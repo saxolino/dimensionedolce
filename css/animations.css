@@ -1,0 +1,410 @@
+/* ============================================================
+   DIMENSIONE DOLCE — Award-Level Animations
+   ============================================================ */
+
+/* -------------------------------------------
+   1. SCROLL REVEAL — Clip & Transform
+   ------------------------------------------- */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in-left.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in-right.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.fade-in.in-view {
+  opacity: 1;
+}
+
+/* Staggered delays */
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.45s; }
+.delay-4 { transition-delay: 0.6s; }
+.delay-5 { transition-delay: 0.75s; }
+
+/* -------------------------------------------
+   2. IMAGE CLIP-PATH REVEAL
+   ------------------------------------------- */
+
+.clip-reveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.clip-reveal.in-view {
+  clip-path: inset(0 0 0 0);
+}
+
+.clip-reveal-left {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.clip-reveal-left.in-view {
+  clip-path: inset(0 0 0 0);
+}
+
+.clip-reveal-right {
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.clip-reveal-right.in-view {
+  clip-path: inset(0 0 0 0);
+}
+
+/* -------------------------------------------
+   3. TEXT MASK REVEAL (line by line)
+   ------------------------------------------- */
+
+.text-reveal {
+  overflow: hidden;
+}
+
+.text-reveal-inner {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.text-reveal.in-view .text-reveal-inner {
+  transform: translateY(0);
+}
+
+/* -------------------------------------------
+   4. HERO SLIDE TRANSITIONS
+   ------------------------------------------- */
+
+.hero__slide {
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero__slide.active .hero__img-main {
+  animation: heroImageIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hero__slide.active .hero__title {
+  animation: heroTextReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero__slide.active .hero__line {
+  animation: heroLineIn 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.6s both;
+}
+
+.hero__slide.active .hero__desc {
+  animation: heroTextReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+
+@keyframes heroImageIn {
+  from {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes heroTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroLineIn {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Hero image slow zoom while visible */
+.hero__slide.active .hero__img-main {
+  animation: heroImageIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both,
+             heroSlowZoom 8s ease-in-out 1.6s both;
+}
+
+@keyframes heroSlowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* -------------------------------------------
+   5. PRODUCT IMAGE PARALLAX & HOVER
+   ------------------------------------------- */
+
+.product__image {
+  overflow: hidden;
+}
+
+.product__image img {
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.product__image:hover img {
+  transform: scale(1.05);
+}
+
+/* Parallax container */
+.parallax-img {
+  will-change: transform;
+  transition: none;
+}
+
+.patisserie__card {
+  overflow: hidden;
+}
+
+.patisserie__card img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.patisserie__card:hover img {
+  transform: scale(1.08);
+}
+
+/* -------------------------------------------
+   6. GIANT KEYWORDS — Horizontal Scroll
+   ------------------------------------------- */
+
+.product__keyword {
+  will-change: transform, opacity;
+  transition: none;
+  opacity: 0;
+}
+
+.product__keyword.in-view {
+  opacity: var(--keyword-opacity);
+}
+
+/* -------------------------------------------
+   7. SVG DECORATIVE ELEMENTS
+   ------------------------------------------- */
+
+.product__deco {
+  opacity: 0;
+  transform: scale(0.7) rotate(-5deg);
+  transition: opacity 1.2s ease, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.product__deco.in-view {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* -------------------------------------------
+   8. CTA UNDERLINE
+   ------------------------------------------- */
+
+.product__cta::after,
+.patisserie__cta::after,
+.header__nav-link::after {
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* -------------------------------------------
+   9. HEADER SCROLL
+   ------------------------------------------- */
+
+.header {
+  transition: background-color 0.5s ease,
+              box-shadow 0.5s ease,
+              height 0.5s ease;
+}
+
+/* -------------------------------------------
+   10. SIDE NAVIGATION
+   ------------------------------------------- */
+
+.side-nav {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s ease;
+}
+
+.side-nav__item::before {
+  transition: height 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.side-nav__item {
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.side-nav__item.active {
+  letter-spacing: 0.25em;
+}
+
+/* -------------------------------------------
+   11. SCROLL-DOWN CHEVRON
+   ------------------------------------------- */
+
+.hero__scroll-down {
+  animation: bounceDown 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.5; }
+}
+
+/* -------------------------------------------
+   12. ABOUT SECTION — Logo Pulse
+   ------------------------------------------- */
+
+.about__logo-mark {
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about__logo-line.in-view .about__logo-mark {
+  animation: logoPulse 3s ease-in-out 0.5s 1;
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.about__line-side {
+  transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1) 0.3s;
+}
+
+.about__logo-line.in-view .about__line-side {
+  transform: scaleX(1);
+}
+
+/* -------------------------------------------
+   13. ABOUT BORDER BOTTOM
+   ------------------------------------------- */
+
+.about__border-bottom {
+  transform: scaleX(0);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.about__border-bottom.in-view {
+  transform: scaleX(1);
+}
+
+/* -------------------------------------------
+   14. CONTACT SECTION
+   ------------------------------------------- */
+
+.contact__item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact__info.in-view .contact__item:nth-child(1) { transition-delay: 0.1s; }
+.contact__info.in-view .contact__item:nth-child(2) { transition-delay: 0.25s; }
+.contact__info.in-view .contact__item:nth-child(3) { transition-delay: 0.4s; }
+.contact__info.in-view .contact__item:nth-child(4) { transition-delay: 0.55s; }
+
+.contact__info.in-view .contact__item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -------------------------------------------
+   15. FOOTER SOCIAL LINKS
+   ------------------------------------------- */
+
+.footer__social-link {
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer__social-link:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+/* -------------------------------------------
+   16. DIAGONAL LINE ANIMATION
+   ------------------------------------------- */
+
+.product__diagonal {
+  transform: rotate(8deg) scaleY(0);
+  transform-origin: top center;
+  transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0.3s;
+}
+
+.product.in-view .product__diagonal {
+  transform: rotate(8deg) scaleY(1);
+}
+
+/* -------------------------------------------
+   17. REDUCED MOTION
+   ------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-in-up, .fade-in-left, .fade-in-right, .fade-in,
+  .clip-reveal, .clip-reveal-left, .clip-reveal-right {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+
+  .text-reveal-inner {
+    transform: none;
+  }
+
+  .product__keyword {
+    opacity: var(--keyword-opacity);
+  }
+
+  .product__deco {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__scroll-down {
+    animation: none;
+  }
+}

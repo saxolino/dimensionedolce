@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dimensione Dolce | Panettone Artigianale Milano</title>
+  <meta name="description" content="Panettone artigianale milanese dal 1962. Tradizione, eccellenza e passione in ogni lievitazione. Spedizione in tutta Italia.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- ========== 1. TOP BAR ========== -->
+  <div class="top-bar">
+    <div class="top-bar__inner">
+      <div class="top-bar__left">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        <span>Spedizione in tutta Italia!</span>
+      </div>
+      <a href="shop.html" class="top-bar__shop" aria-label="Shop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span>SHOP</span>
+      </a>
+      <div class="top-bar__right">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+390212345678">+39 02 1234567</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 2. HEADER (sticky) ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <div class="header__logo-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M20 6 C16 12, 10 16, 10 22 C10 28, 14 34, 20 34 C26 34, 30 28, 30 22 C30 16, 24 12, 20 6Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          <path d="M20 10 L20 34" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M13 20 Q20 17 27 20" stroke="currentColor" stroke-width="0.8" fill="none"/>
+          <path d="M12 26 Q20 23 28 26" stroke="currentColor" stroke-width="0.8" fill="none"/>
+        </svg>
+      </div>
+      <a href="#" class="header__title">DIMENSIONE DOLCE</a>
+      <a href="#panettone-classico" class="header__nav-link">I NOSTRI PANETTONI</a>
+    </div>
+  </header>
+
+  <!-- ========== 3. HERO SLIDER ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__slider" id="heroSlider">
+
+      <!-- Slide 1 -->
+      <div class="hero__slide active" data-slide="0">
+        <div class="hero__slide-left">
+          <img src="assets/img/hero-classico.png" alt="Panettone Classico Dimensione Dolce" class="hero__img-main">
+        </div>
+        <div class="hero__slide-right">
+          <img src="assets/img/product-classico.png" alt="Panettone Classico" class="hero__img-bg">
+          <div class="hero__slide-content">
+            <h1 class="hero__title">Il Panettone<br><em>come una volta</em></h1>
+            <div class="hero__line"></div>
+            <p class="hero__desc">Lievitazione naturale di 72 ore, burro di centrifuga, uvetta sultanina e scorze di agrumi canditi a mano. La tradizione milanese dal 1962.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="hero__slide" data-slide="1">
+        <div class="hero__slide-left">
+          <img src="assets/img/hero-pistacchio.png" alt="Panettone al Pistacchio" class="hero__img-main">
+        </div>
+        <div class="hero__slide-right">
+          <img src="assets/img/product-pistacchio.png" alt="Pistacchio di Bronte" class="hero__img-bg">
+          <div class="hero__slide-content">
+            <h1 class="hero__title">Pistacchio<br><em>di Bronte DOP</em></h1>
+            <div class="hero__line"></div>
+            <p class="hero__desc">Crema di pistacchio puro al 65%, gocce di cioccolato bianco e una glassa croccante. Un equilibrio perfetto tra dolcezza e carattere.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="hero__slide" data-slide="2">
+        <div class="hero__slide-left">
+          <img src="assets/img/hero-cioccolato.png" alt="Panettone al Cioccolato" class="hero__img-main">
+        </div>
+        <div class="hero__slide-right">
+          <img src="assets/img/product-cioccolato.png" alt="Cioccolato fondente" class="hero__img-bg">
+          <div class="hero__slide-content">
+            <h1 class="hero__title">Triplo<br><em>Cioccolato</em></h1>
+            <div class="hero__line"></div>
+            <p class="hero__desc">Tre origini di cacao: Madagascar, Ecuador e Venezuela. Fondente 72%, al latte e gianduia. Per chi ama il cioccolato senza compromessi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Controls -->
+    <div class="hero__controls">
+      <button class="hero__arrow hero__arrow--prev" id="heroPrev" aria-label="Slide precedente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="hero__counter" id="heroCounter">1 / 3</span>
+      <button class="hero__arrow hero__arrow--next" id="heroNext" aria-label="Slide successiva">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Scroll Down Chevron -->
+    <div class="hero__scroll-down">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <!-- ========== 4. CHI SIAMO ========== -->
+  <section class="about" id="chi-siamo">
+    <div class="about__inner">
+      <div class="about__logo-line fade-in-up">
+        <span class="about__line-side"></span>
+        <div class="about__logo-mark">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1"/>
+            <path d="M20 6 C16 12, 10 16, 10 22 C10 28, 14 34, 20 34 C26 34, 30 28, 30 22 C30 16, 24 12, 20 6Z" stroke="currentColor" stroke-width="1" fill="none"/>
+            <path d="M20 10 L20 34" stroke="currentColor" stroke-width="0.6"/>
+            <path d="M13 20 Q20 17 27 20" stroke="currentColor" stroke-width="0.6" fill="none"/>
+            <path d="M12 26 Q20 23 28 26" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          </svg>
+        </div>
+        <span class="about__line-side"></span>
+      </div>
+      <h2 class="about__title fade-in-up delay-1">DIMENSIONE DOLCE</h2>
+      <p class="about__text fade-in-up delay-2">
+        Fondata nel 1962 da Mastro Giuseppe Conti in una piccola bottega del centro di Milano,
+        Dimensione Dolce ha portato avanti per tre generazioni la tradizione del panettone artigianale milanese.
+        Ogni impasto nasce dal nostro lievito madre, custodito e rinfrescato quotidianamente da oltre sessant'anni.
+        Selezioniamo solo materie prime di eccellenza: burro di centrifuga dell'Alta Baviera, uvetta sultanina australiana,
+        scorze di arance siciliane candite lentamente nei nostri laboratori. La lievitazione naturale, che richiede
+        non meno di 72 ore, conferisce al nostro panettone quella sofficità e quel profumo inconfondibili che hanno
+        reso celebre la pasticceria milanese nel mondo.
+      </p>
+    </div>
+    <div class="about__border-bottom"></div>
+  </section>
+
+  <!-- ========== 5. PANETTONE CLASSICO ========== -->
+  <section class="product product--classico" id="panettone-classico" data-nav-section="classico">
+    <span class="product__keyword" aria-hidden="true">TRADIZIONE</span>
+
+    <!-- SVG Decorative: Spiral -->
+    <svg class="product__deco product__deco--spiral" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M100 30 C130 30, 160 50, 160 80 C160 110, 140 130, 110 130 C80 130, 60 115, 60 90 C60 65, 75 50, 95 50 C115 50, 125 62, 125 78 C125 94, 115 102, 103 102 C91 102, 85 95, 85 86 C85 77, 90 73, 97 73" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+    </svg>
+
+    <div class="product__inner">
+      <div class="product__image clip-reveal-left">
+        <img src="assets/img/product-classico.png" alt="Panettone Classico Milanese">
+      </div>
+      <div class="product__content fade-in-right delay-2">
+        <h2 class="product__title"><em>Il Classico</em></h2>
+        <h3 class="product__subtitle">Panettone Tradizionale Milanese</h3>
+        <p class="product__text">
+          Il nostro panettone classico segue fedelmente la ricetta originale del 1962.
+          Lievito madre naturale, burro di centrifuga, tuorli d'uovo da galline allevate a terra,
+          uvetta sultanina australiana e scorze d'arancia siciliana candite nel nostro laboratorio.
+          Ogni panettone richiede 72 ore di lavorazione e tre impasti successivi.
+        </p>
+        <p class="product__weight">Disponibile: 750g &mdash; 1kg &mdash; 1,5kg</p>
+        <a href="product-classico.html" class="product__cta">Scopri e ordina</a>
+        <a href="product-classico.html" class="product__btn">ORDINA ORA</a>
+      </div>
+    </div>
+
+    <!-- Decorative diagonal line -->
+    <div class="product__diagonal" aria-hidden="true"></div>
+  </section>
+
+  <!-- ========== 6. PANETTONE PISTACCHIO ========== -->
+  <section class="product product--pistacchio" id="panettone-pistacchio" data-nav-section="pistacchio">
+    <span class="product__keyword" aria-hidden="true">ARTIGIANALE</span>
+
+    <!-- SVG Decorative: Zigzag -->
+    <svg class="product__deco product__deco--zigzag" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polyline points="20,20 60,60 20,100 60,140 20,180 60,220 20,260" stroke="currentColor" stroke-width="1" opacity="0.15" fill="none"/>
+      <polyline points="40,20 80,60 40,100 80,140 40,180 80,220 40,260" stroke="currentColor" stroke-width="1" opacity="0.1" fill="none"/>
+    </svg>
+
+    <div class="product__inner product__inner--inverted">
+      <div class="product__content fade-in-left delay-2">
+        <h2 class="product__title"><em>Il Pistacchio</em></h2>
+        <h3 class="product__subtitle">Pistacchio di Bronte DOP</h3>
+        <p class="product__text">
+          Un impasto soffice arricchito con crema di pistacchio puro di Bronte al 65%,
+          gocce di cioccolato bianco Valrhona e una glassa croccante di pistacchi caramellati.
+          La dolcezza delicata del pistacchio incontra la complessità del nostro lievito madre
+          in un equilibrio straordinario. Edizione limitata: solo 500 pezzi per stagione.
+        </p>
+        <p class="product__weight">Disponibile: 750g &mdash; 1kg</p>
+        <a href="product-pistacchio.html" class="product__cta">Scopri e ordina</a>
+        <a href="product-pistacchio.html" class="product__btn">ORDINA ORA</a>
+      </div>
+      <div class="product__image clip-reveal-right">
+        <img src="assets/img/product-pistacchio.png" alt="Panettone al Pistacchio di Bronte">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7. PANETTONE CIOCCOLATO ========== -->
+  <section class="product product--cioccolato" id="panettone-cioccolato" data-nav-section="cioccolato">
+    <span class="product__keyword" aria-hidden="true">ECCELLENZA</span>
+
+    <!-- SVG Decorative: Circles/Ellipses -->
+    <svg class="product__deco product__deco--circles" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="60" cy="60" r="40" stroke="currentColor" stroke-width="0.8" opacity="0.12"/>
+      <circle cx="120" cy="80" r="55" stroke="currentColor" stroke-width="0.8" opacity="0.10"/>
+      <ellipse cx="90" cy="140" rx="60" ry="35" stroke="currentColor" stroke-width="0.8" opacity="0.08"/>
+      <circle cx="150" cy="150" r="30" stroke="currentColor" stroke-width="0.8" opacity="0.12"/>
+    </svg>
+
+    <div class="product__inner">
+      <div class="product__image clip-reveal-left">
+        <img src="assets/img/product-cioccolato.png" alt="Panettone Triplo Cioccolato">
+      </div>
+      <div class="product__content fade-in-right delay-2">
+        <h2 class="product__title"><em>Il Cioccolato</em></h2>
+        <h3 class="product__subtitle">Triplo Cioccolato Monorigine</h3>
+        <p class="product__text">
+          Tre cacao monorigine selezionati dal nostro maestro cioccolatiere: fondente 72% dal Madagascar
+          per le note fruttate, cioccolato al latte dall'Ecuador per la cremosità, e gianduia piemontese
+          per il carattere. L'impasto al cacao viene arricchito con gocce di cioccolato e ricoperto
+          da una ganache fondente lucida. Per gli amanti del cioccolato senza compromessi.
+        </p>
+        <p class="product__weight">Disponibile: 750g &mdash; 1kg</p>
+        <a href="product-cioccolato.html" class="product__cta">Scopri e ordina</a>
+        <a href="product-cioccolato.html" class="product__btn">ORDINA ORA</a>
+      </div>
+    </div>
+
+    <!-- Decorative diagonal line -->
+    <div class="product__diagonal" aria-hidden="true"></div>
+  </section>
+
+  <!-- ========== 8. PATISSERIE / OTHER PRODUCTS ========== -->
+  <section class="patisserie" id="panettoni">
+    <div class="patisserie__inner">
+      <h2 class="patisserie__title fade-in-up">La Nostra Pasticceria</h2>
+      <div class="patisserie__grid">
+        <div class="patisserie__card patisserie__card--1 clip-reveal">
+          <img src="assets/img/patisserie-colomba.png" alt="Colomba Pasquale artigianale">
+          <div class="patisserie__card-label">Colomba Pasquale</div>
+        </div>
+        <div class="patisserie__card patisserie__card--2 clip-reveal delay-2">
+          <img src="assets/img/patisserie-lievitati.png" alt="Lievitati artigianali">
+          <div class="patisserie__card-label">Lievitati Speciali</div>
+        </div>
+      </div>
+      <div class="patisserie__text-block fade-in-up delay-2">
+        <p class="patisserie__text">
+          La nostra passione per la lievitazione naturale non si ferma al panettone.
+          Durante tutto l'anno il nostro laboratorio produce colombe, pandori, focacce veneziane
+          e una selezione di lievitati speciali che seguono le stagioni e le migliori materie prime disponibili.
+        </p>
+        <a href="#ordina" class="patisserie__cta">Scopri tutta la selezione</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PARALLAX DIVIDER ========== -->
+  <section class="parallax-section" id="parallax-divider">
+    <img src="assets/img/parallax-bakery.png" alt="" class="parallax-bg" id="parallaxBg">
+    <div class="parallax-overlay"></div>
+    <div class="parallax-text fade-in-up">
+      <p>Ogni panettone nasce dalle mani dei nostri maestri pasticceri</p>
+    </div>
+  </section>
+
+  <!-- ========== 9. CONTACT / CTA ========== -->
+  <section class="contact" id="ordina">
+    <div class="contact__inner contact__inner--split">
+      <div class="contact__left">
+        <h2 class="contact__title fade-in-up">Ordina il tuo<br>panettone artigianale</h2>
+        <div class="contact__info fade-in-up delay-1">
+          <div class="contact__item">
+            <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <strong>Laboratorio &amp; Bottega</strong><br>
+              Via Monte Napoleone 42, 20121 Milano
+            </div>
+          </div>
+          <div class="contact__item">
+            <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>
+              <strong>Telefono</strong><br>
+              <a href="tel:+390212345678">+39 02 1234567</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>
+              <strong>Email</strong><br>
+              <a href="mailto:ordini@dimensionedolce.it">ordini@dimensionedolce.it</a>
+            </div>
+          </div>
+          <div class="contact__item">
+            <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <div>
+              <strong>Vieni a trovarci</strong><br>
+              <a href="https://maps.google.com/?q=Via+Monte+Napoleone+42+Milano" target="_blank" rel="noopener">Apri in Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact__right fade-in-right">
+        <img src="assets/img/contact-gift.png" alt="Confezione Regalo Panettone Dimensione Dolce" class="contact__box-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 10. FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1"/>
+          <path d="M20 6 C16 12, 10 16, 10 22 C10 28, 14 34, 20 34 C26 34, 30 28, 30 22 C30 16, 24 12, 20 6Z" stroke="currentColor" stroke-width="1" fill="none"/>
+          <path d="M20 10 L20 34" stroke="currentColor" stroke-width="0.6"/>
+          <path d="M13 20 Q20 17 27 20" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M12 26 Q20 23 28 26" stroke="currentColor" stroke-width="0.6" fill="none"/>
+        </svg>
+        <span class="footer__logo-text">DIMENSIONE DOLCE</span>
+      </div>
+
+      <div class="footer__social">
+        <!-- Facebook -->
+        <a href="#" class="footer__social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="#" class="footer__social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- Email -->
+        <a href="mailto:ordini@dimensionedolce.it" class="footer__social-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+
+      <p class="footer__instagram">Seguici su Instagram <a href="#">@dimensionedolce</a></p>
+      <p class="footer__copy">&copy; 2026 Dimensione Dolce S.r.l. &mdash; Tutti i diritti riservati</p>
+    </div>
+  </footer>
+
+  <!-- ========== FIXED SIDE NAVIGATION ========== -->
+  <nav class="side-nav" id="sideNav" aria-label="Navigazione panettoni">
+    <a href="#panettone-classico" class="side-nav__item" data-target="classico">CLASSICO</a>
+    <span class="side-nav__sep" aria-hidden="true">&mdash;</span>
+    <a href="#panettone-pistacchio" class="side-nav__item" data-target="pistacchio">PISTACCHIO</a>
+    <span class="side-nav__sep" aria-hidden="true">&mdash;</span>
+    <a href="#panettone-cioccolato" class="side-nav__item" data-target="cioccolato">CIOCCOLATO</a>
+  </nav>
+
+  <!-- Main JS -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>

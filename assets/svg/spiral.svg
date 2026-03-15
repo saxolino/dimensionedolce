@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <path
+    d="M100 100
+       C100 85, 115 75, 125 80
+       C140 88, 142 108, 130 118
+       C115 132, 88 130, 78 115
+       C65 95, 70 65, 92 55
+       C118 42, 148 55, 155 82
+       C165 115, 148 150, 115 158
+       C78 168, 48 145, 42 112
+       C34 72, 55 38, 95 28
+       C140 16, 175 50, 178 95"
+    stroke="#c6a36a"
+    stroke-opacity="0.7"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M100 100
+       C100 90, 110 82, 118 86
+       C128 92, 130 106, 122 114
+       C112 124, 94 122, 86 112
+       C76 98, 80 76, 96 68
+       C116 58, 138 70, 144 90
+       C152 114, 140 140, 118 148
+       C92 158, 66 140, 58 118
+       C48 90, 62 58, 90 46
+       C122 32, 158 54, 166 88"
+    stroke="#c6a36a"
+    stroke-opacity="0.35"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M100 100
+       C100 95, 106 90, 112 93
+       C119 97, 120 105, 116 110
+       C110 116, 102 115, 98 110"
+    stroke="#c6a36a"
+    stroke-opacity="0.9"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
