@@ -1159,7 +1159,23 @@ button {
 @media (max-width: 768px) {
   .parallax-section {
     height: 50vh;
-    min-height: 300px;
+    min-height: 280px;
+  }
+
+  .parallax-text {
+    padding: 0 24px;
+  }
+
+  .parallax-text p {
+    font-size: 24px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 480px) {
+  .parallax-section {
+    height: 40vh;
+    min-height: 240px;
   }
 }
 
@@ -1224,7 +1240,7 @@ button {
 
   .hero__slide {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr auto;
   }
 
   .hero__slide-right {
@@ -1232,8 +1248,8 @@ button {
   }
 
   .hero__img-main {
-    width: 70%;
-    height: 80%;
+    width: 80%;
+    height: 85%;
   }
 
   .product__inner,
@@ -1252,7 +1268,8 @@ button {
   }
 
   .product__keyword {
-    font-size: 20vw;
+    font-size: 18vw;
+    overflow: hidden;
   }
 
   .contact__inner--split {
@@ -1265,7 +1282,7 @@ button {
   }
 
   .contact__info {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
   }
 
@@ -1303,31 +1320,77 @@ button {
     display: none;
   }
 
-  /* Top bar */
+  /* Hide custom cursor on mobile */
+  .custom-cursor {
+    display: none;
+  }
+
+  /* Top bar — hide SHOP center link, truncate left text */
   .top-bar {
     font-size: 10px;
   }
 
   .top-bar__inner {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
-  /* Header */
+  .top-bar__shop {
+    display: none;
+  }
+
+  .top-bar__left span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 160px;
+  }
+
+  .top-bar__right a {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  /* Header — center title static, hide nav link text (keep logo + title) */
   .header__inner {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .header__title {
-    font-size: 12px;
-    letter-spacing: 0.2em;
+    position: static;
+    transform: none;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    flex: 1;
+    text-align: center;
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .header.scrolled .header__title {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .header__nav-link {
     font-size: 9px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Ensure header right items have proper tap targets */
+  .header__shop-link {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header__shop-link svg {
+    width: 22px;
+    height: 22px;
   }
 
   /* Hero */
@@ -1343,25 +1406,37 @@ button {
   }
 
   .hero__slide-left {
-    height: 40vh;
+    height: 45vh;
     min-height: 280px;
   }
 
+  .hero__img-main {
+    width: 100%;
+    height: 100%;
+    object-position: center center;
+  }
+
   .hero__slide-right {
-    padding: 30px 20px 100px;
+    padding: 30px 20px 90px;
   }
 
   .hero__title {
-    font-size: 32px;
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+
+  .hero__desc {
+    font-size: 16px;
+    line-height: 1.7;
   }
 
   .hero__controls {
     left: 20px;
-    bottom: 30px;
+    bottom: 24px;
   }
 
   .hero__scroll-down {
-    bottom: 15px;
+    display: none;
   }
 
   /* About */
@@ -1369,12 +1444,24 @@ button {
     padding: 60px 20px 50px;
   }
 
+  .about__logo-line {
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
   .about__line-side {
     width: 40px;
   }
 
+  .about__title {
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    margin-bottom: 28px;
+  }
+
   .about__text {
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 1.8;
   }
 
   /* Products */
@@ -1384,7 +1471,8 @@ button {
   }
 
   .product__keyword {
-    font-size: 28vw;
+    font-size: 22vw;
+    overflow: hidden;
   }
 
   .product__title {
@@ -1393,6 +1481,7 @@ button {
 
   .product__text {
     font-size: 16px;
+    line-height: 1.75;
   }
 
   .product__image img {
@@ -1403,21 +1492,63 @@ button {
     opacity: 0.5;
   }
 
+  .product__btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px 32px;
+    min-height: 48px;
+  }
+
+  .product__cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-bottom: 4px;
+  }
+
+  .product__subtitle {
+    margin-bottom: 20px;
+  }
+
   /* Patisserie */
   .patisserie {
     padding: 60px 20px;
   }
 
+  .patisserie__title {
+    margin-bottom: 40px;
+  }
+
   .patisserie__grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .patisserie__card img {
-    height: 250px;
+    height: 220px;
   }
 
   .patisserie__card--1 {
     margin-top: 0;
+  }
+
+  .patisserie__card-label {
+    padding: 10px 16px;
+    font-size: 10px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .patisserie__text {
+    font-size: 16px;
+  }
+
+  .patisserie__cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   /* Contact */
@@ -1426,44 +1557,180 @@ button {
   }
 
   .contact__title {
-    font-size: 32px;
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+
+  .contact__info {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .contact__item {
+    font-size: 15px;
+  }
+
+  .contact__box-img {
+    max-width: 240px;
+  }
+
+  .contact__right {
+    order: -1;
   }
 
   /* Footer */
   .footer {
     padding: 40px 20px 30px;
   }
+
+  .footer__logo {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .footer__logo-text {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+
+  .footer__social-link {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer__instagram {
+    font-size: 15px;
+  }
 }
 
 /* ---------- RESPONSIVE: Small Mobile (<480px) ---------- */
 @media (max-width: 480px) {
+  .top-bar__inner {
+    padding: 0 12px;
+  }
+
+  .top-bar__left span {
+    max-width: 130px;
+    font-size: 9px;
+  }
+
+  .header__inner {
+    padding: 0 12px;
+  }
+
   .header__logo-icon {
     width: 28px;
     height: 28px;
   }
 
   .header__title {
-    font-size: 10px;
-    letter-spacing: 0.15em;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+
+  .header__nav-link {
+    font-size: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero__slide-left {
+    height: 38vh;
+    min-height: 240px;
+  }
+
+  .hero__slide-right {
+    padding: 24px 16px 80px;
   }
 
   .hero__title {
     font-size: 26px;
+    margin-bottom: 14px;
   }
 
   .hero__desc {
     font-size: 15px;
   }
 
+  .hero__line {
+    margin-bottom: 16px;
+  }
+
+  .hero__controls {
+    left: 16px;
+    bottom: 20px;
+  }
+
+  .about {
+    padding: 48px 16px 40px;
+  }
+
+  .about__text {
+    font-size: 15px;
+  }
+
+  .product {
+    padding: 48px 16px;
+  }
+
   .product__keyword {
-    font-size: 34vw;
+    font-size: 20vw;
   }
 
   .product__title {
     font-size: 28px;
   }
 
+  .product__text {
+    font-size: 15px;
+  }
+
+  .product__image img {
+    max-height: 320px;
+  }
+
+  .patisserie {
+    padding: 48px 16px;
+  }
+
+  .patisserie__card img {
+    height: 200px;
+  }
+
+  .contact {
+    padding: 48px 16px;
+  }
+
   .contact__title {
     font-size: 26px;
+    margin-bottom: 32px;
+  }
+
+  .contact__item {
+    font-size: 14px;
+  }
+
+  .contact__box-img {
+    max-width: 200px;
+  }
+
+  .footer {
+    padding: 32px 16px 24px;
+  }
+
+  .footer__logo-text {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+  }
+
+  .footer__instagram {
+    font-size: 14px;
+  }
+
+  .parallax-text p {
+    font-size: 22px;
+  }
+
+  .parallax-text {
+    padding: 0 20px;
   }
 }

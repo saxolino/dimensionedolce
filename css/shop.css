@@ -705,9 +705,17 @@
     padding: 30px;
   }
 
+  .shop-card__body {
+    padding: 28px 28px 32px;
+  }
+
   .pdp__inner {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+  }
+
+  .pdp__img-secondary {
+    width: 70%;
   }
 
   .related__card {
@@ -717,14 +725,21 @@
 
 /* ---------- RESPONSIVE: Mobile (<768px) ---------- */
 @media (max-width: 768px) {
+  /* Shop hero */
   .shop-hero {
     padding: 80px 20px 60px;
   }
 
   .shop-hero__keyword {
-    font-size: 22vw;
+    font-size: 20vw;
   }
 
+  .shop-hero__subtitle {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  /* Shop grid */
   .shop-grid {
     padding: 40px 20px 80px;
   }
@@ -734,38 +749,77 @@
     gap: 24px;
   }
 
+  .shop-card {
+    cursor: pointer;
+  }
+
   .shop-card__image {
     height: 280px;
-    padding: 30px;
+    padding: 24px;
   }
 
   .shop-card__body {
-    padding: 24px 24px 28px;
+    padding: 24px 20px 28px;
   }
 
   .shop-card__name {
     font-size: 24px;
   }
 
+  .shop-card__desc {
+    font-size: 15px;
+  }
+
+  .shop-card__bottom {
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .shop-card__price {
+    font-size: 20px;
+  }
+
+  .shop-card__cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 8px 0 4px;
+  }
+
+  /* Hide custom cursor on cards for mobile */
+  .shop-card .custom-cursor-card {
+    display: none;
+  }
+
+  /* Breadcrumb */
   .breadcrumb {
-    padding: 16px 20px;
+    padding: 14px 20px;
   }
 
   .breadcrumb__inner {
     font-size: 10px;
+    flex-wrap: wrap;
+    gap: 4px 8px;
   }
 
+  /* PDP */
   .pdp {
-    padding: 30px 20px 60px;
+    padding: 24px 20px 60px;
   }
 
   .pdp__inner {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
   }
 
   .pdp__info {
     position: static;
+  }
+
+  .pdp__img-secondary {
+    width: 100%;
+    margin-top: 12px;
   }
 
   .pdp__title {
@@ -774,40 +828,212 @@
 
   .pdp__price {
     font-size: 26px;
+    margin-bottom: 24px;
   }
 
+  .pdp__desc {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* Weight selector — touch-friendly sizing */
+  .pdp__weight-option + label {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+
+  /* Accordion — touch-friendly */
+  .pdp__accordion-header {
+    min-height: 48px;
+    padding: 14px 0;
+  }
+
+  .pdp__accordion-title {
+    font-size: 13px;
+  }
+
+  .pdp__accordion-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .pdp__accordion-content {
+    font-size: 15px;
+  }
+
+  /* CTA button */
+  .pdp__cta {
+    min-height: 52px;
+    font-size: 14px;
+    padding: 16px 24px;
+  }
+
+  .pdp__shipping {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  /* Related products */
   .related {
-    padding: 60px 20px 80px;
+    padding: 60px 20px 60px;
+  }
+
+  .related__title {
+    margin-bottom: 32px;
   }
 
   .related__card {
-    flex: 0 0 260px;
+    flex: 0 0 calc(100vw - 80px);
+    max-width: 320px;
   }
 
   .related__card-image {
     height: 200px;
+    padding: 20px;
+  }
+
+  .related__card-body {
+    padding: 20px 20px 24px;
+  }
+
+  .related__card-name {
+    font-size: 20px;
+  }
+
+  .related__card-cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
   }
 }
 
 /* ---------- RESPONSIVE: Small Mobile (<480px) ---------- */
 @media (max-width: 480px) {
+  .shop-hero {
+    padding: 60px 16px 48px;
+  }
+
   .shop-hero__title {
-    font-size: 32px;
+    font-size: 28px;
+  }
+
+  .shop-hero__subtitle {
+    font-size: 10px;
+  }
+
+  .shop-grid {
+    padding: 32px 16px 60px;
+  }
+
+  .shop-grid__inner {
+    gap: 20px;
   }
 
   .shop-card__image {
-    height: 240px;
+    height: 220px;
+    padding: 20px;
+  }
+
+  .shop-card__body {
+    padding: 20px 16px 24px;
+  }
+
+  .shop-card__name {
+    font-size: 22px;
+  }
+
+  .shop-card__desc {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .shop-card__price {
+    font-size: 18px;
+  }
+
+  .breadcrumb {
+    padding: 12px 16px;
+  }
+
+  .breadcrumb__inner {
+    font-size: 9px;
+    letter-spacing: 0.06em;
+  }
+
+  .pdp {
+    padding: 20px 16px 48px;
+  }
+
+  .pdp__inner {
+    gap: 20px;
   }
 
   .pdp__title {
     font-size: 28px;
   }
 
+  .pdp__subtitle {
+    font-size: 11px;
+    margin-bottom: 20px;
+  }
+
   .pdp__price {
     font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .pdp__desc {
+    font-size: 15px;
   }
 
   .pdp__weight-options {
     flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pdp__weight-option + label {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .pdp__cta {
+    font-size: 13px;
+    min-height: 48px;
+  }
+
+  .related {
+    padding: 48px 16px 48px;
+  }
+
+  .related__title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .related__card {
+    flex: 0 0 calc(100vw - 64px);
+  }
+
+  .related__card-image {
+    height: 180px;
+    padding: 16px;
+  }
+
+  .related__card-body {
+    padding: 16px 16px 20px;
+  }
+
+  .related__card-name {
+    font-size: 18px;
+  }
+
+  .related__card-price {
+    font-size: 15px;
   }
 }
