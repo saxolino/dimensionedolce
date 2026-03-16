@@ -1192,8 +1192,13 @@ button {
 
 @media (max-width: 768px) {
   .parallax-section {
-    height: 50vh;
-    min-height: 280px;
+    height: 60vh;
+    min-height: 320px;
+  }
+
+  .parallax-bg {
+    top: 0;
+    height: 100% !important;
   }
 
   .parallax-text {
@@ -1208,8 +1213,8 @@ button {
 
 @media (max-width: 480px) {
   .parallax-section {
-    height: 40vh;
-    min-height: 240px;
+    height: 50vh;
+    min-height: 280px;
   }
 }
 
