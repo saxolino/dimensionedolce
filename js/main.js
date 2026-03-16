@@ -466,76 +466,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealObserver.observe(viewport);
 
-    // --- Desktop: Drag interaction ---
-    if (!isMobile) {
-      const onPointerDown = (e) => {
-        if (e.target.closest('button, a')) return;
-        isDragging = true;
-        hasDragged = false;
-        startX = e.clientX || e.touches?.[0]?.clientX || 0;
-        dragDelta = 0;
-        viewport.classList.add('is-dragging');
-        if (dragHint) dragHint.classList.add('is-hidden');
-      };
+    // --- Drag / Touch interaction (unified for desktop + tablet) ---
+    const getClientX = (e) => {
+      if (e.touches && e.touches.length) return e.touches[0].clientX;
+      return e.clientX;
+    };
 
-      const onPointerMove = (e) => {
-        if (!isDragging) return;
-        const x = e.clientX || e.touches?.[0]?.clientX || 0;
-        dragDelta = x - startX;
+    const onPointerDown = (e) => {
+      if (e.target.closest('button, a')) return;
+      isDragging = true;
+      hasDragged = false;
+      startX = getClientX(e);
+      dragDelta = 0;
+      viewport.classList.add('is-dragging');
+      if (dragHint) dragHint.classList.add('is-hidden');
+    };
 
-        if (Math.abs(dragDelta) > 5) hasDragged = true;
+    const onPointerMove = (e) => {
+      if (!isDragging) return;
+      const x = getClientX(e);
+      dragDelta = x - startX;
 
-        const resistance = 0.35;
-        const atStart = currentIndex === 0 && dragDelta > 0;
-        const atEnd = currentIndex === slides.length - 1 && dragDelta < 0;
-        const multiplier = (atStart || atEnd) ? resistance : 1;
+      if (Math.abs(dragDelta) > 5) hasDragged = true;
 
-        track.style.transform = `translateX(${trackX + dragDelta * multiplier}px)`;
-      };
+      // Prevent vertical scroll while dragging horizontally
+      if (Math.abs(dragDelta) > 10 && e.cancelable) e.preventDefault();
 
-      const onPointerUp = () => {
-        if (!isDragging) return;
-        isDragging = false;
-        viewport.classList.remove('is-dragging');
+      const resistance = 0.35;
+      const atStart = currentIndex === 0 && dragDelta > 0;
+      const atEnd = currentIndex === slides.length - 1 && dragDelta < 0;
+      const multiplier = (atStart || atEnd) ? resistance : 1;
 
-        const threshold = getSlideWidth() * 0.2;
+      track.style.transition = 'none';
+      track.style.transform = `translateX(${trackX + dragDelta * multiplier}px)`;
+    };
 
-        if (dragDelta < -threshold && currentIndex < slides.length - 1) {
-          goToSlide(currentIndex + 1);
-        } else if (dragDelta > threshold && currentIndex > 0) {
-          goToSlide(currentIndex - 1);
-        } else {
-          goToSlide(currentIndex);
-        }
-      };
+    const onPointerUp = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      viewport.classList.remove('is-dragging');
 
-      viewport.addEventListener('mousedown', onPointerDown);
-      window.addEventListener('mousemove', onPointerMove);
-      window.addEventListener('mouseup', onPointerUp);
+      // Restore transition for snap animation
+      track.style.transition = '';
 
-      // Prevent link clicks when dragging
-      viewport.addEventListener('click', (e) => {
-        if (hasDragged) e.preventDefault();
-      }, true);
-    }
+      const threshold = getSlideWidth() * 0.15;
 
-    // --- Mobile: Scroll-snap based index tracking ---
-    if (isMobile) {
-      let scrollTimeout;
-      track.addEventListener('scroll', () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          const slideW = getSlideWidth();
-          const newIndex = Math.round(track.scrollLeft / slideW);
-          if (newIndex !== currentIndex && newIndex >= 0 && newIndex < slides.length) {
-            currentIndex = newIndex;
-            updateSlideStates();
-            updateCaption();
-            updateDots();
-          }
-        }, 60);
-      }, { passive: true });
-    }
+      if (dragDelta < -threshold && currentIndex < slides.length - 1) {
+        goToSlide(currentIndex + 1);
+      } else if (dragDelta > threshold && currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      } else {
+        goToSlide(currentIndex);
+      }
+    };
+
+    // Prevent native image drag
+    viewport.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // Mouse events
+    viewport.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+
+    // Touch events
+    viewport.addEventListener('touchstart', onPointerDown, { passive: true });
+    window.addEventListener('touchmove', onPointerMove, { passive: false });
+    window.addEventListener('touchend', onPointerUp);
+
+    // Prevent link clicks when dragging
+    viewport.addEventListener('click', (e) => {
+      if (hasDragged) e.preventDefault();
+    }, true);
 
     // --- Arrow buttons ---
     if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
