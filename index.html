@@ -14,6 +14,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/vetrina.css">
 </head>
 <body>
 
@@ -48,7 +49,7 @@
         </svg>
       </div>
       <a href="#" class="header__title">DIMENSIONE DOLCE</a>
-      <a href="#panettone-classico" class="header__nav-link">I NOSTRI PANETTONI</a>
+      <a href="#panettone-pistacchio" class="header__nav-link">I NOSTRI PRODOTTI</a>
     </div>
   </header>
 
@@ -58,21 +59,6 @@
 
       <!-- Slide 1 -->
       <div class="hero__slide active" data-slide="0">
-        <div class="hero__slide-left">
-          <img src="assets/img/hero-classico.png" alt="Panettone Classico Dimensione Dolce" class="hero__img-main">
-        </div>
-        <div class="hero__slide-right">
-          <img src="assets/img/product-classico.png" alt="Panettone Classico" class="hero__img-bg">
-          <div class="hero__slide-content">
-            <h1 class="hero__title">Il Panettone<br><em>come una volta</em></h1>
-            <div class="hero__line"></div>
-            <p class="hero__desc">Lievitazione naturale di 72 ore, burro di centrifuga, uvetta sultanina e scorze di agrumi canditi a mano. La tradizione milanese dal 1962.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="hero__slide" data-slide="1">
         <div class="hero__slide-left">
           <img src="assets/img/hero-pistacchio.png" alt="Panettone al Pistacchio" class="hero__img-main">
         </div>
@@ -86,8 +72,8 @@
         </div>
       </div>
 
-      <!-- Slide 3 -->
-      <div class="hero__slide" data-slide="2">
+      <!-- Slide 2 -->
+      <div class="hero__slide" data-slide="1">
         <div class="hero__slide-left">
           <img src="assets/img/hero-cioccolato.png" alt="Panettone al Cioccolato" class="hero__img-main">
         </div>
@@ -97,6 +83,21 @@
             <h1 class="hero__title">Triplo<br><em>Cioccolato</em></h1>
             <div class="hero__line"></div>
             <p class="hero__desc">Tre origini di cacao: Madagascar, Ecuador e Venezuela. Fondente 72%, al latte e gianduia. Per chi ama il cioccolato senza compromessi.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="hero__slide" data-slide="2">
+        <div class="hero__slide-left">
+          <img src="assets/img/hero-crema.png" alt="Crema Spalmabile al Cioccolato" class="hero__img-main">
+        </div>
+        <div class="hero__slide-right">
+          <img src="assets/img/product-crema.png" alt="Crema Spalmabile" class="hero__img-bg">
+          <div class="hero__slide-content">
+            <h1 class="hero__title">Crema<br><em>Spalmabile</em></h1>
+            <div class="hero__line"></div>
+            <p class="hero__desc">Cioccolato fondente monorigine e nocciole Piemonte IGP. Una crema densa e vellutata, senza olio di palma. Il piacere in ogni cucchiaio.</p>
           </div>
         </div>
       </div>
@@ -149,39 +150,7 @@
     <div class="about__border-bottom"></div>
   </section>
 
-  <!-- ========== 5. PANETTONE CLASSICO ========== -->
-  <section class="product product--classico" id="panettone-classico" data-nav-section="classico">
-    <span class="product__keyword" aria-hidden="true">TRADIZIONE</span>
-
-    <!-- SVG Decorative: Spiral -->
-    <svg class="product__deco product__deco--spiral" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M100 30 C130 30, 160 50, 160 80 C160 110, 140 130, 110 130 C80 130, 60 115, 60 90 C60 65, 75 50, 95 50 C115 50, 125 62, 125 78 C125 94, 115 102, 103 102 C91 102, 85 95, 85 86 C85 77, 90 73, 97 73" stroke="currentColor" stroke-width="1" opacity="0.2"/>
-    </svg>
-
-    <div class="product__inner">
-      <div class="product__image clip-reveal-left">
-        <img src="assets/img/product-classico.png" alt="Panettone Classico Milanese">
-      </div>
-      <div class="product__content fade-in-right delay-2">
-        <h2 class="product__title"><em>Il Classico</em></h2>
-        <h3 class="product__subtitle">Panettone Tradizionale Milanese</h3>
-        <p class="product__text">
-          Il nostro panettone classico segue fedelmente la ricetta originale del 1962.
-          Lievito madre naturale, burro di centrifuga, tuorli d'uovo da galline allevate a terra,
-          uvetta sultanina australiana e scorze d'arancia siciliana candite nel nostro laboratorio.
-          Ogni panettone richiede 72 ore di lavorazione e tre impasti successivi.
-        </p>
-        <p class="product__weight">Disponibile: 750g &mdash; 1kg &mdash; 1,5kg</p>
-        <a href="product-classico.html" class="product__cta">Scopri e ordina</a>
-        <a href="product-classico.html" class="product__btn">ORDINA ORA</a>
-      </div>
-    </div>
-
-    <!-- Decorative diagonal line -->
-    <div class="product__diagonal" aria-hidden="true"></div>
-  </section>
-
-  <!-- ========== 6. PANETTONE PISTACCHIO ========== -->
+  <!-- ========== 5. PANETTONE PISTACCHIO ========== -->
   <section class="product product--pistacchio" id="panettone-pistacchio" data-nav-section="pistacchio">
     <span class="product__keyword" aria-hidden="true">ARTIGIANALE</span>
 
@@ -246,29 +215,122 @@
     <div class="product__diagonal" aria-hidden="true"></div>
   </section>
 
-  <!-- ========== 8. PATISSERIE / OTHER PRODUCTS ========== -->
-  <section class="patisserie" id="panettoni">
-    <div class="patisserie__inner">
-      <h2 class="patisserie__title fade-in-up">La Nostra Pasticceria</h2>
-      <div class="patisserie__grid">
-        <div class="patisserie__card patisserie__card--1 clip-reveal">
-          <img src="assets/img/patisserie-colomba.png" alt="Colomba Pasquale artigianale">
-          <div class="patisserie__card-label">Colomba Pasquale</div>
-        </div>
-        <div class="patisserie__card patisserie__card--2 clip-reveal delay-2">
-          <img src="assets/img/patisserie-lievitati.png" alt="Lievitati artigianali">
-          <div class="patisserie__card-label">Lievitati Speciali</div>
-        </div>
-      </div>
-      <div class="patisserie__text-block fade-in-up delay-2">
-        <p class="patisserie__text">
-          La nostra passione per la lievitazione naturale non si ferma al panettone.
-          Durante tutto l'anno il nostro laboratorio produce colombe, pandori, focacce veneziane
-          e una selezione di lievitati speciali che seguono le stagioni e le migliori materie prime disponibili.
+  <!-- ========== 8. CREMA SPALMABILE ========== -->
+  <section class="product product--crema" id="crema-spalmabile" data-nav-section="crema">
+    <span class="product__keyword" aria-hidden="true">SPALMABILE</span>
+
+    <!-- SVG Decorative: Spiral -->
+    <svg class="product__deco product__deco--spiral" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M100 30 C130 30, 160 50, 160 80 C160 110, 140 130, 110 130 C80 130, 60 115, 60 90 C60 65, 75 50, 95 50 C115 50, 125 62, 125 78 C125 94, 115 102, 103 102 C91 102, 85 95, 85 86 C85 77, 90 73, 97 73" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+    </svg>
+
+    <div class="product__inner product__inner--inverted">
+      <div class="product__content fade-in-left delay-2">
+        <h2 class="product__title"><em>La Crema</em></h2>
+        <h3 class="product__subtitle">Crema Spalmabile al Cioccolato</h3>
+        <p class="product__text">
+          Cioccolato fondente monorigine e nocciole Piemonte IGP tostate lentamente
+          nel nostro laboratorio. Una crema densa e vellutata, senza olio di palma,
+          senza conservanti. Solo ingredienti puri, lavorati con la stessa cura
+          che dedichiamo ai nostri panettoni. Perfetta su pane, brioche o da gustare al cucchiaio.
         </p>
-        <a href="#ordina" class="patisserie__cta">Scopri tutta la selezione</a>
+        <p class="product__weight">Disponibile: 200g &mdash; 400g</p>
+        <a href="product-crema.html" class="product__cta">Scopri e ordina</a>
+        <a href="product-crema.html" class="product__btn">ORDINA ORA</a>
+      </div>
+      <div class="product__image clip-reveal-right">
+        <img src="assets/img/product-crema.png" alt="Crema Spalmabile al Cioccolato">
       </div>
     </div>
+
+    <!-- Decorative diagonal line -->
+    <div class="product__diagonal" aria-hidden="true"></div>
+  </section>
+
+  <!-- ========== 9. VETRINA — La Nostra Pasticceria ========== -->
+  <section class="vetrina" id="panettoni">
+    <div class="vetrina__header fade-in-up">
+      <span class="vetrina__label">DAL NOSTRO LABORATORIO</span>
+      <h2 class="vetrina__title">La Nostra <em>Pasticceria</em></h2>
+    </div>
+
+    <div class="vetrina__viewport" id="vetrinaViewport">
+      <div class="vetrina__track" id="vetrinaTrack">
+
+        <div class="vetrina__slide" data-caption="Cornetti Artigianali" data-desc="Sfogliatura a 48 strati, burro francese">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-cornetti.png" alt="Cornetti artigianali sfogliati a mano" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vetrina__slide" data-caption="Torta al Cioccolato" data-desc="Tre strati, ganache fondente 72%">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-torta-cioccolato.png" alt="Torta al cioccolato fondente a tre strati" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vetrina__slide" data-caption="Millefoglie" data-desc="Crema diplomatica, caramello salato">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-millefoglie.png" alt="Millefoglie con crema diplomatica" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vetrina__slide" data-caption="Cannoli Siciliani" data-desc="Ricotta di pecora, pistacchio di Bronte">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-cannoli.png" alt="Cannoli siciliani con ricotta e pistacchio" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vetrina__slide" data-caption="Torta di Mele" data-desc="Mele renette, pasta frolla alle mandorle">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-torta-mele.png" alt="Torta di mele con pasta frolla alle mandorle" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vetrina__slide" data-caption="Bigné alla Crema" data-desc="Pasta choux, crema pasticcera alla vaniglia">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-bigne.png" alt="Bigné ripieni di crema pasticcera" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vetrina__slide" data-caption="Crostata di Frutta" data-desc="Frutta fresca di stagione, crema al limone">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-crostata.png" alt="Crostata con frutta fresca di stagione" loading="lazy">
+          </div>
+        </div>
+
+        <div class="vetrina__slide" data-caption="Tiramisù" data-desc="Mascarpone, savoiardi, caffè espresso">
+          <div class="vetrina__img-wrap">
+            <img src="assets/img/vetrina-tiramisu.png" alt="Tiramisù classico al mascarpone" loading="lazy">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Caption overlay -->
+    <div class="vetrina__caption" id="vetrinaCaption">
+      <span class="vetrina__caption-name" id="vetrinaCaptionName"></span>
+      <span class="vetrina__caption-desc" id="vetrinaCaptionDesc"></span>
+    </div>
+
+    <!-- Controls -->
+    <div class="vetrina__controls">
+      <button class="vetrina__arrow vetrina__arrow--prev" id="vetrinaPrev" aria-label="Precedente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="vetrina__dots" id="vetrinaDots"></div>
+      <button class="vetrina__arrow vetrina__arrow--next" id="vetrinaNext" aria-label="Successivo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Drag hint (desktop only) -->
+    <div class="vetrina__drag-hint" id="vetrinaDragHint">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 12h14M12 5l-3 3M19 12l-3-3M19 12l-3 3M5 12l3-3M5 12l3 3"/></svg>
+      <span>TRASCINA</span>
+    </div>
+
   </section>
 
   <!-- ========== PARALLAX DIVIDER ========== -->
@@ -358,11 +420,11 @@
 
   <!-- ========== FIXED SIDE NAVIGATION ========== -->
   <nav class="side-nav" id="sideNav" aria-label="Navigazione panettoni">
-    <a href="#panettone-classico" class="side-nav__item" data-target="classico">CLASSICO</a>
-    <span class="side-nav__sep" aria-hidden="true">&mdash;</span>
     <a href="#panettone-pistacchio" class="side-nav__item" data-target="pistacchio">PISTACCHIO</a>
     <span class="side-nav__sep" aria-hidden="true">&mdash;</span>
     <a href="#panettone-cioccolato" class="side-nav__item" data-target="cioccolato">CIOCCOLATO</a>
+    <span class="side-nav__sep" aria-hidden="true">&mdash;</span>
+    <a href="#crema-spalmabile" class="side-nav__item" data-target="crema">CREMA</a>
   </nav>
 
   <!-- Main JS -->

@@ -81,7 +81,7 @@
   background: var(--bianco);
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid rgba(198, 163, 106, 0.12);
+  border: 1px solid rgba(187, 194, 92, 0.12);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -104,7 +104,7 @@
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.3) 0%,
-    rgba(198, 163, 106, 0.15) 50%,
+    rgba(187, 194, 92, 0.15) 50%,
     rgba(255, 255, 255, 0.1) 100%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -126,15 +126,15 @@
 }
 
 .shop-card--pistacchio .shop-card__accent {
-  background-color: #a8b060;
+  background-color: #BBC25C;
 }
 
 .shop-card--cioccolato .shop-card__accent {
   background-color: var(--cioccolato);
 }
 
-.shop-card--trio .shop-card__accent {
-  background: linear-gradient(90deg, var(--oro) 0%, #a8b060 50%, var(--cioccolato) 100%);
+.shop-card--crema .shop-card__accent {
+  background: linear-gradient(90deg, var(--cioccolato) 0%, var(--oro) 100%);
 }
 
 /* Image container */
@@ -238,7 +238,7 @@
   height: 70px;
   border-radius: 50%;
   border: 1px solid var(--oro);
-  background: rgba(198, 163, 106, 0.08);
+  background: rgba(187, 194, 92, 0.08);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -266,7 +266,7 @@
 .breadcrumb {
   background-color: var(--crema);
   padding: 20px 40px;
-  border-bottom: 1px solid rgba(198, 163, 106, 0.15);
+  border-bottom: 1px solid rgba(187, 194, 92, 0.15);
 }
 
 .breadcrumb__inner {
@@ -366,7 +366,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--bianco);
-  background-color: #a8b060;
+  background-color: #BBC25C;
   display: inline-block;
   padding: 6px 14px;
   margin-bottom: 20px;
@@ -389,7 +389,7 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #a8b060;
+  color: #BBC25C;
   margin-bottom: 28px;
 }
 
@@ -545,7 +545,7 @@
 .pdp__cta:hover {
   background-color: var(--oro-scuro);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(198, 163, 106, 0.3);
+  box-shadow: 0 8px 24px rgba(187, 194, 92, 0.3);
 }
 
 .pdp__cta:active {
@@ -613,7 +613,7 @@
   background: var(--crema);
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid rgba(198, 163, 106, 0.1);
+  border: 1px solid rgba(187, 194, 92, 0.1);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.5s ease;
 }

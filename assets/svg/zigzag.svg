@@ -7,7 +7,7 @@
        Q175 85, 200 50
        Q225 15, 250 50
        Q275 85, 300 50"
-    stroke="#faf9f5"
+    stroke="#F2F1F0"
     stroke-opacity="0.6"
     stroke-width="1.5"
     stroke-linecap="round"
@@ -20,7 +20,7 @@
        Q175 85, 200 55
        Q225 25, 250 55
        Q275 85, 300 55"
-    stroke="#faf9f5"
+    stroke="#F2F1F0"
     stroke-opacity="0.3"
     stroke-width="1"
     stroke-linecap="round"
@@ -33,7 +33,7 @@
        Q185 70, 210 45
        Q235 20, 260 45
        Q285 70, 295 52"
-    stroke="#faf9f5"
+    stroke="#F2F1F0"
     stroke-opacity="0.15"
     stroke-width="0.8"
     stroke-linecap="round"

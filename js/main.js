@@ -355,6 +355,226 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* -------------------------------------------
+     10. VETRINA CAROUSEL
+     Cinematic drag carousel with snap, Ken Burns
+     ------------------------------------------- */
+
+  const initVetrina = () => {
+    const viewport = document.getElementById('vetrinaViewport');
+    const track = document.getElementById('vetrinaTrack');
+    const slides = track ? track.querySelectorAll('.vetrina__slide') : [];
+    const captionEl = document.getElementById('vetrinaCaption');
+    const captionName = document.getElementById('vetrinaCaptionName');
+    const captionDesc = document.getElementById('vetrinaCaptionDesc');
+    const dotsContainer = document.getElementById('vetrinaDots');
+    const prevBtn = document.getElementById('vetrinaPrev');
+    const nextBtn = document.getElementById('vetrinaNext');
+    const dragHint = document.getElementById('vetrinaDragHint');
+
+    if (!viewport || !track || !slides.length) return;
+
+    let currentIndex = 0;
+    let isDragging = false;
+    let startX = 0;
+    let dragDelta = 0;
+    let trackX = 0;
+    let hasDragged = false;
+    const isMobile = window.innerWidth < 768;
+
+    // --- Build dots ---
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'vetrina__dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', `Slide ${i + 1}`);
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('.vetrina__dot');
+
+    // --- Slide sizing ---
+    const getSlideWidth = () => {
+      return slides[0].offsetWidth + parseFloat(getComputedStyle(track).gap || 24);
+    };
+
+    // --- Go to slide ---
+    const goToSlide = (index) => {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+      currentIndex = index;
+
+      if (!isMobile) {
+        trackX = -(currentIndex * getSlideWidth());
+        track.style.transform = `translateX(${trackX}px)`;
+      } else {
+        // Mobile: scroll to the right position
+        const slideW = getSlideWidth();
+        track.scrollTo({ left: currentIndex * slideW, behavior: 'smooth' });
+      }
+
+      updateSlideStates();
+      updateCaption();
+      updateDots();
+    };
+
+    // --- Update active/adjacent states ---
+    const updateSlideStates = () => {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('is-active', 'is-adjacent');
+        if (i === currentIndex) {
+          slide.classList.add('is-active');
+        } else if (Math.abs(i - currentIndex) === 1) {
+          slide.classList.add('is-adjacent');
+        }
+      });
+    };
+
+    // --- Update caption ---
+    const updateCaption = () => {
+      if (!captionEl) return;
+      captionEl.classList.remove('is-visible');
+
+      setTimeout(() => {
+        const slide = slides[currentIndex];
+        if (captionName) captionName.textContent = slide.getAttribute('data-caption') || '';
+        if (captionDesc) captionDesc.textContent = slide.getAttribute('data-desc') || '';
+        captionEl.classList.add('is-visible');
+      }, 200);
+    };
+
+    // --- Update dots ---
+    const updateDots = () => {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === currentIndex);
+      });
+    };
+
+    // --- Entry animation (clip-path reveal on scroll) ---
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const allSlides = entry.target.querySelectorAll('.vetrina__slide');
+          allSlides.forEach((slide, i) => {
+            setTimeout(() => {
+              slide.classList.add('is-revealed');
+            }, i * 120);
+          });
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealObserver.observe(viewport);
+
+    // --- Desktop: Drag interaction ---
+    if (!isMobile) {
+      const onPointerDown = (e) => {
+        if (e.target.closest('button, a')) return;
+        isDragging = true;
+        hasDragged = false;
+        startX = e.clientX || e.touches?.[0]?.clientX || 0;
+        dragDelta = 0;
+        viewport.classList.add('is-dragging');
+        if (dragHint) dragHint.classList.add('is-hidden');
+      };
+
+      const onPointerMove = (e) => {
+        if (!isDragging) return;
+        const x = e.clientX || e.touches?.[0]?.clientX || 0;
+        dragDelta = x - startX;
+
+        if (Math.abs(dragDelta) > 5) hasDragged = true;
+
+        const resistance = 0.35;
+        const atStart = currentIndex === 0 && dragDelta > 0;
+        const atEnd = currentIndex === slides.length - 1 && dragDelta < 0;
+        const multiplier = (atStart || atEnd) ? resistance : 1;
+
+        track.style.transform = `translateX(${trackX + dragDelta * multiplier}px)`;
+      };
+
+      const onPointerUp = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        viewport.classList.remove('is-dragging');
+
+        const threshold = getSlideWidth() * 0.2;
+
+        if (dragDelta < -threshold && currentIndex < slides.length - 1) {
+          goToSlide(currentIndex + 1);
+        } else if (dragDelta > threshold && currentIndex > 0) {
+          goToSlide(currentIndex - 1);
+        } else {
+          goToSlide(currentIndex);
+        }
+      };
+
+      viewport.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+
+      // Prevent link clicks when dragging
+      viewport.addEventListener('click', (e) => {
+        if (hasDragged) e.preventDefault();
+      }, true);
+    }
+
+    // --- Mobile: Scroll-snap based index tracking ---
+    if (isMobile) {
+      let scrollTimeout;
+      track.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          const slideW = getSlideWidth();
+          const newIndex = Math.round(track.scrollLeft / slideW);
+          if (newIndex !== currentIndex && newIndex >= 0 && newIndex < slides.length) {
+            currentIndex = newIndex;
+            updateSlideStates();
+            updateCaption();
+            updateDots();
+          }
+        }, 60);
+      }, { passive: true });
+    }
+
+    // --- Arrow buttons ---
+    if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    // --- Keyboard ---
+    const vetrinaSection = viewport.closest('.vetrina');
+    if (vetrinaSection) {
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.addEventListener('keydown', handleKeys);
+          } else {
+            document.removeEventListener('keydown', handleKeys);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      sectionObserver.observe(vetrinaSection);
+    }
+
+    function handleKeys(e) {
+      if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+    }
+
+    // --- Resize handler ---
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => goToSlide(currentIndex), 200);
+    });
+
+    // --- Init first slide ---
+    goToSlide(0);
+  };
+
+
+  /* -------------------------------------------
      INITIALIZE
      ------------------------------------------- */
 
@@ -367,5 +587,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollDown();
   initHeroCursor();
   initProgressBar();
+  initVetrina();
 
 });

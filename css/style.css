@@ -4,16 +4,16 @@
 
 /* ---------- CSS Variables ---------- */
 :root {
-  --oro: #c6a36a;
-  --oro-scuro: #b8943f;
-  --cioccolato: #52321f;
-  --crema: #faf9f5;
-  --beige: #d2c29e;
-  --scuro: #30302e;
-  --nero: #1a1a18;
+  --oro: #BBC25C;
+  --oro-scuro: #A3AA42;
+  --cioccolato: #382E2C;
+  --crema: #F2F1F0;
+  --beige: #D8D5D0;
+  --scuro: #2C2322;
+  --nero: #1E1918;
   --bianco: #ffffff;
-  --testo: #403f3e;
-  --testo-light: #8a8785;
+  --testo: #382E2C;
+  --testo-light: #6E6462;
   --keyword-opacity: 0.12;
 
   --font-display: 'Playfair Display', 'Georgia', serif;
@@ -678,16 +678,16 @@ button {
 .product__btn:hover {
   background-color: var(--oro-scuro);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(198, 163, 106, 0.3);
+  box-shadow: 0 8px 24px rgba(187, 194, 92, 0.3);
 }
 
 .product--pistacchio .product__btn {
-  background-color: #a8b060;
-  color: var(--bianco);
+  background-color: var(--oro);
+  color: var(--nero);
 }
 
 .product--pistacchio .product__btn:hover {
-  background-color: #96a050;
+  background-color: var(--oro-scuro);
 }
 
 .product--cioccolato .product__btn {
@@ -746,7 +746,40 @@ button {
   color: var(--cioccolato);
 }
 
-/* ---------- 8. PATISSERIE ---------- */
+/* --- 8. Crema Spalmabile --- */
+.product--crema {
+  background-color: var(--cioccolato);
+  color: var(--crema);
+}
+
+.product--crema .product__keyword {
+  color: var(--crema);
+}
+
+.product--crema .product__subtitle {
+  color: var(--oro);
+  opacity: 1;
+}
+
+.product--crema .product__cta {
+  color: var(--oro);
+}
+
+.product--crema .product__weight {
+  color: var(--beige);
+  opacity: 0.8;
+}
+
+.product--crema .product__btn {
+  background-color: var(--oro);
+  color: var(--nero);
+}
+
+.product--crema .product__btn:hover {
+  background-color: var(--oro-scuro);
+}
+
+/* ---------- 9. PATISSERIE ---------- */
 .patisserie {
   background-color: var(--beige);
   padding: 100px 40px;
@@ -809,7 +842,7 @@ button {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--bianco);
-  background-color: rgba(82, 50, 31, 0.85);
+  background-color: rgba(56, 46, 44, 0.85);
   padding: 8px 16px;
 }
 
