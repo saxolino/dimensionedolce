@@ -4,7 +4,7 @@
     cy="110"
     rx="70"
     ry="70"
-    stroke="#c6a36a"
+    stroke="#BBC25C"
     stroke-opacity="0.4"
     stroke-width="1.2"
   />
@@ -13,7 +13,7 @@
     cy="95"
     rx="55"
     ry="55"
-    stroke="#c6a36a"
+    stroke="#BBC25C"
     stroke-opacity="0.25"
     stroke-width="1"
   />
@@ -22,7 +22,7 @@
     cy="160"
     rx="45"
     ry="45"
-    stroke="#c6a36a"
+    stroke="#BBC25C"
     stroke-opacity="0.5"
     stroke-width="1.5"
   />
@@ -31,7 +31,7 @@
     cy="75"
     rx="30"
     ry="30"
-    stroke="#c6a36a"
+    stroke="#BBC25C"
     stroke-opacity="0.15"
     stroke-width="0.8"
   />

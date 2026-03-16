@@ -1,0 +1,510 @@
+/* ============================================================
+   DIMENSIONE DOLCE — Vetrina Carousel
+   Cinematic pastry showcase with drag, parallax & Ken Burns
+   ============================================================ */
+
+/* ---------- SECTION ---------- */
+.vetrina {
+  background-color: var(--nero);
+  padding: 100px 0 80px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ---------- HEADER ---------- */
+.vetrina__header {
+  text-align: center;
+  padding: 0 40px;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.vetrina__label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 20px;
+}
+
+.vetrina__title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  color: var(--bianco);
+  line-height: 1.15;
+}
+
+.vetrina__title em {
+  font-style: italic;
+}
+
+/* ---------- VIEWPORT ---------- */
+.vetrina__viewport {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  padding: 0 0 40px;
+}
+
+.vetrina__viewport:active {
+  cursor: grabbing;
+}
+
+.vetrina__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+/* ---------- TRACK ---------- */
+.vetrina__track {
+  display: flex;
+  gap: 24px;
+  padding: 0 calc((100vw - min(75vw, 900px)) / 2);
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vetrina__viewport.is-dragging .vetrina__track {
+  transition: none;
+}
+
+/* ---------- SLIDE ---------- */
+.vetrina__slide {
+  flex: 0 0 min(75vw, 900px);
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  transform: scale(0.88);
+  opacity: 0.4;
+  filter: saturate(0.3) brightness(0.7);
+  transition:
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vetrina__slide.is-active {
+  transform: scale(1);
+  opacity: 1;
+  filter: saturate(1) brightness(1);
+}
+
+/* Adjacent slides (prev/next) */
+.vetrina__slide.is-adjacent {
+  transform: scale(0.92);
+  opacity: 0.55;
+  filter: saturate(0.5) brightness(0.8);
+}
+
+/* ---------- IMAGE WRAPPER (Ken Burns + parallax) ---------- */
+.vetrina__img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--cioccolato);
+}
+
+.vetrina__img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(30, 25, 24, 0.65) 0%,
+    rgba(30, 25, 24, 0) 50%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vetrina__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* Ken Burns: active slide slowly zooms */
+.vetrina__slide.is-active .vetrina__img-wrap img {
+  transform: scale(1.16);
+}
+
+/* Hover: slight extra zoom */
+.vetrina__slide.is-active:hover .vetrina__img-wrap img {
+  transform: scale(1.2);
+  transition-duration: 4s;
+}
+
+/* ---------- CLIP-PATH ENTRY ANIMATION ---------- */
+.vetrina__slide {
+  clip-path: inset(8% 8% 8% 8% round 6px);
+}
+
+.vetrina__slide.is-revealed {
+  clip-path: inset(0% 0% 0% 0% round 6px);
+  transition:
+    clip-path 1.4s cubic-bezier(0.77, 0, 0.175, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- CAPTION ---------- */
+.vetrina__caption {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 40px;
+  margin-top: -20px;
+  min-height: 60px;
+}
+
+.vetrina__caption-name {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--bianco);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vetrina__caption-desc {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--oro);
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+
+.vetrina__caption.is-visible .vetrina__caption-name,
+.vetrina__caption.is-visible .vetrina__caption-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- CONTROLS ---------- */
+.vetrina__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 40px;
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.vetrina__arrow {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bianco);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vetrina__arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.vetrina__arrow:hover {
+  background-color: var(--oro);
+  border-color: var(--oro);
+  color: var(--nero);
+  transform: scale(1.1);
+}
+
+.vetrina__arrow:active {
+  transform: scale(0.95);
+}
+
+/* ---------- DOTS ---------- */
+.vetrina__dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vetrina__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.vetrina__dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--oro);
+  transform: scale(0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vetrina__dot.is-active {
+  width: 28px;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.vetrina__dot.is-active::after {
+  transform: scale(1);
+  border-radius: 4px;
+}
+
+/* ---------- DRAG HINT ---------- */
+.vetrina__drag-hint {
+  position: absolute;
+  bottom: 80px;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.vetrina__drag-hint.is-hidden {
+  opacity: 0;
+}
+
+.vetrina__drag-hint svg {
+  animation: dragPulse 2s ease-in-out infinite;
+}
+
+@keyframes dragPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.6; }
+  25% { transform: translateX(6px); opacity: 1; }
+  75% { transform: translateX(-6px); opacity: 1; }
+}
+
+/* ---------- AMBIENT GLOW ---------- */
+.vetrina::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(187, 194, 92, 0.06) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   RESPONSIVE: Tablet (<1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .vetrina {
+    padding: 80px 0 60px;
+  }
+
+  .vetrina__header {
+    margin-bottom: 48px;
+  }
+
+  .vetrina__track {
+    gap: 18px;
+    padding: 0 calc((100vw - 80vw) / 2);
+  }
+
+  .vetrina__slide {
+    flex: 0 0 80vw;
+  }
+
+  .vetrina__drag-hint {
+    display: none;
+  }
+
+  .vetrina__controls {
+    gap: 24px;
+    margin-top: 32px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE: Mobile (<768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .vetrina {
+    padding: 60px 0 48px;
+  }
+
+  .vetrina__header {
+    margin-bottom: 36px;
+    padding: 0 20px;
+  }
+
+  .vetrina__label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+  }
+
+  .vetrina__track {
+    gap: 14px;
+    padding: 0 calc((100vw - 85vw) / 2);
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .vetrina__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vetrina__slide {
+    flex: 0 0 85vw;
+    scroll-snap-align: center;
+    transform: scale(0.92);
+  }
+
+  .vetrina__slide.is-active {
+    transform: scale(1);
+  }
+
+  .vetrina__slide.is-adjacent {
+    transform: scale(0.94);
+  }
+
+  .vetrina__img-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .vetrina__caption {
+    margin-top: -12px;
+    padding: 0 20px;
+    min-height: 50px;
+  }
+
+  .vetrina__caption-desc {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .vetrina__controls {
+    gap: 20px;
+    margin-top: 24px;
+    padding: 0 20px;
+  }
+
+  .vetrina__arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .vetrina__dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .vetrina__dot.is-active {
+    width: 22px;
+  }
+
+  .vetrina__drag-hint {
+    display: none;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE: Small Mobile (<480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  .vetrina {
+    padding: 48px 0 40px;
+  }
+
+  .vetrina__header {
+    margin-bottom: 28px;
+  }
+
+  .vetrina__track {
+    gap: 10px;
+    padding: 0 calc((100vw - 88vw) / 2);
+  }
+
+  .vetrina__slide {
+    flex: 0 0 88vw;
+  }
+
+  .vetrina__img-wrap {
+    aspect-ratio: 3 / 2;
+  }
+
+  .vetrina__controls {
+    gap: 16px;
+    margin-top: 20px;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .vetrina__slide {
+    transition-duration: 0.01ms !important;
+    clip-path: none !important;
+  }
+
+  .vetrina__img-wrap img {
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+
+  .vetrina__caption-name,
+  .vetrina__caption-desc {
+    transition-duration: 0.01ms !important;
+  }
+
+  .vetrina__drag-hint svg {
+    animation: none;
+  }
+}
