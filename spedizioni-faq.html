@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/cart.css">
 
   <style>
     /* ===== Page-specific styles ===== */
@@ -260,7 +261,13 @@
       <a href="index.html#panettone-pistacchio" class="header__nav-link header__nav-link--left">I NOSTRI PRODOTTI</a>
       <button class="header__burger" id="headerBurger" aria-label="Menu"><span></span><span></span><span></span></button>
       <a href="index.html" class="header__title">DIMENSIONE DOLCE</a>
-      <a href="shop.html" class="header__nav-link header__nav-link--right">SHOP</a>
+      <div class="header__right-group">
+        <a href="shop.html" class="header__nav-link header__nav-link--right">SHOP</a>
+        <button class="header__cart" id="cartToggle" aria-label="Carrello">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="header__cart-count" id="cartCount">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -422,6 +429,30 @@
     </div>
   </section>
 
+  <!-- ========== CART DRAWER ========== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__header">
+      <div>
+        <span class="cart-drawer__title">Carrello</span>
+        <span class="cart-drawer__count">0 articoli</span>
+      </div>
+      <button class="cart-drawer__close" aria-label="Chiudi carrello">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-drawer__items"></div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span class="cart-drawer__subtotal-label">Subtotale</span>
+        <span class="cart-drawer__subtotal-price">&euro;0,00</span>
+      </div>
+      <p class="cart-drawer__shipping-note">Spedizione gratuita sopra &euro;80</p>
+      <button class="cart-drawer__checkout" disabled>PROCEDI AL CHECKOUT</button>
+      <button class="cart-drawer__continue">Continua lo shopping</button>
+    </div>
+  </aside>
+
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="footer__inner">
@@ -474,5 +505,7 @@
       });
     });
   </script>
+  <script src="https://sdks.shopifycdn.com/js-buy-sdk/v3/latest/index.umd.min.js" defer></script>
+  <script src="js/shopify.js" defer></script>
 </body>
 </html>
