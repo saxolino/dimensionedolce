@@ -576,6 +576,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* -------------------------------------------
+     11. MOBILE SIDEBAR
+     ------------------------------------------- */
+
+  const initSidebar = () => {
+    const burger = document.getElementById('headerBurger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const closeBtn = document.getElementById('sidebarClose');
+
+    if (!burger || !sidebar) return;
+
+    const open = () => {
+      sidebar.classList.add('is-open');
+      overlay.classList.add('is-visible');
+      burger.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const close = () => {
+      sidebar.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+      burger.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
+
+    burger.addEventListener('click', () => {
+      sidebar.classList.contains('is-open') ? close() : open();
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (overlay) overlay.addEventListener('click', close);
+
+    // Close on link click
+    sidebar.querySelectorAll('.sidebar__link').forEach(link => {
+      link.addEventListener('click', close);
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  };
+
+
+  /* -------------------------------------------
      INITIALIZE
      ------------------------------------------- */
 
@@ -589,5 +634,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroCursor();
   initProgressBar();
   initVetrina();
+  initSidebar();
 
 });

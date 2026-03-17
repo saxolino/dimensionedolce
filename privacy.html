@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Dimensione Dolce</title>
+  <meta name="description" content="Informativa sulla privacy di Dimensione Dolce S.r.l. ai sensi del GDPR (Regolamento UE 2016/679).">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <style>
+    /* ===== Page-specific styles ===== */
+    .page-hero {
+      background-color: var(--cioccolato);
+      color: var(--crema);
+      padding: 120px 40px 80px;
+      text-align: center;
+    }
+
+    .page-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .page-hero__subtitle {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--oro);
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      color: var(--testo);
+      background-color: var(--crema);
+    }
+
+    .page-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      margin-top: 48px;
+      margin-bottom: 20px;
+      color: var(--testo);
+    }
+
+    .page-content h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .page-content h3 {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--testo);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    .page-content p {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--testo-light);
+      margin-bottom: 16px;
+    }
+
+    .page-content ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .page-content ul li {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--testo-light);
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .page-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 1px;
+      background-color: var(--oro);
+    }
+
+    .page-content a {
+      color: var(--oro-scuro);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.3s;
+    }
+
+    .page-content a:hover {
+      color: var(--oro);
+    }
+
+    .page-content__divider {
+      width: 60px;
+      height: 2px;
+      background-color: var(--oro);
+      margin: 48px 0;
+    }
+
+    .page-content__update {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--testo-light);
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--beige);
+    }
+
+    @media (max-width: 768px) {
+      .page-hero {
+        padding: 80px 20px 60px;
+      }
+
+      .page-content {
+        padding: 48px 20px;
+      }
+
+      .page-content p,
+      .page-content ul li {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== 1. TOP BAR ========== -->
+  <div class="top-bar">
+    <div class="top-bar__inner">
+      <div class="top-bar__left">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        <span>Spedizione in tutta Italia!</span>
+      </div>
+      <a href="shop.html" class="top-bar__shop" aria-label="Shop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span>SHOP</span>
+      </a>
+      <div class="top-bar__right">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+390212345678">+39 02 1234567</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 2. HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html#panettone-pistacchio" class="header__nav-link header__nav-link--left">I NOSTRI PRODOTTI</a>
+      <button class="header__burger" id="headerBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="header__title">DIMENSIONE DOLCE</a>
+      <a href="shop.html" class="header__nav-link header__nav-link--right">SHOP</a>
+    </div>
+  </header>
+
+  <!-- ========== MOBILE SIDEBAR ========== -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <nav class="sidebar" id="sidebar" aria-label="Menu principale">
+    <div class="sidebar__header">
+      <span class="sidebar__brand">DIMENSIONE DOLCE</span>
+      <button class="sidebar__close" id="sidebarClose" aria-label="Chiudi menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="sidebar__nav">
+      <a href="index.html#panettone-pistacchio" class="sidebar__link">Panettone Pistacchio</a>
+      <a href="index.html#panettone-cioccolato" class="sidebar__link">Panettone Cioccolato</a>
+      <a href="index.html#crema-spalmabile" class="sidebar__link">Crema Spalmabile</a>
+      <div class="sidebar__sep"></div>
+      <a href="shop.html" class="sidebar__link sidebar__link--accent">Shop Online</a>
+      <a href="index.html#panettoni" class="sidebar__link">La Pasticceria</a>
+      <a href="index.html#ordina" class="sidebar__link">Contatti</a>
+    </div>
+    <div class="sidebar__footer">
+      <a href="tel:+390212345678" class="sidebar__contact">+39 02 1234567</a>
+      <div class="sidebar__social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="page-hero">
+    <h1 class="page-hero__title fade-in-up">Privacy Policy</h1>
+    <p class="page-hero__subtitle fade-in-up delay-1">Informativa ai sensi del GDPR</p>
+  </section>
+
+  <!-- ========== PRIVACY CONTENT ========== -->
+  <div class="page-content">
+
+    <h2>Titolare del Trattamento</h2>
+    <p>
+      Il Titolare del trattamento dei dati personali e <strong>Dimensione Dolce S.r.l.</strong>,
+      con sede legale in Via Monte Napoleone 42, 20121 Milano (MI), Italia.
+    </p>
+    <p>
+      Per qualsiasi informazione relativa al trattamento dei dati personali,
+      e possibile contattarci all'indirizzo email
+      <a href="mailto:privacy@dimensionedolce.it">privacy@dimensionedolce.it</a>.
+    </p>
+
+    <div class="page-content__divider"></div>
+
+    <h2>Raccolta dei Dati Personali</h2>
+    <p>
+      Raccogliamo i dati personali degli utenti nelle seguenti modalita:
+    </p>
+    <ul>
+      <li>Dati forniti volontariamente dall'utente (nome, cognome, indirizzo email, indirizzo di spedizione, numero di telefono) durante la registrazione, l'effettuazione di un ordine o la compilazione di moduli di contatto.</li>
+      <li>Dati di navigazione raccolti automaticamente (indirizzo IP, tipo di browser, pagine visitate, durata della visita) tramite cookie e tecnologie analoghe.</li>
+      <li>Dati di pagamento (numero carta di credito, dati PayPal) gestiti esclusivamente tramite provider terzi certificati PCI-DSS. Dimensione Dolce non memorizza mai i dati completi della carta di credito sui propri server.</li>
+    </ul>
+
+    <h2>Finalita del Trattamento</h2>
+    <p>
+      I dati personali raccolti sono trattati per le seguenti finalita:
+    </p>
+    <ul>
+      <li>Esecuzione del contratto di vendita: gestione degli ordini, spedizione dei prodotti, fatturazione e assistenza post-vendita.</li>
+      <li>Adempimenti di legge: obblighi fiscali, contabili e normativi previsti dalla legislazione vigente.</li>
+      <li>Marketing diretto: invio di comunicazioni promozionali, newsletter e offerte personalizzate, previo consenso esplicito dell'utente.</li>
+      <li>Miglioramento del servizio: analisi statistiche anonime per ottimizzare l'esperienza di navigazione e l'offerta commerciale.</li>
+    </ul>
+
+    <h2>Base Giuridica del Trattamento</h2>
+    <p>
+      Il trattamento dei dati personali si fonda sulle seguenti basi giuridiche, ai sensi dell'art. 6 del Regolamento UE 2016/679 (GDPR):
+    </p>
+    <ul>
+      <li><strong>Esecuzione contrattuale</strong> (art. 6.1.b): per i dati necessari alla gestione degli ordini e alla fornitura dei servizi richiesti.</li>
+      <li><strong>Obbligo legale</strong> (art. 6.1.c): per gli adempimenti fiscali e contabili previsti dalla normativa italiana ed europea.</li>
+      <li><strong>Consenso</strong> (art. 6.1.a): per l'invio di comunicazioni di marketing e la profilazione commerciale. Il consenso puo essere revocato in qualsiasi momento.</li>
+      <li><strong>Interesse legittimo</strong> (art. 6.1.f): per la prevenzione delle frodi e la sicurezza del sito web.</li>
+    </ul>
+
+    <h2>Conservazione dei Dati</h2>
+    <p>
+      I dati personali sono conservati per il tempo strettamente necessario al raggiungimento delle finalita per cui sono stati raccolti:
+    </p>
+    <ul>
+      <li>Dati contrattuali e di fatturazione: 10 anni dalla data dell'ultima transazione, come previsto dalla normativa fiscale italiana.</li>
+      <li>Dati di marketing: fino alla revoca del consenso da parte dell'utente, e comunque non oltre 24 mesi dall'ultima interazione.</li>
+      <li>Dati di navigazione e cookie: massimo 13 mesi dalla raccolta.</li>
+    </ul>
+    <p>
+      Al termine del periodo di conservazione, i dati vengono cancellati o resi anonimi in modo irreversibile.
+    </p>
+
+    <h2>Diritti dell'Utente</h2>
+    <p>
+      In conformita con il GDPR, l'utente ha il diritto di:
+    </p>
+    <ul>
+      <li><strong>Accesso</strong>: ottenere conferma dell'esistenza di un trattamento e accedere ai propri dati personali.</li>
+      <li><strong>Rettifica</strong>: richiedere la correzione di dati inesatti o l'integrazione di dati incompleti.</li>
+      <li><strong>Cancellazione</strong>: richiedere la cancellazione dei propri dati personali ("diritto all'oblio"), nei limiti previsti dalla legge.</li>
+      <li><strong>Limitazione</strong>: richiedere la limitazione del trattamento in determinate circostanze.</li>
+      <li><strong>Portabilita</strong>: ricevere i propri dati in un formato strutturato, di uso comune e leggibile da dispositivo automatico.</li>
+      <li><strong>Opposizione</strong>: opporsi al trattamento dei propri dati per motivi legittimi, incluso il marketing diretto.</li>
+      <li><strong>Revoca del consenso</strong>: revocare in qualsiasi momento il consenso precedentemente prestato, senza pregiudicare la liceita del trattamento effettuato prima della revoca.</li>
+    </ul>
+    <p>
+      Per esercitare i propri diritti, e sufficiente inviare una richiesta a
+      <a href="mailto:privacy@dimensionedolce.it">privacy@dimensionedolce.it</a>.
+      L'utente ha inoltre il diritto di proporre reclamo all'Autorita Garante per la Protezione dei Dati Personali
+      (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).
+    </p>
+
+    <h2>Cookie</h2>
+    <p>
+      Il sito web di Dimensione Dolce utilizza cookie tecnici necessari al funzionamento del sito
+      e cookie analitici per raccogliere informazioni aggregate sull'utilizzo del sito.
+    </p>
+
+    <h3>Cookie Tecnici</h3>
+    <p>
+      Sono essenziali per il corretto funzionamento del sito e non richiedono il consenso dell'utente.
+      Includono cookie di sessione, preferenze di navigazione e gestione del carrello.
+    </p>
+
+    <h3>Cookie Analitici</h3>
+    <p>
+      Utilizziamo cookie analitici (Google Analytics) per comprendere come gli utenti interagiscono
+      con il sito. Questi cookie raccolgono informazioni in forma anonima e aggregata.
+      L'utente puo disabilitarli tramite le impostazioni del proprio browser.
+    </p>
+
+    <h3>Cookie di Profilazione</h3>
+    <p>
+      Eventuali cookie di profilazione vengono installati solo previo consenso esplicito dell'utente,
+      espresso tramite il banner cookie al primo accesso al sito.
+    </p>
+
+    <h2>Modifiche alla Privacy Policy</h2>
+    <p>
+      Dimensione Dolce si riserva il diritto di modificare la presente informativa in qualsiasi momento.
+      Le modifiche saranno pubblicate su questa pagina con indicazione della data di ultimo aggiornamento.
+      Invitiamo gli utenti a consultare periodicamente questa pagina per restare informati sulle modalita
+      di trattamento dei dati personali.
+    </p>
+
+    <p class="page-content__update">Ultimo aggiornamento: marzo 2026</p>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1"/>
+          <path d="M20 6 C16 12, 10 16, 10 22 C10 28, 14 34, 20 34 C26 34, 30 28, 30 22 C30 16, 24 12, 20 6Z" stroke="currentColor" stroke-width="1" fill="none"/>
+          <path d="M20 10 L20 34" stroke="currentColor" stroke-width="0.6"/>
+          <path d="M13 20 Q20 17 27 20" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M12 26 Q20 23 28 26" stroke="currentColor" stroke-width="0.6" fill="none"/>
+        </svg>
+        <span class="footer__logo-text">DIMENSIONE DOLCE</span>
+      </div>
+
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="footer__social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="mailto:ordini@dimensionedolce.it" class="footer__social-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+
+      <p class="footer__instagram">Seguici su Instagram <a href="#">@dimensionedolce</a></p>
+      <p class="footer__copy">&copy; 2026 Dimensione Dolce S.r.l. &mdash; Tutti i diritti riservati</p>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>
