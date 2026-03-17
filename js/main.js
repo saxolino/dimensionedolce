@@ -369,25 +369,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Arc keyframes: the "finger" traces the crescent shape
     // Each point: [centerX%, centerY%, radius%]
-    // Starts bottom-right (tail of swirl), sweeps CCW to top-right (dots)
+    // Starts top-right (dots/gocce), sweeps CW down-left following the smear
     const arcPoints = [
-      [80, 82, 5],
-      [70, 88, 10],
-      [55, 90, 16],
-      [38, 85, 22],
-      [22, 72, 28],
-      [14, 55, 34],
-      [14, 38, 40],
-      [22, 22, 46],
-      [36, 12, 52],
-      [52, 8, 58],
-      [68, 12, 64],
-      [78, 22, 70],
-      [82, 35, 76],
-      [80, 48, 82],
-      [74, 58, 88],
-      [65, 60, 94],
-      [55, 50, 100],
+      [82, 8, 5],    // gocce in alto a destra
+      [78, 14, 10],
+      [72, 18, 16],   // inizio arco
+      [62, 14, 22],
+      [48, 10, 28],
+      [34, 14, 34],   // curva verso sinistra
+      [22, 24, 40],
+      [14, 38, 46],   // scende a sinistra
+      [12, 52, 52],
+      [16, 65, 58],   // fondo sinistra
+      [24, 76, 64],
+      [36, 84, 70],   // curva in basso
+      [50, 88, 76],
+      [62, 84, 82],   // risale verso destra
+      [72, 74, 88],
+      [76, 62, 94],   // coda interna
+      [55, 50, 100],  // centro — completo
     ];
 
     const observer = new IntersectionObserver((entries) => {
