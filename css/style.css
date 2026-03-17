@@ -598,27 +598,20 @@ button {
   margin-bottom: 16px;
 }
 
-.about__swirl-svg {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
 .about__swirl-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  mask: url(#swirlRevealMask);
-  -webkit-mask: url(#swirlRevealMask);
-}
-
-/* SVG mask path — animated via JS for the drawing effect */
-.about__swirl-path {
+  clip-path: circle(0% at 85% 80%);
   transition: none;
 }
 
-/* Text logo reveal — delayed after swirl completes */
+/* When animation completes */
+.about__logo-animated.is-complete .about__swirl-img {
+  clip-path: circle(100% at 50% 50%);
+}
+
+/* Text logo reveal — after swirl completes */
 .about__logo-text-reveal {
   opacity: 0;
   transform: translateY(16px);

@@ -356,32 +356,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* -------------------------------------------
      10. CREAM SWIRL DRAW ANIMATION
+     Finger-smear effect: clip-path circle moves along
+     the crescent arc while expanding
      ------------------------------------------- */
 
   const initSwirlAnimation = () => {
     const container = document.getElementById('aboutLogoAnimated');
-    const path = document.getElementById('swirlPath');
+    if (!container) return;
 
-    if (!container || !path) return;
+    const img = container.querySelector('.about__swirl-img');
+    if (!img) return;
+
+    // Arc keyframes: the "finger" traces the crescent shape
+    // Each point: [centerX%, centerY%, radius%]
+    // Starts bottom-right (tail of swirl), sweeps CCW to top-right (dots)
+    const arcPoints = [
+      [80, 82, 5],
+      [70, 88, 10],
+      [55, 90, 16],
+      [38, 85, 22],
+      [22, 72, 28],
+      [14, 55, 34],
+      [14, 38, 40],
+      [22, 22, 46],
+      [36, 12, 52],
+      [52, 8, 58],
+      [68, 12, 64],
+      [78, 22, 70],
+      [82, 35, 76],
+      [80, 48, 82],
+      [74, 58, 88],
+      [65, 60, 94],
+      [55, 50, 100],
+    ];
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Animate stroke-dashoffset from 3 to 0 over 2 seconds
-          const duration = 2000;
+          const duration = 1800;
           const startTime = performance.now();
 
           function animate(now) {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            path.style.strokeDashoffset = 3 - (eased * 3);
+            // Ease in-out cubic
+            const eased = progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+            // Interpolate along arc keyframes
+            const totalSegments = arcPoints.length - 1;
+            const rawIndex = eased * totalSegments;
+            const i = Math.min(Math.floor(rawIndex), totalSegments - 1);
+            const t = rawIndex - i;
+
+            const cx = arcPoints[i][0] + (arcPoints[i + 1][0] - arcPoints[i][0]) * t;
+            const cy = arcPoints[i][1] + (arcPoints[i + 1][1] - arcPoints[i][1]) * t;
+            const r = arcPoints[i][2] + (arcPoints[i + 1][2] - arcPoints[i][2]) * t;
+
+            img.style.clipPath = `circle(${r}% at ${cx}% ${cy}%)`;
 
             if (progress < 1) {
               requestAnimationFrame(animate);
             } else {
-              // Drawing complete — show text
+              img.style.clipPath = 'circle(120% at 50% 50%)';
               container.classList.add('is-complete');
             }
           }
@@ -390,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.3 });
 
     observer.observe(container);
   };
