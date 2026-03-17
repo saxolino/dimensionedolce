@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateParallax = () => {
       const wh = window.innerHeight;
 
-      // --- FULL-WIDTH PARALLAX SECTION ---
-      if (parallaxBg && parallaxSection) {
+      // --- FULL-WIDTH PARALLAX SECTION (desktop only) ---
+      if (parallaxBg && parallaxSection && window.innerWidth > 768) {
         const rect = parallaxSection.getBoundingClientRect();
         if (rect.bottom > -200 && rect.top < wh + 200) {
           const progress = (wh - rect.top) / (wh + rect.height);
