@@ -583,15 +583,79 @@ button {
   text-align: center;
 }
 
-.about__logo-full {
+/* Animated logo reveal — finger smear effect */
+.about__logo-animated {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 40px;
 }
 
-.about__logo-full-img {
-  height: 180px;
+.about__swirl {
+  position: relative;
+  width: 160px;
+  height: 170px;
+  margin-bottom: 16px;
+}
+
+.about__swirl-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.about__swirl-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mask: url(#swirlRevealMask);
+  -webkit-mask: url(#swirlRevealMask);
+}
+
+/* SVG mask path — animated via JS for the drawing effect */
+.about__swirl-path {
+  transition: none;
+}
+
+/* Text logo reveal — delayed after swirl completes */
+.about__logo-text-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about__logo-animated.is-complete .about__logo-text-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about__logo-text-img {
+  height: 48px;
   width: auto;
+}
+
+@media (max-width: 768px) {
+  .about__swirl {
+    width: 120px;
+    height: 130px;
+  }
+
+  .about__logo-text-img {
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about__swirl {
+    width: 100px;
+    height: 110px;
+  }
+
+  .about__logo-text-img {
+    height: 30px;
+  }
 }
 
 .about__title {

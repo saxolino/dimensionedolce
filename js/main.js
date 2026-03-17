@@ -355,7 +355,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* -------------------------------------------
-     10. VETRINA CAROUSEL
+     10. CREAM SWIRL DRAW ANIMATION
+     ------------------------------------------- */
+
+  const initSwirlAnimation = () => {
+    const container = document.getElementById('aboutLogoAnimated');
+    const path = document.getElementById('swirlPath');
+
+    if (!container || !path) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Animate stroke-dashoffset from 3 to 0 over 2 seconds
+          const duration = 2000;
+          const startTime = performance.now();
+
+          function animate(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            path.style.strokeDashoffset = 3 - (eased * 3);
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              // Drawing complete — show text
+              container.classList.add('is-complete');
+            }
+          }
+
+          requestAnimationFrame(animate);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    observer.observe(container);
+  };
+
+
+  /* -------------------------------------------
+     11. VETRINA CAROUSEL
      Cinematic drag carousel with snap, Ken Burns
      ------------------------------------------- */
 
@@ -633,6 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollDown();
   initHeroCursor();
   initProgressBar();
+  initSwirlAnimation();
   initVetrina();
   initSidebar();
 

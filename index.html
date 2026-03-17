@@ -153,8 +153,26 @@
   <!-- ========== 4. CHI SIAMO ========== -->
   <section class="about" id="chi-siamo">
     <div class="about__inner">
-      <div class="about__logo-full fade-in-up">
-        <img src="assets/img/logo-full.png" alt="Dimensione Dolce" class="about__logo-full-img">
+      <div class="about__logo-animated" id="aboutLogoAnimated">
+        <!-- Cream swirl with finger-draw reveal -->
+        <div class="about__swirl">
+          <img src="assets/img/logo-moon.png" alt="" class="about__swirl-img">
+          <!-- SVG mask definition (hidden) -->
+          <svg class="about__swirl-svg" width="0" height="0" aria-hidden="true">
+            <defs>
+              <mask id="swirlRevealMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+                <path class="about__swirl-path" id="swirlPath"
+                  d="M0.82,0.78 C0.65,0.95 0.29,0.92 0.16,0.76 C0.03,0.59 0.04,0.35 0.18,0.19 C0.31,0.03 0.56,-0.03 0.75,0.08 C0.91,0.18 0.97,0.35 0.91,0.53 C0.87,0.66 0.75,0.74 0.65,0.70 C0.54,0.66 0.51,0.57 0.56,0.49 C0.59,0.43 0.65,0.42 0.69,0.45"
+                  stroke="white" stroke-width="0.26" stroke-linecap="round" fill="none"
+                  style="stroke-dasharray: 3; stroke-dashoffset: 3;"/>
+              </mask>
+            </defs>
+          </svg>
+        </div>
+        <!-- Text logo fades in after swirl -->
+        <div class="about__logo-text-reveal">
+          <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce" class="about__logo-text-img">
+        </div>
       </div>
       <p class="about__text fade-in-up delay-2">
         Fondata nel 1962 da Mastro Giuseppe Conti in una piccola bottega del centro di Milano,
