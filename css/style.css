@@ -583,31 +583,15 @@ button {
   text-align: center;
 }
 
-.about__logo-line {
+.about__logo-full {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 24px;
   margin-bottom: 40px;
 }
 
-.about__line-side {
-  display: block;
-  width: 80px;
-  height: 1px;
-  background-color: var(--oro);
-}
-
-.about__logo-mark {
-  width: 48px;
-  height: 48px;
-  color: var(--oro);
-  flex-shrink: 0;
-}
-
-.about__logo-mark svg {
-  width: 100%;
-  height: 100%;
+.about__logo-full-img {
+  height: 180px;
+  width: auto;
 }
 
 .about__title {
