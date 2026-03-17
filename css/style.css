@@ -1195,16 +1195,14 @@ button {
   color: var(--bianco);
 }
 
-.footer__logo svg {
-  width: 36px;
-  height: 36px;
+.footer__logo-moon {
+  height: 60px;
+  width: auto;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.footer__logo-text {
-  font-family: var(--font-ui);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.3em;
+.footer__logo-moon:hover {
+  transform: scale(1.08) rotate(-5deg);
 }
 
 .footer__social {
