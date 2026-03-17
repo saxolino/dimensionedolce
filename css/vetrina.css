@@ -373,7 +373,7 @@
    ============================================================ */
 @media (max-width: 768px) {
   .vetrina {
-    padding: 60px 0 48px;
+    padding: 60px 0 20px;
   }
 
   .vetrina__header {
@@ -450,7 +450,7 @@
    ============================================================ */
 @media (max-width: 480px) {
   .vetrina {
-    padding: 48px 0 40px;
+    padding: 48px 0 16px;
   }
 
   .vetrina__header {

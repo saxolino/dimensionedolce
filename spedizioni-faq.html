@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spedizioni e FAQ | Dimensione Dolce</title>
+  <meta name="description" content="Informazioni su spedizioni, tempi di consegna e risposte alle domande frequenti su Dimensione Dolce.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/shop.css">
+
+  <style>
+    /* ===== Page-specific styles ===== */
+    .page-hero {
+      background-color: var(--cioccolato);
+      color: var(--crema);
+      padding: 120px 40px 80px;
+      text-align: center;
+    }
+
+    .page-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .page-hero__subtitle {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--oro);
+    }
+
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      color: var(--testo);
+      background-color: var(--crema);
+    }
+
+    .page-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .page-content p {
+      font-family: var(--font-body);
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--testo-light);
+      margin-bottom: 24px;
+    }
+
+    .page-content__divider {
+      width: 60px;
+      height: 2px;
+      background-color: var(--oro);
+      margin: 60px auto;
+    }
+
+    /* Shipping info cards */
+    .shipping-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 20px;
+    }
+
+    .shipping-card {
+      background-color: var(--bianco);
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid var(--beige);
+    }
+
+    .shipping-card__icon {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 20px;
+      color: var(--oro);
+    }
+
+    .shipping-card__title {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--testo);
+      margin-bottom: 12px;
+    }
+
+    .shipping-card__text {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--testo-light);
+      margin-bottom: 0;
+    }
+
+    /* FAQ section */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      background-color: var(--crema);
+    }
+
+    .faq-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      margin-bottom: 40px;
+      text-align: center;
+      color: var(--testo);
+    }
+
+    .faq-accordion {
+      border-top: 1px solid var(--beige);
+      margin-bottom: 0;
+    }
+
+    .faq-accordion__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--beige);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .faq-accordion__header:hover {
+      color: var(--oro-scuro);
+    }
+
+    .faq-accordion__title {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--testo);
+    }
+
+    .faq-accordion__header:hover .faq-accordion__title {
+      color: var(--oro-scuro);
+    }
+
+    .faq-accordion__icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-left: 16px;
+      transition: transform 0.3s ease;
+      color: var(--testo-light);
+    }
+
+    .faq-accordion.open .faq-accordion__icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-accordion__body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-accordion.open .faq-accordion__body {
+      max-height: 400px;
+    }
+
+    .faq-accordion__content {
+      padding: 0 0 24px;
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--testo-light);
+    }
+
+    @media (max-width: 768px) {
+      .page-hero {
+        padding: 80px 20px 60px;
+      }
+
+      .page-content {
+        padding: 48px 20px;
+      }
+
+      .page-content p {
+        font-size: 16px;
+      }
+
+      .shipping-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .faq-section {
+        padding: 0 20px 48px;
+      }
+
+      .faq-accordion__header {
+        min-height: 48px;
+        padding: 14px 0;
+      }
+
+      .faq-accordion__title {
+        font-size: 12px;
+      }
+
+      .faq-accordion__content {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== 1. TOP BAR ========== -->
+  <div class="top-bar">
+    <div class="top-bar__inner">
+      <div class="top-bar__left">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        <span>Spedizione in tutta Italia!</span>
+      </div>
+      <a href="shop.html" class="top-bar__shop" aria-label="Shop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span>SHOP</span>
+      </a>
+      <div class="top-bar__right">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+390212345678">+39 02 1234567</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 2. HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html#panettone-pistacchio" class="header__nav-link header__nav-link--left">I NOSTRI PRODOTTI</a>
+      <button class="header__burger" id="headerBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="header__title">DIMENSIONE DOLCE</a>
+      <a href="shop.html" class="header__nav-link header__nav-link--right">SHOP</a>
+    </div>
+  </header>
+
+  <!-- ========== MOBILE SIDEBAR ========== -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <nav class="sidebar" id="sidebar" aria-label="Menu principale">
+    <div class="sidebar__header">
+      <span class="sidebar__brand">DIMENSIONE DOLCE</span>
+      <button class="sidebar__close" id="sidebarClose" aria-label="Chiudi menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="sidebar__nav">
+      <a href="index.html#panettone-pistacchio" class="sidebar__link">Panettone Pistacchio</a>
+      <a href="index.html#panettone-cioccolato" class="sidebar__link">Panettone Cioccolato</a>
+      <a href="index.html#crema-spalmabile" class="sidebar__link">Crema Spalmabile</a>
+      <div class="sidebar__sep"></div>
+      <a href="shop.html" class="sidebar__link sidebar__link--accent">Shop Online</a>
+      <a href="index.html#panettoni" class="sidebar__link">La Pasticceria</a>
+      <a href="index.html#ordina" class="sidebar__link">Contatti</a>
+    </div>
+    <div class="sidebar__footer">
+      <a href="tel:+390212345678" class="sidebar__contact">+39 02 1234567</a>
+      <div class="sidebar__social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="page-hero">
+    <h1 class="page-hero__title fade-in-up">Spedizioni e FAQ</h1>
+    <p class="page-hero__subtitle fade-in-up delay-1">Tutto quello che devi sapere</p>
+  </section>
+
+  <!-- ========== SHIPPING INFO ========== -->
+  <div class="page-content">
+    <h2 class="fade-in-up">Informazioni sulla Spedizione</h2>
+
+    <p class="fade-in-up delay-1" style="text-align: center;">
+      Spediamo i nostri prodotti artigianali in tutta Italia con la massima cura,
+      utilizzando packaging isotermico premium per garantire la freschezza fino alla tua porta.
+    </p>
+
+    <div class="page-content__divider fade-in-up"></div>
+
+    <div class="shipping-grid fade-in-up delay-2">
+      <div class="shipping-card">
+        <svg class="shipping-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+        <h3 class="shipping-card__title">Spedizione Gratuita</h3>
+        <p class="shipping-card__text">Gratuita per ordini superiori a 80 euro. Sotto questa soglia, costo fisso di 6,90 euro.</p>
+      </div>
+      <div class="shipping-card">
+        <svg class="shipping-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <h3 class="shipping-card__title">Tempi di Consegna</h3>
+        <p class="shipping-card__text">2-3 giorni lavorativi per la penisola. 3-4 giorni per Sicilia e Sardegna.</p>
+      </div>
+      <div class="shipping-card">
+        <svg class="shipping-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <h3 class="shipping-card__title">Packaging Isotermico</h3>
+        <p class="shipping-card__text">Ogni pacco include gel refrigerante e isolamento termico per mantenere la freschezza.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq-section">
+    <h2 class="fade-in-up">Domande Frequenti</h2>
+
+    <div class="faq-accordion fade-in-up delay-1" data-faq>
+      <div class="faq-accordion__header">
+        <span class="faq-accordion__title">Come vengono spediti i prodotti?</span>
+        <svg class="faq-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-accordion__body">
+        <div class="faq-accordion__content">
+          Tutti i nostri prodotti vengono confezionati in packaging isotermico premium con gel refrigerante,
+          per garantire che arrivino a destinazione nelle condizioni ottimali. Utilizziamo corrieri selezionati
+          con esperienza nella consegna di prodotti alimentari di alta gamma.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-accordion fade-in-up delay-1" data-faq>
+      <div class="faq-accordion__header">
+        <span class="faq-accordion__title">Quali sono i tempi di consegna?</span>
+        <svg class="faq-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-accordion__body">
+        <div class="faq-accordion__content">
+          Le consegne in penisola richiedono 2-3 giorni lavorativi dalla conferma dell'ordine.
+          Per le isole (Sicilia e Sardegna) i tempi si estendono a 3-4 giorni lavorativi.
+          Riceverai un'email con il codice di tracciamento non appena il pacco viene affidato al corriere.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-accordion fade-in-up delay-2" data-faq>
+      <div class="faq-accordion__header">
+        <span class="faq-accordion__title">Posso richiedere una confezione regalo?</span>
+        <svg class="faq-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-accordion__body">
+        <div class="faq-accordion__content">
+          Certamente. L'opzione confezione regalo e disponibile direttamente al checkout.
+          I nostri panettoni vengono presentati in eleganti cofanetti con nastro in raso
+          e biglietto personalizzabile, perfetti per ogni occasione speciale.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-accordion fade-in-up delay-2" data-faq>
+      <div class="faq-accordion__header">
+        <span class="faq-accordion__title">Come conservo il panettone?</span>
+        <svg class="faq-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-accordion__body">
+        <div class="faq-accordion__content">
+          Il panettone va conservato a temperatura ambiente, in un luogo fresco e asciutto,
+          lontano da fonti di calore dirette e dalla luce solare. Una volta aperto, consigliamo
+          di consumarlo entro 3-4 giorni, avvolgendolo nella pellicola alimentare per mantenerne la sofficita.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-accordion fade-in-up delay-3" data-faq>
+      <div class="faq-accordion__header">
+        <span class="faq-accordion__title">Spedite all'estero?</span>
+        <svg class="faq-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-accordion__body">
+        <div class="faq-accordion__content">
+          Si, effettuiamo spedizioni in tutta Europa. I tempi di consegna per le destinazioni europee
+          sono di 4-6 giorni lavorativi. I costi di spedizione internazionale vengono calcolati al checkout
+          in base alla destinazione e al peso dell'ordine.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-accordion fade-in-up delay-3" data-faq>
+      <div class="faq-accordion__header">
+        <span class="faq-accordion__title">Posso modificare o annullare un ordine?</span>
+        <svg class="faq-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="faq-accordion__body">
+        <div class="faq-accordion__content">
+          E possibile modificare o annullare un ordine entro 2 ore dalla conferma, contattandoci
+          via email a ordini@dimensionedolce.it o telefonicamente al +39 02 1234567.
+          Trascorso questo termine, l'ordine entra in fase di preparazione e non sara piu modificabile.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1"/>
+          <path d="M20 6 C16 12, 10 16, 10 22 C10 28, 14 34, 20 34 C26 34, 30 28, 30 22 C30 16, 24 12, 20 6Z" stroke="currentColor" stroke-width="1" fill="none"/>
+          <path d="M20 10 L20 34" stroke="currentColor" stroke-width="0.6"/>
+          <path d="M13 20 Q20 17 27 20" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M12 26 Q20 23 28 26" stroke="currentColor" stroke-width="0.6" fill="none"/>
+        </svg>
+        <span class="footer__logo-text">DIMENSIONE DOLCE</span>
+      </div>
+
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="footer__social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="mailto:ordini@dimensionedolce.it" class="footer__social-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+
+      <p class="footer__instagram">Seguici su Instagram <a href="#">@dimensionedolce</a></p>
+      <p class="footer__copy">&copy; 2026 Dimensione Dolce S.r.l. &mdash; Tutti i diritti riservati</p>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="js/main.js" defer></script>
+
+  <!-- FAQ Accordion Script -->
+  <script>
+    document.querySelectorAll('[data-faq] .faq-accordion__header').forEach(function(header) {
+      header.addEventListener('click', function() {
+        var accordion = this.closest('[data-faq]');
+        var wasOpen = accordion.classList.contains('open');
+        // Close all
+        document.querySelectorAll('[data-faq]').forEach(function(a) { a.classList.remove('open'); });
+        // Toggle current
+        if (!wasOpen) accordion.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>
