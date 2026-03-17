@@ -105,30 +105,23 @@ button {
   gap: 8px;
 }
 
-.top-bar__shop {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--bianco);
-  transition: opacity 0.3s;
+.top-bar__moon {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s, transform 0.3s;
 }
 
-.top-bar__shop svg {
-  width: 15px;
-  height: 15px;
+.top-bar__moon img {
+  height: 24px;
+  width: auto;
 }
 
-.top-bar__shop span {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-}
-
-.top-bar__shop:hover {
-  opacity: 0.8;
+.top-bar__moon:hover {
+  opacity: 0.85;
+  transform: translateX(-50%) scale(1.08);
 }
 
 .top-bar__right a {
@@ -174,20 +167,21 @@ button {
 }
 
 .header__title {
-  font-family: var(--font-ui);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  color: var(--testo);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  transition: font-size 0.4s ease;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
 
-.header.scrolled .header__title {
-  font-size: 14px;
+.header__logo-img {
+  height: 40px;
+  width: auto;
+  transition: height 0.4s ease;
+}
+
+.header.scrolled .header__logo-img {
+  height: 30px;
 }
 
 .header__nav-link {
@@ -1601,13 +1595,14 @@ button {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    white-space: nowrap;
   }
 
-  .header.scrolled .header__title {
-    font-size: 10px;
+  .header__logo-img {
+    height: 32px;
+  }
+
+  .header.scrolled .header__logo-img {
+    height: 24px;
   }
 
   /* Hero — Full-width immersive mobile */
@@ -1880,9 +1875,8 @@ button {
     padding: 0 12px;
   }
 
-  .header__title {
-    font-size: 9px;
-    letter-spacing: 0.1em;
+  .header__logo-img {
+    height: 26px;
   }
 
   .hero {
