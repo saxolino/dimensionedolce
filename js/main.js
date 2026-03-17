@@ -371,23 +371,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Each point: [centerX%, centerY%, radius%]
     // Starts top-right (dots/gocce), sweeps CW down-left following the smear
     const arcPoints = [
-      [82, 8, 5],    // gocce in alto a destra
-      [78, 14, 10],
-      [72, 18, 16],   // inizio arco
-      [62, 14, 22],
-      [48, 10, 28],
-      [34, 14, 34],   // curva verso sinistra
-      [22, 24, 40],
-      [14, 38, 46],   // scende a sinistra
-      [12, 52, 52],
-      [16, 65, 58],   // fondo sinistra
-      [24, 76, 64],
-      [36, 84, 70],   // curva in basso
-      [50, 88, 76],
-      [62, 84, 82],   // risale verso destra
-      [72, 74, 88],
-      [76, 62, 94],   // coda interna
-      [55, 50, 100],  // centro — completo
+      [82, 8, 6],     // gocce in alto a destra
+      [76, 14, 14],
+      [66, 16, 22],   // inizio arco, allarga subito
+      [52, 12, 30],
+      [38, 14, 38],   // curva verso sinistra — raggio piu grande
+      [24, 24, 46],
+      [14, 38, 54],   // scende a sinistra — copre bene il lato
+      [10, 52, 60],
+      [14, 66, 66],   // fondo sinistra
+      [24, 78, 72],
+      [38, 86, 78],   // curva in basso
+      [52, 88, 84],
+      [64, 82, 90],   // risale verso destra
+      [72, 72, 96],
+      [50, 50, 110],  // centro — completo, copre tutto
     ];
 
     const observer = new IntersectionObserver((entries) => {
