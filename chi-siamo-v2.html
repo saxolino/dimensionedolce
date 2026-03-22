@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dimensione Dolce | Pasticceria Artigianale</title>
-  <meta name="description" content="Un luogo dedicato al gusto e al piacere della dolcezza, tra pasticceria, gelateria e caffè.">
+  <title>Chi Siamo | Dimensione Dolce</title>
+  <meta name="description" content="Scopri la storia e il team di Dimensione Dolce, pasticceria artigianale.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,8 +13,8 @@
 
   <style>
     /* ============================================================
-       DIMENSIONE DOLCE V3 — Editorial Sidebar Layout
-       Based on PDF mockup: sidebar nav + asymmetric blocks
+       DIMENSIONE DOLCE — Chi Siamo V2
+       Same design system as index-v3
        ============================================================ */
 
     :root {
@@ -143,6 +143,10 @@
       color: var(--pistacchio);
     }
 
+    .sidebar__link--active {
+      color: var(--pistacchio);
+    }
+
     /* Main content offset */
     .main {
       margin-left: var(--sidebar-w);
@@ -226,6 +230,10 @@
 
     .mobile-nav a:hover { color: var(--bianco); }
 
+    .mobile-nav a.mobile-nav__link--active {
+      color: var(--pistacchio);
+    }
+
     /* ============================================================
        HERO — Cinematic carousel + floating brand
        ============================================================ */
@@ -240,7 +248,6 @@
       padding: 80px 60px;
     }
 
-    /* Carousel slides */
     .hero__carousel {
       position: absolute;
       inset: 0;
@@ -275,7 +282,6 @@
       to { transform: scale(1); }
     }
 
-    /* Dark overlay gradient */
     .hero__overlay {
       position: absolute;
       inset: 0;
@@ -308,7 +314,6 @@
       will-change: transform;
     }
 
-    /* Moon — scale + blur reveal, then gentle float */
     .hero__moon {
       width: 280px;
       height: 280px;
@@ -336,7 +341,6 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* Wordmark — clip-path reveal */
     .hero__wordmark {
       display: flex;
       flex-direction: column;
@@ -344,7 +348,6 @@
       gap: 0;
     }
 
-    /* Lines draw from center outward */
     .hero__line-top,
     .hero__line-bottom {
       height: 1.5px;
@@ -357,7 +360,6 @@
       to { width: 280px; }
     }
 
-    /* DIMENSIONE — letter-spacing reveal */
     .hero__dimensione {
       font-family: var(--font-ui);
       font-size: 16px;
@@ -374,7 +376,6 @@
       to { opacity: 1; letter-spacing: 0.45em; }
     }
 
-    /* Dolce — slide up from clip */
     .hero__dolce {
       font-family: var(--font-display);
       font-size: 72px;
@@ -390,7 +391,6 @@
       to { clip-path: inset(0 0 0 0); }
     }
 
-    /* Tagline — fade + subtle slide */
     .hero__tagline {
       max-width: 480px;
       margin-top: 40px;
@@ -421,7 +421,6 @@
       color: rgba(255,255,255,0.4);
     }
 
-    /* Scroll indicator */
     .hero__scroll {
       position: absolute;
       bottom: 36px;
@@ -493,312 +492,7 @@
     }
 
     /* ============================================================
-       BENVENUTI — Centered statement
-       ============================================================ */
-    .benvenuti {
-      background: var(--bianco);
-      padding: 150px 60px;
-      text-align: center;
-    }
-
-    .benvenuti__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--testo);
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .benvenuti__text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--testo-light);
-      max-width: 620px;
-      margin: 0 auto;
-    }
-
-    .benvenuti__divider {
-      width: 60px;
-      height: 1px;
-      background: var(--pistacchio);
-      margin: 48px auto 0;
-    }
-
-    /* ============================================================
-       SERVICE BLOCKS — Alternating asymmetric halves
-       ============================================================ */
-    .svc-block {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 460px;
-    }
-
-    .svc-block--reverse {
-      direction: rtl;
-    }
-
-    .svc-block--reverse > * {
-      direction: ltr;
-    }
-
-    .svc-half {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 56px 52px;
-    }
-
-    /* Dark half */
-    .svc-half--dark {
-      background: var(--cioccolato-deep);
-      padding: 56px 52px;
-    }
-
-    .svc-half--dark .svc-half__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--bianco);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .svc-half--dark .svc-half__text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.55);
-      max-width: 400px;
-    }
-
-    /* Light half — magenta label */
-    .svc-half--light {
-      background: var(--crema-warm);
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .svc-half--light-white {
-      background: var(--bianco);
-    }
-
-    /* Photo background in service halves */
-    .svc-half--photo {
-      background-size: cover;
-      background-position: center;
-    }
-
-    .svc-half--photo::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(30, 25, 24, 0.45);
-      z-index: 0;
-    }
-
-    .svc-half--photo .svc-half__category,
-    .svc-half--photo .svc-half__cta {
-      position: relative;
-      z-index: 1;
-    }
-
-    .svc-half--photo .svc-half__category {
-      color: var(--bianco);
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-    }
-
-    .svc-half--photo .svc-half__cta {
-      color: var(--bianco);
-      border-bottom-color: rgba(255,255,255,0.6);
-    }
-
-    .svc-half--photo .svc-half__cta:hover {
-      opacity: 0.8;
-    }
-
-    .svc-half__category {
-      font-family: var(--font-ui);
-      font-size: clamp(28px, 3.5vw, 44px);
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      color: var(--magenta);
-      text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-
-    .svc-half__cta {
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--magenta);
-      border-bottom: 1px solid var(--magenta);
-      padding-bottom: 4px;
-      transition: opacity 0.3s;
-    }
-
-    .svc-half__cta:hover {
-      opacity: 0.7;
-    }
-
-    .svc-half__category--green {
-      color: var(--cioccolato);
-    }
-
-    /* White text box */
-    .svc-half--bianco {
-      background: var(--bianco);
-    }
-
-    .svc-half--bianco .svc-half__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--testo);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .svc-half--bianco .svc-half__text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--testo-light);
-      max-width: 400px;
-    }
-
-    /* Pistachio text box */
-    .svc-half--pistacchio {
-      background: var(--pistacchio);
-    }
-
-    .svc-half--pistacchio .svc-half__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--cioccolato);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .svc-half--pistacchio .svc-half__text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--cioccolato-deep);
-      max-width: 400px;
-      opacity: 0.75;
-    }
-
-    /* Accent variants */
-    .svc-accent--magenta { background: var(--magenta); }
-    .svc-accent--dark { background: var(--cioccolato); }
-
-    /* CTA dark variant */
-    .svc-cta--dark {
-      color: var(--testo);
-      border-color: rgba(56, 46, 44, 0.25);
-    }
-
-    .svc-cta--dark:hover {
-      border-color: rgba(56, 46, 44, 0.45);
-    }
-
-    .svc-cta--dark::after {
-      background: var(--magenta);
-    }
-
-    /* CTA pistachio variant */
-    .svc-cta--pistacchio {
-      color: var(--cioccolato);
-      border-color: rgba(56, 46, 44, 0.3);
-    }
-
-    .svc-cta--pistacchio:hover {
-      border-color: var(--cioccolato);
-    }
-
-    .svc-cta--pistacchio::after {
-      background: var(--cioccolato);
-    }
-
-    /* Clean photo half — no text, pure image */
-    .svc-half--photo-clean {
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .svc-half--photo-clean img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .svc-half--photo-clean:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Accent line — pistacchio bar */
-    .svc-accent {
-      width: 40px;
-      height: 2px;
-      background: var(--pistacchio);
-      margin-bottom: 28px;
-    }
-
-    /* CTA button — elegant outlined */
-    .svc-cta {
-      display: inline-block;
-      font-family: var(--font-ui);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bianco);
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 14px 36px;
-      margin-top: 36px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .svc-cta::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--pistacchio);
-      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .svc-cta:hover {
-      border-color: rgba(255,255,255,0.45);
-      letter-spacing: 0.26em;
-    }
-
-    .svc-cta:hover::after {
-      width: 100%;
-    }
-
-    /* ============================================================
-       LA NOSTRA STORIA — Team intro
+       LA NOSTRA STORIA — Centered statement (same as Benvenuti)
        ============================================================ */
     .storia {
       background: var(--bianco);
@@ -808,20 +502,20 @@
 
     .storia__title {
       font-family: var(--font-display);
-      font-size: clamp(32px, 4vw, 48px);
+      font-size: clamp(30px, 3vw, 40px);
       font-weight: 400;
       color: var(--testo);
       line-height: 1.2;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .storia__text {
       font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 1.9;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
       color: var(--testo-light);
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 auto;
     }
 
@@ -833,11 +527,17 @@
     }
 
     /* ============================================================
-       TEAM BLOCKS — Alternating photo/text halves
+       TEAM BLOCKS — Flexbox photo/info halves
        ============================================================ */
     .team-block {
       display: flex;
       min-height: 460px;
+    }
+
+    .team-half--photo {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
     }
 
     .team-half--info {
@@ -847,13 +547,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      text-align: center;
       padding: 56px 52px;
-    }
-
-    .team-half--photo {
-      flex: 1;
-      background-size: cover;
-      background-position: center;
     }
 
     .team-half__role {
@@ -868,7 +564,7 @@
 
     .team-half__name {
       font-family: var(--font-display);
-      font-size: clamp(24px, 2.5vw, 34px);
+      font-size: clamp(30px, 3vw, 40px);
       font-weight: 400;
       color: var(--bianco);
       line-height: 1.2;
@@ -877,14 +573,12 @@
 
     .team-half__bio {
       font-family: var(--font-ui);
-      font-size: 13px;
-      font-weight: 300;
+      font-size: 15px;
+      font-weight: 400;
       line-height: 1.8;
       color: rgba(255,255,255,0.55);
       max-width: 400px;
     }
-
-
 
     /* ============================================================
        FOOTER — Cream with moon logo + nav
@@ -942,15 +636,8 @@
     @media (max-width: 1024px) {
       :root { --sidebar-w: 170px; }
 
-      .hero { padding: 60px 40px; }
-      .hero__inner { gap: 48px; }
-      .hero__moon { width: 200px; height: 200px; }
-      .hero__dolce { font-size: 56px; }
-      .hero__line-top, .hero__line-bottom { width: 220px; }
-
-      .svc-half, .team-half--info { padding: 48px 36px; }
-      .svc-half--text { padding: 48px 36px; }
-      .benvenuti, .storia { padding: 80px 36px; }
+      .team-half--info { padding: 48px 36px; }
+      .storia { padding: 80px 36px; }
     }
 
     /* Mobile */
@@ -959,16 +646,9 @@
       .mobile-header { display: flex; }
       .main { margin-left: 0; padding-top: 56px; }
 
-      /* Hero mobile — stacked, centered */
       .hero {
         min-height: auto;
         padding: 60px 24px 48px;
-      }
-
-      .hero__inner {
-        flex-direction: column;
-        gap: 36px;
-        text-align: center;
       }
 
       .hero__moon {
@@ -982,12 +662,7 @@
       .hero__dimensione { font-size: 14px; letter-spacing: 0.35em; }
       .hero__scroll { display: none; }
 
-      .hero__tagline {
-        max-width: 100%;
-        text-align: center;
-      }
-
-      /* Photos — 2x2 grid on mobile */
+      /* Photos — 2 columns on mobile */
       .photos-row {
         grid-template-columns: repeat(2, 1fr);
         gap: 2px;
@@ -997,63 +672,33 @@
         display: none;
       }
 
-      /* Add 4th photo on mobile via extra item */
-      .photos-row__item--mobile-only {
-        display: block;
-      }
-
-      /* Service blocks stack */
-      .svc-block,
+      /* Team blocks stack */
       .team-block {
-        grid-template-columns: 1fr;
+        flex-direction: column;
       }
 
-      .svc-block--reverse,
-      .team-block--reverse {
-        direction: ltr;
-      }
-
-      .svc-half,
       .team-half--info {
+        width: 100%;
         padding: 56px 24px;
       }
 
-
-
-      .svc-half--light {
-        padding: 48px 24px;
-        min-height: 200px;
-      }
-
-      .team-half--photo,
-      .team-half--placeholder {
+      .team-half--photo {
         min-height: 300px;
       }
 
-      .benvenuti, .storia { padding: 72px 24px; }
+      .storia { padding: 72px 24px; }
       .ftr { padding: 56px 24px 36px; }
       .ftr__nav { gap: 20px; }
     }
 
     @media (max-width: 480px) {
-      .hero__moon { width: 140px; height: 140px; }
-      .hero__dolce { font-size: 44px; }
-      .hero__line-top, .hero__line-bottom { width: 160px; }
-      .hero__dimensione { font-size: 12px; }
-
-      .svc-half__category { font-size: 24px; }
-    }
-
-    /* Desktop-only: hide mobile elements */
-    @media (min-width: 769px) {
-      .photos-row__item--mobile-only { display: none; }
+      .photos-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .rv { opacity: 1; transform: none; transition: none !important; }
-      .hero__moon, .hero__wordmark, .hero__tagline {
-        opacity: 1; transform: none; animation: none;
-      }
     }
   </style>
 </head>
@@ -1067,7 +712,7 @@
       <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
     </a>
     <nav class="sidebar__nav">
-      <a href="chi-siamo-v2.html" class="sidebar__link">Chi Siamo</a>
+      <a href="chi-siamo-v2.html" class="sidebar__link sidebar__link--active">Chi Siamo</a>
       <a href="menu.html" class="sidebar__link">Menu'</a>
       <a href="torte-su-misura.html" class="sidebar__link">Torte su Misura</a>
       <a href="catering-eventi.html" class="sidebar__link">Catering &amp; Eventi</a>
@@ -1086,7 +731,7 @@
   </div>
 
   <nav class="mobile-nav" id="mobileNav">
-    <a href="chi-siamo-v2.html">Chi Siamo</a>
+    <a href="chi-siamo-v2.html" class="mobile-nav__link--active">Chi Siamo</a>
     <a href="menu.html">Menu'</a>
     <a href="torte-su-misura.html">Torte su Misura</a>
     <a href="catering-eventi.html">Catering &amp; Eventi</a>
@@ -1100,37 +745,31 @@
     <section class="hero" id="hero">
       <div class="hero__carousel" id="heroCarousel">
         <div class="hero__slide hero__slide--active">
-          <img src="assets/img/generated/hero-1-prodotti.png" alt="Le nostre creazioni">
+          <img src="assets/img/generated/laboratorio-bianco.png" alt="Il nostro laboratorio">
         </div>
         <div class="hero__slide">
-          <img src="assets/img/generated/hero-2-laboratorio.png" alt="Il laboratorio">
+          <img src="assets/img/generated/laboratorio-bianco-2.png" alt="La lavorazione">
         </div>
         <div class="hero__slide">
-          <img src="assets/img/generated/hero-3-panettoni.png" alt="I nostri panettoni">
-        </div>
-        <div class="hero__slide">
-          <img src="assets/img/generated/hero-4-servizio-v2.png" alt="La nostra bottega">
+          <img src="assets/img/generated/laboratorio-moderno.png" alt="Il laboratorio moderno">
         </div>
       </div>
       <div class="hero__overlay"></div>
       <div class="hero__inner">
         <div class="hero__brand">
-          <div class="hero__moon">
-            <img src="assets/img/logo-moon.png" alt="">
-          </div>
           <div class="hero__wordmark">
             <div class="hero__line-top"></div>
-            <span class="hero__dimensione">Dimensione</span>
+            <span class="hero__dimensione">Chi Siamo</span>
             <div class="hero__line-bottom"></div>
-            <span class="hero__dolce">Dolce</span>
+            <span class="hero__dolce">La nostra Storia</span>
           </div>
         </div>
         <div class="hero__tagline">
           <p class="hero__tagline-text">
-            Un luogo dedicato al gusto e al piacere della dolcezza,
-            tra pasticceria, gelateria e caffe.
+            Dimensione Dolce nasce dall'esperienza e dalla passione
+            del nostro team, che unisce tecnica, creativita e gusto
+            in un'idea condivisa di dolcezza.
           </p>
-          <span class="hero__categories">Gelateria &bull; Caffe &bull; Pasticceria</span>
         </div>
       </div>
       <div class="hero__scroll">
@@ -1139,95 +778,59 @@
       </div>
     </section>
 
-    <!-- ========== 3 PRODUCT PHOTOS ========== -->
+    <!-- ========== 3 PHOTOS ROW ========== -->
     <div class="photos-row">
       <div class="photos-row__item">
-        <img src="assets/img/vetrina-pesca.png" alt="La Pesca">
+        <img src="assets/img/generated/laboratorio-bianco.png" alt="Il laboratorio">
       </div>
       <div class="photos-row__item">
-        <img src="assets/img/vetrina-sfera-cioccolato.png" alt="Sfera al Cioccolato">
+        <img src="assets/img/generated/laboratorio-bianco-2.png" alt="Il laboratorio">
       </div>
-      <div class="photos-row__item">
-        <img src="assets/img/vetrina-monoporzione.png" alt="Monoporzione">
-      </div>
-      <div class="photos-row__item photos-row__item--mobile-only">
-        <img src="assets/img/vetrina-cornetti.png" alt="Cornetti">
+      <div class="photos-row__item photos-row__item--hide-mobile">
+        <img src="assets/img/generated/laboratorio-moderno.png" alt="Il laboratorio moderno">
       </div>
     </div>
 
-    <!-- ========== BENVENUTI ========== -->
-    <section class="benvenuti">
-      <h2 class="benvenuti__title rv">Benvenuti nella nostra dimensione</h2>
-      <p class="benvenuti__text rv rv-d1">
-        Un luogo dove il piacere della dolcezza si incontra con il tempo di una pausa.
-        Nel nostro laboratorio, pasticceria e gelato nascono da ingredienti selezionati
-        e lavorazioni artigianali. Dalla pausa quotidiana alle occasioni da celebrare,
-        accompagniamo ogni momento con gusto e qualita.
+    <!-- ========== LA NOSTRA STORIA ========== -->
+    <section class="storia">
+      <h2 class="storia__title rv">La nostra Storia</h2>
+      <p class="storia__text rv rv-d1">
+        Dimensione Dolce nasce dall'esperienza e dalla passione del nostro team,
+        che unisce tecnica, creativita e gusto in un'idea condivisa di dolcezza.
       </p>
-      <div class="benvenuti__divider rv rv-d2"></div>
+      <div class="storia__divider rv rv-d2"></div>
     </section>
 
-    <!-- ========== SERVIZI ========== -->
-    <div id="servizi">
-
-      <!-- GELATERIA: dark left with CTA, clean photo right -->
-      <div class="svc-block">
-        <div class="svc-half svc-half--dark">
-          <div class="svc-accent rv"></div>
-          <h3 class="svc-half__title rv rv-d1">Gelateria Artigianale</h3>
-          <p class="svc-half__text rv rv-d2">
-            Il nostro gelato non conosce scorciatoie.
-            Ogni gusto nasce da ingredienti freschi e
-            selezionati, lavorati ogni giorno con
-            passione artigianale e nel rispetto dei
-            tempi. Un modo semplice e sincero di fare
-            gelato, dove la qualita si esprime nel
-            sapore autentico delle cose buone.
-          </p>
-          <a href="#" class="svc-cta rv rv-d3">Scopri il menu</a>
-        </div>
-        <div class="svc-half svc-half--photo-clean">
-          <img src="assets/img/generated/row-gelateria.png" alt="Gelateria artigianale">
-        </div>
+    <!-- ========== EVANGELISTA PATRIZIO ========== -->
+    <div class="team-block">
+      <div class="team-half--photo" style="background-image: url('assets/img/generated/chef-elena.png');"></div>
+      <div class="team-half--info">
+        <span class="team-half__role rv">Maestro Pasticciere</span>
+        <h3 class="team-half__name rv rv-d1">Evangelista Patrizio</h3>
+        <p class="team-half__bio rv rv-d2">
+          Formatosi tra le cucine di Roma e le patisserie del sud della Francia,
+          porta in laboratorio una visione dove tecnica classica e creativita
+          contemporanea si incontrano. Ogni sua creazione nasce da un equilibrio
+          preciso tra estetica e sapore, con un'attenzione particolare alle
+          materie prime del territorio.
+        </p>
       </div>
-
-      <!-- PASTICCERIA: foto sinistra, testo bianco destra -->
-      <div class="svc-block">
-        <div class="svc-half svc-half--photo-clean">
-          <img src="assets/img/generated/row-pasticceria.png" alt="Pasticceria artigianale">
-        </div>
-        <div class="svc-half svc-half--bianco">
-          <div class="svc-accent svc-accent--magenta rv"></div>
-          <h3 class="svc-half__title rv rv-d1">La nostra Pasticceria</h3>
-          <p class="svc-half__text rv rv-d2">
-            Un incontro tra gusto, tradizione e
-            creativita, in una selezione di dolci pensata
-            per ogni occasione. Preparati freschi e con
-            cura, accompagnano la colazione, le pause
-            della giornata e i momenti da condividere.
-          </p>
-          <a href="#" class="svc-cta svc-cta--dark rv rv-d3">Scopri il menu</a>
-        </div>
-      </div>
-
-      <!-- CAFFE: testo pistacchio sinistra, foto destra -->
-      <div class="svc-block">
-        <div class="svc-half svc-half--pistacchio">
-          <div class="svc-accent svc-accent--dark rv"></div>
-          <h3 class="svc-half__title rv rv-d1">Caffe &amp; Torrefazione</h3>
-          <p class="svc-half__text rv rv-d2">
-            Caffe selezionati e miscele curate, pensati
-            per chi ama il vero piacere del caffe.
-          </p>
-          <a href="#" class="svc-cta svc-cta--pistacchio rv rv-d3">Scopri le miscele</a>
-        </div>
-        <div class="svc-half svc-half--photo-clean">
-          <img src="assets/img/generated/row-caffe.png" alt="Caffe e torrefazione">
-        </div>
-      </div>
-
     </div>
 
+    <!-- ========== DANIELE MICOZZI: info sx, foto dx ========== -->
+    <div class="team-block">
+      <div class="team-half--info">
+        <span class="team-half__role rv">Maestro Gelatiere</span>
+        <h3 class="team-half__name rv rv-d1">Daniele Micozzi</h3>
+        <p class="team-half__bio rv rv-d2">
+          Artigiano del freddo con una passione nata tra i banconi delle gelaterie
+          marchigiane. Seleziona personalmente ogni ingrediente, dalla frutta di
+          stagione al pistacchio di Bronte, per creare gusti autentici dove la
+          semplicita diventa il segno di una qualita senza compromessi.
+        </p>
+      </div>
+      <div class="team-half--photo" style="background-image: url('assets/img/generated/chef-elena.png');"></div>
+    </div>
 
     <!-- ========== FOOTER ========== -->
     <footer class="ftr" id="contatti">
@@ -1281,56 +884,36 @@
 
     // Hero carousel
     const slides = document.querySelectorAll('.hero__slide');
-    let currentSlide = 0;
-    setInterval(() => {
-      slides[currentSlide].classList.remove('hero__slide--active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      const next = slides[currentSlide];
-      next.classList.add('hero__slide--active');
-      const img = next.querySelector('img');
-      img.style.animation = 'none';
-      img.offsetHeight;
-      img.style.animation = '';
-    }, 6000);
+    if (slides.length) {
+      let currentSlide = 0;
+      setInterval(() => {
+        slides[currentSlide].classList.remove('hero__slide--active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        const next = slides[currentSlide];
+        next.classList.add('hero__slide--active');
+        const img = next.querySelector('img');
+        img.style.animation = 'none';
+        img.offsetHeight;
+        img.style.animation = '';
+      }, 6000);
+    }
 
     // Hero parallax on mouse
     const heroEl = document.querySelector('.hero');
     const moonEl = document.querySelector('.hero__moon');
     const brandEl = document.querySelector('.hero__brand');
-    const tagEl = document.querySelector('.hero__tagline');
-
     if (heroEl && window.matchMedia('(min-width: 769px)').matches) {
       heroEl.addEventListener('mousemove', (e) => {
         const rect = heroEl.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-
         if (moonEl) moonEl.style.transform = `translate(${x * -14}px, ${y * -10}px)`;
         if (brandEl) brandEl.style.transform = `translate(${x * -4}px, ${y * -3}px)`;
       });
-
       heroEl.addEventListener('mouseleave', () => {
         if (moonEl) moonEl.style.transform = '';
         if (brandEl) brandEl.style.transform = '';
       });
-    }
-
-    // Scroll parallax on photo row
-    const photoItems = document.querySelectorAll('.photos-row__item');
-    if (photoItems.length && window.matchMedia('(min-width: 769px)').matches) {
-      const speeds = [0.03, -0.02, 0.04];
-      window.addEventListener('scroll', () => {
-        const row = document.querySelector('.photos-row');
-        if (!row) return;
-        const rect = row.getBoundingClientRect();
-        const offset = rect.top;
-        photoItems.forEach((item, i) => {
-          if (i < 3) {
-            const s = speeds[i] || 0;
-            item.style.transform = `translateY(${offset * s}px)`;
-          }
-        });
-      }, { passive: true });
     }
 
     // Scroll reveal

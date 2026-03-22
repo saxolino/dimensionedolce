@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dimensione Dolce | Pasticceria Artigianale</title>
-  <meta name="description" content="Un luogo dedicato al gusto e al piacere della dolcezza, tra pasticceria, gelateria e caffè.">
+  <title>Catering & Eventi | Dimensione Dolce</title>
+  <meta name="description" content="Catering dolce per eventi privati e aziendali. Buffet, rinfreschi e allestimenti su misura dalla pasticceria Dimensione Dolce.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,8 +13,8 @@
 
   <style>
     /* ============================================================
-       DIMENSIONE DOLCE V3 — Editorial Sidebar Layout
-       Based on PDF mockup: sidebar nav + asymmetric blocks
+       DIMENSIONE DOLCE — Catering & Eventi (Hybrid Service + Catalog)
+       Design system from V3 + editorial lookbook layout
        ============================================================ */
 
     :root {
@@ -89,6 +89,9 @@
     .rv-d3 { transition-delay: 0.3s; }
     .rv-d4 { transition-delay: 0.4s; }
     .rv-d5 { transition-delay: 0.5s; }
+    .rv-d6 { transition-delay: 0.6s; }
+    .rv-d7 { transition-delay: 0.7s; }
+    .rv-d8 { transition-delay: 0.8s; }
 
     /* ============================================================
        SIDEBAR — Fixed left navigation (desktop)
@@ -140,6 +143,10 @@
     }
 
     .sidebar__link:hover {
+      color: var(--pistacchio);
+    }
+
+    .sidebar__link--active {
       color: var(--pistacchio);
     }
 
@@ -226,8 +233,12 @@
 
     .mobile-nav a:hover { color: var(--bianco); }
 
+    .mobile-nav a.mobile-nav__link--active {
+      color: var(--pistacchio);
+    }
+
     /* ============================================================
-       HERO — Cinematic carousel + floating brand
+       HERO — Cinematic carousel + centered wordmark (no moon)
        ============================================================ */
     .hero {
       background: var(--nero);
@@ -308,34 +319,6 @@
       will-change: transform;
     }
 
-    /* Moon — scale + blur reveal, then gentle float */
-    .hero__moon {
-      width: 280px;
-      height: 280px;
-      margin-bottom: 32px;
-      opacity: 0;
-      transform: scale(0.7);
-      filter: blur(12px);
-      animation: moonIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-      will-change: transform;
-    }
-
-    .hero__moon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      animation: moonFloat 6s ease-in-out 2s infinite;
-    }
-
-    @keyframes moonIn {
-      to { opacity: 1; transform: scale(1); filter: blur(0); }
-    }
-
-    @keyframes moonFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
     /* Wordmark — clip-path reveal */
     .hero__wordmark {
       display: flex;
@@ -350,40 +333,41 @@
       height: 1.5px;
       background: rgba(255,255,255,0.6);
       width: 0;
-      animation: lineDrawSlow 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
+      animation: lineDrawSlow 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
     }
 
     @keyframes lineDrawSlow {
-      to { width: 280px; }
+      to { width: 320px; }
     }
 
-    /* DIMENSIONE — letter-spacing reveal */
+    /* "CATERING & EVENTI" — letter-spacing reveal */
     .hero__dimensione {
       font-family: var(--font-ui);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       letter-spacing: 1em;
       text-transform: uppercase;
       color: var(--bianco);
       padding: 14px 0;
       opacity: 0;
-      animation: dimensioneReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) 1s forwards;
+      animation: dimensioneReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
     }
 
     @keyframes dimensioneReveal {
-      to { opacity: 1; letter-spacing: 0.45em; }
+      to { opacity: 1; letter-spacing: 0.35em; }
     }
 
-    /* Dolce — slide up from clip */
+    /* "Dolcezza su misura..." — slide up from clip */
     .hero__dolce {
       font-family: var(--font-display);
-      font-size: 72px;
+      font-size: 60px;
       font-weight: 400;
+      font-style: italic;
       color: var(--bianco);
-      line-height: 1;
-      margin-top: 8px;
+      line-height: 1.15;
+      margin-top: 12px;
       clip-path: inset(100% 0 0 0);
-      animation: dolceClipReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+      animation: dolceClipReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 1s forwards;
     }
 
     @keyframes dolceClipReveal {
@@ -392,11 +376,11 @@
 
     /* Tagline — fade + subtle slide */
     .hero__tagline {
-      max-width: 480px;
+      max-width: 560px;
       margin-top: 40px;
       opacity: 0;
       transform: translateY(16px);
-      animation: taglineIn 1s cubic-bezier(0.22, 1, 0.36, 1) 1.7s forwards;
+      animation: taglineIn 1s cubic-bezier(0.22, 1, 0.36, 1) 1.4s forwards;
       text-align: center;
     }
 
@@ -410,15 +394,6 @@
       font-weight: 400;
       line-height: 1.8;
       color: rgba(255,255,255,0.6);
-      margin-bottom: 16px;
-    }
-
-    .hero__categories {
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      color: rgba(255,255,255,0.4);
     }
 
     /* Scroll indicator */
@@ -433,7 +408,7 @@
       align-items: center;
       gap: 8px;
       opacity: 0;
-      animation: scrollIndicatorIn 0.8s ease 2.4s forwards;
+      animation: scrollIndicatorIn 0.8s ease 2s forwards;
     }
 
     .hero__scroll-label {
@@ -466,42 +441,68 @@
     }
 
     /* ============================================================
-       PHOTOS ROW — 3 cinematic edge-to-edge images
+       SHOWCASE GALLERY — Asymmetric editorial mosaic
        ============================================================ */
-    .photos-row {
+    .showcase {
+      background: var(--nero);
+      padding: 0;
+    }
+
+    .showcase__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      overflow: hidden;
-      background: var(--nero);
+      grid-template-rows: auto auto;
+      gap: 3px;
     }
 
-    .photos-row__item {
+    .showcase__item {
+      overflow: hidden;
       position: relative;
-      overflow: hidden;
-      aspect-ratio: 16 / 9;
     }
 
-    .photos-row__item img {
-      width: 100%; height: 100%;
+    .showcase__item img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      display: block;
       transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .photos-row__item:hover img {
-      transform: scale(1.06);
+    .showcase__item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* First image spans 2 rows (tall) */
+    .showcase__item--tall {
+      grid-row: span 2;
+    }
+
+    .showcase__item--tall img {
+      min-height: 100%;
+    }
+
+    /* Square items for the remaining 4 */
+    .showcase__item--square {
+      aspect-ratio: 1 / 1;
     }
 
     /* ============================================================
-       BENVENUTI — Centered statement
+       INTRO — Centered intro statement
        ============================================================ */
-    .benvenuti {
+    .servizio-intro {
       background: var(--bianco);
-      padding: 150px 60px;
+      padding: 120px 60px;
       text-align: center;
     }
 
-    .benvenuti__title {
+    .servizio-intro__accent {
+      width: 40px;
+      height: 2px;
+      background: var(--pistacchio);
+      margin: 0 auto 28px;
+    }
+
+    .servizio-intro__title {
       font-family: var(--font-display);
       font-size: clamp(30px, 3vw, 40px);
       font-weight: 400;
@@ -510,7 +511,7 @@
       margin-bottom: 24px;
     }
 
-    .benvenuti__text {
+    .servizio-intro__text {
       font-family: var(--font-ui);
       font-size: 15px;
       font-weight: 400;
@@ -520,374 +521,277 @@
       margin: 0 auto;
     }
 
-    .benvenuti__divider {
+    .servizio-intro__divider {
       width: 60px;
       height: 1px;
-      background: var(--pistacchio);
+      background: var(--beige);
       margin: 48px auto 0;
     }
 
     /* ============================================================
-       SERVICE BLOCKS — Alternating asymmetric halves
+       I NOSTRI SERVIZI — Alternating image+text blocks (flexbox)
        ============================================================ */
-    .svc-block {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 460px;
-    }
-
-    .svc-block--reverse {
-      direction: rtl;
-    }
-
-    .svc-block--reverse > * {
-      direction: ltr;
-    }
-
-    .svc-half {
+    .process-block {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 56px 52px;
+      min-height: 360px;
     }
 
-    /* Dark half */
-    .svc-half--dark {
-      background: var(--cioccolato-deep);
-      padding: 56px 52px;
-    }
-
-    .svc-half--dark .svc-half__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--bianco);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .svc-half--dark .svc-half__text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.55);
-      max-width: 400px;
-    }
-
-    /* Light half — magenta label */
-    .svc-half--light {
-      background: var(--crema-warm);
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .svc-half--light-white {
-      background: var(--bianco);
-    }
-
-    /* Photo background in service halves */
-    .svc-half--photo {
-      background-size: cover;
-      background-position: center;
-    }
-
-    .svc-half--photo::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(30, 25, 24, 0.45);
-      z-index: 0;
-    }
-
-    .svc-half--photo .svc-half__category,
-    .svc-half--photo .svc-half__cta {
-      position: relative;
-      z-index: 1;
-    }
-
-    .svc-half--photo .svc-half__category {
-      color: var(--bianco);
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-    }
-
-    .svc-half--photo .svc-half__cta {
-      color: var(--bianco);
-      border-bottom-color: rgba(255,255,255,0.6);
-    }
-
-    .svc-half--photo .svc-half__cta:hover {
-      opacity: 0.8;
-    }
-
-    .svc-half__category {
-      font-family: var(--font-ui);
-      font-size: clamp(28px, 3.5vw, 44px);
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      color: var(--magenta);
-      text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-
-    .svc-half__cta {
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--magenta);
-      border-bottom: 1px solid var(--magenta);
-      padding-bottom: 4px;
-      transition: opacity 0.3s;
-    }
-
-    .svc-half__cta:hover {
-      opacity: 0.7;
-    }
-
-    .svc-half__category--green {
-      color: var(--cioccolato);
-    }
-
-    /* White text box */
-    .svc-half--bianco {
-      background: var(--bianco);
-    }
-
-    .svc-half--bianco .svc-half__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--testo);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .svc-half--bianco .svc-half__text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--testo-light);
-      max-width: 400px;
-    }
-
-    /* Pistachio text box */
-    .svc-half--pistacchio {
-      background: var(--pistacchio);
-    }
-
-    .svc-half--pistacchio .svc-half__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--cioccolato);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .svc-half--pistacchio .svc-half__text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--cioccolato-deep);
-      max-width: 400px;
-      opacity: 0.75;
-    }
-
-    /* Accent variants */
-    .svc-accent--magenta { background: var(--magenta); }
-    .svc-accent--dark { background: var(--cioccolato); }
-
-    /* CTA dark variant */
-    .svc-cta--dark {
-      color: var(--testo);
-      border-color: rgba(56, 46, 44, 0.25);
-    }
-
-    .svc-cta--dark:hover {
-      border-color: rgba(56, 46, 44, 0.45);
-    }
-
-    .svc-cta--dark::after {
-      background: var(--magenta);
-    }
-
-    /* CTA pistachio variant */
-    .svc-cta--pistacchio {
-      color: var(--cioccolato);
-      border-color: rgba(56, 46, 44, 0.3);
-    }
-
-    .svc-cta--pistacchio:hover {
-      border-color: var(--cioccolato);
-    }
-
-    .svc-cta--pistacchio::after {
-      background: var(--cioccolato);
-    }
-
-    /* Clean photo half — no text, pure image */
-    .svc-half--photo-clean {
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .svc-half--photo-clean img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .svc-half--photo-clean:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Accent line — pistacchio bar */
-    .svc-accent {
-      width: 40px;
-      height: 2px;
-      background: var(--pistacchio);
-      margin-bottom: 28px;
-    }
-
-    /* CTA button — elegant outlined */
-    .svc-cta {
-      display: inline-block;
-      font-family: var(--font-ui);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bianco);
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 14px 36px;
-      margin-top: 36px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .svc-cta::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--pistacchio);
-      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .svc-cta:hover {
-      border-color: rgba(255,255,255,0.45);
-      letter-spacing: 0.26em;
-    }
-
-    .svc-cta:hover::after {
-      width: 100%;
-    }
-
-    /* ============================================================
-       LA NOSTRA STORIA — Team intro
-       ============================================================ */
-    .storia {
-      background: var(--bianco);
-      padding: 150px 60px;
-      text-align: center;
-    }
-
-    .storia__title {
-      font-family: var(--font-display);
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 400;
-      color: var(--testo);
-      line-height: 1.2;
-      margin-bottom: 28px;
-    }
-
-    .storia__text {
-      font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 1.9;
-      color: var(--testo-light);
-      max-width: 580px;
-      margin: 0 auto;
-    }
-
-    .storia__divider {
-      width: 60px;
-      height: 1px;
-      background: var(--pistacchio);
-      margin: 48px auto 0;
-    }
-
-    /* ============================================================
-       TEAM BLOCKS — Alternating photo/text halves
-       ============================================================ */
-    .team-block {
-      display: flex;
-      min-height: 460px;
-    }
-
-    .team-half--info {
-      width: 50%;
-      flex-shrink: 0;
-      background: var(--cioccolato-deep);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 56px 52px;
-    }
-
-    .team-half--photo {
+    .process-block__photo {
       flex: 1;
       background-size: cover;
       background-position: center;
     }
 
-    .team-half__role {
-      font-family: var(--font-ui);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--pistacchio);
-      margin-bottom: 16px;
+    .process-block__info {
+      width: 50%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 56px 52px;
     }
 
-    .team-half__name {
+    /* Dark cioccolato variant */
+    .process-block__info--dark {
+      background: var(--cioccolato-deep);
+    }
+
+    .process-block__info--dark .process-block__title {
       font-family: var(--font-display);
-      font-size: clamp(24px, 2.5vw, 34px);
+      font-size: clamp(24px, 2.5vw, 32px);
       font-weight: 400;
+      font-style: italic;
       color: var(--bianco);
       line-height: 1.2;
       margin-bottom: 18px;
     }
 
-    .team-half__bio {
+    .process-block__info--dark .process-block__text {
       font-family: var(--font-ui);
-      font-size: 13px;
-      font-weight: 300;
+      font-size: 15px;
+      font-weight: 400;
       line-height: 1.8;
       color: rgba(255,255,255,0.55);
       max-width: 400px;
     }
 
+    /* White variant */
+    .process-block__info--white {
+      background: var(--bianco);
+    }
 
+    .process-block__info--white .process-block__title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.5vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .process-block__info--white .process-block__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 400px;
+    }
+
+    /* Pistachio variant */
+    .process-block__info--pistacchio {
+      background: var(--pistacchio);
+    }
+
+    .process-block__info--pistacchio .process-block__title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.5vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cioccolato);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .process-block__info--pistacchio .process-block__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--cioccolato-deep);
+      opacity: 0.75;
+      max-width: 400px;
+    }
 
     /* ============================================================
-       FOOTER — Cream with moon logo + nav
+       LE PROPOSTE — Product showcase grid
+       ============================================================ */
+    .creazioni {
+      background: var(--crema-warm);
+      padding: 120px 60px;
+      text-align: center;
+    }
+
+    .creazioni__accent {
+      width: 40px;
+      height: 2px;
+      background: var(--magenta);
+      margin: 0 auto 28px;
+    }
+
+    .creazioni__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .creazioni__subtitle {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 520px;
+      margin: 0 auto 80px;
+    }
+
+    .creazioni__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Product card — same style as menu.html */
+    .menu-card {
+      text-align: left;
+    }
+
+    .menu-card__image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--beige);
+      border-radius: 2px;
+    }
+
+    .menu-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-card:hover .menu-card__image img {
+      transform: scale(1.06);
+    }
+
+    .menu-card__body {
+      padding: 20px 4px 0;
+    }
+
+    .menu-card__name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .menu-card__desc {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--testo-light);
+      margin-bottom: 12px;
+    }
+
+    .menu-card__price {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pistacchio-scuro);
+    }
+
+    /* ============================================================
+       CTA — Call to action
+       ============================================================ */
+    .cta-section {
+      background: var(--bianco);
+      padding: 150px 60px;
+      text-align: center;
+    }
+
+    .cta-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .cta-section__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 480px;
+      margin: 0 auto 48px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--magenta);
+      border: 1px solid var(--magenta);
+      background: transparent;
+      padding: 18px 48px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .cta-btn:hover {
+      background: var(--magenta);
+      color: var(--bianco);
+      border-color: var(--magenta);
+    }
+
+    .cta-section__contacts {
+      margin-top: 32px;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--testo-muted);
+      line-height: 1.8;
+    }
+
+    .cta-section__contacts a {
+      color: var(--testo-light);
+      transition: color 0.3s;
+    }
+
+    .cta-section__contacts a:hover {
+      color: var(--magenta);
+    }
+
+    /* ============================================================
+       FOOTER — Cream with moon logo + nav (identical to v3)
        ============================================================ */
     .ftr {
       background: var(--crema);
@@ -943,14 +847,34 @@
       :root { --sidebar-w: 170px; }
 
       .hero { padding: 60px 40px; }
-      .hero__inner { gap: 48px; }
-      .hero__moon { width: 200px; height: 200px; }
-      .hero__dolce { font-size: 56px; }
-      .hero__line-top, .hero__line-bottom { width: 220px; }
+      .hero__dolce { font-size: 48px; }
 
-      .svc-half, .team-half--info { padding: 48px 36px; }
-      .svc-half--text { padding: 48px 36px; }
-      .benvenuti, .storia { padding: 80px 36px; }
+      .servizio-intro { padding: 100px 40px; }
+
+      .process-block__info { padding: 48px 36px; }
+
+      .creazioni { padding: 100px 40px; }
+      .creazioni__grid { gap: 32px 24px; }
+
+      .cta-section { padding: 100px 40px; }
+
+      /* Gallery: 2 columns on tablet */
+      .showcase__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .showcase__item--tall {
+        grid-row: span 1;
+      }
+
+      .showcase__item--square {
+        aspect-ratio: 4 / 3;
+      }
+
+      /* Hide 5th gallery image on tablet */
+      .showcase__item--hide-tablet {
+        display: none;
+      }
     }
 
     /* Mobile */
@@ -959,101 +883,98 @@
       .mobile-header { display: flex; }
       .main { margin-left: 0; padding-top: 56px; }
 
-      /* Hero mobile — stacked, centered */
+      /* Hero mobile */
       .hero {
         min-height: auto;
-        padding: 60px 24px 48px;
+        padding: 80px 24px 60px;
       }
 
-      .hero__inner {
-        flex-direction: column;
-        gap: 36px;
-        text-align: center;
+      .hero__dolce {
+        font-size: 40px;
+        clip-path: none;
+        opacity: 0;
+        animation: fadeUp 0.8s ease 0.8s forwards;
       }
 
-      .hero__moon {
-        width: 200px;
-        height: 200px;
-        margin-bottom: 24px;
-      }
-
-      .hero__dolce { font-size: 52px; clip-path: none; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
       .hero__line-top, .hero__line-bottom { width: 200px; }
-      .hero__dimensione { font-size: 14px; letter-spacing: 0.35em; }
+      @keyframes lineDrawSlow { to { width: 200px; } }
+      .hero__dimensione { font-size: 12px; letter-spacing: 0.3em; }
       .hero__scroll { display: none; }
+      .hero__tagline { max-width: 100%; }
 
-      .hero__tagline {
-        max-width: 100%;
-        text-align: center;
-      }
-
-      /* Photos — 2x2 grid on mobile */
-      .photos-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-      }
-
-      .photos-row__item--hide-mobile {
-        display: none;
-      }
-
-      /* Add 4th photo on mobile via extra item */
-      .photos-row__item--mobile-only {
-        display: block;
-      }
-
-      /* Service blocks stack */
-      .svc-block,
-      .team-block {
+      /* Gallery: 1 column on mobile */
+      .showcase__grid {
         grid-template-columns: 1fr;
       }
 
-      .svc-block--reverse,
-      .team-block--reverse {
-        direction: ltr;
+      .showcase__item--tall {
+        grid-row: span 1;
       }
 
-      .svc-half,
-      .team-half--info {
+      .showcase__item--square {
+        aspect-ratio: 16 / 9;
+      }
+
+      .showcase__item--hide-mobile {
+        display: none;
+      }
+
+      /* Servizio intro */
+      .servizio-intro { padding: 80px 24px; }
+
+      /* Process blocks stack */
+      .process-block {
+        flex-direction: column;
+      }
+
+      .process-block__photo {
+        min-height: 280px;
+      }
+
+      .process-block__info {
+        width: 100%;
         padding: 56px 24px;
       }
 
-
-
-      .svc-half--light {
-        padding: 48px 24px;
-        min-height: 200px;
+      /* Creazioni: 2 columns on mobile */
+      .creazioni { padding: 80px 24px; }
+      .creazioni__subtitle { margin-bottom: 48px; }
+      .creazioni__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
       }
 
-      .team-half--photo,
-      .team-half--placeholder {
-        min-height: 300px;
-      }
+      /* CTA */
+      .cta-section { padding: 80px 24px; }
 
-      .benvenuti, .storia { padding: 72px 24px; }
       .ftr { padding: 56px 24px 36px; }
       .ftr__nav { gap: 20px; }
     }
 
     @media (max-width: 480px) {
-      .hero__moon { width: 140px; height: 140px; }
-      .hero__dolce { font-size: 44px; }
+      .hero__dolce { font-size: 34px; }
       .hero__line-top, .hero__line-bottom { width: 160px; }
-      .hero__dimensione { font-size: 12px; }
+      @keyframes lineDrawSlow { to { width: 160px; } }
+      .hero__dimensione { font-size: 11px; }
 
-      .svc-half__category { font-size: 24px; }
-    }
+      .creazioni__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
-    /* Desktop-only: hide mobile elements */
-    @media (min-width: 769px) {
-      .photos-row__item--mobile-only { display: none; }
+      .cta-btn { padding: 16px 36px; font-size: 10px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .rv { opacity: 1; transform: none; transition: none !important; }
-      .hero__moon, .hero__wordmark, .hero__tagline {
-        opacity: 1; transform: none; animation: none;
+      .hero__wordmark, .hero__tagline, .hero__dolce {
+        opacity: 1; transform: none; animation: none; clip-path: none;
       }
+      .hero__line-top, .hero__line-bottom { width: 320px; }
+      .hero__dimensione { opacity: 1; letter-spacing: 0.35em; animation: none; }
     }
   </style>
 </head>
@@ -1070,7 +991,7 @@
       <a href="chi-siamo-v2.html" class="sidebar__link">Chi Siamo</a>
       <a href="menu.html" class="sidebar__link">Menu'</a>
       <a href="torte-su-misura.html" class="sidebar__link">Torte su Misura</a>
-      <a href="catering-eventi.html" class="sidebar__link">Catering &amp; Eventi</a>
+      <a href="catering-eventi.html" class="sidebar__link sidebar__link--active">Catering &amp; Eventi</a>
       <a href="contatti.html" class="sidebar__link">Contatti</a>
     </nav>
   </aside>
@@ -1089,7 +1010,7 @@
     <a href="chi-siamo-v2.html">Chi Siamo</a>
     <a href="menu.html">Menu'</a>
     <a href="torte-su-misura.html">Torte su Misura</a>
-    <a href="catering-eventi.html">Catering &amp; Eventi</a>
+    <a href="catering-eventi.html" class="mobile-nav__link--active">Catering &amp; Eventi</a>
     <a href="contatti.html">Contatti</a>
   </nav>
 
@@ -1100,37 +1021,29 @@
     <section class="hero" id="hero">
       <div class="hero__carousel" id="heroCarousel">
         <div class="hero__slide hero__slide--active">
-          <img src="assets/img/generated/hero-1-prodotti.png" alt="Le nostre creazioni">
+          <img src="assets/img/generated/hero-4-servizio-v2.png" alt="Catering e servizio">
         </div>
         <div class="hero__slide">
-          <img src="assets/img/generated/hero-2-laboratorio.png" alt="Il laboratorio">
+          <img src="assets/img/generated/hero-1-prodotti.png" alt="I nostri prodotti">
         </div>
         <div class="hero__slide">
-          <img src="assets/img/generated/hero-3-panettoni.png" alt="I nostri panettoni">
-        </div>
-        <div class="hero__slide">
-          <img src="assets/img/generated/hero-4-servizio-v2.png" alt="La nostra bottega">
+          <img src="assets/img/generated/row-pasticceria.png" alt="Pasticceria artigianale">
         </div>
       </div>
       <div class="hero__overlay"></div>
       <div class="hero__inner">
         <div class="hero__brand">
-          <div class="hero__moon">
-            <img src="assets/img/logo-moon.png" alt="">
-          </div>
           <div class="hero__wordmark">
             <div class="hero__line-top"></div>
-            <span class="hero__dimensione">Dimensione</span>
+            <span class="hero__dimensione">Catering &amp; Eventi</span>
             <div class="hero__line-bottom"></div>
-            <span class="hero__dolce">Dolce</span>
+            <span class="hero__dolce">Dolcezza su misura, ovunque tu sia</span>
           </div>
         </div>
         <div class="hero__tagline">
           <p class="hero__tagline-text">
-            Un luogo dedicato al gusto e al piacere della dolcezza,
-            tra pasticceria, gelateria e caffe.
+            Buffet, rinfreschi e allestimenti dolci per eventi privati e aziendali.
           </p>
-          <span class="hero__categories">Gelateria &bull; Caffe &bull; Pasticceria</span>
         </div>
       </div>
       <div class="hero__scroll">
@@ -1139,98 +1052,172 @@
       </div>
     </section>
 
-    <!-- ========== 3 PRODUCT PHOTOS ========== -->
-    <div class="photos-row">
-      <div class="photos-row__item">
-        <img src="assets/img/vetrina-pesca.png" alt="La Pesca">
+    <!-- ========== SHOWCASE GALLERY ========== -->
+    <section class="showcase">
+      <div class="showcase__grid">
+        <div class="showcase__item showcase__item--tall">
+          <img src="assets/img/vetrina-brioche.png" alt="Brioche artigianali">
+        </div>
+        <div class="showcase__item showcase__item--square">
+          <img src="assets/img/vetrina-cornetti.png" alt="Cornetti">
+        </div>
+        <div class="showcase__item showcase__item--square">
+          <img src="assets/img/patisserie-colomba.png" alt="Colomba artigianale">
+        </div>
+        <div class="showcase__item showcase__item--square">
+          <img src="assets/img/vetrina-crostatina-mele.png" alt="Crostatina alle mele">
+        </div>
+        <div class="showcase__item showcase__item--square showcase__item--hide-mobile">
+          <img src="assets/img/trio-panettoni.png" alt="Panettoni artigianali">
+        </div>
       </div>
-      <div class="photos-row__item">
-        <img src="assets/img/vetrina-sfera-cioccolato.png" alt="Sfera al Cioccolato">
-      </div>
-      <div class="photos-row__item">
-        <img src="assets/img/vetrina-monoporzione.png" alt="Monoporzione">
-      </div>
-      <div class="photos-row__item photos-row__item--mobile-only">
-        <img src="assets/img/vetrina-cornetti.png" alt="Cornetti">
-      </div>
-    </div>
-
-    <!-- ========== BENVENUTI ========== -->
-    <section class="benvenuti">
-      <h2 class="benvenuti__title rv">Benvenuti nella nostra dimensione</h2>
-      <p class="benvenuti__text rv rv-d1">
-        Un luogo dove il piacere della dolcezza si incontra con il tempo di una pausa.
-        Nel nostro laboratorio, pasticceria e gelato nascono da ingredienti selezionati
-        e lavorazioni artigianali. Dalla pausa quotidiana alle occasioni da celebrare,
-        accompagniamo ogni momento con gusto e qualita.
-      </p>
-      <div class="benvenuti__divider rv rv-d2"></div>
     </section>
 
-    <!-- ========== SERVIZI ========== -->
+    <!-- ========== INTRO ========== -->
+    <section class="servizio-intro">
+      <div class="servizio-intro__accent rv"></div>
+      <h2 class="servizio-intro__title rv rv-d1">Catering &amp; Eventi</h2>
+      <p class="servizio-intro__text rv rv-d2">
+        Portiamo la nostra pasticceria dove vuoi tu. Dalle colazioni aziendali ai ricevimenti nuziali, componiamo buffet dolci su misura con la stessa cura del nostro laboratorio. Ogni dettaglio e' pensato per sorprendere i tuoi ospiti.
+      </p>
+      <div class="servizio-intro__divider rv rv-d3"></div>
+    </section>
+
+    <!-- ========== I NOSTRI SERVIZI — 4 Blocks ========== -->
     <div id="servizi">
 
-      <!-- GELATERIA: dark left with CTA, clean photo right -->
-      <div class="svc-block">
-        <div class="svc-half svc-half--dark">
-          <div class="svc-accent rv"></div>
-          <h3 class="svc-half__title rv rv-d1">Gelateria Artigianale</h3>
-          <p class="svc-half__text rv rv-d2">
-            Il nostro gelato non conosce scorciatoie.
-            Ogni gusto nasce da ingredienti freschi e
-            selezionati, lavorati ogni giorno con
-            passione artigianale e nel rispetto dei
-            tempi. Un modo semplice e sincero di fare
-            gelato, dove la qualita si esprime nel
-            sapore autentico delle cose buone.
+      <!-- Block 1: Info LEFT (dark) — Photo RIGHT -->
+      <div class="process-block">
+        <div class="process-block__info process-block__info--dark rv">
+          <h3 class="process-block__title rv rv-d1">Colazioni Aziendali</h3>
+          <p class="process-block__text rv rv-d2">
+            Brioche, cornetti, mignon e caffe' di torrefazione per iniziare la giornata con gusto. Servizio completo con allestimento e ritiro.
           </p>
-          <a href="#" class="svc-cta rv rv-d3">Scopri il menu</a>
         </div>
-        <div class="svc-half svc-half--photo-clean">
-          <img src="assets/img/generated/row-gelateria.png" alt="Gelateria artigianale">
+        <div class="process-block__photo" style="background-image: url('assets/img/vetrina-cornetti.png');"></div>
+      </div>
+
+      <!-- Block 2: Photo LEFT — Info RIGHT (white) -->
+      <div class="process-block">
+        <div class="process-block__photo" style="background-image: url('assets/img/generated/hero-4-servizio-v2.png');"></div>
+        <div class="process-block__info process-block__info--white rv">
+          <h3 class="process-block__title rv rv-d1">Rinfreschi &amp; Aperitivi</h3>
+          <p class="process-block__text rv rv-d2">
+            Finger food dolci, monoporzioni e composizioni eleganti per cocktail, inaugurazioni e presentazioni.
+          </p>
         </div>
       </div>
 
-      <!-- PASTICCERIA: foto sinistra, testo bianco destra -->
-      <div class="svc-block">
-        <div class="svc-half svc-half--photo-clean">
-          <img src="assets/img/generated/row-pasticceria.png" alt="Pasticceria artigianale">
-        </div>
-        <div class="svc-half svc-half--bianco">
-          <div class="svc-accent svc-accent--magenta rv"></div>
-          <h3 class="svc-half__title rv rv-d1">La nostra Pasticceria</h3>
-          <p class="svc-half__text rv rv-d2">
-            Un incontro tra gusto, tradizione e
-            creativita, in una selezione di dolci pensata
-            per ogni occasione. Preparati freschi e con
-            cura, accompagnano la colazione, le pause
-            della giornata e i momenti da condividere.
+      <!-- Block 3: Info LEFT (pistacchio) — Photo RIGHT -->
+      <div class="process-block">
+        <div class="process-block__info process-block__info--pistacchio rv">
+          <h3 class="process-block__title rv rv-d1">Buffet Nuziali</h3>
+          <p class="process-block__text rv rv-d2">
+            Il dolce piu' importante del giorno piu' importante. Componiamo angoli dolci completi: torta, confettata, sweet table e bomboniere artigianali.
           </p>
-          <a href="#" class="svc-cta svc-cta--dark rv rv-d3">Scopri il menu</a>
         </div>
+        <div class="process-block__photo" style="background-image: url('assets/img/patisserie-lievitati.png');"></div>
       </div>
 
-      <!-- CAFFE: testo pistacchio sinistra, foto destra -->
-      <div class="svc-block">
-        <div class="svc-half svc-half--pistacchio">
-          <div class="svc-accent svc-accent--dark rv"></div>
-          <h3 class="svc-half__title rv rv-d1">Caffe &amp; Torrefazione</h3>
-          <p class="svc-half__text rv rv-d2">
-            Caffe selezionati e miscele curate, pensati
-            per chi ama il vero piacere del caffe.
+      <!-- Block 4: Photo LEFT — Info RIGHT (dark) -->
+      <div class="process-block">
+        <div class="process-block__photo" style="background-image: url('assets/img/generated/laboratorio-moderno.png');"></div>
+        <div class="process-block__info process-block__info--dark rv">
+          <h3 class="process-block__title rv rv-d1">Eventi Privati</h3>
+          <p class="process-block__text rv rv-d2">
+            Compleanni, battesimi, anniversari, lauree. Ogni festa merita dolci all'altezza dell'occasione.
           </p>
-          <a href="#" class="svc-cta svc-cta--pistacchio rv rv-d3">Scopri le miscele</a>
-        </div>
-        <div class="svc-half svc-half--photo-clean">
-          <img src="assets/img/generated/row-caffe.png" alt="Caffe e torrefazione">
         </div>
       </div>
 
     </div>
 
+    <!-- ========== LE PROPOSTE ========== -->
+    <section class="creazioni" id="proposte">
+      <div class="creazioni__accent rv"></div>
+      <h2 class="creazioni__title rv rv-d1">Le Proposte</h2>
+      <p class="creazioni__subtitle rv rv-d2">
+        Una selezione delle nostre proposte per il tuo evento.
+      </p>
+      <div class="creazioni__grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-monoporzione.png" alt="Mignon Assortiti">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Mignon Assortiti</h3>
+            <p class="menu-card__desc">Selezione di piccola pasticceria: mousse, tartellette, bigne'</p>
+            <span class="menu-card__price">da &euro;3/pz</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-brioche.png" alt="Brioche & Cornetti">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Brioche &amp; Cornetti</h3>
+            <p class="menu-card__desc">Lievitati artigianali con farciture classiche e stagionali</p>
+            <span class="menu-card__price">da &euro;2/pz</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-torta-funghetti.png" alt="Sweet Table Completo">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Sweet Table Completo</h3>
+            <p class="menu-card__desc">Composizione completa per 50+ ospiti: torta, mignon, confettata</p>
+            <span class="menu-card__price">da &euro;350</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d4">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-torta-ciliegie.png" alt="Torta Evento">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Torta Evento</h3>
+            <p class="menu-card__desc">Torta personalizzata da 2 a 5 piani, design su misura</p>
+            <span class="menu-card__price">da &euro;80</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d5">
+          <div class="menu-card__image">
+            <img src="assets/img/contact-gift.png" alt="Box Regalo">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Box Regalo</h3>
+            <p class="menu-card__desc">Confezione regalo con selezione dolci artigianali, personalizzabile</p>
+            <span class="menu-card__price">da &euro;25</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d6">
+          <div class="menu-card__image">
+            <img src="assets/img/patisserie-colomba.png" alt="Colomba & Panettoni">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Colomba &amp; Panettoni</h3>
+            <p class="menu-card__desc">Lievitati delle feste: colomba, panettone, pandoro artigianale</p>
+            <span class="menu-card__price">da &euro;28</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="cta-section" id="contatti">
+      <h2 class="cta-section__title rv">Organizziamo insieme</h2>
+      <p class="cta-section__text rv rv-d1">
+        Contattaci per un preventivo gratuito.
+        Ti aiuteremo a creare il menu' dolce perfetto per il tuo evento.
+      </p>
+      <a href="mailto:info@dimensionedolce.it" class="cta-btn rv rv-d2">Richiedi un Preventivo</a>
+      <div class="cta-section__contacts rv rv-d3">
+        <a href="tel:+390733123456">0733 123 456</a> &nbsp;&mdash;&nbsp; <a href="mailto:info@dimensionedolce.it">info@dimensionedolce.it</a>
+      </div>
+    </section>
 
     <!-- ========== FOOTER ========== -->
-    <footer class="ftr" id="contatti">
+    <footer class="ftr">
       <div class="ftr__moon">
         <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
       </div>
@@ -1273,7 +1260,7 @@
         if (!dot.classList.contains('is-visible')) dot.classList.add('is-visible');
       });
       document.addEventListener('mouseleave', () => dot.classList.remove('is-visible'));
-      document.querySelectorAll('a, button, .photos-row__item').forEach(el => {
+      document.querySelectorAll('a, button, .menu-card, .showcase__item').forEach(el => {
         el.addEventListener('mouseenter', () => dot.classList.add('is-hovering'));
         el.addEventListener('mouseleave', () => dot.classList.remove('is-hovering'));
       });
@@ -1295,9 +1282,7 @@
 
     // Hero parallax on mouse
     const heroEl = document.querySelector('.hero');
-    const moonEl = document.querySelector('.hero__moon');
     const brandEl = document.querySelector('.hero__brand');
-    const tagEl = document.querySelector('.hero__tagline');
 
     if (heroEl && window.matchMedia('(min-width: 769px)').matches) {
       heroEl.addEventListener('mousemove', (e) => {
@@ -1305,32 +1290,12 @@
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-        if (moonEl) moonEl.style.transform = `translate(${x * -14}px, ${y * -10}px)`;
-        if (brandEl) brandEl.style.transform = `translate(${x * -4}px, ${y * -3}px)`;
+        if (brandEl) brandEl.style.transform = `translate(${x * -6}px, ${y * -4}px)`;
       });
 
       heroEl.addEventListener('mouseleave', () => {
-        if (moonEl) moonEl.style.transform = '';
         if (brandEl) brandEl.style.transform = '';
       });
-    }
-
-    // Scroll parallax on photo row
-    const photoItems = document.querySelectorAll('.photos-row__item');
-    if (photoItems.length && window.matchMedia('(min-width: 769px)').matches) {
-      const speeds = [0.03, -0.02, 0.04];
-      window.addEventListener('scroll', () => {
-        const row = document.querySelector('.photos-row');
-        if (!row) return;
-        const rect = row.getBoundingClientRect();
-        const offset = rect.top;
-        photoItems.forEach((item, i) => {
-          if (i < 3) {
-            const s = speeds[i] || 0;
-            item.style.transform = `translateY(${offset * s}px)`;
-          }
-        });
-      }, { passive: true });
     }
 
     // Scroll reveal

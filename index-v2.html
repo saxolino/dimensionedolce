@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dimensione Dolce | Pasticceria Artigianale Milano</title>
+  <meta name="description" content="Pasticceria artigianale milanese dal 1962. Tradizione, eccellenza e passione in ogni creazione. Via Monte Napoleone 42, Milano.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DIMENSIONE DOLCE — Pre-Launch Homepage
+       Editorial Luxury Manifesto
+       ============================================================ */
+
+    :root {
+      --oro: #BBC25C;
+      --oro-scuro: #A3AA42;
+      --cioccolato: #382E2C;
+      --crema: #F2F1F0;
+      --beige: #D8D5D0;
+      --scuro: #2C2322;
+      --nero: #1E1918;
+      --bianco: #ffffff;
+      --testo: #382E2C;
+      --testo-light: #6E6462;
+
+      --font-display: 'Bodoni Moda', 'Georgia', serif;
+      --font-ui: 'Montserrat', 'Helvetica Neue', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      color: var(--testo);
+      background: var(--crema);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- SCROLL REVEAL ---------- */
+    .rv {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .rv.is-v { opacity: 1; transform: translateY(0); }
+    .rv-d1 { transition-delay: 0.12s; }
+    .rv-d2 { transition-delay: 0.24s; }
+    .rv-d3 { transition-delay: 0.36s; }
+    .rv-d4 { transition-delay: 0.48s; }
+
+    /* ============================================================
+       HEADER — Minimal, no cart
+       ============================================================ */
+    .hdr {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .hdr.is-scrolled {
+      background: rgba(30, 25, 24, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .hdr__inner {
+      width: 100%;
+      max-width: 1400px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hdr__nav {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .hdr__nav:hover { opacity: 1; }
+
+    .hdr__logo img {
+      height: 36px;
+      filter: brightness(0) invert(1);
+      transition: height 0.3s ease;
+    }
+
+    .hdr.is-scrolled .hdr__logo img { height: 30px; }
+
+    /* ============================================================
+       HERO — Full-screen cinematic
+       ============================================================ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero__carousel {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero__slide--active {
+      opacity: 1;
+    }
+
+    .hero__slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35) saturate(0.7);
+      transform: scale(1.08);
+      animation: heroSlideZoom 8s ease-out forwards;
+    }
+
+    .hero__slide--active img {
+      animation: heroSlideZoom 8s ease-out forwards;
+    }
+
+    @keyframes heroSlideZoom {
+      from { transform: scale(1.08); }
+      to { transform: scale(1); }
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(30, 25, 24, 0.9) 0%,
+        rgba(30, 25, 24, 0.15) 50%,
+        rgba(30, 25, 24, 0.3) 100%
+      );
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 40px;
+    }
+
+    .hero__moon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 40px;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: moonIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+
+    .hero__moon img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+
+    @keyframes moonIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .hero__label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1;
+      margin-bottom: 32px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    }
+
+    .hero__title em { font-style: italic; }
+
+    .hero__sub {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.5);
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+    }
+
+    .hero__line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--oro), transparent);
+      margin: 48px auto 0;
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       BRAND STATEMENT
+       ============================================================ */
+    .stmt {
+      padding: 140px 40px;
+      text-align: center;
+      background: var(--crema);
+      position: relative;
+    }
+
+    .stmt__text {
+      font-family: var(--font-ui);
+      font-size: clamp(16px, 1.8vw, 20px);
+      font-weight: 300;
+      color: var(--testo-light);
+      line-height: 1.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .stmt__line {
+      width: 60px;
+      height: 1px;
+      background: var(--oro);
+      margin: 48px auto 0;
+    }
+
+    /* ============================================================
+       GALLERY — Asymmetric masonry
+       ============================================================ */
+    .gal {
+      background: var(--nero);
+      padding: 120px 0;
+      overflow: hidden;
+    }
+
+    .gal__header {
+      text-align: center;
+      padding: 0 40px;
+      margin-bottom: 72px;
+    }
+
+    .gal__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 20px;
+    }
+
+    .gal__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.15;
+    }
+
+    .gal__title em { font-style: italic; }
+
+    .gal__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 280px;
+      gap: 5px;
+      padding: 0 clamp(16px, 4vw, 80px);
+    }
+
+    .gal__item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .gal__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gal__item:hover img { transform: scale(1.06); }
+
+    /* Name on hover */
+    .gal__item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(30,25,24,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover::after { opacity: 1; }
+
+    .gal__item::before {
+      content: attr(data-name);
+      position: absolute;
+      bottom: 20px; left: 24px; right: 24px;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.4vw, 22px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gal__item--w { grid-column: span 2; }
+    .gal__item--t { grid-row: span 2; }
+
+    /* ============================================================
+       LABORATORIO — Parallax dark section
+       ============================================================ */
+    .lab {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lab__img {
+      width: 100%;
+      height: 75vh;
+      min-height: 450px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lab__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .lab__img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, var(--nero) 100%);
+    }
+
+    .lab__body {
+      background: var(--nero);
+      text-align: center;
+      padding: 60px 40px 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lab__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 24px;
+    }
+
+    .lab__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+
+    .lab__title em { font-style: italic; }
+
+    .lab__text {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.65);
+      max-width: 640px;
+      margin: 0 auto 24px;
+    }
+
+    .lab__cta {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      border-bottom: 1px solid var(--oro);
+      padding-bottom: 4px;
+      margin-top: 32px;
+      transition: color 0.3s ease;
+    }
+
+    .lab__cta:hover { color: var(--oro); }
+
+    /* ============================================================
+       CONTATTI — Refined contact section
+       ============================================================ */
+    .contact {
+      background: var(--crema);
+      padding: 120px 40px;
+    }
+
+    .contact__inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact__left {}
+
+    .contact__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 24px;
+    }
+
+    .contact__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+
+    .contact__row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .contact__icon {
+      width: 20px; height: 20px;
+      color: var(--oro-scuro);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .contact__info-label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--testo);
+      margin-bottom: 6px;
+    }
+
+    .contact__info-value {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--testo-light);
+      line-height: 1.6;
+    }
+
+    .contact__info-value a {
+      color: var(--testo-light);
+      border-bottom: 1px solid var(--oro);
+      transition: color 0.3s ease;
+    }
+
+    .contact__info-value a:hover { color: var(--oro-scuro); }
+
+    .contact__right {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 4 / 5;
+    }
+
+    .contact__right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .contact__right:hover img { transform: scale(1.04); }
+
+    /* ============================================================
+       FOOTER — Ultra-minimal
+       ============================================================ */
+    .ftr {
+      background: var(--nero);
+      padding: 64px 40px;
+      text-align: center;
+    }
+
+    .ftr__logo {
+      width: 48px;
+      margin: 0 auto 32px;
+    }
+
+    .ftr__logo img {
+      width: 100%;
+      opacity: 0.6;
+    }
+
+    .ftr__social {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .ftr__social a {
+      width: 20px; height: 20px;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.3s ease;
+    }
+
+    .ftr__social a:hover { color: var(--oro); }
+    .ftr__social svg { width: 100%; height: 100%; }
+
+    .ftr__links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .ftr__links a {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.3s ease;
+    }
+
+    .ftr__links a:hover { color: var(--bianco); }
+
+    .ftr__copy {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .gal__grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hdr { height: 60px; }
+      .hdr__inner { padding: 0 20px; }
+      .hdr__nav { font-size: 10px; letter-spacing: 0.15em; }
+
+      .hero { min-height: 500px; }
+      .hero__moon { width: 48px; height: 48px; margin-bottom: 28px; }
+
+      .stmt { padding: 80px 24px; }
+
+      .gal { padding: 80px 0; }
+      .gal__header { margin-bottom: 48px; padding: 0 24px; }
+      .gal__grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
+        gap: 4px;
+        padding: 0 16px;
+      }
+      .gal__item--t { grid-row: span 1; }
+
+      .lab__img { height: 50vh; }
+      .lab__body { padding: 0 24px 80px; }
+
+      .contact { padding: 80px 24px; }
+      .contact__inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .contact__right { aspect-ratio: 16 / 10; }
+
+      .ftr { padding: 48px 24px; }
+      .ftr__links { gap: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .gal__grid {
+        grid-auto-rows: 160px;
+        gap: 3px;
+        padding: 0 12px;
+      }
+
+      .stmt__text { font-size: 15px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rv { opacity: 1; transform: none; transition: none !important; }
+      .hero__bg img { animation: none; transform: none; }
+      .hero__moon, .hero__label, .hero__title, .hero__sub, .hero__line {
+        opacity: 1; transform: none; animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <a href="chi-siamo.html" class="hdr__nav">La Pasticceria</a>
+      <a href="index-v2.html" class="hdr__logo"><img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce"></a>
+      <a href="contatti-v2.html" class="hdr__nav">Contatti</a>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero__carousel" id="heroCarousel">
+      <div class="hero__slide hero__slide--active">
+        <img src="assets/img/generated/hero-1-prodotti.png" alt="Le nostre creazioni">
+      </div>
+      <div class="hero__slide">
+        <img src="assets/img/generated/hero-2-laboratorio.png" alt="Il laboratorio">
+      </div>
+      <div class="hero__slide">
+        <img src="assets/img/generated/hero-3-panettoni.png" alt="I nostri panettoni">
+      </div>
+      <div class="hero__slide">
+        <img src="assets/img/generated/hero-4-servizio-v2.png" alt="La nostra bottega">
+      </div>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__moon">
+        <img src="assets/img/logo-moon.png" alt="">
+      </div>
+      <span class="hero__label">Pasticceria artigianale dal 1962</span>
+      <h1 class="hero__title"><em>Dimensione</em><br>Dolce</h1>
+      <p class="hero__sub">Via Monte Napoleone 42, Milano</p>
+      <div class="hero__line"></div>
+    </div>
+  </section>
+
+  <!-- ========== BRAND STATEMENT ========== -->
+  <section class="stmt">
+    <p class="stmt__text rv">
+      Ogni mattina, alle quattro, le mani dei nostri maestri pasticceri
+      danno forma a creazioni che portano avanti sessant'anni di tradizione milanese.
+      Ingredienti puri, lievitazione naturale, nessun compromesso.
+    </p>
+    <div class="stmt__line rv rv-d1"></div>
+  </section>
+
+  <!-- ========== GALLERY ========== -->
+  <section class="gal">
+    <div class="gal__header rv">
+      <span class="gal__label">Dal nostro laboratorio</span>
+      <h2 class="gal__title">Le Nostre <em>Creazioni</em></h2>
+    </div>
+
+    <div class="gal__grid">
+      <div class="gal__item gal__item--w rv" data-name="La Pesca">
+        <img src="assets/img/vetrina-pesca.png" alt="La Pesca" loading="lazy">
+      </div>
+      <div class="gal__item gal__item--t rv rv-d1" data-name="Sfera al Cioccolato">
+        <img src="assets/img/vetrina-sfera-cioccolato.png" alt="Sfera al Cioccolato" loading="lazy">
+      </div>
+      <div class="gal__item rv rv-d2" data-name="Cornetti Sfogliati">
+        <img src="assets/img/vetrina-cornetti.png" alt="Cornetti Sfogliati" loading="lazy">
+      </div>
+      <div class="gal__item rv rv-d3" data-name="Monoporzione">
+        <img src="assets/img/vetrina-monoporzione.png" alt="Monoporzione" loading="lazy">
+      </div>
+      <div class="gal__item gal__item--w rv" data-name="Crostatina di Mele">
+        <img src="assets/img/vetrina-crostatina-mele.png" alt="Crostatina di Mele" loading="lazy">
+      </div>
+      <div class="gal__item gal__item--t rv rv-d1" data-name="Brioche al Limone">
+        <img src="assets/img/vetrina-brioche.png" alt="Brioche al Limone" loading="lazy">
+      </div>
+      <div class="gal__item rv rv-d2" data-name="Torta alle Ciliegie">
+        <img src="assets/img/vetrina-torta-ciliegie.png" alt="Torta alle Ciliegie" loading="lazy">
+      </div>
+      <div class="gal__item rv rv-d3" data-name="Torta Incantata">
+        <img src="assets/img/vetrina-torta-funghetti.png" alt="Torta Incantata" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LABORATORIO ========== -->
+  <section class="lab">
+    <div class="lab__img rv">
+      <img src="assets/img/generated/laboratorio-bianco-2.png" alt="Il laboratorio artigianale">
+    </div>
+    <div class="lab__body">
+      <span class="lab__label rv">Il cuore della produzione</span>
+      <h2 class="lab__title rv rv-d1">Il Nostro <em>Laboratorio</em></h2>
+      <p class="lab__text rv rv-d2">
+        Duecento metri quadri nel cuore di Milano dove il tempo scorre diversamente.
+        Ogni impasto nasce alle quattro del mattino, quando le mani dei nostri maestri
+        danno forma a quello che diventerà una creazione unica.
+      </p>
+      <p class="lab__text rv rv-d3">
+        Il forno in pietra refrattaria, il lievito madre custodito da tre generazioni,
+        le celle di lievitazione a temperatura controllata: ogni dettaglio è pensato per
+        rispettare i tempi della natura.
+      </p>
+      <a href="chi-siamo.html" class="lab__cta rv rv-d4">Scopri la nostra storia</a>
+    </div>
+  </section>
+
+  <!-- ========== CONTATTI ========== -->
+  <section class="contact" id="contatti">
+    <div class="contact__inner">
+      <div class="contact__left">
+        <span class="contact__label rv">Vieni a trovarci</span>
+        <h2 class="contact__title rv rv-d1">La Nostra<br>Bottega</h2>
+
+        <div class="contact__row rv rv-d2">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <p class="contact__info-label">Indirizzo</p>
+            <p class="contact__info-value">Via Monte Napoleone 42<br>20121 Milano</p>
+          </div>
+        </div>
+
+        <div class="contact__row rv rv-d3">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <p class="contact__info-label">Telefono</p>
+            <p class="contact__info-value"><a href="tel:+390212345678">+39 02 1234567</a></p>
+          </div>
+        </div>
+
+        <div class="contact__row rv rv-d4">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <p class="contact__info-label">Email</p>
+            <p class="contact__info-value"><a href="mailto:info@dimensionedolce.it">info@dimensionedolce.it</a></p>
+          </div>
+        </div>
+
+        <div class="contact__row rv rv-d4">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <div>
+            <p class="contact__info-label">Orari</p>
+            <p class="contact__info-value">Mar &mdash; Dom: 7:30 &mdash; 19:30<br>Lunedi chiuso</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact__right rv rv-d2">
+        <img src="assets/img/contact-gift.png" alt="Dimensione Dolce">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="ftr">
+    <div class="ftr__logo">
+      <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
+    </div>
+
+    <div class="ftr__social">
+      <a href="#" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="mailto:info@dimensionedolce.it" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+
+    <nav class="ftr__links">
+      <a href="chi-siamo.html">La Pasticceria</a>
+      <a href="menu-v2.html">Il Menu</a>
+      <a href="torte-su-misura-v2.html">Torte su Misura</a>
+      <a href="catering-eventi-v2.html">Catering &amp; Eventi</a>
+      <a href="contatti-v2.html">Contatti</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+    <p class="ftr__copy">&copy; 2026 Dimensione Dolce S.r.l. &mdash; Tutti i diritti riservati</p>
+  </footer>
+
+  <!-- ========== JS ========== -->
+  <script>
+    // Header scroll
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => {
+      hdr.classList.toggle('is-scrolled', window.scrollY > 80);
+    }, { passive: true });
+
+    // Hero carousel
+    const slides = document.querySelectorAll('.hero__slide');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('hero__slide--active');
+      current = (current + 1) % slides.length;
+      const next = slides[current];
+      next.classList.add('hero__slide--active');
+      // Reset zoom animation
+      const img = next.querySelector('img');
+      img.style.animation = 'none';
+      img.offsetHeight;
+      img.style.animation = '';
+    }, 6000);
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.rv');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-v');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

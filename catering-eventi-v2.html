@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Pasticceria | Dimensione Dolce</title>
-  <meta name="description" content="La storia di Dimensione Dolce: tre generazioni di panettone artigianale milanese dal 1962. Il laboratorio, i maestri pasticceri.">
+  <title>Catering & Eventi | Dimensione Dolce</title>
+  <meta name="description" content="Catering dolce per eventi privati e aziendali. Buffet, rinfreschi e allestimenti su misura dalla pasticceria Dimensione Dolce.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
 
   <style>
     /* ============================================================
-       LA PASTICCERIA — Editorial About Page
+       CATERING & EVENTI — Editorial Service Page (V2 Design System)
        ============================================================ */
 
     /* ---------- HERO ---------- */
@@ -135,7 +135,126 @@
       color: var(--oro);
     }
 
-    /* ---------- STORIA (Timeline) ---------- */
+    /* ---------- GALLERY MOSAIC ---------- */
+    .gal {
+      background: var(--nero);
+      padding: 120px 0;
+      overflow: hidden;
+    }
+
+    .gal__header {
+      text-align: center;
+      padding: 0 40px;
+      margin-bottom: 72px;
+    }
+
+    .gal__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 20px;
+    }
+
+    .gal__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.15;
+    }
+
+    .gal__title em { font-style: italic; }
+
+    .gal__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 280px;
+      gap: 5px;
+      padding: 0 clamp(16px, 4vw, 80px);
+    }
+
+    .gal__item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .gal__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gal__item:hover img { transform: scale(1.06); }
+
+    /* Name on hover */
+    .gal__item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(30,25,24,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover::after { opacity: 1; }
+
+    .gal__item::before {
+      content: attr(data-name);
+      position: absolute;
+      bottom: 20px; left: 24px; right: 24px;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.4vw, 22px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gal__item--w { grid-column: span 2; }
+    .gal__item--t { grid-row: span 2; }
+
+    /* ---------- SERVIZIO INTRO (stmt style) ---------- */
+    .stmt {
+      padding: 140px 40px;
+      text-align: center;
+      background: var(--crema);
+      position: relative;
+    }
+
+    .stmt__text {
+      font-family: var(--font-ui);
+      font-size: clamp(16px, 1.8vw, 20px);
+      font-weight: 300;
+      color: var(--testo-light);
+      line-height: 1.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .stmt__line {
+      width: 60px;
+      height: 1px;
+      background: var(--oro);
+      margin: 48px auto 0;
+    }
+
+    /* ---------- I NOSTRI SERVIZI (storia/epoch timeline) ---------- */
     .p-storia {
       background: var(--crema);
       padding: 120px 0;
@@ -174,7 +293,7 @@
 
     .p-storia__title em { font-style: italic; }
 
-    /* Timeline block — alternating layout */
+    /* Timeline block -- alternating layout */
     .p-epoch {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -241,100 +360,27 @@
       margin-top: 32px;
     }
 
-    /* ---------- LABORATORIO (Full-bleed dark) ---------- */
-    .p-lab {
-      background: var(--nero);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .p-lab__image {
-      width: 100%;
-      height: 70vh;
-      min-height: 400px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .p-lab__image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .p-lab__image::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 40%,
-        var(--nero) 100%
-      );
-    }
-
-    .p-lab__content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 40px 120px;
-      text-align: center;
-      position: relative;
-      margin-top: -80px;
-      z-index: 1;
-    }
-
-    .p-lab__label {
-      display: block;
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--oro);
-      margin-bottom: 24px;
-    }
-
-    .p-lab__title {
-      font-family: var(--font-display);
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 400;
-      color: var(--bianco);
-      line-height: 1.2;
-      margin-bottom: 40px;
-    }
-
-    .p-lab__title em { font-style: italic; }
-
-    .p-lab__text {
-      font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.9;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 24px;
-    }
-
-    .p-lab__line {
-      width: 60px;
-      height: 1px;
-      background: var(--oro);
-      margin: 48px auto 0;
-      opacity: 0.5;
-    }
-
-    /* ---------- MAESTRI (Chefs) ---------- */
-    .p-maestri {
-      background: var(--crema);
+    /* ---------- PRODUCT SECTIONS ---------- */
+    .m-section {
       padding: 120px 0;
+      position: relative;
     }
 
-    .p-maestri__header {
+    .m-section--crema {
+      background: var(--crema);
+    }
+
+    .m-section--nero {
+      background: var(--nero);
+    }
+
+    .m-section__header {
       text-align: center;
       margin-bottom: 80px;
       padding: 0 40px;
     }
 
-    .p-maestri__label {
+    .m-section__label {
       display: block;
       font-family: var(--font-ui);
       font-size: 11px;
@@ -345,7 +391,11 @@
       margin-bottom: 20px;
     }
 
-    .p-maestri__title {
+    .m-section--nero .m-section__label {
+      color: var(--oro);
+    }
+
+    .m-section__title {
       font-family: var(--font-display);
       font-size: clamp(36px, 5vw, 56px);
       font-weight: 400;
@@ -353,68 +403,144 @@
       line-height: 1.15;
     }
 
-    .p-maestri__title em { font-style: italic; }
+    .m-section__title em { font-style: italic; }
 
-    .p-maestri__grid {
+    .m-section--nero .m-section__title {
+      color: var(--bianco);
+    }
+
+    /* ---------- PRODUCT GRID ---------- */
+    .m-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 40px;
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 40px;
     }
 
-    .p-chef {
-      text-align: center;
+    /* ---------- PRODUCT CARD ---------- */
+    .m-card {
+      text-align: left;
     }
 
-    .p-chef__portrait {
-      position: relative;
+    .m-card__image {
+      aspect-ratio: 1 / 1;
       overflow: hidden;
       border-radius: 2px;
-      aspect-ratio: 3 / 4;
-      margin-bottom: 32px;
-      background: var(--cioccolato);
+      background: var(--beige);
     }
 
-    .p-chef__portrait img {
+    .m-section--nero .m-card__image {
+      background: var(--scuro);
+    }
+
+    .m-card__image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .p-chef:hover .p-chef__portrait img {
-      transform: scale(1.04);
+    .m-card:hover .m-card__image img {
+      transform: scale(1.06);
     }
 
-    .p-chef__name {
+    .m-card__body {
+      padding: 20px 4px 0;
+    }
+
+    .m-card__name {
       font-family: var(--font-display);
-      font-size: clamp(22px, 2.5vw, 30px);
+      font-size: clamp(18px, 2vw, 22px);
       font-weight: 400;
       font-style: italic;
       color: var(--testo);
+      line-height: 1.3;
       margin-bottom: 8px;
     }
 
-    .p-chef__role {
+    .m-card__desc {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--testo-light);
+      margin-bottom: 12px;
+    }
+
+    .m-card__price {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--oro-scuro);
+    }
+
+    /* Dark card variant */
+    .m-card--dark .m-card__name {
+      color: var(--bianco);
+    }
+
+    .m-card--dark .m-card__desc {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .m-card--dark .m-card__price {
+      color: var(--oro);
+    }
+
+    /* ---------- CTA CONTACT SECTION ---------- */
+    .t-cta {
+      background: var(--crema);
+      padding: 140px 40px;
+      text-align: center;
+    }
+
+    .t-cta__label {
+      display: block;
       font-family: var(--font-ui);
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--oro-scuro);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
-    .p-chef__bio {
+    .t-cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+
+    .t-cta__text {
       font-family: var(--font-ui);
       font-size: 14px;
       font-weight: 400;
       line-height: 1.85;
       color: var(--testo-light);
-      max-width: 400px;
-      margin: 0 auto;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    .t-cta__contacts {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--testo-light);
+      line-height: 1.85;
+    }
+
+    .t-cta__line {
+      width: 60px;
+      height: 1px;
+      background: var(--oro);
+      margin: 48px auto 0;
+      opacity: 0.5;
     }
 
     /* ---------- CTA BAND ---------- */
@@ -475,9 +601,19 @@
        RESPONSIVE
        ============================================================ */
     @media (max-width: 1024px) {
+      .gal__grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 240px;
+      }
+
       .p-epoch {
         gap: 32px 48px;
         margin-bottom: 80px;
+      }
+
+      .m-grid {
+        gap: 32px;
+        padding: 0 32px;
       }
     }
 
@@ -493,6 +629,20 @@
 
       .p-quote {
         padding: 64px 24px;
+      }
+
+      .gal { padding: 80px 0; }
+      .gal__header { margin-bottom: 48px; padding: 0 24px; }
+      .gal__grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
+        gap: 4px;
+        padding: 0 16px;
+      }
+      .gal__item--t { grid-row: span 1; }
+
+      .stmt {
+        padding: 80px 24px;
       }
 
       .p-storia {
@@ -524,31 +674,43 @@
         font-size: 64px;
       }
 
-      .p-lab__image {
-        height: 50vh;
-      }
-
-      .p-lab__content {
-        padding: 0 24px 80px;
-      }
-
-      .p-maestri {
+      .m-section {
         padding: 80px 0;
       }
 
-      .p-maestri__header {
+      .m-section__header {
         margin-bottom: 48px;
         padding: 0 24px;
       }
 
-      .p-maestri__grid {
-        grid-template-columns: 1fr;
-        gap: 64px;
+      .m-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
         padding: 0 24px;
+      }
+
+      .t-cta {
+        padding: 80px 24px;
       }
 
       .p-cta {
         padding: 64px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gal__grid {
+        grid-auto-rows: 160px;
+        gap: 3px;
+        padding: 0 12px;
+      }
+
+      .stmt__text { font-size: 15px; }
+
+      .m-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        max-width: 400px;
       }
     }
 
@@ -629,12 +791,12 @@
   <!-- ========== HERO ========== -->
   <section class="p-hero">
     <div class="p-hero__bg">
-      <img src="assets/img/parallax-bakery.png" alt="Il laboratorio di Dimensione Dolce">
+      <img src="assets/img/generated/hero-4-servizio-v2.png" alt="Catering e servizio eventi di Dimensione Dolce">
     </div>
     <div class="p-hero__overlay"></div>
     <div class="p-hero__content">
-      <span class="p-hero__label">Dal 1962 a Milano</span>
-      <h1 class="p-hero__title">La <em>Pasticceria</em></h1>
+      <span class="p-hero__label">Il servizio per i tuoi eventi</span>
+      <h1 class="p-hero__title">Catering &amp; <em>Eventi</em></h1>
       <div class="p-hero__line"></div>
     </div>
   </section>
@@ -642,68 +804,110 @@
   <!-- ========== QUOTE ========== -->
   <section class="p-quote">
     <p class="p-quote__text reveal">
-      &laquo;Il panettone non si fa con la fretta. Si fa con il tempo, con le mani, e con un lievito che ha piu memoria di noi.&raquo;
+      &laquo;Dolcezza su misura, ovunque tu sia. Buffet, rinfreschi e allestimenti dolci per eventi privati e aziendali.&raquo;
     </p>
-    <span class="p-quote__attr reveal reveal-delay-1">Mastro Giuseppe Conti, fondatore</span>
+    <span class="p-quote__attr reveal reveal-delay-1">Dimensione Dolce</span>
   </section>
 
-  <!-- ========== STORIA ========== -->
+  <!-- ========== GALLERY MOSAIC ========== -->
+  <section class="gal">
+    <div class="gal__header reveal">
+      <span class="gal__label">I nostri eventi</span>
+      <h2 class="gal__title">Dolci per ogni <em>Occasione</em></h2>
+    </div>
+    <div class="gal__grid">
+      <div class="gal__item gal__item--w reveal" data-name="Brioche Artigianali">
+        <img src="assets/img/vetrina-brioche.png" alt="Brioche Artigianali" loading="lazy">
+      </div>
+      <div class="gal__item gal__item--t reveal reveal-delay-1" data-name="Cornetti Sfogliati">
+        <img src="assets/img/vetrina-cornetti.png" alt="Cornetti Sfogliati" loading="lazy">
+      </div>
+      <div class="gal__item reveal reveal-delay-2" data-name="Colomba Artigianale">
+        <img src="assets/img/patisserie-colomba.png" alt="Colomba Artigianale" loading="lazy">
+      </div>
+      <div class="gal__item reveal reveal-delay-3" data-name="Crostatina di Mele">
+        <img src="assets/img/vetrina-crostatina-mele.png" alt="Crostatina di Mele" loading="lazy">
+      </div>
+      <div class="gal__item gal__item--w reveal" data-name="I Nostri Panettoni">
+        <img src="assets/img/trio-panettoni.png" alt="I Nostri Panettoni" loading="lazy">
+      </div>
+      <div class="gal__item reveal reveal-delay-1" data-name="Mignon">
+        <img src="assets/img/vetrina-monoporzione.png" alt="Mignon" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTRO ========== -->
+  <section class="stmt">
+    <p class="stmt__text reveal">
+      Portiamo la nostra pasticceria dove vuoi tu. Dalle colazioni aziendali ai ricevimenti nuziali, componiamo buffet dolci su misura con la stessa cura del nostro laboratorio. Ogni dettaglio e' pensato per sorprendere i tuoi ospiti.
+    </p>
+    <div class="stmt__line reveal reveal-delay-1"></div>
+  </section>
+
+  <!-- ========== I NOSTRI SERVIZI ========== -->
   <section class="p-storia">
     <div class="p-storia__inner">
       <div class="p-storia__header reveal">
-        <span class="p-storia__label">La nostra storia</span>
-        <h2 class="p-storia__title">Tre Generazioni <em>di Eccellenza</em></h2>
+        <span class="p-storia__label">Cosa offriamo</span>
+        <h2 class="p-storia__title">I Nostri <em>Servizi</em></h2>
       </div>
 
-      <!-- 1962 -->
+      <!-- Servizio 01 — Colazioni Aziendali -->
       <div class="p-epoch">
         <div class="p-epoch__visual reveal">
-          <img src="assets/img/generated/storia-1962-bottega.png" alt="La bottega originale di Dimensione Dolce">
+          <img src="assets/img/vetrina-cornetti.png" alt="Colazioni Aziendali" loading="lazy">
         </div>
         <div class="p-epoch__content reveal reveal-delay-1">
-          <div class="p-epoch__year">1962</div>
-          <h3 class="p-epoch__subtitle">La Bottega</h3>
+          <div class="p-epoch__year">01</div>
+          <h3 class="p-epoch__subtitle">Colazioni Aziendali</h3>
           <p class="p-epoch__text">
-            Mastro Giuseppe Conti apre una piccola bottega nel cuore di Milano, in Via Monte Napoleone.
-            Un bancone di marmo, un forno a legna e un sogno: creare il panettone perfetto. Con il suo
-            primo lievito madre, ancora oggi custodito e rinfrescato quotidianamente, nasce la tradizione
-            di Dimensione Dolce.
+            Brioche, cornetti, mignon e caffe' di torrefazione per iniziare la giornata con gusto. Servizio completo con allestimento e ritiro.
           </p>
           <div class="p-epoch__divider"></div>
         </div>
       </div>
 
-      <!-- 1985 -->
+      <!-- Servizio 02 — Rinfreschi & Aperitivi (reverse) -->
       <div class="p-epoch p-epoch--reverse">
         <div class="p-epoch__visual reveal">
-          <img src="assets/img/generated/storia-1985-generazione.png" alt="La seconda generazione">
+          <img src="assets/img/generated/hero-4-servizio-v2.png" alt="Rinfreschi e Aperitivi" loading="lazy">
         </div>
         <div class="p-epoch__content reveal reveal-delay-1">
-          <div class="p-epoch__year">1985</div>
-          <h3 class="p-epoch__subtitle">La Seconda Generazione</h3>
+          <div class="p-epoch__year">02</div>
+          <h3 class="p-epoch__subtitle">Rinfreschi &amp; Aperitivi</h3>
           <p class="p-epoch__text">
-            Il figlio Marco Conti eredita il laboratorio e lo trasforma. Amplia la produzione mantenendo
-            il rigore artigianale del padre. Introduce le creme spalmabili e i lievitati speciali.
-            La fama del panettone Dimensione Dolce supera i confini di Milano e raggiunge le tavole
-            di tutta Italia.
+            Finger food dolci, monoporzioni e composizioni eleganti per cocktail, inaugurazioni e presentazioni.
           </p>
           <div class="p-epoch__divider"></div>
         </div>
       </div>
 
-      <!-- 2018 -->
+      <!-- Servizio 03 — Buffet Nuziali -->
       <div class="p-epoch">
         <div class="p-epoch__visual reveal">
-          <img src="assets/img/generated/storia-2018-contemporanea.png" alt="L'era contemporanea">
+          <img src="assets/img/patisserie-lievitati.png" alt="Buffet Nuziali" loading="lazy">
         </div>
         <div class="p-epoch__content reveal reveal-delay-1">
-          <div class="p-epoch__year">2018</div>
-          <h3 class="p-epoch__subtitle">L'Era Contemporanea</h3>
+          <div class="p-epoch__year">03</div>
+          <h3 class="p-epoch__subtitle">Buffet Nuziali</h3>
           <p class="p-epoch__text">
-            La terza generazione, guidata da Elena e Luca Conti, porta Dimensione Dolce nel presente.
-            Nuovi gusti audaci come il Pistacchio di Bronte DOP e il Triplo Cioccolato Monorigine si
-            affiancano alla tradizione. Lo shop online nasce per portare l'eccellenza milanese in ogni
-            angolo del Paese.
+            Il dolce piu' importante del giorno piu' importante. Componiamo angoli dolci completi: torta, confettata, sweet table e bomboniere artigianali.
+          </p>
+          <div class="p-epoch__divider"></div>
+        </div>
+      </div>
+
+      <!-- Servizio 04 — Eventi Privati (reverse) -->
+      <div class="p-epoch p-epoch--reverse">
+        <div class="p-epoch__visual reveal">
+          <img src="assets/img/generated/laboratorio-moderno.png" alt="Eventi Privati" loading="lazy">
+        </div>
+        <div class="p-epoch__content reveal reveal-delay-1">
+          <div class="p-epoch__year">04</div>
+          <h3 class="p-epoch__subtitle">Eventi Privati</h3>
+          <p class="p-epoch__text">
+            Compleanni, battesimi, anniversari, lauree. Ogni festa merita dolci all'altezza dell'occasione.
           </p>
           <div class="p-epoch__divider"></div>
         </div>
@@ -711,68 +915,97 @@
     </div>
   </section>
 
-  <!-- ========== LABORATORIO ========== -->
-  <section class="p-lab">
-    <div class="p-lab__image reveal">
-      <img src="assets/img/parallax-bakery.png" alt="Il laboratorio artigianale">
+  <!-- ========== LE PROPOSTE ========== -->
+  <section class="m-section m-section--nero">
+    <div class="m-section__header reveal">
+      <span class="m-section__label">Per il tuo evento</span>
+      <h2 class="m-section__title">Le <em>Proposte</em></h2>
     </div>
-    <div class="p-lab__content">
-      <span class="p-lab__label reveal">Il cuore della produzione</span>
-      <h2 class="p-lab__title reveal reveal-delay-1">Il Nostro <em>Laboratorio</em></h2>
-      <p class="p-lab__text reveal reveal-delay-2">
-        Duecento metri quadri nel cuore di Milano dove il tempo scorre diversamente.
-        Qui ogni impasto nasce alle quattro del mattino, quando le mani dei nostri maestri
-        danno forma a quello che tra 72 ore diventerà un panettone.
-      </p>
-      <p class="p-lab__text reveal reveal-delay-2">
-        Il forno in pietra refrattaria, i tavoli in acciaio dove il lievito madre riposa,
-        le celle di lievitazione a temperatura controllata: ogni dettaglio è pensato per
-        rispettare i tempi della natura. Nessuna scorciatoia, nessun compromesso.
-      </p>
-      <div class="p-lab__line reveal reveal-delay-3"></div>
+
+    <div class="m-grid">
+      <div class="m-card m-card--dark reveal">
+        <div class="m-card__image">
+          <img src="assets/img/vetrina-monoporzione.png" alt="Mignon Assortiti" loading="lazy">
+        </div>
+        <div class="m-card__body">
+          <h3 class="m-card__name">Mignon Assortiti</h3>
+          <p class="m-card__desc">Selezione di piccola pasticceria: mousse, tartellette, bigne'</p>
+          <span class="m-card__price">da &euro;3/pz</span>
+        </div>
+      </div>
+      <div class="m-card m-card--dark reveal reveal-delay-1">
+        <div class="m-card__image">
+          <img src="assets/img/vetrina-brioche.png" alt="Brioche &amp; Cornetti" loading="lazy">
+        </div>
+        <div class="m-card__body">
+          <h3 class="m-card__name">Brioche &amp; Cornetti</h3>
+          <p class="m-card__desc">Lievitati artigianali con farciture classiche e stagionali</p>
+          <span class="m-card__price">da &euro;2/pz</span>
+        </div>
+      </div>
+      <div class="m-card m-card--dark reveal reveal-delay-2">
+        <div class="m-card__image">
+          <img src="assets/img/vetrina-torta-funghetti.png" alt="Sweet Table Completo" loading="lazy">
+        </div>
+        <div class="m-card__body">
+          <h3 class="m-card__name">Sweet Table Completo</h3>
+          <p class="m-card__desc">Composizione completa per 50+ ospiti: torta, mignon, confettata</p>
+          <span class="m-card__price">da &euro;350</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-grid" style="margin-top: 40px;">
+      <div class="m-card m-card--dark reveal">
+        <div class="m-card__image">
+          <img src="assets/img/vetrina-torta-ciliegie.png" alt="Torta Evento" loading="lazy">
+        </div>
+        <div class="m-card__body">
+          <h3 class="m-card__name">Torta Evento</h3>
+          <p class="m-card__desc">Torta personalizzata da 2 a 5 piani, design su misura</p>
+          <span class="m-card__price">da &euro;80</span>
+        </div>
+      </div>
+      <div class="m-card m-card--dark reveal reveal-delay-1">
+        <div class="m-card__image">
+          <img src="assets/img/contact-gift.png" alt="Box Regalo" loading="lazy">
+        </div>
+        <div class="m-card__body">
+          <h3 class="m-card__name">Box Regalo</h3>
+          <p class="m-card__desc">Confezione regalo con selezione dolci artigianali, personalizzabile</p>
+          <span class="m-card__price">da &euro;25</span>
+        </div>
+      </div>
+      <div class="m-card m-card--dark reveal reveal-delay-2">
+        <div class="m-card__image">
+          <img src="assets/img/patisserie-colomba.png" alt="Colomba &amp; Panettoni" loading="lazy">
+        </div>
+        <div class="m-card__body">
+          <h3 class="m-card__name">Colomba &amp; Panettoni</h3>
+          <p class="m-card__desc">Lievitati delle feste: colomba, panettone, pandoro artigianale</p>
+          <span class="m-card__price">da &euro;28</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ========== MAESTRI PASTICCERI ========== -->
-  <section class="p-maestri">
-    <div class="p-maestri__header reveal">
-      <span class="p-maestri__label">Chi siamo</span>
-      <h2 class="p-maestri__title">I Nostri <em>Maestri</em></h2>
-    </div>
-
-    <div class="p-maestri__grid">
-      <div class="p-chef reveal">
-        <div class="p-chef__portrait">
-          <img src="assets/img/generated/chef-elena.png" alt="Elena Conti">
-        </div>
-        <h3 class="p-chef__name">Elena Conti</h3>
-        <p class="p-chef__role">Maestra Pasticcera</p>
-        <p class="p-chef__bio">
-          Formatasi tra le cucine di Parigi e Milano, Elena porta una visione contemporanea
-          alla tradizione di famiglia. Sua la mano dietro le creazioni piu audaci: il Panettone
-          al Pistacchio e le monoporzioni che reinterpretano i classici della pasticceria milanese.
-        </p>
-      </div>
-
-      <div class="p-chef reveal reveal-delay-2">
-        <div class="p-chef__portrait">
-          <img src="assets/img/generated/chef-luca.png" alt="Luca Conti">
-        </div>
-        <h3 class="p-chef__name">Luca Conti</h3>
-        <p class="p-chef__role">Maestro Cioccolatiere</p>
-        <p class="p-chef__bio">
-          Custode del lievito madre e dei segreti del nonno Giuseppe, Luca e il guardiano
-          della tradizione. Specializzato in cioccolato monorigine, seleziona personalmente
-          ogni fava di cacao per il Panettone Triplo Cioccolato e la Crema Spalmabile.
-        </p>
-      </div>
-    </div>
+  <!-- ========== CTA CONTACT ========== -->
+  <section class="t-cta">
+    <span class="t-cta__label reveal">Iniziamo insieme</span>
+    <h2 class="t-cta__title reveal reveal-delay-1">Organizziamo <em>insieme</em></h2>
+    <p class="t-cta__text reveal reveal-delay-2">
+      Contattaci per un preventivo gratuito. Ti aiuteremo a creare il menu' dolce perfetto per il tuo evento.
+    </p>
+    <p class="t-cta__contacts reveal reveal-delay-3">
+      0733 123 456 &mdash; info@dimensionedolce.it
+    </p>
+    <div class="t-cta__line reveal reveal-delay-3"></div>
   </section>
 
-  <!-- ========== CTA ========== -->
+  <!-- ========== CTA BAND ========== -->
   <section class="p-cta">
-    <h2 class="p-cta__title reveal">Scopri i nostri <em>panettoni</em></h2>
-    <a href="shop.html" class="p-cta__btn reveal reveal-delay-1">Vai allo Shop</a>
+    <h2 class="p-cta__title reveal">Scopri le nostre <em>torte su misura</em></h2>
+    <a href="torte-su-misura-v2.html" class="p-cta__btn reveal reveal-delay-1">TORTE SU MISURA</a>
   </section>
 
   <!-- ========== CART DRAWER ========== -->

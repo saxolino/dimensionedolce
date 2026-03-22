@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti | Dimensione Dolce</title>
+  <meta name="description" content="Contattaci per informazioni, torte su misura, catering ed eventi. Vieni a trovarci nel nostro laboratorio a Macerata.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/cart.css">
+
+  <style>
+    /* ============================================================
+       CONTATTI — Focused Contact Page (V2 Design System)
+       ============================================================ */
+
+    /* ---------- DARK HEADER (compact, no image) ---------- */
+    .c-header {
+      background: var(--nero);
+      min-height: 45vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 40px;
+    }
+
+    .c-header__content {
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .c-header__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    .c-header__title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+
+    .c-header__title em {
+      font-style: italic;
+    }
+
+    .c-header__line {
+      width: 60px;
+      height: 1px;
+      background: var(--oro);
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- CONTACT INFO + PHOTO (from index-v2 .contact pattern) ---------- */
+    .contact {
+      background: var(--crema);
+      padding: 120px 40px;
+    }
+
+    .contact__inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 24px;
+    }
+
+    .contact__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+
+    .contact__row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .contact__icon {
+      width: 20px;
+      height: 20px;
+      color: var(--oro-scuro);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .contact__info-label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--testo);
+      margin-bottom: 6px;
+    }
+
+    .contact__info-value {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--testo-light);
+      line-height: 1.6;
+    }
+
+    .contact__info-value a {
+      color: var(--testo-light);
+      border-bottom: 1px solid var(--oro);
+      transition: color 0.3s ease;
+    }
+
+    .contact__info-value a:hover {
+      color: var(--oro-scuro);
+    }
+
+    .contact__right {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 4 / 5;
+    }
+
+    .contact__right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .contact__right:hover img {
+      transform: scale(1.04);
+    }
+
+    /* ---------- MAP PLACEHOLDER ---------- */
+    .c-map {
+      background: var(--nero);
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .c-map::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      z-index: 0;
+    }
+
+    .c-map::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 0%, var(--nero) 75%);
+      z-index: 1;
+    }
+
+    .c-map__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .c-map__label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 20px;
+    }
+
+    .c-map__icon {
+      width: 28px;
+      height: 28px;
+      color: var(--oro);
+      margin: 0 auto 20px;
+    }
+
+    .c-map__address {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      line-height: 1.4;
+      opacity: 0.85;
+    }
+
+    /* ---------- FORM SECTION ---------- */
+    .c-form-section {
+      background: var(--crema);
+      padding: 120px 40px;
+    }
+
+    .c-form-section__header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .c-form-section__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 24px;
+    }
+
+    .c-form-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .c-form-section__subtitle {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--testo-light);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ---------- FORM ---------- */
+    .c-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .c-form__group {
+      margin-bottom: 28px;
+    }
+
+    .c-form__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 10px;
+    }
+
+    .c-form__input,
+    .c-form__select,
+    .c-form__textarea {
+      width: 100%;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--testo);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--beige);
+      padding: 10px 0;
+      outline: none;
+      transition: border-color 0.4s ease;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 0;
+    }
+
+    .c-form__input::placeholder,
+    .c-form__textarea::placeholder {
+      color: #9A9290;
+      font-weight: 300;
+    }
+
+    .c-form__input:focus,
+    .c-form__select:focus,
+    .c-form__textarea:focus {
+      border-bottom-color: var(--oro);
+    }
+
+    .c-form__select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239A9290'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0 center;
+      padding-right: 20px;
+    }
+
+    .c-form__select option {
+      font-family: var(--font-ui);
+      color: var(--testo);
+      background: var(--crema);
+    }
+
+    .c-form__textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    .c-form__actions {
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* ---------- CTA BAND ---------- */
+    .p-cta {
+      background: var(--cioccolato);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .p-cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      margin-bottom: 32px;
+      line-height: 1.3;
+    }
+
+    .p-cta__btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--nero);
+      background: var(--oro);
+      padding: 16px 48px;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .p-cta__btn:hover {
+      background: var(--bianco);
+      transform: translateY(-2px);
+    }
+
+    /* ---------- SCROLL REVEAL ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .contact__inner {
+        gap: 48px;
+      }
+
+      .c-form-section {
+        padding: 100px 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .c-header {
+        min-height: auto;
+        padding: 80px 24px 60px;
+      }
+
+      .contact {
+        padding: 80px 24px;
+      }
+
+      .contact__inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .contact__right {
+        order: -1;
+        aspect-ratio: 16 / 10;
+      }
+
+      .c-map {
+        height: 250px;
+      }
+
+      .c-form-section {
+        padding: 80px 24px;
+      }
+
+      .p-cta {
+        padding: 64px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .c-header__title {
+        font-size: 40px;
+      }
+
+      .contact__right {
+        aspect-ratio: 16 / 9;
+      }
+
+      .c-form__actions .p-cta__btn {
+        padding: 14px 36px;
+        font-size: 11px;
+      }
+    }
+
+    /* ---------- REDUCED MOTION ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none !important;
+      }
+
+      .c-header__label,
+      .c-header__title,
+      .c-header__line {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== 1. TOP BAR ========== -->
+  <div class="top-bar">
+    <div class="top-bar__inner">
+      <div class="top-bar__left">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        <span>Spedizione in tutta Italia!</span>
+      </div>
+      <a href="index-v2.html" class="top-bar__moon" aria-label="Home"><img src="assets/img/logo-moon.png" alt="Dimensione Dolce"></a>
+      <div class="top-bar__right">
+        <svg class="top-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+390212345678">+39 02 1234567</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 2. HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="chi-siamo.html" class="header__nav-link header__nav-link--left">LA PASTICCERIA</a>
+      <button class="header__burger" id="headerBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <a href="index-v2.html" class="header__title"><img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce" class="header__logo-img"></a>
+      <div class="header__right-group">
+        <a href="shop.html" class="header__nav-link header__nav-link--right">SHOP</a>
+        <button class="header__cart" id="cartToggle" aria-label="Carrello">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="header__cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== MOBILE SIDEBAR ========== -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <nav class="sidebar" id="sidebar" aria-label="Menu principale">
+    <div class="sidebar__header">
+      <span class="sidebar__brand">DIMENSIONE DOLCE</span>
+      <button class="sidebar__close" id="sidebarClose" aria-label="Chiudi menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="sidebar__nav">
+      <a href="index-v2.html" class="sidebar__link">Home</a>
+      <a href="shop.html" class="sidebar__link sidebar__link--accent">Shop Online</a>
+      <a href="chi-siamo.html" class="sidebar__link">La Pasticceria</a>
+      <a href="menu-v2.html" class="sidebar__link">Il Menu</a>
+      <a href="torte-su-misura-v2.html" class="sidebar__link">Torte su Misura</a>
+      <a href="catering-eventi-v2.html" class="sidebar__link">Catering &amp; Eventi</a>
+      <a href="contatti-v2.html" class="sidebar__link">Contatti</a>
+    </div>
+    <div class="sidebar__footer">
+      <a href="tel:+390212345678" class="sidebar__contact">+39 02 1234567</a>
+    </div>
+  </nav>
+
+  <!-- ========== DARK HEADER (compact, no image) ========== -->
+  <section class="c-header">
+    <div class="c-header__content">
+      <span class="c-header__label">Dimensione Dolce</span>
+      <h1 class="c-header__title">Vieni a <em>trovarci</em></h1>
+      <div class="c-header__line"></div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT INFO + PHOTO ========== -->
+  <section class="contact">
+    <div class="contact__inner">
+      <div class="contact__left">
+        <span class="contact__label reveal">I nostri recapiti</span>
+        <h2 class="contact__title reveal reveal-delay-1">La Nostra <em>Bottega</em></h2>
+
+        <div class="contact__row reveal reveal-delay-2">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <p class="contact__info-label">Indirizzo</p>
+            <p class="contact__info-value">Via Roma, 42 / 62100 Macerata (MC)</p>
+          </div>
+        </div>
+
+        <div class="contact__row reveal reveal-delay-3">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <p class="contact__info-label">Telefono</p>
+            <p class="contact__info-value"><a href="tel:+390733123456">0733 123 456</a></p>
+          </div>
+        </div>
+
+        <div class="contact__row reveal reveal-delay-3">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <p class="contact__info-label">Email</p>
+            <p class="contact__info-value"><a href="mailto:info@dimensionedolce.it">info@dimensionedolce.it</a></p>
+          </div>
+        </div>
+
+        <div class="contact__row reveal reveal-delay-4">
+          <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <div>
+            <p class="contact__info-label">Orari</p>
+            <p class="contact__info-value">Lunedi &mdash; Sabato: 7:00 &mdash; 20:00<br>Domenica: 8:00 &mdash; 13:00</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact__right reveal reveal-delay-2">
+        <img src="assets/img/generated/hero-4-servizio-v2.png" alt="La bottega di Dimensione Dolce" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAP PLACEHOLDER ========== -->
+  <section class="c-map">
+    <div class="c-map__content reveal">
+      <span class="c-map__label">DOVE SIAMO</span>
+      <svg class="c-map__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <p class="c-map__address">Via Roma, 42 &mdash; Macerata</p>
+    </div>
+  </section>
+
+  <!-- ========== SCRIVICI — Contact Form ========== -->
+  <section class="c-form-section" id="scrivici">
+    <div class="c-form-section__header">
+      <span class="c-form-section__label reveal">Hai una domanda?</span>
+      <h2 class="c-form-section__title reveal reveal-delay-1">Scrivici un <em>messaggio</em></h2>
+      <p class="c-form-section__subtitle reveal reveal-delay-2">Compila il modulo e ti rispondiamo entro 24 ore.</p>
+    </div>
+
+    <form class="c-form" onsubmit="return false;">
+      <div class="c-form__group reveal">
+        <label class="c-form__label" for="cf-name">Nome e Cognome</label>
+        <input class="c-form__input" type="text" id="cf-name" name="name" placeholder="Il tuo nome" required>
+      </div>
+
+      <div class="c-form__group reveal reveal-delay-1">
+        <label class="c-form__label" for="cf-email">Email</label>
+        <input class="c-form__input" type="email" id="cf-email" name="email" placeholder="La tua email" required>
+      </div>
+
+      <div class="c-form__group reveal reveal-delay-2">
+        <label class="c-form__label" for="cf-phone">Telefono</label>
+        <input class="c-form__input" type="tel" id="cf-phone" name="phone" placeholder="Il tuo numero di telefono">
+      </div>
+
+      <div class="c-form__group reveal reveal-delay-3">
+        <label class="c-form__label" for="cf-subject">Motivo</label>
+        <select class="c-form__select" id="cf-subject" name="subject" required>
+          <option value="" disabled selected>Seleziona un motivo</option>
+          <option value="info">Informazioni generali</option>
+          <option value="torte">Torte su misura</option>
+          <option value="catering">Catering &amp; eventi</option>
+          <option value="altro">Altro</option>
+        </select>
+      </div>
+
+      <div class="c-form__group reveal reveal-delay-4">
+        <label class="c-form__label" for="cf-message">Messaggio</label>
+        <textarea class="c-form__textarea" id="cf-message" name="message" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
+      </div>
+
+      <div class="c-form__actions reveal reveal-delay-5">
+        <button type="submit" class="p-cta__btn">INVIA MESSAGGIO</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ========== CTA BAND ========== -->
+  <section class="p-cta">
+    <h2 class="p-cta__title reveal">Scopri il nostro <em>menu</em></h2>
+    <a href="menu-v2.html" class="p-cta__btn reveal reveal-delay-1">VAI AL MENU</a>
+  </section>
+
+  <!-- ========== CART DRAWER ========== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__header">
+      <div>
+        <span class="cart-drawer__title">Carrello</span>
+        <span class="cart-drawer__count">0 articoli</span>
+      </div>
+      <button class="cart-drawer__close" aria-label="Chiudi carrello">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-drawer__items"></div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span class="cart-drawer__subtotal-label">Subtotale</span>
+        <span class="cart-drawer__subtotal-price">&euro;0,00</span>
+      </div>
+      <p class="cart-drawer__shipping-note">Spedizione gratuita sopra &euro;80</p>
+      <button class="cart-drawer__checkout" disabled>PROCEDI AL CHECKOUT</button>
+      <button class="cart-drawer__continue">Continua lo shopping</button>
+    </div>
+  </aside>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__logo">
+        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce" class="footer__logo-moon">
+      </div>
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="footer__social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="mailto:ordini@dimensionedolce.it" class="footer__social-link" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+      <nav class="footer__links">
+        <a href="chi-siamo.html">La Pasticceria</a>
+        <a href="menu-v2.html">Il Menu</a>
+        <a href="torte-su-misura-v2.html">Torte su Misura</a>
+        <a href="catering-eventi-v2.html">Catering &amp; Eventi</a>
+        <a href="contatti-v2.html">Contatti</a>
+        <a href="spedizioni-faq.html">Spedizioni &amp; FAQ</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+      <p class="footer__instagram">Seguici su Instagram <a href="#">@dimensionedolce</a></p>
+      <p class="footer__copy">&copy; 2026 Dimensione Dolce S.r.l. &mdash; Tutti i diritti riservati</p>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="js/main.js" defer></script>
+  <script src="https://sdks.shopifycdn.com/js-buy-sdk/v3/latest/index.umd.min.js" defer></script>
+  <script src="js/shopify.js" defer></script>
+
+  <!-- Scroll Reveal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      reveals.forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>
