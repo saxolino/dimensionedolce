@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catering & Eventi | Dimensione Dolce</title>
+  <meta name="description" content="Catering dolce per eventi privati e aziendali. Buffet, rinfreschi e allestimenti su misura dalla pasticceria Dimensione Dolce.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DIMENSIONE DOLCE — Catering & Eventi (Hybrid Service + Catalog)
+       Design system from V3 + editorial lookbook layout
+       ============================================================ */
+
+    :root {
+      --magenta: #E91E8C;
+      --magenta-dark: #C4177A;
+      --pistacchio: #BBC25C;
+      --pistacchio-scuro: #A3AA42;
+      --cioccolato: #382E2C;
+      --cioccolato-deep: #2C2322;
+      --crema: #F2F1F0;
+      --crema-warm: #F7F6F4;
+      --beige: #E8E5E1;
+      --nero: #1E1918;
+      --bianco: #ffffff;
+      --testo: #382E2C;
+      --testo-light: #6E6462;
+      --testo-muted: #9A9290;
+
+      --font-display: 'Bodoni Moda', 'Georgia', serif;
+      --font-ui: 'Montserrat', 'Helvetica Neue', sans-serif;
+
+      --sidebar-w: 200px;
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      color: var(--testo);
+      background: var(--crema);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* Custom cursor dot (desktop only) */
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--pistacchio);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease-out, opacity 0.3s;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    .cursor-dot.is-visible { opacity: 1; }
+    .cursor-dot.is-hovering { transform: translate(-50%, -50%) scale(3.5); }
+
+    /* ---------- SCROLL REVEAL (subtle) ---------- */
+    .rv {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .rv.is-v { opacity: 1; transform: translateY(0); }
+    .rv-d1 { transition-delay: 0.1s; }
+    .rv-d2 { transition-delay: 0.2s; }
+    .rv-d3 { transition-delay: 0.3s; }
+    .rv-d4 { transition-delay: 0.4s; }
+    .rv-d5 { transition-delay: 0.5s; }
+    .rv-d6 { transition-delay: 0.6s; }
+    .rv-d7 { transition-delay: 0.7s; }
+    .rv-d8 { transition-delay: 0.8s; }
+
+    /* ============================================================
+       SIDEBAR — Fixed left navigation (desktop)
+       ============================================================ */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--cioccolato);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 28px;
+    }
+
+    .sidebar__logo {
+      margin-bottom: auto;
+    }
+
+    .sidebar__logo img {
+      height: 40px;
+      filter: brightness(0) invert(1);
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar__logo:hover img {
+      opacity: 1;
+    }
+
+    .sidebar__nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: auto;
+    }
+
+    .sidebar__link {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      padding: 12px 0;
+      transition: color 0.3s ease;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    .sidebar__link:hover {
+      color: var(--pistacchio);
+    }
+
+    .sidebar__link--active {
+      color: var(--pistacchio);
+    }
+
+    /* Main content offset */
+    .main {
+      margin-left: var(--sidebar-w);
+    }
+
+    /* ============================================================
+       MOBILE HAMBURGER
+       ============================================================ */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: var(--cioccolato);
+      z-index: 200;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .mobile-header__logo img {
+      height: 22px;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+    }
+
+    .hamburger {
+      width: 28px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: rgba(255,255,255,0.7);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .hamburger.is-open span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .hamburger.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-open span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 56px; left: 0; right: 0; bottom: 0;
+      background: var(--cioccolato);
+      z-index: 199;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .mobile-nav.is-open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a:hover { color: var(--bianco); }
+
+    .mobile-nav a.mobile-nav__link--active {
+      color: var(--pistacchio);
+    }
+
+    /* ============================================================
+       HERO — Cinematic carousel + centered wordmark (no moon)
+       ============================================================ */
+    .hero {
+      background: var(--nero);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 60px;
+    }
+
+    /* Carousel slides */
+    .hero__carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero__slide--active {
+      opacity: 1;
+    }
+
+    .hero__slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.32) saturate(0.7);
+      transform: scale(1.08);
+      animation: heroKenBurns 8s ease-out forwards;
+    }
+
+    .hero__slide--active img {
+      animation: heroKenBurns 8s ease-out forwards;
+    }
+
+    @keyframes heroKenBurns {
+      from { transform: scale(1.08); }
+      to { transform: scale(1); }
+    }
+
+    /* Dark overlay gradient */
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(30, 25, 24, 0.85) 0%,
+        rgba(30, 25, 24, 0.15) 50%,
+        rgba(30, 25, 24, 0.35) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero__brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      will-change: transform;
+    }
+
+    /* Wordmark — clip-path reveal */
+    .hero__wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Lines draw from center outward */
+    .hero__line-top,
+    .hero__line-bottom {
+      height: 1.5px;
+      background: rgba(255,255,255,0.6);
+      width: 0;
+      animation: lineDrawSlow 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    }
+
+    @keyframes lineDrawSlow {
+      to { width: 320px; }
+    }
+
+    /* "CATERING & EVENTI" — letter-spacing reveal */
+    .hero__dimensione {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      padding: 14px 0;
+      opacity: 0;
+      animation: dimensioneReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+    }
+
+    @keyframes dimensioneReveal {
+      to { opacity: 1; letter-spacing: 0.35em; }
+    }
+
+    /* "Dolcezza su misura..." — slide up from clip */
+    .hero__dolce {
+      font-family: var(--font-display);
+      font-size: 60px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      line-height: 1.15;
+      margin-top: 12px;
+      clip-path: inset(100% 0 0 0);
+      animation: dolceClipReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 1s forwards;
+    }
+
+    @keyframes dolceClipReveal {
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    /* Tagline — fade + subtle slide */
+    .hero__tagline {
+      max-width: 560px;
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: taglineIn 1s cubic-bezier(0.22, 1, 0.36, 1) 1.4s forwards;
+      text-align: center;
+    }
+
+    @keyframes taglineIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero__tagline-text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: scrollIndicatorIn 0.8s ease 2s forwards;
+    }
+
+    .hero__scroll-label {
+      font-family: var(--font-ui);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--pistacchio), transparent);
+      animation: scrollPulse 2s ease-in-out 3s infinite;
+    }
+
+    @keyframes scrollIndicatorIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.3); transform-origin: top; }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       SHOWCASE GALLERY — Asymmetric editorial mosaic
+       ============================================================ */
+    .showcase {
+      background: var(--nero);
+      padding: 0;
+    }
+
+    .showcase__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 3px;
+    }
+
+    .showcase__item {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .showcase__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .showcase__item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* First image spans 2 rows (tall) */
+    .showcase__item--tall {
+      grid-row: span 2;
+    }
+
+    .showcase__item--tall img {
+      min-height: 100%;
+    }
+
+    /* Square items for the remaining 4 */
+    .showcase__item--square {
+      aspect-ratio: 1 / 1;
+    }
+
+    /* ============================================================
+       INTRO — Centered intro statement
+       ============================================================ */
+    .servizio-intro {
+      background: var(--bianco);
+      padding: 120px 60px;
+      text-align: center;
+    }
+
+    .servizio-intro__accent {
+      width: 40px;
+      height: 2px;
+      background: var(--pistacchio);
+      margin: 0 auto 28px;
+    }
+
+    .servizio-intro__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .servizio-intro__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .servizio-intro__divider {
+      width: 60px;
+      height: 1px;
+      background: var(--beige);
+      margin: 48px auto 0;
+    }
+
+    /* ============================================================
+       I NOSTRI SERVIZI — Alternating image+text blocks (flexbox)
+       ============================================================ */
+    .process-block {
+      display: flex;
+      min-height: 360px;
+    }
+
+    .process-block__photo {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .process-block__info {
+      width: 50%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 56px 52px;
+    }
+
+    /* Dark cioccolato variant */
+    .process-block__info--dark {
+      background: var(--cioccolato-deep);
+    }
+
+    .process-block__info--dark .process-block__title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.5vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .process-block__info--dark .process-block__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      max-width: 400px;
+    }
+
+    /* White variant */
+    .process-block__info--white {
+      background: var(--bianco);
+    }
+
+    .process-block__info--white .process-block__title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.5vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .process-block__info--white .process-block__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 400px;
+    }
+
+    /* Pistachio variant */
+    .process-block__info--pistacchio {
+      background: var(--pistacchio);
+    }
+
+    .process-block__info--pistacchio .process-block__title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.5vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cioccolato);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .process-block__info--pistacchio .process-block__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--cioccolato-deep);
+      opacity: 0.75;
+      max-width: 400px;
+    }
+
+    /* ============================================================
+       LE PROPOSTE — Product showcase grid
+       ============================================================ */
+    .creazioni {
+      background: var(--crema-warm);
+      padding: 120px 60px;
+      text-align: center;
+    }
+
+    .creazioni__accent {
+      width: 40px;
+      height: 2px;
+      background: var(--magenta);
+      margin: 0 auto 28px;
+    }
+
+    .creazioni__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .creazioni__subtitle {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 520px;
+      margin: 0 auto 80px;
+    }
+
+    .creazioni__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Product card — same style as menu.html */
+    .menu-card {
+      text-align: left;
+    }
+
+    .menu-card__image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--beige);
+      border-radius: 2px;
+    }
+
+    .menu-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-card:hover .menu-card__image img {
+      transform: scale(1.06);
+    }
+
+    .menu-card__body {
+      padding: 20px 4px 0;
+    }
+
+    .menu-card__name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .menu-card__desc {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--testo-light);
+      margin-bottom: 12px;
+    }
+
+    .menu-card__price {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pistacchio-scuro);
+    }
+
+    /* ============================================================
+       CTA — Call to action
+       ============================================================ */
+    .cta-section {
+      background: var(--bianco);
+      padding: 150px 60px;
+      text-align: center;
+    }
+
+    .cta-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .cta-section__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 480px;
+      margin: 0 auto 48px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--magenta);
+      border: 1px solid var(--magenta);
+      background: transparent;
+      padding: 18px 48px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .cta-btn:hover {
+      background: var(--magenta);
+      color: var(--bianco);
+      border-color: var(--magenta);
+    }
+
+    .cta-section__contacts {
+      margin-top: 32px;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--testo-muted);
+      line-height: 1.8;
+    }
+
+    .cta-section__contacts a {
+      color: var(--testo-light);
+      transition: color 0.3s;
+    }
+
+    .cta-section__contacts a:hover {
+      color: var(--magenta);
+    }
+
+    /* ============================================================
+       FOOTER — Cream with moon logo + nav (identical to v3)
+       ============================================================ */
+    .ftr {
+      background: var(--crema);
+      padding: 100px 40px 56px;
+      text-align: center;
+      border-top: 1px solid var(--beige);
+    }
+
+    .ftr__moon {
+      width: 72px;
+      margin: 0 auto 40px;
+    }
+
+    .ftr__moon img {
+      width: 100%;
+      opacity: 0.8;
+    }
+
+    .ftr__nav {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .ftr__nav a {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--testo-light);
+      transition: color 0.3s;
+    }
+
+    .ftr__nav a:hover {
+      color: var(--pistacchio-scuro);
+    }
+
+    .ftr__copy {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--testo-muted);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      :root { --sidebar-w: 170px; }
+
+      .hero { padding: 60px 40px; }
+      .hero__dolce { font-size: 48px; }
+
+      .servizio-intro { padding: 100px 40px; }
+
+      .process-block__info { padding: 48px 36px; }
+
+      .creazioni { padding: 100px 40px; }
+      .creazioni__grid { gap: 32px 24px; }
+
+      .cta-section { padding: 100px 40px; }
+
+      /* Gallery: 2 columns on tablet */
+      .showcase__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .showcase__item--tall {
+        grid-row: span 1;
+      }
+
+      .showcase__item--square {
+        aspect-ratio: 4 / 3;
+      }
+
+      /* Hide 5th gallery image on tablet */
+      .showcase__item--hide-tablet {
+        display: none;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .mobile-header { display: flex; }
+      .main { margin-left: 0; padding-top: 56px; }
+
+      /* Hero mobile */
+      .hero {
+        min-height: auto;
+        padding: 80px 24px 60px;
+      }
+
+      .hero__dolce {
+        font-size: 40px;
+        clip-path: none;
+        opacity: 0;
+        animation: fadeUp 0.8s ease 0.8s forwards;
+      }
+
+      .hero__line-top, .hero__line-bottom { width: 200px; }
+      @keyframes lineDrawSlow { to { width: 200px; } }
+      .hero__dimensione { font-size: 12px; letter-spacing: 0.3em; }
+      .hero__scroll { display: none; }
+      .hero__tagline { max-width: 100%; }
+
+      /* Gallery: 1 column on mobile */
+      .showcase__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase__item--tall {
+        grid-row: span 1;
+      }
+
+      .showcase__item--square {
+        aspect-ratio: 16 / 9;
+      }
+
+      .showcase__item--hide-mobile {
+        display: none;
+      }
+
+      /* Servizio intro */
+      .servizio-intro { padding: 80px 24px; }
+
+      /* Process blocks stack */
+      .process-block {
+        flex-direction: column;
+      }
+
+      .process-block__photo {
+        min-height: 280px;
+      }
+
+      .process-block__info {
+        width: 100%;
+        padding: 56px 24px;
+      }
+
+      /* Creazioni: 2 columns on mobile */
+      .creazioni { padding: 80px 24px; }
+      .creazioni__subtitle { margin-bottom: 48px; }
+      .creazioni__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
+      }
+
+      /* CTA */
+      .cta-section { padding: 80px 24px; }
+
+      .ftr { padding: 56px 24px 36px; }
+      .ftr__nav { gap: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero__dolce { font-size: 34px; }
+      .hero__line-top, .hero__line-bottom { width: 160px; }
+      @keyframes lineDrawSlow { to { width: 160px; } }
+      .hero__dimensione { font-size: 11px; }
+
+      .creazioni__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-btn { padding: 16px 36px; font-size: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rv { opacity: 1; transform: none; transition: none !important; }
+      .hero__wordmark, .hero__tagline, .hero__dolce {
+        opacity: 1; transform: none; animation: none; clip-path: none;
+      }
+      .hero__line-top, .hero__line-bottom { width: 320px; }
+      .hero__dimensione { opacity: 1; letter-spacing: 0.35em; animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- ========== SIDEBAR (Desktop) ========== -->
+  <aside class="sidebar">
+    <a href="index-v3.html" class="sidebar__logo">
+      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
+    </a>
+    <nav class="sidebar__nav">
+      <a href="chi-siamo-v2.html" class="sidebar__link">Chi Siamo</a>
+      <a href="menu.html" class="sidebar__link">Menu'</a>
+      <a href="torte-su-misura.html" class="sidebar__link">Torte su Misura</a>
+      <a href="catering-eventi.html" class="sidebar__link sidebar__link--active">Catering &amp; Eventi</a>
+      <a href="contatti.html" class="sidebar__link">Contatti</a>
+    </nav>
+  </aside>
+
+  <!-- ========== MOBILE HEADER ========== -->
+  <div class="mobile-header">
+    <a href="index-v3.html" class="mobile-header__logo">
+      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="chi-siamo-v2.html">Chi Siamo</a>
+    <a href="menu.html">Menu'</a>
+    <a href="torte-su-misura.html">Torte su Misura</a>
+    <a href="catering-eventi.html" class="mobile-nav__link--active">Catering &amp; Eventi</a>
+    <a href="contatti.html">Contatti</a>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <div class="main">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+      <div class="hero__carousel" id="heroCarousel">
+        <div class="hero__slide hero__slide--active">
+          <img src="assets/img/generated/hero-4-servizio-v2.png" alt="Catering e servizio">
+        </div>
+        <div class="hero__slide">
+          <img src="assets/img/generated/hero-1-prodotti.png" alt="I nostri prodotti">
+        </div>
+        <div class="hero__slide">
+          <img src="assets/img/generated/row-pasticceria.png" alt="Pasticceria artigianale">
+        </div>
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__inner">
+        <div class="hero__brand">
+          <div class="hero__wordmark">
+            <div class="hero__line-top"></div>
+            <span class="hero__dimensione">Catering &amp; Eventi</span>
+            <div class="hero__line-bottom"></div>
+            <span class="hero__dolce">Dolcezza su misura, ovunque tu sia</span>
+          </div>
+        </div>
+        <div class="hero__tagline">
+          <p class="hero__tagline-text">
+            Buffet, rinfreschi e allestimenti dolci per eventi privati e aziendali.
+          </p>
+        </div>
+      </div>
+      <div class="hero__scroll">
+        <span class="hero__scroll-label">Scopri</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ========== SHOWCASE GALLERY ========== -->
+    <section class="showcase">
+      <div class="showcase__grid">
+        <div class="showcase__item showcase__item--tall">
+          <img src="assets/img/vetrina-brioche.png" alt="Brioche artigianali">
+        </div>
+        <div class="showcase__item showcase__item--square">
+          <img src="assets/img/vetrina-cornetti.png" alt="Cornetti">
+        </div>
+        <div class="showcase__item showcase__item--square">
+          <img src="assets/img/patisserie-colomba.png" alt="Colomba artigianale">
+        </div>
+        <div class="showcase__item showcase__item--square">
+          <img src="assets/img/vetrina-crostatina-mele.png" alt="Crostatina alle mele">
+        </div>
+        <div class="showcase__item showcase__item--square showcase__item--hide-mobile">
+          <img src="assets/img/trio-panettoni.png" alt="Panettoni artigianali">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== INTRO ========== -->
+    <section class="servizio-intro">
+      <div class="servizio-intro__accent rv"></div>
+      <h2 class="servizio-intro__title rv rv-d1">Catering &amp; Eventi</h2>
+      <p class="servizio-intro__text rv rv-d2">
+        Portiamo la nostra pasticceria dove vuoi tu. Dalle colazioni aziendali ai ricevimenti nuziali, componiamo buffet dolci su misura con la stessa cura del nostro laboratorio. Ogni dettaglio e' pensato per sorprendere i tuoi ospiti.
+      </p>
+      <div class="servizio-intro__divider rv rv-d3"></div>
+    </section>
+
+    <!-- ========== I NOSTRI SERVIZI — 4 Blocks ========== -->
+    <div id="servizi">
+
+      <!-- Block 1: Info LEFT (dark) — Photo RIGHT -->
+      <div class="process-block">
+        <div class="process-block__info process-block__info--dark rv">
+          <h3 class="process-block__title rv rv-d1">Colazioni Aziendali</h3>
+          <p class="process-block__text rv rv-d2">
+            Brioche, cornetti, mignon e caffe' di torrefazione per iniziare la giornata con gusto. Servizio completo con allestimento e ritiro.
+          </p>
+        </div>
+        <div class="process-block__photo" style="background-image: url('assets/img/vetrina-cornetti.png');"></div>
+      </div>
+
+      <!-- Block 2: Photo LEFT — Info RIGHT (white) -->
+      <div class="process-block">
+        <div class="process-block__photo" style="background-image: url('assets/img/generated/hero-4-servizio-v2.png');"></div>
+        <div class="process-block__info process-block__info--white rv">
+          <h3 class="process-block__title rv rv-d1">Rinfreschi &amp; Aperitivi</h3>
+          <p class="process-block__text rv rv-d2">
+            Finger food dolci, monoporzioni e composizioni eleganti per cocktail, inaugurazioni e presentazioni.
+          </p>
+        </div>
+      </div>
+
+      <!-- Block 3: Info LEFT (pistacchio) — Photo RIGHT -->
+      <div class="process-block">
+        <div class="process-block__info process-block__info--pistacchio rv">
+          <h3 class="process-block__title rv rv-d1">Buffet Nuziali</h3>
+          <p class="process-block__text rv rv-d2">
+            Il dolce piu' importante del giorno piu' importante. Componiamo angoli dolci completi: torta, confettata, sweet table e bomboniere artigianali.
+          </p>
+        </div>
+        <div class="process-block__photo" style="background-image: url('assets/img/patisserie-lievitati.png');"></div>
+      </div>
+
+      <!-- Block 4: Photo LEFT — Info RIGHT (dark) -->
+      <div class="process-block">
+        <div class="process-block__photo" style="background-image: url('assets/img/generated/laboratorio-moderno.png');"></div>
+        <div class="process-block__info process-block__info--dark rv">
+          <h3 class="process-block__title rv rv-d1">Eventi Privati</h3>
+          <p class="process-block__text rv rv-d2">
+            Compleanni, battesimi, anniversari, lauree. Ogni festa merita dolci all'altezza dell'occasione.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== LE PROPOSTE ========== -->
+    <section class="creazioni" id="proposte">
+      <div class="creazioni__accent rv"></div>
+      <h2 class="creazioni__title rv rv-d1">Le Proposte</h2>
+      <p class="creazioni__subtitle rv rv-d2">
+        Una selezione delle nostre proposte per il tuo evento.
+      </p>
+      <div class="creazioni__grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-monoporzione.png" alt="Mignon Assortiti">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Mignon Assortiti</h3>
+            <p class="menu-card__desc">Selezione di piccola pasticceria: mousse, tartellette, bigne'</p>
+            <span class="menu-card__price">da &euro;3/pz</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-brioche.png" alt="Brioche & Cornetti">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Brioche &amp; Cornetti</h3>
+            <p class="menu-card__desc">Lievitati artigianali con farciture classiche e stagionali</p>
+            <span class="menu-card__price">da &euro;2/pz</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-torta-funghetti.png" alt="Sweet Table Completo">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Sweet Table Completo</h3>
+            <p class="menu-card__desc">Composizione completa per 50+ ospiti: torta, mignon, confettata</p>
+            <span class="menu-card__price">da &euro;350</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d4">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-torta-ciliegie.png" alt="Torta Evento">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Torta Evento</h3>
+            <p class="menu-card__desc">Torta personalizzata da 2 a 5 piani, design su misura</p>
+            <span class="menu-card__price">da &euro;80</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d5">
+          <div class="menu-card__image">
+            <img src="assets/img/contact-gift.png" alt="Box Regalo">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Box Regalo</h3>
+            <p class="menu-card__desc">Confezione regalo con selezione dolci artigianali, personalizzabile</p>
+            <span class="menu-card__price">da &euro;25</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d6">
+          <div class="menu-card__image">
+            <img src="assets/img/patisserie-colomba.png" alt="Colomba & Panettoni">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Colomba &amp; Panettoni</h3>
+            <p class="menu-card__desc">Lievitati delle feste: colomba, panettone, pandoro artigianale</p>
+            <span class="menu-card__price">da &euro;28</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="cta-section" id="contatti">
+      <h2 class="cta-section__title rv">Organizziamo insieme</h2>
+      <p class="cta-section__text rv rv-d1">
+        Contattaci per un preventivo gratuito.
+        Ti aiuteremo a creare il menu' dolce perfetto per il tuo evento.
+      </p>
+      <a href="mailto:info@dimensionedolce.it" class="cta-btn rv rv-d2">Richiedi un Preventivo</a>
+      <div class="cta-section__contacts rv rv-d3">
+        <a href="tel:+390733123456">0733 123 456</a> &nbsp;&mdash;&nbsp; <a href="mailto:info@dimensionedolce.it">info@dimensionedolce.it</a>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="ftr">
+      <div class="ftr__moon">
+        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
+      </div>
+      <nav class="ftr__nav">
+        <a href="chi-siamo-v2.html">Chi Siamo</a>
+        <a href="menu.html">Menu'</a>
+        <a href="torte-su-misura.html">Torte su Misura</a>
+        <a href="catering-eventi.html">Catering &amp; Eventi</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+      <p class="ftr__copy">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
+    </footer>
+
+  </div>
+
+  <!-- ========== JS ========== -->
+  <script>
+    // Mobile hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('is-open');
+      mobileNav.classList.toggle('is-open');
+    });
+
+    // Close mobile nav on link click
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        mobileNav.classList.remove('is-open');
+      });
+    });
+
+    // Custom cursor
+    const dot = document.getElementById('cursorDot');
+    if (dot && window.matchMedia('(min-width: 769px) and (pointer: fine)').matches) {
+      document.addEventListener('mousemove', e => {
+        dot.style.left = e.clientX + 'px';
+        dot.style.top = e.clientY + 'px';
+        if (!dot.classList.contains('is-visible')) dot.classList.add('is-visible');
+      });
+      document.addEventListener('mouseleave', () => dot.classList.remove('is-visible'));
+      document.querySelectorAll('a, button, .menu-card, .showcase__item').forEach(el => {
+        el.addEventListener('mouseenter', () => dot.classList.add('is-hovering'));
+        el.addEventListener('mouseleave', () => dot.classList.remove('is-hovering'));
+      });
+    }
+
+    // Hero carousel
+    const slides = document.querySelectorAll('.hero__slide');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('hero__slide--active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      const next = slides[currentSlide];
+      next.classList.add('hero__slide--active');
+      const img = next.querySelector('img');
+      img.style.animation = 'none';
+      img.offsetHeight;
+      img.style.animation = '';
+    }, 6000);
+
+    // Hero parallax on mouse
+    const heroEl = document.querySelector('.hero');
+    const brandEl = document.querySelector('.hero__brand');
+
+    if (heroEl && window.matchMedia('(min-width: 769px)').matches) {
+      heroEl.addEventListener('mousemove', (e) => {
+        const rect = heroEl.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        if (brandEl) brandEl.style.transform = `translate(${x * -6}px, ${y * -4}px)`;
+      });
+
+      heroEl.addEventListener('mouseleave', () => {
+        if (brandEl) brandEl.style.transform = '';
+      });
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.rv');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-v');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

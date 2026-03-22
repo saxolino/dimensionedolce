@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il Menu | Dimensione Dolce</title>
+  <meta name="description" content="Il menu di Dimensione Dolce: gelateria artigianale, pasticceria e colazione. Creazioni preparate ogni giorno con ingredienti freschi e di stagione.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DIMENSIONE DOLCE — Menu Page
+       Editorial Sidebar Layout (from V3 design system)
+       ============================================================ */
+
+    :root {
+      --magenta: #E91E8C;
+      --magenta-dark: #C4177A;
+      --pistacchio: #BBC25C;
+      --pistacchio-scuro: #A3AA42;
+      --cioccolato: #382E2C;
+      --cioccolato-deep: #2C2322;
+      --crema: #F2F1F0;
+      --crema-warm: #F7F6F4;
+      --beige: #E8E5E1;
+      --nero: #1E1918;
+      --bianco: #ffffff;
+      --testo: #382E2C;
+      --testo-light: #6E6462;
+      --testo-muted: #9A9290;
+
+      --font-display: 'Bodoni Moda', 'Georgia', serif;
+      --font-ui: 'Montserrat', 'Helvetica Neue', sans-serif;
+
+      --sidebar-w: 200px;
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      color: var(--testo);
+      background: var(--crema);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* Custom cursor dot (desktop only) */
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--pistacchio);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease-out, opacity 0.3s;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    .cursor-dot.is-visible { opacity: 1; }
+    .cursor-dot.is-hovering { transform: translate(-50%, -50%) scale(3.5); }
+
+    /* ---------- SCROLL REVEAL (subtle) ---------- */
+    .rv {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .rv.is-v { opacity: 1; transform: translateY(0); }
+    .rv-d1 { transition-delay: 0.1s; }
+    .rv-d2 { transition-delay: 0.2s; }
+    .rv-d3 { transition-delay: 0.3s; }
+    .rv-d4 { transition-delay: 0.4s; }
+    .rv-d5 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       SIDEBAR — Fixed left navigation (desktop)
+       ============================================================ */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--cioccolato);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 28px;
+    }
+
+    .sidebar__logo {
+      margin-bottom: auto;
+    }
+
+    .sidebar__logo img {
+      height: 40px;
+      filter: brightness(0) invert(1);
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar__logo:hover img {
+      opacity: 1;
+    }
+
+    .sidebar__nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: auto;
+    }
+
+    .sidebar__link {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      padding: 12px 0;
+      transition: color 0.3s ease;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    .sidebar__link:hover {
+      color: var(--pistacchio);
+    }
+
+    .sidebar__link--active {
+      color: var(--pistacchio);
+    }
+
+    /* Main content offset */
+    .main {
+      margin-left: var(--sidebar-w);
+    }
+
+    /* ============================================================
+       MOBILE HAMBURGER
+       ============================================================ */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: var(--cioccolato);
+      z-index: 200;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .mobile-header__logo img {
+      height: 22px;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+    }
+
+    .hamburger {
+      width: 28px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: rgba(255,255,255,0.7);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .hamburger.is-open span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .hamburger.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.is-open span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 56px; left: 0; right: 0; bottom: 0;
+      background: var(--cioccolato);
+      z-index: 199;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .mobile-nav.is-open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a:hover { color: var(--bianco); }
+
+    .mobile-nav a.mobile-nav__link--active {
+      color: var(--pistacchio);
+    }
+
+    /* ============================================================
+       HERO — Cinematic carousel (no moon)
+       ============================================================ */
+    .hero {
+      background: var(--nero);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 60px;
+    }
+
+    /* Carousel slides */
+    .hero__carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero__slide--active {
+      opacity: 1;
+    }
+
+    .hero__slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.32) saturate(0.7);
+      transform: scale(1.08);
+      animation: heroKenBurns 8s ease-out forwards;
+    }
+
+    .hero__slide--active img {
+      animation: heroKenBurns 8s ease-out forwards;
+    }
+
+    @keyframes heroKenBurns {
+      from { transform: scale(1.08); }
+      to { transform: scale(1); }
+    }
+
+    /* Dark overlay gradient */
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(30, 25, 24, 0.85) 0%,
+        rgba(30, 25, 24, 0.15) 50%,
+        rgba(30, 25, 24, 0.35) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero__brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      will-change: transform;
+    }
+
+    /* Wordmark — clip-path reveal */
+    .hero__wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Lines draw from center outward */
+    .hero__line-top,
+    .hero__line-bottom {
+      height: 1.5px;
+      background: rgba(255,255,255,0.6);
+      width: 0;
+      animation: lineDrawSlow 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    }
+
+    @keyframes lineDrawSlow {
+      to { width: 280px; }
+    }
+
+    /* IL — letter-spacing reveal */
+    .hero__il {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      padding: 14px 0;
+      opacity: 0;
+      animation: ilReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+    }
+
+    @keyframes ilReveal {
+      to { opacity: 1; letter-spacing: 0.45em; }
+    }
+
+    /* Menu — slide up from clip */
+    .hero__menu-title {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1;
+      margin-top: 8px;
+      clip-path: inset(100% 0 0 0);
+      animation: menuClipReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+    }
+
+    @keyframes menuClipReveal {
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    /* Tagline — fade + subtle slide */
+    .hero__tagline {
+      max-width: 480px;
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: taglineIn 1s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+      text-align: center;
+    }
+
+    @keyframes taglineIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero__tagline-text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: scrollIndicatorIn 0.8s ease 2s forwards;
+    }
+
+    .hero__scroll-label {
+      font-family: var(--font-ui);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--pistacchio), transparent);
+      animation: scrollPulse 2s ease-in-out 3s infinite;
+    }
+
+    @keyframes scrollIndicatorIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.3); transform-origin: top; }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       MENU SECTIONS — Category blocks
+       ============================================================ */
+    .menu-section {
+      padding: 120px 60px;
+      text-align: center;
+    }
+
+    .menu-section--white {
+      background: var(--bianco);
+    }
+
+    .menu-section--crema {
+      background: var(--crema-warm);
+    }
+
+    .menu-section__accent {
+      width: 40px;
+      height: 2px;
+      margin: 0 auto 28px;
+    }
+
+    .menu-section__accent--pistacchio {
+      background: var(--pistacchio);
+    }
+
+    .menu-section__accent--magenta {
+      background: var(--magenta);
+    }
+
+    .menu-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .menu-section__subtitle {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 560px;
+      margin: 0 auto 64px;
+    }
+
+    /* ============================================================
+       PRODUCT GRID
+       ============================================================ */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .menu-grid--2col {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 720px;
+    }
+
+    .menu-grid + .menu-grid {
+      margin-top: 40px;
+    }
+
+    /* ============================================================
+       PRODUCT CARD — Luxury editorial style
+       ============================================================ */
+    .menu-card {
+      text-align: left;
+    }
+
+    .menu-card__image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--crema);
+      border-radius: 2px;
+    }
+
+    .menu-section--crema .menu-card__image {
+      background: var(--beige);
+    }
+
+    .menu-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-card:hover .menu-card__image img {
+      transform: scale(1.06);
+    }
+
+    .menu-card__body {
+      padding: 20px 4px 0;
+    }
+
+    .menu-card__name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .menu-card__desc {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--testo-light);
+      margin-bottom: 12px;
+    }
+
+    .menu-card__price {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pistacchio-scuro);
+    }
+
+    /* ============================================================
+       FOOTER — Cream with moon logo + nav
+       ============================================================ */
+    .ftr {
+      background: var(--crema);
+      padding: 100px 40px 56px;
+      text-align: center;
+      border-top: 1px solid var(--beige);
+    }
+
+    .ftr__moon {
+      width: 72px;
+      margin: 0 auto 40px;
+    }
+
+    .ftr__moon img {
+      width: 100%;
+      opacity: 0.8;
+    }
+
+    .ftr__nav {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .ftr__nav a {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--testo-light);
+      transition: color 0.3s;
+    }
+
+    .ftr__nav a:hover {
+      color: var(--pistacchio-scuro);
+    }
+
+    .ftr__copy {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--testo-muted);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      :root { --sidebar-w: 170px; }
+
+      .hero { padding: 60px 40px; }
+      .hero__menu-title { font-size: 56px; }
+      .hero__line-top, .hero__line-bottom { width: 220px; }
+
+      .menu-section { padding: 80px 36px; }
+      .menu-grid { gap: 28px; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .mobile-header { display: flex; }
+      .main { margin-left: 0; padding-top: 56px; }
+
+      /* Hero mobile — stacked, centered */
+      .hero {
+        min-height: auto;
+        padding: 60px 24px 48px;
+      }
+
+      .hero__menu-title { font-size: 52px; clip-path: none; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+      .hero__line-top, .hero__line-bottom { width: 200px; }
+      .hero__il { font-size: 14px; letter-spacing: 0.35em; }
+      .hero__scroll { display: none; }
+
+      .hero__tagline {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      /* Menu sections */
+      .menu-section { padding: 64px 24px; }
+      .menu-section__subtitle { margin-bottom: 40px; }
+
+      /* Product grid — single column */
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        max-width: 400px;
+      }
+
+      .menu-grid--2col {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .ftr { padding: 56px 24px 36px; }
+      .ftr__nav { gap: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero__menu-title { font-size: 44px; }
+      .hero__line-top, .hero__line-bottom { width: 160px; }
+      .hero__il { font-size: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rv { opacity: 1; transform: none; transition: none !important; }
+      .hero__wordmark, .hero__tagline {
+        opacity: 1; transform: none; animation: none;
+      }
+      .hero__il { opacity: 1; letter-spacing: 0.45em; animation: none; }
+      .hero__menu-title { opacity: 1; clip-path: none; animation: none; }
+      .hero__line-top, .hero__line-bottom { width: 280px; animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- ========== SIDEBAR (Desktop) ========== -->
+  <aside class="sidebar">
+    <a href="index-v3.html" class="sidebar__logo">
+      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
+    </a>
+    <nav class="sidebar__nav">
+      <a href="chi-siamo-v2.html" class="sidebar__link">Chi Siamo</a>
+      <a href="menu.html" class="sidebar__link sidebar__link--active">Menu'</a>
+      <a href="torte-su-misura.html" class="sidebar__link">Torte su Misura</a>
+      <a href="catering-eventi.html" class="sidebar__link">Catering &amp; Eventi</a>
+      <a href="contatti.html" class="sidebar__link">Contatti</a>
+    </nav>
+  </aside>
+
+  <!-- ========== MOBILE HEADER ========== -->
+  <div class="mobile-header">
+    <a href="index-v3.html" class="mobile-header__logo">
+      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="chi-siamo-v2.html">Chi Siamo</a>
+    <a href="menu.html" class="mobile-nav__link--active">Menu'</a>
+    <a href="torte-su-misura.html">Torte su Misura</a>
+    <a href="catering-eventi.html">Catering &amp; Eventi</a>
+    <a href="contatti.html">Contatti</a>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <div class="main">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+      <div class="hero__carousel" id="heroCarousel">
+        <div class="hero__slide hero__slide--active">
+          <img src="assets/img/generated/row-gelateria.png" alt="Gelateria artigianale">
+        </div>
+        <div class="hero__slide">
+          <img src="assets/img/generated/row-pasticceria.png" alt="Pasticceria artigianale">
+        </div>
+        <div class="hero__slide">
+          <img src="assets/img/generated/row-caffe.png" alt="Caffe e torrefazione">
+        </div>
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__inner">
+        <div class="hero__brand">
+          <div class="hero__wordmark">
+            <div class="hero__line-top"></div>
+            <span class="hero__il">Il</span>
+            <div class="hero__line-bottom"></div>
+            <span class="hero__menu-title">Menu</span>
+          </div>
+        </div>
+        <div class="hero__tagline">
+          <p class="hero__tagline-text">
+            Le nostre creazioni artigianali
+          </p>
+        </div>
+      </div>
+      <div class="hero__scroll">
+        <span class="hero__scroll-label">Scopri</span>
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ========== GELATERIA ========== -->
+    <section class="menu-section menu-section--white" id="gelateria">
+      <div class="menu-section__accent menu-section__accent--pistacchio rv"></div>
+      <h2 class="menu-section__title rv rv-d1">Gelateria</h2>
+      <p class="menu-section__subtitle rv rv-d2">I nostri gusti artigianali, preparati ogni giorno con ingredienti freschi e di stagione.</p>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="assets/img/product-pistacchio.png" alt="Pistacchio di Bronte">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pistacchio di Bronte</h3>
+            <p class="menu-card__desc">Crema di pistacchio DOP, tostato e macinato a pietra</p>
+            <span class="menu-card__price">&euro;3.50</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="assets/img/product-cioccolato.png" alt="Cioccolato Fondente">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cioccolato Fondente</h3>
+            <p class="menu-card__desc">Cioccolato Valrhona 70%, lavorato in mantecatura lenta</p>
+            <span class="menu-card__price">&euro;3.50</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="assets/img/product-classico.png" alt="Crema Classica">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Crema Classica</h3>
+            <p class="menu-card__desc">La nostra crema alla vaniglia del Madagascar, una tradizione rinnovata</p>
+            <span class="menu-card__price">&euro;3.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PASTICCERIA ========== -->
+    <section class="menu-section menu-section--crema" id="pasticceria">
+      <div class="menu-section__accent menu-section__accent--magenta rv"></div>
+      <h2 class="menu-section__title rv rv-d1">Pasticceria</h2>
+      <p class="menu-section__subtitle rv rv-d2">Dolci pensati per ogni momento della giornata, dalla colazione alla pausa.</p>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-pesca.png" alt="La Pesca">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">La Pesca</h3>
+            <p class="menu-card__desc">Mousse alla pesca su biscotto mandorla, glassa specchio</p>
+            <span class="menu-card__price">&euro;6.50</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-sfera-cioccolato.png" alt="Sfera al Cioccolato">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Sfera al Cioccolato</h3>
+            <p class="menu-card__desc">Cremoso fondente, cuore caramello salato, copertura a specchio</p>
+            <span class="menu-card__price">&euro;7.00</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-monoporzione.png" alt="Monoporzione">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Monoporzione</h3>
+            <p class="menu-card__desc">Cremoso vaniglia, gelee di frutti rossi, base croccante</p>
+            <span class="menu-card__price">&euro;6.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-crostatina-mele.png" alt="Crostatina alle Mele">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Crostatina alle Mele</h3>
+            <p class="menu-card__desc">Pasta frolla, crema frangipane, mele renette caramellate</p>
+            <span class="menu-card__price">&euro;5.00</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-torta-ciliegie.png" alt="Torta alle Ciliegie">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Torta alle Ciliegie</h3>
+            <p class="menu-card__desc">Mousse yogurt, composta di ciliegie, streusel al cacao</p>
+            <span class="menu-card__price">&euro;5.50</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-torta-funghetti.png" alt="Torta Funghetti">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Torta Funghetti</h3>
+            <p class="menu-card__desc">Meringa italiana, crema al cioccolato bianco, nocciola Piemonte</p>
+            <span class="menu-card__price">&euro;5.50</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== COLAZIONE ========== -->
+    <section class="menu-section menu-section--white" id="colazione">
+      <div class="menu-section__accent menu-section__accent--pistacchio rv"></div>
+      <h2 class="menu-section__title rv rv-d1">Colazione</h2>
+      <p class="menu-section__subtitle rv rv-d2">Il buongiorno si vede dal mattino.</p>
+
+      <div class="menu-grid menu-grid--2col">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-brioche.png" alt="Brioche Artigianale">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Brioche Artigianale</h3>
+            <p class="menu-card__desc">Impasto al burro, lievitazione 24 ore, farciture a scelta</p>
+            <span class="menu-card__price">&euro;2.50</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="assets/img/vetrina-cornetti.png" alt="Cornetti">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cornetti</h3>
+            <p class="menu-card__desc">Sfogliatura classica, burro francese, croccante e leggera</p>
+            <span class="menu-card__price">&euro;2.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="ftr" id="contatti">
+      <div class="ftr__moon">
+        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
+      </div>
+      <nav class="ftr__nav">
+        <a href="chi-siamo-v2.html">Chi Siamo</a>
+        <a href="menu.html">Menu'</a>
+        <a href="torte-su-misura.html">Torte su Misura</a>
+        <a href="catering-eventi.html">Catering &amp; Eventi</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+      <p class="ftr__copy">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
+    </footer>
+
+  </div>
+
+  <!-- ========== JS ========== -->
+  <script>
+    // Mobile hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('is-open');
+      mobileNav.classList.toggle('is-open');
+    });
+
+    // Close mobile nav on link click
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        mobileNav.classList.remove('is-open');
+      });
+    });
+
+    // Custom cursor
+    const dot = document.getElementById('cursorDot');
+    if (dot && window.matchMedia('(min-width: 769px) and (pointer: fine)').matches) {
+      document.addEventListener('mousemove', e => {
+        dot.style.left = e.clientX + 'px';
+        dot.style.top = e.clientY + 'px';
+        if (!dot.classList.contains('is-visible')) dot.classList.add('is-visible');
+      });
+      document.addEventListener('mouseleave', () => dot.classList.remove('is-visible'));
+      document.querySelectorAll('a, button, .menu-card').forEach(el => {
+        el.addEventListener('mouseenter', () => dot.classList.add('is-hovering'));
+        el.addEventListener('mouseleave', () => dot.classList.remove('is-hovering'));
+      });
+    }
+
+    // Hero carousel
+    const slides = document.querySelectorAll('.hero__slide');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('hero__slide--active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      const next = slides[currentSlide];
+      next.classList.add('hero__slide--active');
+      const img = next.querySelector('img');
+      img.style.animation = 'none';
+      img.offsetHeight;
+      img.style.animation = '';
+    }, 6000);
+
+    // Hero parallax on mouse
+    const heroEl = document.querySelector('.hero');
+    const brandEl = document.querySelector('.hero__brand');
+
+    if (heroEl && window.matchMedia('(min-width: 769px)').matches) {
+      heroEl.addEventListener('mousemove', (e) => {
+        const rect = heroEl.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        if (brandEl) brandEl.style.transform = `translate(${x * -6}px, ${y * -4}px)`;
+      });
+
+      heroEl.addEventListener('mouseleave', () => {
+        if (brandEl) brandEl.style.transform = '';
+      });
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.rv');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-v');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
