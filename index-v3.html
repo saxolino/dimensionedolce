@@ -987,17 +987,20 @@
         text-align: center;
       }
 
-      /* Photos — 2x2 grid on mobile */
+      /* Photos — 2x2 grid on mobile, square cells */
       .photos-row {
         grid-template-columns: repeat(2, 1fr);
         gap: 2px;
+      }
+
+      .photos-row__item {
+        aspect-ratio: 1;
       }
 
       .photos-row__item--hide-mobile {
         display: none;
       }
 
-      /* Add 4th photo on mobile via extra item */
       .photos-row__item--mobile-only {
         display: block;
       }
@@ -1018,7 +1021,11 @@
         padding: 56px 24px;
       }
 
-
+      /* Photo halves need explicit height when stacked */
+      .svc-half--photo-clean {
+        min-height: 280px;
+        aspect-ratio: 4 / 3;
+      }
 
       .svc-half--light {
         padding: 48px 24px;
