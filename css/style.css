@@ -704,22 +704,9 @@ button {
   direction: ltr; /* keep text direction */
 }
 
-/* Giant Background Keywords */
+/* Giant Background Keywords — disabled */
 .product__keyword {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-display);
-  font-size: 15vw;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
-  opacity: var(--keyword-opacity);
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
-  line-height: 1;
+  display: none;
 }
 
 /* SVG Decorative Elements */
