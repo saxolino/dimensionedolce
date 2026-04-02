@@ -323,8 +323,128 @@ body.is-leaving {
   opacity: 0.45;
 }
 
+.ftr__legal {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.ftr__legal a {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--cioccolato);
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+.ftr__legal a:hover { opacity: 0.6; }
+
+.ftr__legal .ftr__nav-sep {
+  font-size: 11px;
+}
+
 /* ============================================================
-   9. Responsive — Shared breakpoints
+   9. Cookie Banner
+   ============================================================ */
+.cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 500;
+  background: var(--cioccolato-deep);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-banner.is-visible { transform: translateY(0); }
+
+.cookie-banner__text {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+
+.cookie-banner__text a {
+  color: rgba(255,255,255,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  transition: border-color 0.3s;
+}
+
+.cookie-banner__text a:hover { border-color: rgba(255,255,255,0.6); }
+
+.cookie-banner__btn {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cioccolato-deep);
+  background: var(--pistacchio);
+  border: none;
+  padding: 12px 32px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.3s;
+}
+
+.cookie-banner__btn:hover { opacity: 0.85; }
+
+/* ============================================================
+   10. GDPR Consent Checkbox
+   ============================================================ */
+.gdpr-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 24px 0 8px;
+}
+
+.gdpr-consent input[type="checkbox"] {
+  width: 16px; height: 16px;
+  margin-top: 2px;
+  accent-color: var(--cioccolato);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.gdpr-consent label {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--testo-light);
+  cursor: pointer;
+}
+
+.gdpr-consent a {
+  color: var(--testo);
+  border-bottom: 1px solid var(--beige);
+  transition: border-color 0.3s;
+}
+
+.gdpr-consent a:hover { border-color: var(--testo); }
+
+/* ============================================================
+   Responsive — Shared breakpoints
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .cookie-banner {
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 16px;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   11. Responsive — Shared breakpoints
    ============================================================ */
 
 @media (max-width: 1024px) {
