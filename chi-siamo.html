@@ -12,143 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/shared.css">
 
   <style>
     /* ============================================================
        LA PASTICCERIA — Editorial About Page
        ============================================================ */
-
-    :root {
-      --font-display: 'Cormorant Garamond', 'Georgia', serif;
-      --font-ui: 'Montserrat', 'Helvetica Neue', sans-serif;
-      --pistacchio: #BBC25C;
-      --cioccolato: #382E2C;
-      --cioccolato-deep: #2C2322;
-      --bianco: #ffffff;
-    }
-
-    /* ---------- HEADER v3 ---------- */
-    .hdr {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: var(--cioccolato-deep);
-      transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hdr__inner {
-      max-width: 1440px; margin: 0 auto; padding: 0 48px;
-      height: 88px; display: flex; align-items: center;
-      justify-content: center; position: relative;
-      transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hdr__nav { display: flex; align-items: center; gap: 72px; }
-    .hdr__nav--left { flex: 1; justify-content: flex-end; }
-    .hdr__nav--right { flex: 1; justify-content: flex-start; }
-    .hdr__link {
-      font-family: var(--font-ui); font-size: 11.5px; font-weight: 500;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.5); position: relative; padding: 6px 0;
-      transition: color 0.4s ease;
-    }
-    .hdr__link::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 100%; height: 1px;
-      background: linear-gradient(90deg, var(--pistacchio), rgba(187,194,92,0.3));
-      transform: scaleX(0); transform-origin: right;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hdr__link:hover { color: var(--bianco); }
-    .hdr__link:hover::after { transform: scaleX(1); transform-origin: left; }
-    .hdr__logo {
-      padding: 0 88px; flex-shrink: 0; display: flex;
-      flex-direction: column; align-items: center;
-    }
-    .hdr__logo-top {
-      font-family: var(--font-display); font-size: 10px; font-weight: 400;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.7); line-height: 1.2;
-    }
-    .hdr__logo-bottom {
-      font-family: var(--font-display); font-size: 28px; font-weight: 300;
-      color: var(--bianco); line-height: 1.1; letter-spacing: 0.02em;
-    }
-    .hdr__filament {
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(187,194,92,0.06) 10%, rgba(187,194,92,0.28) 50%, rgba(187,194,92,0.06) 90%, transparent 100%);
-    }
-    .hdr.is-scrolled {
-      background: rgba(30,25,24,0.97); backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0,0,0,0.12);
-    }
-    .hdr.is-scrolled .hdr__inner { height: 64px; }
-    .hdr.is-scrolled .hdr__logo-bottom { font-size: 22px; }
-    .hdr__burger {
-      display: none; width: 44px; height: 44px;
-      align-items: center; justify-content: center; flex-direction: column;
-      gap: 6px; background: none; border: none; cursor: pointer; padding: 10px;
-      position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
-    }
-    .hdr__burger span {
-      display: block; width: 24px; height: 1.5px; background: var(--bianco);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center;
-    }
-    .hdr__burger.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-    .hdr__burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hdr__burger.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
-
-    /* Mobile sidebar */
-    .mob-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-      z-index: 198; opacity: 0; visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
-    }
-    .mob-overlay.is-open { opacity: 1; visibility: visible; }
-    .mob-sidebar {
-      position: fixed; top: 0; left: 0; bottom: 0; width: 280px;
-      background: var(--cioccolato); z-index: 199;
-      transform: translateX(-100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex; flex-direction: column;
-    }
-    .mob-sidebar.is-open { transform: translateX(0); }
-    .mob-sidebar__header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .mob-sidebar__brand {
-      font-family: var(--font-ui); font-size: 11px; font-weight: 500;
-      letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6);
-    }
-    .mob-sidebar__close {
-      width: 32px; height: 32px; background: none; border: none;
-      cursor: pointer; color: rgba(255,255,255,0.5); transition: color 0.3s;
-    }
-    .mob-sidebar__close:hover { color: var(--bianco); }
-    .mob-sidebar__close svg { width: 20px; height: 20px; }
-    .mob-sidebar__nav { display: flex; flex-direction: column; padding: 24px; flex: 1; }
-    .mob-sidebar__link {
-      font-family: var(--font-display); font-size: 22px; font-weight: 400;
-      color: rgba(255,255,255,0.7); padding: 16px 0; transition: color 0.3s;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .mob-sidebar__link:last-child { border-bottom: none; }
-    .mob-sidebar__link:hover { color: var(--pistacchio); }
-    .mob-sidebar__footer { padding: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .mob-sidebar__contact { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,0.4); }
-
-    @media (max-width: 1024px) {
-      .hdr__nav { gap: 24px; }
-    }
-    @media (max-width: 768px) {
-      .hdr__nav { display: none; }
-      .hdr__burger { display: flex; }
-      .hdr__inner { height: 56px; }
-      .hdr__logo-bottom { font-size: 22px; }
-    }
 
     /* ---------- HERO ---------- */
     .p-hero {
@@ -582,24 +451,6 @@
       transform: translateY(-2px);
     }
 
-    /* ---------- SCROLL REVEAL ---------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition:
-        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
     /* ============================================================
        RESPONSIVE
        ============================================================ */
@@ -789,45 +640,20 @@
     }
     .cs-cta__btn:hover { opacity: 0.85; }
 
-    /* ---------- FOOTER v3 ---------- */
-    .ftr {
-      background: var(--pistacchio);
-      padding: 140px 40px 80px;
-      text-align: center;
-    }
-    .ftr__moon { width: 80px; margin: 0 auto 56px; }
-    .ftr__moon img { width: 100%; opacity: 0.7; filter: saturate(0) brightness(0.4); }
-    .ftr__nav {
-      display: flex; justify-content: center; gap: 12px;
-      flex-wrap: wrap; margin-bottom: 48px; align-items: center;
-    }
-    .ftr__nav a {
-      font-family: var(--font-ui); font-size: 13px; font-weight: 500;
-      letter-spacing: 0.04em; color: var(--cioccolato); transition: color 0.3s;
-    }
-    .ftr__nav a:hover { opacity: 0.7; }
-    .ftr__nav-sep { color: var(--cioccolato); opacity: 0.3; font-size: 13px; }
-    .ftr__copy {
-      font-family: var(--font-ui); font-size: 11px; font-weight: 400;
-      color: var(--cioccolato); opacity: 0.45;
-    }
-
     @media (max-width: 768px) {
       .cs-gal__track { height: 360px; }
       .cs-gal__item { width: 75%; }
       .cs-storia { padding: 80px 24px; }
       .cs-cta { padding: 72px 24px; }
-      .ftr { padding: 80px 24px 56px; }
+    }
+
+    @media (max-width: 480px) {
+      .p-maestri__grid { grid-template-columns: 1fr; }
+      .cs-storia { padding: 64px 20px; }
     }
 
     /* ---------- REDUCED MOTION ---------- */
     @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none !important;
-      }
-
       .p-hero__label,
       .p-hero__title,
       .p-hero__line {
@@ -847,7 +673,7 @@
         <a href="menu.html" class="hdr__link">Menu'</a>
         <a href="chi-siamo.html" class="hdr__link">Chi Siamo</a>
       </nav>
-      <a href="index-v3.html" class="hdr__logo">
+      <a href="index.html" class="hdr__logo">
         <span class="hdr__logo-top">Dimensione</span>
         <span class="hdr__logo-bottom">Dolce</span>
       </a>
@@ -904,30 +730,27 @@
         <img src="assets/img/vetrina-torta-funghetti.png" alt="Torta Incantata" loading="lazy">
       </div>
     </div>
-    <div class="cs-gal__progress">
-      <div class="cs-gal__progress-fill" id="galFill"></div>
-    </div>
   </section>
 
   <!-- ========== LA NOSTRA STORIA ========== -->
   <section class="cs-storia">
-    <h2 class="cs-storia__title reveal">La nostra Storia</h2>
-    <p class="cs-storia__text reveal">
+    <h2 class="cs-storia__title rv">La nostra Storia</h2>
+    <p class="cs-storia__text rv rv-d1">
       Dimensione Dolce nasce dall'esperienza e dalla passione del nostro team, che
       unisce tecnica, creativita e gusto in un'idea condivisa di dolcezza.
     </p>
-    <div class="cs-storia__divider reveal"></div>
+    <div class="cs-storia__divider rv rv-d2"></div>
   </section>
 
   <!-- ========== MAESTRI PASTICCERI ========== -->
   <section class="p-maestri">
-    <div class="p-maestri__header reveal">
+    <div class="p-maestri__header rv">
       <span class="p-maestri__label">Chi siamo</span>
       <h2 class="p-maestri__title">I Nostri <em>Maestri</em></h2>
     </div>
 
     <div class="p-maestri__grid">
-      <div class="p-chef reveal">
+      <div class="p-chef rv rv-d1">
         <div class="p-chef__portrait">
           <img src="assets/img/generated/chef-elena.png" alt="Elena Conti">
         </div>
@@ -940,7 +763,7 @@
         </p>
       </div>
 
-      <div class="p-chef reveal reveal-delay-2">
+      <div class="p-chef rv rv-d2">
         <div class="p-chef__portrait">
           <img src="assets/img/generated/chef-luca.png" alt="Luca Conti">
         </div>
@@ -957,16 +780,16 @@
 
   <!-- ========== CTA CONTATTO ========== -->
   <section class="cs-cta">
-    <h2 class="cs-cta__title reveal">Vieni a <em>trovarci</em></h2>
-    <a href="contatti.html" class="cs-cta__btn reveal">Contattaci</a>
+    <h2 class="cs-cta__title rv">Vieni a <em>trovarci</em></h2>
+    <a href="contatti.html" class="cs-cta__btn rv rv-d1">Contattaci</a>
   </section>
 
   <!-- ========== FOOTER v3 ========== -->
   <footer class="ftr">
-    <div class="ftr__moon">
+    <div class="ftr__moon rv">
       <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
     </div>
-    <nav class="ftr__nav">
+    <nav class="ftr__nav rv rv-d1">
       <a href="menu.html">Menu'</a>
       <span class="ftr__nav-sep">|</span>
       <a href="chi-siamo.html">Chi Siamo</a>
@@ -975,98 +798,9 @@
       <span class="ftr__nav-sep">|</span>
       <a href="contatti.html">Contatti</a>
     </nav>
-    <p class="ftr__copy">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
+    <p class="ftr__copy rv rv-d2">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
   </footer>
 
-  <!-- ========== FOOTER ========== -->
-
-  <!-- Main JS -->
-  <script src="js/main.js" defer></script>
-  <script src="https://sdks.shopifycdn.com/js-buy-sdk/v3/latest/index.umd.min.js" defer></script>
-  <script src="js/shopify.js" defer></script>
-
-  <!-- Header JS v3 -->
-  <script>
-    const hdr = document.getElementById('hdr');
-    window.addEventListener('scroll', () => {
-      hdr.classList.toggle('is-scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    const hdrBurger = document.getElementById('hdrBurger');
-    const mobSidebar = document.getElementById('mobSidebar');
-    const mobOverlay = document.getElementById('mobOverlay');
-    const mobClose = document.getElementById('mobClose');
-    function openMob() {
-      hdrBurger.classList.add('is-open');
-      mobSidebar.classList.add('is-open');
-      mobOverlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMob() {
-      hdrBurger.classList.remove('is-open');
-      mobSidebar.classList.remove('is-open');
-      mobOverlay.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-    hdrBurger.addEventListener('click', () => {
-      mobSidebar.classList.contains('is-open') ? closeMob() : openMob();
-    });
-    mobClose.addEventListener('click', closeMob);
-    mobOverlay.addEventListener('click', closeMob);
-    mobSidebar.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMob));
-  </script>
-
-  <!-- Gallery drag-scroll -->
-  <script>
-    const galTrack = document.getElementById('galTrack');
-    const galFill = document.getElementById('galFill');
-    if (galTrack) {
-      let isDragging = false, startX, scrollStart, hasDragged = false;
-      function updateProgress() {
-        const max = galTrack.scrollWidth - galTrack.clientWidth;
-        if (max <= 0) return;
-        const pct = galTrack.scrollLeft / max;
-        galFill.style.transform = `translateX(${pct * 200}%)`;
-      }
-      galTrack.addEventListener('scroll', () => updateProgress(), { passive: true });
-      galTrack.addEventListener('mousedown', (e) => {
-        isDragging = true; hasDragged = false;
-        startX = e.pageX - galTrack.offsetLeft;
-        scrollStart = galTrack.scrollLeft;
-        galTrack.classList.add('is-dragging');
-      });
-      window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return; e.preventDefault();
-        const walk = (e.pageX - galTrack.offsetLeft - startX) * 1.5;
-        if (Math.abs(walk) > 5) hasDragged = true;
-        galTrack.scrollLeft = scrollStart - walk;
-      });
-      window.addEventListener('mouseup', () => {
-        if (!isDragging) return; isDragging = false;
-        galTrack.classList.remove('is-dragging');
-      });
-      galTrack.addEventListener('click', (e) => {
-        if (hasDragged) { e.preventDefault(); e.stopPropagation(); }
-      }, true);
-      updateProgress();
-    }
-  </script>
-
-  <!-- Scroll Reveal -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const reveals = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-
-      reveals.forEach(el => observer.observe(el));
-    });
-  </script>
+  <script src="js/shared.js" defer></script>
 </body>
 </html>
