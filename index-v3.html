@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -33,7 +33,7 @@
       --testo-light: #6E6462;
       --testo-muted: #9A9290;
 
-      --font-display: 'Bodoni Moda', 'Georgia', serif;
+      --font-display: 'Cormorant Garamond', 'Georgia', serif;
       --font-ui: 'Montserrat', 'Helvetica Neue', sans-serif;
 
       --sidebar-w: 200px;
@@ -91,374 +91,339 @@
     .rv-d5 { transition-delay: 0.5s; }
 
     /* ============================================================
-       SIDEBAR — Fixed left navigation (desktop)
+       HEADER — Top bar (v2-style, centered logo + nav)
        ============================================================ */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: var(--sidebar-w);
-      height: 100vh;
-      background: var(--cioccolato);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      padding: 36px 28px;
-    }
-
-    .sidebar__logo {
-      margin-bottom: auto;
-    }
-
-    .sidebar__logo img {
-      height: 40px;
-      filter: brightness(0) invert(1);
-      opacity: 1;
-      transition: opacity 0.3s;
-    }
-
-    .sidebar__logo:hover img {
-      opacity: 1;
-    }
-
-    .sidebar__nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-bottom: auto;
-    }
-
-    .sidebar__link {
-      font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.65);
-      padding: 12px 0;
-      transition: color 0.3s ease;
-      letter-spacing: 0.02em;
-      line-height: 1.4;
-    }
-
-    .sidebar__link:hover {
-      color: var(--pistacchio);
-    }
-
-    /* Main content offset */
-    .main {
-      margin-left: var(--sidebar-w);
-    }
-
-    /* ============================================================
-       MOBILE HAMBURGER
-       ============================================================ */
-    .mobile-header {
-      display: none;
+    .hdr {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 56px;
-      background: var(--cioccolato);
-      z-index: 200;
+      z-index: 100;
+      background: var(--cioccolato-deep);
+      transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hdr__inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 88px;
+      display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
+      justify-content: center;
+      position: relative;
+      transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .mobile-header__logo img {
-      height: 22px;
-      filter: brightness(0) invert(1);
-      opacity: 0.85;
+    .hdr__nav {
+      display: flex;
+      align-items: center;
+      gap: 72px;
     }
 
-    .hamburger {
-      width: 28px;
-      height: 20px;
+    .hdr__nav--left {
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .hdr__nav--right {
+      flex: 1;
+      justify-content: flex-start;
+    }
+
+    .hdr__link {
+      font-family: var(--font-ui);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.4s ease;
+      opacity: 0;
+      animation: hdrLinkIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hdr__nav--left .hdr__link:nth-child(1) { animation-delay: 0.1s; }
+    .hdr__nav--left .hdr__link:nth-child(2) { animation-delay: 0.15s; }
+    .hdr__nav--right .hdr__link:nth-child(1) { animation-delay: 0.2s; }
+    .hdr__nav--right .hdr__link:nth-child(2) { animation-delay: 0.25s; }
+
+    @keyframes hdrLinkIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hdr__link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--pistacchio), rgba(187,194,92,0.3));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hdr__link:hover { color: var(--bianco); }
+    .hdr__link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    .hdr__logo {
+      padding: 0 88px;
+      flex-shrink: 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      background: none;
-      border: none;
+      align-items: center;
+      position: relative;
+      opacity: 0;
+      animation: hdrLogoIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+    }
+
+    @keyframes hdrLogoIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .hdr__logo-top {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.2;
+    }
+
+    .hdr__logo-bottom {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--bianco);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    /* Golden filament */
+    .hdr__filament {
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(187, 194, 92, 0.06) 10%,
+        rgba(187, 194, 92, 0.28) 50%,
+        rgba(187, 194, 92, 0.06) 90%,
+        transparent 100%
+      );
+      transition: opacity 0.5s ease;
+    }
+
+    /* Scrolled state */
+    .hdr.is-scrolled {
+      background: rgba(30, 25, 24, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+    }
+
+    .hdr.is-scrolled .hdr__inner { height: 64px; }
+    .hdr.is-scrolled .hdr__logo-bottom { font-size: 22px; }
+    .hdr.is-scrolled .hdr__filament {
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(187, 194, 92, 0.04) 10%,
+        rgba(187, 194, 92, 0.14) 50%,
+        rgba(187, 194, 92, 0.04) 90%,
+        transparent 100%
+      );
+    }
+
+    /* Hamburger — mobile only */
+    .hdr__burger {
+      display: none;
+      width: 44px; height: 44px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      background: none; border: none;
+      cursor: pointer; padding: 10px;
+      position: absolute;
+      left: 20px; top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .hdr__burger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--bianco);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center;
+    }
+
+    .hdr__burger.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hdr__burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hdr__burger.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* ============================================================
+       MOBILE SIDEBAR — Slide-in from left (index-style)
+       ============================================================ */
+    .mob-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 198;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .mob-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mob-sidebar {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 280px;
+      background: var(--cioccolato);
+      z-index: 199;
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
       padding: 0;
     }
 
-    .hamburger span {
-      display: block;
-      width: 100%;
-      height: 1.5px;
-      background: rgba(255,255,255,0.7);
-      transition: transform 0.3s, opacity 0.3s;
+    .mob-sidebar.is-open {
+      transform: translateX(0);
     }
 
-    .hamburger.is-open span:nth-child(1) {
-      transform: translateY(9px) rotate(45deg);
-    }
-    .hamburger.is-open span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.is-open span:nth-child(3) {
-      transform: translateY(-9px) rotate(-45deg);
-    }
-
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 56px; left: 0; right: 0; bottom: 0;
-      background: var(--cioccolato);
-      z-index: 199;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-    }
-
-    .mobile-nav.is-open {
+    .mob-sidebar__header {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .mobile-nav a {
+    .mob-sidebar__brand {
       font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.04em;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .mob-sidebar__close {
+      width: 32px; height: 32px;
+      background: none; border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.5);
       transition: color 0.3s;
     }
 
-    .mobile-nav a:hover { color: var(--bianco); }
+    .mob-sidebar__close:hover { color: var(--bianco); }
+    .mob-sidebar__close svg { width: 20px; height: 20px; }
+
+    .mob-sidebar__nav {
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      flex: 1;
+    }
+
+    .mob-sidebar__link {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      padding: 16px 0;
+      transition: color 0.3s;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mob-sidebar__link:last-child { border-bottom: none; }
+    .mob-sidebar__link:hover { color: var(--pistacchio); }
+
+    .mob-sidebar__footer {
+      padding: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mob-sidebar__contact {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.02em;
+    }
+
+    /* Main content — no sidebar offset */
+    .main {
+      margin-left: 0;
+    }
 
     /* ============================================================
-       HERO — Cinematic carousel + floating brand
+       HERO — Minimal white with logo
        ============================================================ */
     .hero {
-      background: var(--nero);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 80px 60px;
-    }
-
-    /* Carousel slides */
-    .hero__carousel {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-
-    .hero__slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .hero__slide--active {
-      opacity: 1;
-    }
-
-    .hero__slide img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: brightness(0.32) saturate(0.7);
-      transform: scale(1.08);
-      animation: heroKenBurns 8s ease-out forwards;
-    }
-
-    .hero__slide--active img {
-      animation: heroKenBurns 8s ease-out forwards;
-    }
-
-    @keyframes heroKenBurns {
-      from { transform: scale(1.08); }
-      to { transform: scale(1); }
-    }
-
-    /* Dark overlay gradient */
-    .hero__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(30, 25, 24, 0.85) 0%,
-        rgba(30, 25, 24, 0.15) 50%,
-        rgba(30, 25, 24, 0.35) 100%
-      );
-      z-index: 1;
-    }
-
-    .hero__inner {
+      background: var(--bianco);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 180px 40px 80px;
       text-align: center;
-      max-width: 1100px;
-      width: 100%;
-      position: relative;
-      z-index: 2;
     }
 
-    .hero__brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-      will-change: transform;
-    }
-
-    /* Moon — scale + blur reveal, then gentle float */
     .hero__moon {
-      width: 280px;
-      height: 280px;
-      margin-bottom: 32px;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 24px;
       opacity: 0;
-      transform: scale(0.7);
-      filter: blur(12px);
-      animation: moonIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-      will-change: transform;
+      transform: scale(0.8);
+      animation: moonIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
     }
 
     .hero__moon img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: contain;
-      animation: moonFloat 6s ease-in-out 2s infinite;
     }
 
     @keyframes moonIn {
-      to { opacity: 1; transform: scale(1); filter: blur(0); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes moonFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    /* Wordmark — clip-path reveal */
     .hero__wordmark {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
     }
 
-    /* Lines draw from center outward */
-    .hero__line-top,
-    .hero__line-bottom {
-      height: 1.5px;
-      background: rgba(255,255,255,0.6);
-      width: 0;
-      animation: lineDrawSlow 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
-    }
-
-    @keyframes lineDrawSlow {
-      to { width: 280px; }
-    }
-
-    /* DIMENSIONE — letter-spacing reveal */
     .hero__dimensione {
       font-family: var(--font-ui);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
-      letter-spacing: 1em;
+      letter-spacing: 0.45em;
       text-transform: uppercase;
-      color: var(--bianco);
-      padding: 14px 0;
+      color: var(--testo);
       opacity: 0;
-      animation: dimensioneReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) 1s forwards;
+      animation: fadeUp 0.8s ease 0.4s forwards;
     }
 
-    @keyframes dimensioneReveal {
-      to { opacity: 1; letter-spacing: 0.45em; }
-    }
-
-    /* Dolce — slide up from clip */
     .hero__dolce {
       font-family: var(--font-display);
-      font-size: 72px;
+      font-size: 64px;
       font-weight: 400;
-      color: var(--bianco);
+      color: var(--testo);
       line-height: 1;
-      margin-top: 8px;
-      clip-path: inset(100% 0 0 0);
-      animation: dolceClipReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
-    }
-
-    @keyframes dolceClipReveal {
-      to { clip-path: inset(0 0 0 0); }
-    }
-
-    /* Tagline — fade + subtle slide */
-    .hero__tagline {
-      max-width: 480px;
-      margin-top: 40px;
+      margin-top: 4px;
       opacity: 0;
-      transform: translateY(16px);
-      animation: taglineIn 1s cubic-bezier(0.22, 1, 0.36, 1) 1.7s forwards;
-      text-align: center;
-    }
-
-    @keyframes taglineIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero__tagline-text {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 16px;
-    }
-
-    .hero__categories {
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* Scroll indicator */
-    .hero__scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      animation: scrollIndicatorIn 0.8s ease 2.4s forwards;
-    }
-
-    .hero__scroll-label {
-      font-family: var(--font-ui);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-    }
-
-    .hero__scroll-line {
-      width: 1px;
-      height: 32px;
-      background: linear-gradient(to bottom, var(--pistacchio), transparent);
-      animation: scrollPulse 2s ease-in-out 3s infinite;
-    }
-
-    @keyframes scrollIndicatorIn {
-      to { opacity: 1; }
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.3); transform-origin: top; }
+      animation: fadeUp 0.8s ease 0.6s forwards;
     }
 
     @keyframes fadeUp {
@@ -466,30 +431,123 @@
     }
 
     /* ============================================================
-       PHOTOS ROW — 3 cinematic edge-to-edge images
+       GALLERY — Horizontal drag-scroll on white
        ============================================================ */
-    .photos-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
+    .gal {
+      background: var(--bianco);
+      padding: 0 0 40px;
       overflow: hidden;
-      background: var(--nero);
     }
 
-    .photos-row__item {
+    .gal__track {
+      display: flex;
+      gap: 6px;
+      padding: 0 clamp(24px, 5vw, 80px);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      height: 780px;
+    }
+
+    .gal__track::-webkit-scrollbar { display: none; }
+    .gal__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+    .gal__track.is-dragging .gal__item img { pointer-events: none; }
+
+    .gal__item {
       position: relative;
       overflow: hidden;
-      aspect-ratio: 16 / 9;
+      border-radius: 3px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      height: 100%;
     }
 
-    .photos-row__item img {
+    .gal__item--wide { width: clamp(340px, 38vw, 520px); }
+    .gal__item--narrow { width: clamp(260px, 26vw, 360px); }
+
+    .gal__item--duo {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: clamp(260px, 26vw, 360px);
+    }
+
+    .gal__item--duo .gal__sub {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      flex: 1;
+    }
+
+    .gal__item img,
+    .gal__sub img {
       width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
-    .photos-row__item:hover img {
-      transform: scale(1.06);
+    .gal__item:hover > img,
+    .gal__sub:hover img { transform: scale(1.06); }
+
+    .gal__item > .gal__name,
+    .gal__sub > .gal__name {
+      position: absolute;
+      bottom: 20px; left: 24px; right: 24px;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.4vw, 22px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover > .gal__name,
+    .gal__sub:hover > .gal__name {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gal__item::after,
+    .gal__sub::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(30,25,24,0.55), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover::after,
+    .gal__sub:hover::after { opacity: 1; }
+    .gal__item--duo::after { display: none; }
+
+    .gal__progress {
+      width: 120px;
+      height: 2px;
+      background: rgba(0,0,0,0.08);
+      margin: 32px auto 0;
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .gal__progress-fill {
+      height: 100%;
+      background: var(--pistacchio);
+      border-radius: 1px;
+      width: 30%;
+      transition: width 0.1s ease-out, transform 0.1s ease-out;
     }
 
     /* ============================================================
@@ -528,40 +586,33 @@
     }
 
     /* ============================================================
-       SERVICE BLOCKS — Alternating asymmetric halves
+       SERVICE BLOCKS — Square alternating halves
        ============================================================ */
     .svc-block {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 460px;
-    }
-
-    .svc-block--reverse {
-      direction: rtl;
-    }
-
-    .svc-block--reverse > * {
-      direction: ltr;
     }
 
     .svc-half {
+      aspect-ratio: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 56px 52px;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Dark half */
+    /* Text on dark bg */
     .svc-half--dark {
       background: var(--cioccolato-deep);
-      padding: 56px 52px;
     }
 
     .svc-half--dark .svc-half__title {
       font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
+      font-size: clamp(28px, 3vw, 40px);
       font-weight: 400;
       color: var(--bianco);
       line-height: 1.2;
@@ -570,99 +621,27 @@
 
     .svc-half--dark .svc-half__text {
       font-family: var(--font-ui);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       line-height: 1.8;
       color: rgba(255,255,255,0.55);
-      max-width: 400px;
+      max-width: 380px;
     }
 
-    /* Light half — magenta label */
-    .svc-half--light {
-      background: var(--crema-warm);
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .svc-half--light-white {
-      background: var(--bianco);
-    }
-
-    /* Photo background in service halves */
-    .svc-half--photo {
-      background-size: cover;
-      background-position: center;
-    }
-
-    .svc-half--photo::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(30, 25, 24, 0.45);
-      z-index: 0;
-    }
-
-    .svc-half--photo .svc-half__category,
-    .svc-half--photo .svc-half__cta {
-      position: relative;
-      z-index: 1;
-    }
-
-    .svc-half--photo .svc-half__category {
-      color: var(--bianco);
-      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-    }
-
-    .svc-half--photo .svc-half__cta {
-      color: var(--bianco);
-      border-bottom-color: rgba(255,255,255,0.6);
-    }
-
-    .svc-half--photo .svc-half__cta:hover {
-      opacity: 0.8;
-    }
-
-    .svc-half__category {
-      font-family: var(--font-ui);
-      font-size: clamp(28px, 3.5vw, 44px);
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      color: var(--magenta);
-      text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-
-    .svc-half__cta {
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .svc-half--dark .svc-half__cta {
       color: var(--magenta);
       border-bottom: 1px solid var(--magenta);
-      padding-bottom: 4px;
-      transition: opacity 0.3s;
+      margin-top: 28px;
     }
 
-    .svc-half__cta:hover {
-      opacity: 0.7;
-    }
-
-    .svc-half__category--green {
-      color: var(--cioccolato);
-    }
-
-    /* White text box */
+    /* Text on white bg */
     .svc-half--bianco {
       background: var(--bianco);
     }
 
     .svc-half--bianco .svc-half__title {
       font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
+      font-size: clamp(28px, 3vw, 40px);
       font-weight: 400;
       color: var(--testo);
       line-height: 1.2;
@@ -671,21 +650,27 @@
 
     .svc-half--bianco .svc-half__text {
       font-family: var(--font-ui);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       line-height: 1.8;
       color: var(--testo-light);
-      max-width: 400px;
+      max-width: 380px;
     }
 
-    /* Pistachio text box */
+    .svc-half--bianco .svc-half__cta {
+      color: var(--testo);
+      border-bottom: 1px solid rgba(56,46,44,0.25);
+      margin-top: 28px;
+    }
+
+    /* Text on pistachio bg */
     .svc-half--pistacchio {
       background: var(--pistacchio);
     }
 
     .svc-half--pistacchio .svc-half__title {
       font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
+      font-size: clamp(28px, 3vw, 40px);
       font-weight: 400;
       color: var(--cioccolato);
       line-height: 1.2;
@@ -694,108 +679,82 @@
 
     .svc-half--pistacchio .svc-half__text {
       font-family: var(--font-ui);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       line-height: 1.8;
       color: var(--cioccolato-deep);
-      max-width: 400px;
+      max-width: 380px;
       opacity: 0.75;
     }
 
-    /* Accent variants */
-    .svc-accent--magenta { background: var(--magenta); }
-    .svc-accent--dark { background: var(--cioccolato); }
-
-    /* CTA dark variant */
-    .svc-cta--dark {
-      color: var(--testo);
-      border-color: rgba(56, 46, 44, 0.25);
-    }
-
-    .svc-cta--dark:hover {
-      border-color: rgba(56, 46, 44, 0.45);
-    }
-
-    .svc-cta--dark::after {
-      background: var(--magenta);
-    }
-
-    /* CTA pistachio variant */
-    .svc-cta--pistacchio {
+    .svc-half--pistacchio .svc-half__cta {
       color: var(--cioccolato);
-      border-color: rgba(56, 46, 44, 0.3);
+      border-bottom: 1px solid rgba(44,35,34,0.3);
+      margin-top: 28px;
     }
 
-    .svc-cta--pistacchio:hover {
-      border-color: var(--cioccolato);
-    }
-
-    .svc-cta--pistacchio::after {
-      background: var(--cioccolato);
-    }
-
-    /* Clean photo half — no text, pure image */
-    .svc-half--photo-clean {
-      position: relative;
-      overflow: hidden;
+    /* Photo half */
+    .svc-half--photo {
       padding: 0;
+      cursor: pointer;
     }
 
-    .svc-half--photo-clean img {
-      position: absolute;
-      inset: 0;
+    .svc-half--photo img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .svc-half--photo-clean:hover img {
-      transform: scale(1.05);
-    }
+    .svc-half--photo:hover img { transform: scale(1.06); }
 
-    /* Accent line — pistacchio bar */
-    .svc-accent {
-      width: 40px;
-      height: 2px;
-      background: var(--pistacchio);
-      margin-bottom: 28px;
-    }
-
-    /* CTA button — elegant outlined */
-    .svc-cta {
-      display: inline-block;
-      font-family: var(--font-ui);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bianco);
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 14px 36px;
-      margin-top: 36px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .svc-cta::after {
+    .svc-half--photo::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--pistacchio);
-      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(30,25,24,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
     }
 
-    .svc-cta:hover {
-      border-color: rgba(255,255,255,0.45);
-      letter-spacing: 0.26em;
+    .svc-half--photo:hover::after { opacity: 1; }
+
+    .svc-half--photo .svc-half__overlay {
+      position: absolute;
+      bottom: 28px; left: 0; right: 0;
+      z-index: 2;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
     }
 
-    .svc-cta:hover::after {
-      width: 100%;
+    .svc-half--photo:hover .svc-half__overlay {
+      opacity: 1;
+      transform: translateY(0);
     }
+
+    /* CTA shared */
+    .svc-half__cta {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding-bottom: 4px;
+      transition: opacity 0.3s;
+    }
+
+    .svc-half__cta:hover { opacity: 0.7; }
+
 
     /* ============================================================
        LA NOSTRA STORIA — Team intro
@@ -890,48 +849,58 @@
        FOOTER — Cream with moon logo + nav
        ============================================================ */
     .ftr {
-      background: var(--crema);
-      padding: 100px 40px 56px;
+      background: var(--pistacchio);
+      padding: 140px 40px 80px;
       text-align: center;
-      border-top: 1px solid var(--beige);
+      border-top: none;
     }
 
     .ftr__moon {
-      width: 72px;
-      margin: 0 auto 40px;
+      width: 80px;
+      margin: 0 auto 56px;
     }
 
     .ftr__moon img {
       width: 100%;
-      opacity: 0.8;
+      opacity: 0.7;
+      filter: saturate(0) brightness(0.4);
     }
 
     .ftr__nav {
       display: flex;
       justify-content: center;
-      gap: 32px;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 32px;
+      margin-bottom: 48px;
+      align-items: center;
     }
 
     .ftr__nav a {
       font-family: var(--font-ui);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.04em;
-      color: var(--testo-light);
+      color: var(--cioccolato);
       transition: color 0.3s;
     }
 
     .ftr__nav a:hover {
-      color: var(--pistacchio-scuro);
+      color: var(--cioccolato-deep);
+      opacity: 0.7;
+    }
+
+    .ftr__nav-sep {
+      color: var(--cioccolato);
+      opacity: 0.3;
+      font-size: 13px;
     }
 
     .ftr__copy {
       font-family: var(--font-ui);
       font-size: 11px;
       font-weight: 400;
-      color: var(--testo-muted);
+      color: var(--cioccolato);
+      opacity: 0.45;
     }
 
     /* ============================================================
@@ -940,13 +909,13 @@
 
     /* Tablet */
     @media (max-width: 1024px) {
-      :root { --sidebar-w: 170px; }
+      .hdr__nav { gap: 24px; }
 
-      .hero { padding: 60px 40px; }
-      .hero__inner { gap: 48px; }
-      .hero__moon { width: 200px; height: 200px; }
-      .hero__dolce { font-size: 56px; }
-      .hero__line-top, .hero__line-bottom { width: 220px; }
+      .hero { padding: 80px 40px 40px; }
+      .hero__moon { width: 160px; height: 160px; }
+      .hero__dolce { font-size: 52px; }
+
+      .gal__track { height: 500px; }
 
       .svc-half, .team-half--info { padding: 48px 36px; }
       .svc-half--text { padding: 48px 36px; }
@@ -955,55 +924,25 @@
 
     /* Mobile */
     @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .mobile-header { display: flex; }
-      .main { margin-left: 0; padding-top: 56px; }
+      .hdr__nav { display: none; }
+      .hdr__burger { display: flex; }
+      .hdr__inner { height: 56px; }
+      .hdr__logo-bottom { font-size: 22px; }
 
-      /* Hero mobile — stacked, centered */
-      .hero {
-        min-height: auto;
-        padding: 60px 24px 48px;
+      .hero { padding: 80px 24px 32px; }
+      .hero__moon { width: 140px; height: 140px; }
+      .hero__dolce { font-size: 44px; }
+      .hero__dimensione { font-size: 12px; letter-spacing: 0.35em; }
+
+      /* Gallery mobile */
+      .gal__track {
+        height: 420px;
+        gap: 4px;
+        padding: 0 16px;
       }
-
-      .hero__inner {
-        flex-direction: column;
-        gap: 36px;
-        text-align: center;
-      }
-
-      .hero__moon {
-        width: 200px;
-        height: 200px;
-        margin-bottom: 24px;
-      }
-
-      .hero__dolce { font-size: 52px; clip-path: none; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
-      .hero__line-top, .hero__line-bottom { width: 200px; }
-      .hero__dimensione { font-size: 14px; letter-spacing: 0.35em; }
-      .hero__scroll { display: none; }
-
-      .hero__tagline {
-        max-width: 100%;
-        text-align: center;
-      }
-
-      /* Photos — 2x2 grid on mobile, square cells */
-      .photos-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-      }
-
-      .photos-row__item {
-        aspect-ratio: 1;
-      }
-
-      .photos-row__item--hide-mobile {
-        display: none;
-      }
-
-      .photos-row__item--mobile-only {
-        display: block;
-      }
+      .gal__item--wide { width: 300px; }
+      .gal__item--narrow { width: 220px; }
+      .gal__item--duo { width: 220px; }
 
       /* Service blocks stack */
       .svc-block,
@@ -1021,15 +960,14 @@
         padding: 56px 24px;
       }
 
-      /* Photo halves need explicit height when stacked */
-      .svc-half--photo-clean {
-        min-height: 280px;
-        aspect-ratio: 4 / 3;
+      .svc-half {
+        aspect-ratio: auto;
+        padding: 48px 24px;
       }
 
-      .svc-half--light {
-        padding: 48px 24px;
-        min-height: 200px;
+      .svc-half--photo {
+        min-height: 280px;
+        aspect-ratio: 4 / 3;
       }
 
       .team-half--photo,
@@ -1043,17 +981,10 @@
     }
 
     @media (max-width: 480px) {
-      .hero__moon { width: 140px; height: 140px; }
-      .hero__dolce { font-size: 44px; }
-      .hero__line-top, .hero__line-bottom { width: 160px; }
-      .hero__dimensione { font-size: 12px; }
+      .hero__moon { width: 120px; height: 120px; }
+      .hero__dolce { font-size: 38px; }
 
-      .svc-half__category { font-size: 24px; }
-    }
-
-    /* Desktop-only: hide mobile elements */
-    @media (min-width: 769px) {
-      .photos-row__item--mobile-only { display: none; }
+      .svc-half--photo { min-height: 240px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1068,99 +999,106 @@
 
   <div class="cursor-dot" id="cursorDot"></div>
 
-  <!-- ========== SIDEBAR (Desktop) ========== -->
-  <aside class="sidebar">
-    <a href="index-v3.html" class="sidebar__logo">
-      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
-    </a>
-    <nav class="sidebar__nav">
-      <a href="chi-siamo-v2.html" class="sidebar__link">Chi Siamo</a>
-      <a href="menu.html" class="sidebar__link">Menu'</a>
-      <a href="torte-su-misura.html" class="sidebar__link">Torte su Misura</a>
-      <a href="catering-eventi.html" class="sidebar__link">Catering &amp; Eventi</a>
-      <a href="contatti.html" class="sidebar__link">Contatti</a>
-    </nav>
-  </aside>
+  <!-- ========== HEADER — Top bar ========== -->
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <nav class="hdr__nav hdr__nav--left">
+        <a href="menu.html" class="hdr__link">Menu'</a>
+        <a href="chi-siamo-v2.html" class="hdr__link">Chi Siamo</a>
+      </nav>
+      <a href="index-v3.html" class="hdr__logo">
+        <span class="hdr__logo-top">Dimensione</span>
+        <span class="hdr__logo-bottom">Dolce</span>
+      </a>
+      <nav class="hdr__nav hdr__nav--right">
+        <a href="catering-eventi.html" class="hdr__link">Eventi</a>
+        <a href="contatti.html" class="hdr__link">Contatti</a>
+      </nav>
+      <button class="hdr__burger" id="hdrBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="hdr__filament"></div>
+  </header>
 
-  <!-- ========== MOBILE HEADER ========== -->
-  <div class="mobile-header">
-    <a href="index-v3.html" class="mobile-header__logo">
-      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="chi-siamo-v2.html">Chi Siamo</a>
-    <a href="menu.html">Menu'</a>
-    <a href="torte-su-misura.html">Torte su Misura</a>
-    <a href="catering-eventi.html">Catering &amp; Eventi</a>
-    <a href="contatti.html">Contatti</a>
+  <!-- ========== MOBILE SIDEBAR (slide-in) ========== -->
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <nav class="mob-sidebar" id="mobSidebar">
+    <div class="mob-sidebar__header">
+      <span class="mob-sidebar__brand">Dimensione Dolce</span>
+      <button class="mob-sidebar__close" id="mobClose" aria-label="Chiudi menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="mob-sidebar__nav">
+      <a href="menu.html" class="mob-sidebar__link">Menu'</a>
+      <a href="chi-siamo-v2.html" class="mob-sidebar__link">Chi Siamo</a>
+      <a href="catering-eventi.html" class="mob-sidebar__link">Eventi</a>
+      <a href="contatti.html" class="mob-sidebar__link">Contatti</a>
+    </div>
+    <div class="mob-sidebar__footer">
+      <a href="tel:+390212345678" class="mob-sidebar__contact">+39 02 1234567</a>
+    </div>
   </nav>
 
   <!-- ========== MAIN CONTENT ========== -->
   <div class="main">
 
-    <!-- ========== HERO ========== -->
+    <!-- ========== HERO — Logo only ========== -->
     <section class="hero" id="hero">
-      <div class="hero__carousel" id="heroCarousel">
-        <div class="hero__slide hero__slide--active">
-          <img src="assets/img/generated/hero-1-prodotti.png" alt="Le nostre creazioni">
-        </div>
-        <div class="hero__slide">
-          <img src="assets/img/generated/hero-2-laboratorio.png" alt="Il laboratorio">
-        </div>
-        <div class="hero__slide">
-          <img src="assets/img/generated/hero-3-panettoni.png" alt="I nostri panettoni">
-        </div>
-        <div class="hero__slide">
-          <img src="assets/img/generated/hero-4-servizio-v2.png" alt="La nostra bottega">
-        </div>
+      <div class="hero__moon">
+        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
       </div>
-      <div class="hero__overlay"></div>
-      <div class="hero__inner">
-        <div class="hero__brand">
-          <div class="hero__moon">
-            <img src="assets/img/logo-moon.png" alt="">
-          </div>
-          <div class="hero__wordmark">
-            <div class="hero__line-top"></div>
-            <span class="hero__dimensione">Dimensione</span>
-            <div class="hero__line-bottom"></div>
-            <span class="hero__dolce">Dolce</span>
-          </div>
-        </div>
-        <div class="hero__tagline">
-          <p class="hero__tagline-text">
-            Un luogo dedicato al gusto e al piacere della dolcezza,
-            tra pasticceria, gelateria e caffe.
-          </p>
-          <span class="hero__categories">Gelateria &bull; Caffe &bull; Pasticceria</span>
-        </div>
-      </div>
-      <div class="hero__scroll">
-        <span class="hero__scroll-label">Scopri</span>
-        <div class="hero__scroll-line"></div>
+      <div class="hero__wordmark">
+        <span class="hero__dimensione">Dimensione</span>
+        <span class="hero__dolce">Dolce</span>
       </div>
     </section>
 
-    <!-- ========== 3 PRODUCT PHOTOS ========== -->
-    <div class="photos-row">
-      <div class="photos-row__item">
-        <img src="assets/img/vetrina-pesca.png" alt="La Pesca">
+    <!-- ========== GALLERY ========== -->
+    <section class="gal">
+      <div class="gal__track" id="galTrack">
+        <div class="gal__item gal__item--wide rv">
+          <img src="assets/img/vetrina-sfera-cioccolato.png" alt="Sfera al Cioccolato" loading="lazy">
+          <span class="gal__name">Sfera al Cioccolato</span>
+        </div>
+        <div class="gal__item gal__item--duo rv rv-d1">
+          <div class="gal__sub">
+            <img src="assets/img/vetrina-pesca.png" alt="La Pesca" loading="lazy">
+            <span class="gal__name">La Pesca</span>
+          </div>
+          <div class="gal__sub">
+            <img src="assets/img/vetrina-cornetti.png" alt="Cornetti Sfogliati" loading="lazy">
+            <span class="gal__name">Cornetti Sfogliati</span>
+          </div>
+        </div>
+        <div class="gal__item gal__item--narrow rv rv-d2">
+          <img src="assets/img/vetrina-monoporzione.png" alt="Monoporzione" loading="lazy">
+          <span class="gal__name">Monoporzione</span>
+        </div>
+        <div class="gal__item gal__item--duo rv rv-d3">
+          <div class="gal__sub">
+            <img src="assets/img/vetrina-crostatina-mele.png" alt="Crostatina di Mele" loading="lazy">
+            <span class="gal__name">Crostatina di Mele</span>
+          </div>
+          <div class="gal__sub">
+            <img src="assets/img/vetrina-torta-ciliegie.png" alt="Torta alle Ciliegie" loading="lazy">
+            <span class="gal__name">Torta alle Ciliegie</span>
+          </div>
+        </div>
+        <div class="gal__item gal__item--wide rv rv-d4">
+          <img src="assets/img/vetrina-brioche.png" alt="Brioche al Limone" loading="lazy">
+          <span class="gal__name">Brioche al Limone</span>
+        </div>
+        <div class="gal__item gal__item--narrow rv rv-d5">
+          <img src="assets/img/vetrina-torta-funghetti.png" alt="Torta Incantata" loading="lazy">
+          <span class="gal__name">Torta Incantata</span>
+        </div>
       </div>
-      <div class="photos-row__item">
-        <img src="assets/img/vetrina-sfera-cioccolato.png" alt="Sfera al Cioccolato">
+      <div class="gal__progress">
+        <div class="gal__progress-fill" id="galProgressFill"></div>
       </div>
-      <div class="photos-row__item">
-        <img src="assets/img/vetrina-monoporzione.png" alt="Monoporzione">
-      </div>
-      <div class="photos-row__item photos-row__item--mobile-only">
-        <img src="assets/img/vetrina-cornetti.png" alt="Cornetti">
-      </div>
-    </div>
+    </section>
 
     <!-- ========== BENVENUTI ========== -->
     <section class="benvenuti">
@@ -1168,8 +1106,10 @@
       <p class="benvenuti__text rv rv-d1">
         Un luogo dove il piacere della dolcezza si incontra con il tempo di una pausa.
         Nel nostro laboratorio, pasticceria e gelato nascono da ingredienti selezionati
-        e lavorazioni artigianali. Dalla pausa quotidiana alle occasioni da celebrare,
-        accompagniamo ogni momento con gusto e qualita.
+        e lavorazioni artigianali, insieme a caffe e specialita pensate per la colazione e per
+        i piccoli momenti della giornata. Dalla pausa quotidiana alle occasioni da
+        celebrare, con torte personalizzate e catering per eventi, accompagniamo ogni
+        momento con gusto e qualita.
       </p>
       <div class="benvenuti__divider rv rv-d2"></div>
     </section>
@@ -1177,12 +1117,11 @@
     <!-- ========== SERVIZI ========== -->
     <div id="servizi">
 
-      <!-- GELATERIA: dark left with CTA, clean photo right -->
+      <!-- GELATERIA: dark text + photo -->
       <div class="svc-block">
         <div class="svc-half svc-half--dark">
-          <div class="svc-accent rv"></div>
-          <h3 class="svc-half__title rv rv-d1">Gelateria Artigianale</h3>
-          <p class="svc-half__text rv rv-d2">
+          <h3 class="svc-half__title rv">Gelateria Artigianale</h3>
+          <p class="svc-half__text rv rv-d1">
             Il nostro gelato non conosce scorciatoie.
             Ogni gusto nasce da ingredienti freschi e
             selezionati, lavorati ogni giorno con
@@ -1191,46 +1130,83 @@
             gelato, dove la qualita si esprime nel
             sapore autentico delle cose buone.
           </p>
-          <a href="#" class="svc-cta rv rv-d3">Scopri il menu</a>
+          <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
         </div>
-        <div class="svc-half svc-half--photo-clean">
+        <a href="menu.html" class="svc-half svc-half--photo">
           <img src="assets/img/generated/row-gelateria.png" alt="Gelateria artigianale">
-        </div>
+          <span class="svc-half__overlay">Guarda tutto il menu</span>
+        </a>
       </div>
 
-      <!-- PASTICCERIA: foto sinistra, testo bianco destra -->
+      <!-- PASTICCERIA: photo + white text -->
       <div class="svc-block">
-        <div class="svc-half svc-half--photo-clean">
+        <a href="menu.html" class="svc-half svc-half--photo">
           <img src="assets/img/generated/row-pasticceria.png" alt="Pasticceria artigianale">
-        </div>
+          <span class="svc-half__overlay">Guarda tutto il menu</span>
+        </a>
         <div class="svc-half svc-half--bianco">
-          <div class="svc-accent svc-accent--magenta rv"></div>
-          <h3 class="svc-half__title rv rv-d1">La nostra Pasticceria</h3>
-          <p class="svc-half__text rv rv-d2">
+          <h3 class="svc-half__title rv">La nostra Pasticceria</h3>
+          <p class="svc-half__text rv rv-d1">
             Un incontro tra gusto, tradizione e
             creativita, in una selezione di dolci pensata
             per ogni occasione. Preparati freschi e con
             cura, accompagnano la colazione, le pause
             della giornata e i momenti da condividere.
           </p>
-          <a href="#" class="svc-cta svc-cta--dark rv rv-d3">Scopri il menu</a>
+          <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
         </div>
       </div>
 
-      <!-- CAFFE: testo pistacchio sinistra, foto destra -->
+      <!-- CAFFE: pistachio text + photo -->
       <div class="svc-block">
         <div class="svc-half svc-half--pistacchio">
-          <div class="svc-accent svc-accent--dark rv"></div>
-          <h3 class="svc-half__title rv rv-d1">Caffe &amp; Torrefazione</h3>
-          <p class="svc-half__text rv rv-d2">
+          <h3 class="svc-half__title rv">Caffe &amp; Torrefazione</h3>
+          <p class="svc-half__text rv rv-d1">
             Caffe selezionati e miscele curate, pensati
             per chi ama il vero piacere del caffe.
           </p>
-          <a href="#" class="svc-cta svc-cta--pistacchio rv rv-d3">Scopri le miscele</a>
+          <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
         </div>
-        <div class="svc-half svc-half--photo-clean">
+        <a href="menu.html" class="svc-half svc-half--photo">
           <img src="assets/img/generated/row-caffe.png" alt="Caffe e torrefazione">
+          <span class="svc-half__overlay">Guarda tutto il menu</span>
+        </a>
+      </div>
+
+      <!-- APERITIVO: photo + white text -->
+      <div class="svc-block">
+        <a href="menu.html" class="svc-half svc-half--photo">
+          <img src="assets/img/generated/row-caffe.png" alt="Aperitivo">
+          <span class="svc-half__overlay">Guarda tutto il menu</span>
+        </a>
+        <div class="svc-half svc-half--bianco">
+          <h3 class="svc-half__title rv">Aperitivo</h3>
+          <p class="svc-half__text rv rv-d1">
+            Un momento che segna il passaggio dalla
+            giornata alla sera. Da Dimensione Dolce,
+            l'aperitivo e un invito a rallentare,
+            incontrarsi e godersi il tempo con
+            leggerezza.
+          </p>
+          <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
         </div>
+      </div>
+
+      <!-- EVENTI: dark text + photo -->
+      <div class="svc-block">
+        <div class="svc-half svc-half--dark">
+          <h3 class="svc-half__title rv">Eventi</h3>
+          <p class="svc-half__text rv rv-d1">
+            Realizziamo creazioni su misura per
+            ogni occasione. Produzione artigianale,
+            ingredienti selezionati e massima cura.
+          </p>
+          <a href="catering-eventi.html" class="svc-half__cta rv rv-d2">Contattaci per prenotare</a>
+        </div>
+        <a href="catering-eventi.html" class="svc-half svc-half--photo">
+          <img src="assets/img/generated/row-gelateria.png" alt="Eventi">
+          <span class="svc-half__overlay">Contattaci per prenotare</span>
+        </a>
       </div>
 
     </div>
@@ -1242,10 +1218,12 @@
         <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
       </div>
       <nav class="ftr__nav">
-        <a href="chi-siamo-v2.html">Chi Siamo</a>
         <a href="menu.html">Menu'</a>
-        <a href="torte-su-misura.html">Torte su Misura</a>
-        <a href="catering-eventi.html">Catering &amp; Eventi</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="chi-siamo-v2.html">Chi Siamo</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="catering-eventi.html">Eventi</a>
+        <span class="ftr__nav-sep">|</span>
         <a href="contatti.html">Contatti</a>
       </nav>
       <p class="ftr__copy">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
@@ -1255,21 +1233,77 @@
 
   <!-- ========== JS ========== -->
   <script>
-    // Mobile hamburger
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('is-open');
-      mobileNav.classList.toggle('is-open');
+    // Header scroll effect
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => {
+      hdr.classList.toggle('is-scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Mobile sidebar
+    const hdrBurger = document.getElementById('hdrBurger');
+    const mobSidebar = document.getElementById('mobSidebar');
+    const mobOverlay = document.getElementById('mobOverlay');
+    const mobClose = document.getElementById('mobClose');
+
+    function openMob() {
+      hdrBurger.classList.add('is-open');
+      mobSidebar.classList.add('is-open');
+      mobOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMob() {
+      hdrBurger.classList.remove('is-open');
+      mobSidebar.classList.remove('is-open');
+      mobOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    hdrBurger.addEventListener('click', () => {
+      mobSidebar.classList.contains('is-open') ? closeMob() : openMob();
+    });
+    mobClose.addEventListener('click', closeMob);
+    mobOverlay.addEventListener('click', closeMob);
+
+    mobSidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMob);
     });
 
-    // Close mobile nav on link click
-    mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('is-open');
-        mobileNav.classList.remove('is-open');
+    // Gallery drag-to-scroll
+    const galTrack = document.getElementById('galTrack');
+    const galFill = document.getElementById('galProgressFill');
+    if (galTrack) {
+      let isDragging = false, startX, scrollStart, hasDragged = false;
+      function updateProgress() {
+        const max = galTrack.scrollWidth - galTrack.clientWidth;
+        if (max <= 0) return;
+        const pct = galTrack.scrollLeft / max;
+        const fillW = Math.max(20, (galTrack.clientWidth / galTrack.scrollWidth) * 100);
+        const travel = 100 - fillW;
+        galFill.style.width = fillW + '%';
+        galFill.style.transform = `translateX(${pct * travel * (100 / fillW)}%)`;
+      }
+      galTrack.addEventListener('scroll', () => updateProgress(), { passive: true });
+      galTrack.addEventListener('mousedown', (e) => {
+        isDragging = true; hasDragged = false;
+        startX = e.pageX - galTrack.offsetLeft;
+        scrollStart = galTrack.scrollLeft;
+        galTrack.classList.add('is-dragging');
       });
-    });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return; e.preventDefault();
+        const walk = (e.pageX - galTrack.offsetLeft - startX) * 1.5;
+        if (Math.abs(walk) > 5) hasDragged = true;
+        galTrack.scrollLeft = scrollStart - walk;
+      });
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return; isDragging = false;
+        galTrack.classList.remove('is-dragging');
+      });
+      galTrack.addEventListener('click', (e) => {
+        if (hasDragged) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+      updateProgress();
+    }
 
     // Custom cursor
     const dot = document.getElementById('cursorDot');
@@ -1280,64 +1314,10 @@
         if (!dot.classList.contains('is-visible')) dot.classList.add('is-visible');
       });
       document.addEventListener('mouseleave', () => dot.classList.remove('is-visible'));
-      document.querySelectorAll('a, button, .photos-row__item').forEach(el => {
+      document.querySelectorAll('a, button, .gal__item').forEach(el => {
         el.addEventListener('mouseenter', () => dot.classList.add('is-hovering'));
         el.addEventListener('mouseleave', () => dot.classList.remove('is-hovering'));
       });
-    }
-
-    // Hero carousel
-    const slides = document.querySelectorAll('.hero__slide');
-    let currentSlide = 0;
-    setInterval(() => {
-      slides[currentSlide].classList.remove('hero__slide--active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      const next = slides[currentSlide];
-      next.classList.add('hero__slide--active');
-      const img = next.querySelector('img');
-      img.style.animation = 'none';
-      img.offsetHeight;
-      img.style.animation = '';
-    }, 6000);
-
-    // Hero parallax on mouse
-    const heroEl = document.querySelector('.hero');
-    const moonEl = document.querySelector('.hero__moon');
-    const brandEl = document.querySelector('.hero__brand');
-    const tagEl = document.querySelector('.hero__tagline');
-
-    if (heroEl && window.matchMedia('(min-width: 769px)').matches) {
-      heroEl.addEventListener('mousemove', (e) => {
-        const rect = heroEl.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-        if (moonEl) moonEl.style.transform = `translate(${x * -14}px, ${y * -10}px)`;
-        if (brandEl) brandEl.style.transform = `translate(${x * -4}px, ${y * -3}px)`;
-      });
-
-      heroEl.addEventListener('mouseleave', () => {
-        if (moonEl) moonEl.style.transform = '';
-        if (brandEl) brandEl.style.transform = '';
-      });
-    }
-
-    // Scroll parallax on photo row
-    const photoItems = document.querySelectorAll('.photos-row__item');
-    if (photoItems.length && window.matchMedia('(min-width: 769px)').matches) {
-      const speeds = [0.03, -0.02, 0.04];
-      window.addEventListener('scroll', () => {
-        const row = document.querySelector('.photos-row');
-        if (!row) return;
-        const rect = row.getBoundingClientRect();
-        const offset = rect.top;
-        photoItems.forEach((item, i) => {
-          if (i < 3) {
-            const s = speeds[i] || 0;
-            item.style.transform = `translateY(${offset * s}px)`;
-          }
-        });
-      }, { passive: true });
     }
 
     // Scroll reveal
