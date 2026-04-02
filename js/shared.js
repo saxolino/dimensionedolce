@@ -125,3 +125,16 @@ document.querySelectorAll('a[href]').forEach(link => {
     setTimeout(() => { window.location.href = href; }, 300);
   });
 });
+
+// Cookie banner
+const cookieBanner = document.querySelector('.cookie-banner');
+const cookieBtn = document.querySelector('.cookie-banner__btn');
+if (cookieBanner && cookieBtn) {
+  if (!localStorage.getItem('dd_cookie_consent')) {
+    setTimeout(() => cookieBanner.classList.add('is-visible'), 1000);
+  }
+  cookieBtn.addEventListener('click', () => {
+    localStorage.setItem('dd_cookie_consent', 'accepted');
+    cookieBanner.classList.remove('is-visible');
+  });
+}
