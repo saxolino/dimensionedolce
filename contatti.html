@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -33,7 +33,7 @@
       --testo-light: #6E6462;
       --testo-muted: #9A9290;
 
-      --font-display: 'Bodoni Moda', 'Georgia', serif;
+      --font-display: 'Cormorant Garamond', 'Georgia', serif;
       --font-ui: 'Montserrat', 'Helvetica Neue', sans-serif;
 
       --sidebar-w: 200px;
@@ -93,148 +93,49 @@
     .rv-d7 { transition-delay: 0.7s; }
     .rv-d8 { transition-delay: 0.8s; }
 
-    /* ============================================================
-       SIDEBAR — Fixed left navigation (desktop)
-       ============================================================ */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: var(--sidebar-w);
-      height: 100vh;
-      background: var(--cioccolato);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      padding: 36px 28px;
-    }
+    /* HEADER v3 */
+    .hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--cioccolato-deep); transition: background 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .hdr__inner { max-width: 1440px; margin: 0 auto; padding: 0 48px; height: 88px; display: flex; align-items: center; justify-content: center; position: relative; transition: height 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .hdr__nav { display: flex; align-items: center; gap: 72px; }
+    .hdr__nav--left { flex: 1; justify-content: flex-end; }
+    .hdr__nav--right { flex: 1; justify-content: flex-start; }
+    .hdr__link { font-family: var(--font-ui); font-size: 11.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.5); position: relative; padding: 6px 0; transition: color 0.4s ease; }
+    .hdr__link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, var(--pistacchio), rgba(187,194,92,0.3)); transform: scaleX(0); transform-origin: right; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .hdr__link:hover { color: var(--bianco); }
+    .hdr__link:hover::after { transform: scaleX(1); transform-origin: left; }
+    .hdr__logo { padding: 0 88px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+    .hdr__logo-top { font-family: var(--font-display); font-size: 10px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); line-height: 1.2; }
+    .hdr__logo-bottom { font-family: var(--font-display); font-size: 28px; font-weight: 300; color: var(--bianco); line-height: 1.1; letter-spacing: 0.02em; }
+    .hdr__filament { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(187,194,92,0.06) 10%, rgba(187,194,92,0.28) 50%, rgba(187,194,92,0.06) 90%, transparent 100%); }
+    .hdr.is-scrolled { background: rgba(30,25,24,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0,0,0,0.12); }
+    .hdr.is-scrolled .hdr__inner { height: 64px; }
+    .hdr.is-scrolled .hdr__logo-bottom { font-size: 22px; }
+    .hdr__burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 10px; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
+    .hdr__burger span { display: block; width: 24px; height: 1.5px; background: var(--bianco); transition: all 0.4s cubic-bezier(0.16,1,0.3,1); transform-origin: center; }
+    .hdr__burger.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hdr__burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hdr__burger.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-    .sidebar__logo {
-      margin-bottom: auto;
-    }
-
-    .sidebar__logo img {
-      height: 40px;
-      filter: brightness(0) invert(1);
-      opacity: 1;
-      transition: opacity 0.3s;
-    }
-
-    .sidebar__logo:hover img {
-      opacity: 1;
-    }
-
-    .sidebar__nav {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-bottom: auto;
-    }
-
-    .sidebar__link {
-      font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.65);
-      padding: 12px 0;
-      transition: color 0.3s ease;
-      letter-spacing: 0.02em;
-      line-height: 1.4;
-    }
-
-    .sidebar__link:hover {
-      color: var(--pistacchio);
-    }
-
-    .sidebar__link--active {
-      color: var(--pistacchio);
-    }
+    /* Mobile sidebar */
+    .mob-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 198; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .mob-overlay.is-open { opacity: 1; visibility: visible; }
+    .mob-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 280px; background: var(--cioccolato); z-index: 199; transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); display: flex; flex-direction: column; }
+    .mob-sidebar.is-open { transform: translateX(0); }
+    .mob-sidebar__header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .mob-sidebar__brand { font-family: var(--font-ui); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .mob-sidebar__close { width: 32px; height: 32px; background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.5); transition: color 0.3s; }
+    .mob-sidebar__close:hover { color: var(--bianco); }
+    .mob-sidebar__close svg { width: 20px; height: 20px; }
+    .mob-sidebar__nav { display: flex; flex-direction: column; padding: 24px; flex: 1; }
+    .mob-sidebar__link { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.7); padding: 16px 0; transition: color 0.3s; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mob-sidebar__link:last-child { border-bottom: none; }
+    .mob-sidebar__link:hover { color: var(--pistacchio); }
+    .mob-sidebar__footer { padding: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .mob-sidebar__contact { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,0.4); }
 
     /* Main content offset */
     .main {
-      margin-left: var(--sidebar-w);
-    }
-
-    /* ============================================================
-       MOBILE HAMBURGER
-       ============================================================ */
-    .mobile-header {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 56px;
-      background: var(--cioccolato);
-      z-index: 200;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-    }
-
-    .mobile-header__logo img {
-      height: 22px;
-      filter: brightness(0) invert(1);
-      opacity: 0.85;
-    }
-
-    .hamburger {
-      width: 28px;
-      height: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 100%;
-      height: 1.5px;
-      background: rgba(255,255,255,0.7);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    .hamburger.is-open span:nth-child(1) {
-      transform: translateY(9px) rotate(45deg);
-    }
-    .hamburger.is-open span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.is-open span:nth-child(3) {
-      transform: translateY(-9px) rotate(-45deg);
-    }
-
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 56px; left: 0; right: 0; bottom: 0;
-      background: var(--cioccolato);
-      z-index: 199;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-    }
-
-    .mobile-nav.is-open {
-      display: flex;
-    }
-
-    .mobile-nav a {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.04em;
-      transition: color 0.3s;
-    }
-
-    .mobile-nav a:hover { color: var(--bianco); }
-
-    .mobile-nav a.mobile-nav__link--active {
-      color: var(--pistacchio);
+      margin-left: 0;
     }
 
     /* ============================================================
@@ -341,379 +242,100 @@
     }
 
     /* ============================================================
-       CONTACT INFO + PHOTO — Two-column flexbox
+       CONTATTI — Minimal
        ============================================================ */
-    .contact-section {
+    .ct {
       background: var(--bianco);
-      padding: 120px 0 80px;
-    }
-
-    .contact-columns {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 160px clamp(24px, 5vw, 80px) 120px;
+      gap: 80px;
     }
-
-    .contact-info {
-      width: 55%;
-      flex-shrink: 0;
-      padding: 0 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .contact-info__accent {
-      width: 40px;
-      height: 2px;
-      background: var(--pistacchio);
-      margin-bottom: 28px;
-    }
-
-    .contact-info__name {
+    .ct__title {
       font-family: var(--font-display);
-      font-size: 28px;
+      font-size: clamp(32px, 3.5vw, 44px);
       font-weight: 400;
       color: var(--testo);
-      line-height: 1.2;
-      margin-bottom: 24px;
+      margin-bottom: 48px;
     }
-
-    .contact-info__address {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--testo-light);
-      margin-bottom: 32px;
-    }
-
-    .contact-info__divider {
-      width: 60px;
-      height: 1px;
-      background: var(--beige);
-      margin-bottom: 32px;
-    }
-
-    .contact-info__label {
-      font-family: var(--font-ui);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--pistacchio-scuro);
-      margin-bottom: 6px;
-    }
-
-    .contact-info__value {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--testo-light);
-      margin-bottom: 28px;
-    }
-
-    .contact-info__value a {
-      transition: color 0.3s;
-    }
-
-    .contact-info__value a:hover {
-      color: var(--magenta);
-    }
-
-    .contact-info__hours {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--testo-light);
-    }
-
-    .contact-photo {
-      width: 45%;
-      background-image: url('assets/img/generated/hero-4-servizio-v2.png');
-      background-size: cover;
-      background-position: center;
-      min-height: 500px;
-    }
-
-    /* ============================================================
-       MAP PLACEHOLDER — Full-width dark section
-       ============================================================ */
-    .map-section {
-      background: var(--cioccolato);
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Subtle grid pattern to suggest a map */
-    .map-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      z-index: 0;
-    }
-
-    .map-section::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at center, transparent 0%, var(--cioccolato) 70%);
-      z-index: 1;
-    }
-
-    .map-section__content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-    }
-
-    .map-section__label {
-      font-family: var(--font-ui);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--pistacchio);
-      margin-bottom: 16px;
-    }
-
-    .map-section__address {
-      font-family: var(--font-display);
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--bianco);
-      line-height: 1.4;
-      opacity: 0.85;
-    }
-
-    .map-section__pin {
-      width: 24px;
-      height: 24px;
-      margin: 0 auto 20px;
-      position: relative;
-    }
-
-    .map-section__pin::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 16px;
-      border: 2px solid var(--pistacchio);
-      border-radius: 50% 50% 50% 0;
-      transform: translateX(-50%) rotate(-45deg);
-    }
-
-    .map-section__pin::after {
-      content: '';
-      position: absolute;
-      top: 4px; left: 50%;
-      transform: translateX(-50%) rotate(-45deg);
-      width: 6px;
-      height: 6px;
-      background: var(--pistacchio);
-      border-radius: 50%;
-    }
-
-    /* ============================================================
-       FORM SECTION — "Scrivici"
-       ============================================================ */
-    .form-section {
-      background: var(--crema-warm);
-      padding: 120px 60px;
-    }
-
-    .form-section__header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .form-section__accent {
-      width: 40px;
-      height: 2px;
-      background: var(--magenta);
-      margin: 0 auto 28px;
-    }
-
-    .form-section__title {
-      font-family: var(--font-display);
-      font-size: clamp(30px, 3vw, 40px);
-      font-weight: 400;
-      color: var(--testo);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .form-section__subtitle {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--testo-light);
-      max-width: 540px;
-      margin: 0 auto;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .form-group {
-      margin-bottom: 32px;
-      position: relative;
-    }
-
-    .form-group__label {
+    .ct__detail { margin-bottom: 28px; }
+    .ct__label {
       display: block;
       font-family: var(--font-ui);
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--pistacchio-scuro);
-      margin-bottom: 10px;
-    }
-
-    .form-group__input,
-    .form-group__select,
-    .form-group__textarea {
-      width: 100%;
-      font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--testo);
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--beige);
-      padding: 10px 0;
-      outline: none;
-      transition: border-color 0.4s ease;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      border-radius: 0;
-    }
-
-    .form-group__input::placeholder,
-    .form-group__textarea::placeholder {
-      color: var(--testo-muted);
-      font-weight: 300;
-    }
-
-    .form-group__input:focus,
-    .form-group__select:focus,
-    .form-group__textarea:focus {
-      border-bottom-color: var(--pistacchio);
-    }
-
-    .form-group__select {
-      cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239A9290'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0 center;
-      padding-right: 20px;
-    }
-
-    .form-group__select option {
-      font-family: var(--font-ui);
-      color: var(--testo);
-      background: var(--crema-warm);
-    }
-
-    .form-group__textarea {
-      min-height: 120px;
-      resize: vertical;
-      line-height: 1.7;
-    }
-
-    .form-submit {
-      display: inline-block;
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--magenta);
-      border: 1px solid var(--magenta);
+      color: var(--testo-muted);
+      margin-bottom: 6px;
+    }
+    .ct__detail p {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--testo);
+    }
+    .ct__detail a {
+      color: var(--testo);
+      border-bottom: 1px solid var(--beige);
+      transition: border-color 0.3s;
+    }
+    .ct__detail a:hover { border-color: var(--testo); }
+
+    /* Form */
+    .ct__form-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--testo);
+      margin-bottom: 36px;
+    }
+    .ct__form input,
+    .ct__form select,
+    .ct__form textarea {
+      display: block; width: 100%;
+      font-family: var(--font-ui); font-size: 14px; color: var(--testo);
       background: transparent;
-      padding: 18px 48px;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      margin-top: 16px;
+      border: none; border-bottom: 1px solid var(--beige);
+      padding: 16px 0; margin-bottom: 4px;
+      outline: none; border-radius: 0;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
     }
+    .ct__form input::placeholder,
+    .ct__form textarea::placeholder { color: var(--testo-muted); }
+    .ct__form input:focus,
+    .ct__form select:focus,
+    .ct__form textarea:focus { border-color: var(--testo); }
+    .ct__form select { appearance: none; cursor: pointer; color: var(--testo-muted); }
+    .ct__form select:valid { color: var(--testo); }
+    .ct__form textarea { resize: vertical; min-height: 100px; margin-top: 12px; }
+    .ct__form button {
+      font-family: var(--font-ui); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--bianco); background: var(--cioccolato-deep);
+      border: none; padding: 18px 52px; margin-top: 36px;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .ct__form button:hover { background: var(--cioccolato); }
 
-    .form-submit:hover {
-      background: var(--magenta);
-      color: var(--bianco);
-      border-color: var(--magenta);
-    }
-
-    .form-actions {
-      text-align: center;
-    }
+    /* Map */
+    .ct-map { width: 100%; height: 400px; filter: grayscale(0.8) contrast(1.1); }
+    .ct-map iframe { width: 100%; height: 100%; }
 
     /* ============================================================
        FOOTER — Cream with moon logo + nav (identical to v3)
        ============================================================ */
-    .ftr {
-      background: var(--crema);
-      padding: 100px 40px 56px;
-      text-align: center;
-      border-top: 1px solid var(--beige);
-    }
-
-    .ftr__moon {
-      width: 72px;
-      margin: 0 auto 40px;
-    }
-
-    .ftr__moon img {
-      width: 100%;
-      opacity: 0.8;
-    }
-
-    .ftr__nav {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-
-    .ftr__nav a {
-      font-family: var(--font-ui);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--testo-light);
-      transition: color 0.3s;
-    }
-
-    .ftr__nav a:hover {
-      color: var(--pistacchio-scuro);
-    }
-
-    .ftr__copy {
-      font-family: var(--font-ui);
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--testo-muted);
-    }
+    .ftr { background: var(--pistacchio); padding: 140px 40px 80px; text-align: center; border-top: none; }
+    .ftr__moon { width: 80px; margin: 0 auto 56px; }
+    .ftr__moon img { width: 100%; opacity: 0.7; filter: saturate(0) brightness(0.4); }
+    .ftr__nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; align-items: center; }
+    .ftr__nav a { font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--cioccolato); transition: color 0.3s; }
+    .ftr__nav a:hover { opacity: 0.7; }
+    .ftr__nav-sep { color: var(--cioccolato); opacity: 0.3; font-size: 13px; }
+    .ftr__copy { font-family: var(--font-ui); font-size: 11px; font-weight: 400; color: var(--cioccolato); opacity: 0.45; }
 
     /* ============================================================
        RESPONSIVE
@@ -721,7 +343,7 @@
 
     /* Tablet */
     @media (max-width: 1024px) {
-      :root { --sidebar-w: 170px; }
+      .hdr__nav { gap: 24px; }
 
       .page-header { padding: 60px 40px; }
       .page-header__title { font-size: 48px; }
@@ -733,9 +355,12 @@
 
     /* Mobile */
     @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .mobile-header { display: flex; }
-      .main { margin-left: 0; padding-top: 56px; }
+      .hdr__nav { display: none; }
+      .hdr__burger { display: flex; }
+      .hdr__inner { height: 56px; }
+      .hdr__logo-bottom { font-size: 22px; }
+      .main { padding-top: 0; }
+      .ftr { padding: 80px 24px 56px; }
 
       /* Header mobile */
       .page-header {
@@ -783,6 +408,10 @@
       /* Form */
       .form-section { padding: 80px 24px; }
 
+      /* Contact layout */
+      .ct { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px 64px; }
+      .ct-map { height: 280px; }
+
       .ftr { padding: 56px 24px 36px; }
       .ftr__nav { gap: 20px; }
     }
@@ -815,136 +444,101 @@
 
   <div class="cursor-dot" id="cursorDot"></div>
 
-  <!-- ========== SIDEBAR (Desktop) ========== -->
-  <aside class="sidebar">
-    <a href="index-v3.html" class="sidebar__logo">
-      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
-    </a>
-    <nav class="sidebar__nav">
-      <a href="chi-siamo-v2.html" class="sidebar__link">Chi Siamo</a>
-      <a href="menu.html" class="sidebar__link">Menu'</a>
-      <a href="torte-su-misura.html" class="sidebar__link">Torte su Misura</a>
-      <a href="catering-eventi.html" class="sidebar__link">Catering &amp; Eventi</a>
-      <a href="contatti.html" class="sidebar__link sidebar__link--active">Contatti</a>
-    </nav>
-  </aside>
+  <!-- HEADER v3 -->
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <nav class="hdr__nav hdr__nav--left">
+        <a href="menu.html" class="hdr__link">Menu'</a>
+        <a href="chi-siamo.html" class="hdr__link">Chi Siamo</a>
+      </nav>
+      <a href="index-v3.html" class="hdr__logo">
+        <span class="hdr__logo-top">Dimensione</span>
+        <span class="hdr__logo-bottom">Dolce</span>
+      </a>
+      <nav class="hdr__nav hdr__nav--right">
+        <a href="catering-eventi.html" class="hdr__link">Eventi</a>
+        <a href="contatti.html" class="hdr__link">Contatti</a>
+      </nav>
+      <button class="hdr__burger" id="hdrBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="hdr__filament"></div>
+  </header>
 
-  <!-- ========== MOBILE HEADER ========== -->
-  <div class="mobile-header">
-    <a href="index-v3.html" class="mobile-header__logo">
-      <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
-    </a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="chi-siamo-v2.html">Chi Siamo</a>
-    <a href="menu.html">Menu'</a>
-    <a href="torte-su-misura.html">Torte su Misura</a>
-    <a href="catering-eventi.html">Catering &amp; Eventi</a>
-    <a href="contatti.html" class="mobile-nav__link--active">Contatti</a>
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <nav class="mob-sidebar" id="mobSidebar">
+    <div class="mob-sidebar__header">
+      <span class="mob-sidebar__brand">Dimensione Dolce</span>
+      <button class="mob-sidebar__close" id="mobClose" aria-label="Chiudi menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="mob-sidebar__nav">
+      <a href="menu.html" class="mob-sidebar__link">Menu'</a>
+      <a href="chi-siamo.html" class="mob-sidebar__link">Chi Siamo</a>
+      <a href="catering-eventi.html" class="mob-sidebar__link">Eventi</a>
+      <a href="contatti.html" class="mob-sidebar__link">Contatti</a>
+    </div>
+    <div class="mob-sidebar__footer">
+      <a href="tel:+390212345678" class="mob-sidebar__contact">+39 02 1234567</a>
+    </div>
   </nav>
 
   <!-- ========== MAIN CONTENT ========== -->
   <div class="main">
 
-    <!-- ========== HEADER (dark, compact — no carousel) ========== -->
-    <section class="page-header">
-      <div class="page-header__inner">
-        <div class="page-header__wordmark">
-          <div class="page-header__line-top"></div>
-          <span class="page-header__label">Contatti</span>
-          <div class="page-header__line-bottom"></div>
-          <span class="page-header__title">Vieni a trovarci</span>
-        </div>
-        <div class="page-header__subtitle">
-          <p class="page-header__subtitle-text">
-            Siamo sempre felici di accoglierti nel nostro laboratorio.
-          </p>
-        </div>
-      </div>
-    </section>
+    <!-- ========== CONTATTI ========== -->
+    <section class="ct" style="padding-top: 180px;">
 
-    <!-- ========== CONTACT INFO + SHOP PHOTO ========== -->
-    <section class="contact-section">
-      <div class="contact-columns">
-        <div class="contact-info">
-          <div class="contact-info__accent rv"></div>
-          <h2 class="contact-info__name rv rv-d1">Dimensione Dolce</h2>
-          <p class="contact-info__address rv rv-d2">
-            Via Roma, 42<br>
-            62100 Macerata (MC)
-          </p>
-          <div class="contact-info__divider rv rv-d3"></div>
-          <span class="contact-info__label rv rv-d3">Telefono</span>
-          <p class="contact-info__value rv rv-d4"><a href="tel:+390733123456">0733 123 456</a></p>
-          <span class="contact-info__label rv rv-d4">Email</span>
-          <p class="contact-info__value rv rv-d5"><a href="mailto:info@dimensionedolce.it">info@dimensionedolce.it</a></p>
-          <div class="contact-info__divider rv rv-d5"></div>
-          <span class="contact-info__label rv rv-d5">Orari</span>
-          <div class="contact-info__hours rv rv-d6">
-            Lunedi &mdash; Sabato: 7:00 &mdash; 20:00<br>
-            Domenica: 8:00 &mdash; 13:00
-          </div>
-        </div>
-        <div class="contact-photo"></div>
-      </div>
-    </section>
+      <!-- Info -->
+      <div class="ct__info rv">
+        <h1 class="ct__title">Contatti</h1>
 
-    <!-- ========== MAP PLACEHOLDER ========== -->
-    <section class="map-section">
-      <div class="map-section__content rv">
-        <div class="map-section__pin"></div>
-        <span class="map-section__label">Mappa</span>
-        <p class="map-section__address">
-          Via Roma, 42 &mdash; Macerata
-        </p>
-      </div>
-    </section>
+        <div class="ct__detail">
+          <span class="ct__label">Indirizzo</span>
+          <p>Via Roma, 42<br>62100 Macerata (MC)</p>
+        </div>
 
-    <!-- ========== SCRIVICI — Contact Form ========== -->
-    <section class="form-section" id="scrivici">
-      <div class="form-section__header">
-        <div class="form-section__accent rv"></div>
-        <h2 class="form-section__title rv rv-d1">Scrivici</h2>
-        <p class="form-section__subtitle rv rv-d2">
-          Hai una domanda o vuoi prenotare? Compila il modulo e ti rispondiamo entro 24 ore.
-        </p>
+        <div class="ct__detail">
+          <span class="ct__label">Telefono</span>
+          <p><a href="tel:+390733123456">0733 123 456</a></p>
+        </div>
+
+        <div class="ct__detail">
+          <span class="ct__label">Email</span>
+          <p><a href="mailto:info@dimensionedolce.it">info@dimensionedolce.it</a></p>
+        </div>
+
+        <div class="ct__detail">
+          <span class="ct__label">Orari</span>
+          <p>Lun &mdash; Sab: 7:00 &mdash; 20:00<br>Dom: 8:00 &mdash; 13:00</p>
+        </div>
       </div>
-      <form class="contact-form" onsubmit="return false;">
-        <div class="form-group rv rv-d1">
-          <label class="form-group__label" for="cf-name">Nome e Cognome</label>
-          <input class="form-group__input" type="text" id="cf-name" name="name" placeholder="Il tuo nome" required>
-        </div>
-        <div class="form-group rv rv-d2">
-          <label class="form-group__label" for="cf-email">Email</label>
-          <input class="form-group__input" type="email" id="cf-email" name="email" placeholder="La tua email" required>
-        </div>
-        <div class="form-group rv rv-d3">
-          <label class="form-group__label" for="cf-phone">Telefono</label>
-          <input class="form-group__input" type="tel" id="cf-phone" name="phone" placeholder="Il tuo numero di telefono">
-        </div>
-        <div class="form-group rv rv-d4">
-          <label class="form-group__label" for="cf-subject">Motivo del contatto</label>
-          <select class="form-group__select" id="cf-subject" name="subject" required>
-            <option value="" disabled selected>Seleziona un motivo</option>
-            <option value="info">Informazioni generali</option>
-            <option value="torte">Torte su misura</option>
-            <option value="catering">Catering &amp; eventi</option>
-            <option value="altro">Altro</option>
-          </select>
-        </div>
-        <div class="form-group rv rv-d5">
-          <label class="form-group__label" for="cf-message">Il tuo messaggio</label>
-          <textarea class="form-group__textarea" id="cf-message" name="message" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
-        </div>
-        <div class="form-actions rv rv-d6">
-          <button type="submit" class="form-submit">Invia Messaggio</button>
-        </div>
+
+      <!-- Form -->
+      <form class="ct__form rv rv-d1" onsubmit="return false;">
+        <h2 class="ct__form-title">Scrivici</h2>
+        <input type="text" name="name" placeholder="Nome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone" placeholder="Telefono">
+        <select name="subject" required>
+          <option value="" disabled selected>Motivo del contatto</option>
+          <option value="info">Informazioni</option>
+          <option value="torte">Torte su misura</option>
+          <option value="catering">Catering &amp; eventi</option>
+          <option value="altro">Altro</option>
+        </select>
+        <textarea name="message" placeholder="Il tuo messaggio..." rows="5" required></textarea>
+        <button type="submit">Invia</button>
       </form>
+
     </section>
+
+    <!-- ========== MAP — Google Maps embed ========== -->
+    <div class="ct-map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.5!2d13.4531!3d43.2984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE3JzU0LjIiTiAxM8KwMjcnMTEuMiJF!5e0!3m2!1sit!2sit!4v1" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 
     <!-- ========== FOOTER ========== -->
     <footer class="ftr">
@@ -952,10 +546,12 @@
         <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
       </div>
       <nav class="ftr__nav">
-        <a href="chi-siamo-v2.html">Chi Siamo</a>
         <a href="menu.html">Menu'</a>
-        <a href="torte-su-misura.html">Torte su Misura</a>
-        <a href="catering-eventi.html">Catering &amp; Eventi</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="chi-siamo.html">Chi Siamo</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="catering-eventi.html">Eventi</a>
+        <span class="ftr__nav-sep">|</span>
         <a href="contatti.html">Contatti</a>
       </nav>
       <p class="ftr__copy">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
@@ -965,21 +561,35 @@
 
   <!-- ========== JS ========== -->
   <script>
-    // Mobile hamburger
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('is-open');
-      mobileNav.classList.toggle('is-open');
-    });
+    // Header scroll
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => {
+      hdr.classList.toggle('is-scrolled', window.scrollY > 60);
+    }, { passive: true });
 
-    // Close mobile nav on link click
-    mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('is-open');
-        mobileNav.classList.remove('is-open');
-      });
+    // Mobile sidebar
+    const hdrBurger = document.getElementById('hdrBurger');
+    const mobSidebar = document.getElementById('mobSidebar');
+    const mobOverlay = document.getElementById('mobOverlay');
+    const mobClose = document.getElementById('mobClose');
+    function openMob() {
+      hdrBurger.classList.add('is-open');
+      mobSidebar.classList.add('is-open');
+      mobOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMob() {
+      hdrBurger.classList.remove('is-open');
+      mobSidebar.classList.remove('is-open');
+      mobOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    hdrBurger.addEventListener('click', () => {
+      mobSidebar.classList.contains('is-open') ? closeMob() : openMob();
     });
+    mobClose.addEventListener('click', closeMob);
+    mobOverlay.addEventListener('click', closeMob);
+    mobSidebar.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMob));
 
     // Custom cursor
     const dot = document.getElementById('cursorDot');

@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css?v=3">
@@ -20,6 +20,135 @@
     /* ============================================================
        LA PASTICCERIA — Editorial About Page
        ============================================================ */
+
+    :root {
+      --font-display: 'Cormorant Garamond', 'Georgia', serif;
+      --font-ui: 'Montserrat', 'Helvetica Neue', sans-serif;
+      --pistacchio: #BBC25C;
+      --cioccolato: #382E2C;
+      --cioccolato-deep: #2C2322;
+      --bianco: #ffffff;
+    }
+
+    /* ---------- HEADER v3 ---------- */
+    .hdr {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--cioccolato-deep);
+      transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hdr__inner {
+      max-width: 1440px; margin: 0 auto; padding: 0 48px;
+      height: 88px; display: flex; align-items: center;
+      justify-content: center; position: relative;
+      transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hdr__nav { display: flex; align-items: center; gap: 72px; }
+    .hdr__nav--left { flex: 1; justify-content: flex-end; }
+    .hdr__nav--right { flex: 1; justify-content: flex-start; }
+    .hdr__link {
+      font-family: var(--font-ui); font-size: 11.5px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); position: relative; padding: 6px 0;
+      transition: color 0.4s ease;
+    }
+    .hdr__link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, var(--pistacchio), rgba(187,194,92,0.3));
+      transform: scaleX(0); transform-origin: right;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hdr__link:hover { color: var(--bianco); }
+    .hdr__link:hover::after { transform: scaleX(1); transform-origin: left; }
+    .hdr__logo {
+      padding: 0 88px; flex-shrink: 0; display: flex;
+      flex-direction: column; align-items: center;
+    }
+    .hdr__logo-top {
+      font-family: var(--font-display); font-size: 10px; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); line-height: 1.2;
+    }
+    .hdr__logo-bottom {
+      font-family: var(--font-display); font-size: 28px; font-weight: 300;
+      color: var(--bianco); line-height: 1.1; letter-spacing: 0.02em;
+    }
+    .hdr__filament {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(187,194,92,0.06) 10%, rgba(187,194,92,0.28) 50%, rgba(187,194,92,0.06) 90%, transparent 100%);
+    }
+    .hdr.is-scrolled {
+      background: rgba(30,25,24,0.97); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+    }
+    .hdr.is-scrolled .hdr__inner { height: 64px; }
+    .hdr.is-scrolled .hdr__logo-bottom { font-size: 22px; }
+    .hdr__burger {
+      display: none; width: 44px; height: 44px;
+      align-items: center; justify-content: center; flex-direction: column;
+      gap: 6px; background: none; border: none; cursor: pointer; padding: 10px;
+      position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+    }
+    .hdr__burger span {
+      display: block; width: 24px; height: 1.5px; background: var(--bianco);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: center;
+    }
+    .hdr__burger.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hdr__burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hdr__burger.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* Mobile sidebar */
+    .mob-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 198; opacity: 0; visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .mob-overlay.is-open { opacity: 1; visibility: visible; }
+    .mob-sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0; width: 280px;
+      background: var(--cioccolato); z-index: 199;
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; flex-direction: column;
+    }
+    .mob-sidebar.is-open { transform: translateX(0); }
+    .mob-sidebar__header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mob-sidebar__brand {
+      font-family: var(--font-ui); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+    }
+    .mob-sidebar__close {
+      width: 32px; height: 32px; background: none; border: none;
+      cursor: pointer; color: rgba(255,255,255,0.5); transition: color 0.3s;
+    }
+    .mob-sidebar__close:hover { color: var(--bianco); }
+    .mob-sidebar__close svg { width: 20px; height: 20px; }
+    .mob-sidebar__nav { display: flex; flex-direction: column; padding: 24px; flex: 1; }
+    .mob-sidebar__link {
+      font-family: var(--font-display); font-size: 22px; font-weight: 400;
+      color: rgba(255,255,255,0.7); padding: 16px 0; transition: color 0.3s;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mob-sidebar__link:last-child { border-bottom: none; }
+    .mob-sidebar__link:hover { color: var(--pistacchio); }
+    .mob-sidebar__footer { padding: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .mob-sidebar__contact { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,0.4); }
+
+    @media (max-width: 1024px) {
+      .hdr__nav { gap: 24px; }
+    }
+    @media (max-width: 768px) {
+      .hdr__nav { display: none; }
+      .hdr__burger { display: flex; }
+      .hdr__inner { height: 56px; }
+      .hdr__logo-bottom { font-size: 22px; }
+    }
 
     /* ---------- HERO ---------- */
     .p-hero {
@@ -552,6 +681,145 @@
       }
     }
 
+    /* ---------- CHI SIAMO GALLERY ---------- */
+    .cs-gal {
+      background: var(--bianco);
+    }
+    .cs-gal__track {
+      display: flex;
+      gap: 6px;
+      padding: 0 clamp(16px, 4vw, 60px);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      scrollbar-width: none;
+      height: 620px;
+    }
+    .cs-gal__track::-webkit-scrollbar { display: none; }
+    .cs-gal__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+    .cs-gal__item {
+      flex-shrink: 0;
+      width: calc(33.333% - 4px);
+      height: 100%;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+    }
+    .cs-gal__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cs-gal__item:hover img { transform: scale(1.06); }
+    .cs-gal__progress {
+      width: 120px; height: 2px;
+      background: rgba(0,0,0,0.08);
+      margin: 24px auto 0;
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    .cs-gal__progress-fill {
+      height: 100%;
+      background: var(--pistacchio);
+      border-radius: 1px;
+      width: 33.3%;
+      transition: transform 0.15s ease-out;
+    }
+
+    /* ---------- LA NOSTRA STORIA ---------- */
+    .cs-storia {
+      background: var(--bianco, #fff);
+      padding: 120px 60px;
+      text-align: center;
+    }
+    .cs-storia__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--cioccolato, #382E2C);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .cs-storia__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: #6E6462;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .cs-storia__divider {
+      width: 60px; height: 1px;
+      background: var(--pistacchio);
+      margin: 48px auto 0;
+    }
+
+    /* ---------- CTA CONTATTO ---------- */
+    .cs-cta {
+      background: var(--cioccolato-deep);
+      padding: 100px 40px;
+      text-align: center;
+    }
+    .cs-cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.2;
+      margin-bottom: 36px;
+    }
+    .cs-cta__title em { font-style: italic; }
+    .cs-cta__btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cioccolato-deep);
+      background: var(--pistacchio);
+      padding: 16px 44px;
+      transition: opacity 0.3s;
+    }
+    .cs-cta__btn:hover { opacity: 0.85; }
+
+    /* ---------- FOOTER v3 ---------- */
+    .ftr {
+      background: var(--pistacchio);
+      padding: 140px 40px 80px;
+      text-align: center;
+    }
+    .ftr__moon { width: 80px; margin: 0 auto 56px; }
+    .ftr__moon img { width: 100%; opacity: 0.7; filter: saturate(0) brightness(0.4); }
+    .ftr__nav {
+      display: flex; justify-content: center; gap: 12px;
+      flex-wrap: wrap; margin-bottom: 48px; align-items: center;
+    }
+    .ftr__nav a {
+      font-family: var(--font-ui); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.04em; color: var(--cioccolato); transition: color 0.3s;
+    }
+    .ftr__nav a:hover { opacity: 0.7; }
+    .ftr__nav-sep { color: var(--cioccolato); opacity: 0.3; font-size: 13px; }
+    .ftr__copy {
+      font-family: var(--font-ui); font-size: 11px; font-weight: 400;
+      color: var(--cioccolato); opacity: 0.45;
+    }
+
+    @media (max-width: 768px) {
+      .cs-gal__track { height: 360px; }
+      .cs-gal__item { width: 75%; }
+      .cs-storia { padding: 80px 24px; }
+      .cs-cta { padding: 72px 24px; }
+      .ftr { padding: 80px 24px 56px; }
+    }
+
     /* ---------- REDUCED MOTION ---------- */
     @media (prefers-reduced-motion: reduce) {
       .reveal {
@@ -572,20 +840,20 @@
 </head>
 <body>
 
-  <!-- ========== HEADER — La Vetrina ========== -->
+  <!-- ========== HEADER v3 ========== -->
   <header class="hdr" id="hdr">
     <div class="hdr__inner">
       <nav class="hdr__nav hdr__nav--left">
+        <a href="menu.html" class="hdr__link">Menu'</a>
         <a href="chi-siamo.html" class="hdr__link">Chi Siamo</a>
-        <a href="menu-v2.html" class="hdr__link">Menu</a>
-        <a href="torte-su-misura-v2.html" class="hdr__link">Torte su Misura</a>
       </nav>
-      <a href="index-v2.html" class="hdr__logo">
-        <img src="assets/img/logo-dimensione-dolce.png" alt="Dimensione Dolce">
+      <a href="index-v3.html" class="hdr__logo">
+        <span class="hdr__logo-top">Dimensione</span>
+        <span class="hdr__logo-bottom">Dolce</span>
       </a>
       <nav class="hdr__nav hdr__nav--right">
-        <a href="catering-eventi-v2.html" class="hdr__link">Catering &amp; Eventi</a>
-        <a href="contatti-v2.html" class="hdr__link">Contatti</a>
+        <a href="catering-eventi.html" class="hdr__link">Eventi</a>
+        <a href="contatti.html" class="hdr__link">Contatti</a>
       </nav>
       <button class="hdr__burger" id="hdrBurger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -594,128 +862,61 @@
     <div class="hdr__filament"></div>
   </header>
 
-  <!-- Mobile overlay menu -->
-  <div class="mob-menu" id="mobMenu">
-    <div class="mob-menu__inner">
-      <div class="mob-menu__moon">
-        <img src="assets/img/logo-moon.png" alt="">
-      </div>
-      <nav class="mob-menu__nav">
-        <a href="chi-siamo.html" class="mob-menu__link">Chi Siamo</a>
-        <a href="menu-v2.html" class="mob-menu__link">Menu</a>
-        <a href="torte-su-misura-v2.html" class="mob-menu__link">Torte su Misura</a>
-        <a href="catering-eventi-v2.html" class="mob-menu__link">Catering &amp; Eventi</a>
-        <a href="contatti-v2.html" class="mob-menu__link">Contatti</a>
-      </nav>
-      <p class="mob-menu__est">Pasticceria Artigianale dal 1962</p>
+  <!-- ========== MOBILE SIDEBAR ========== -->
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <nav class="mob-sidebar" id="mobSidebar">
+    <div class="mob-sidebar__header">
+      <span class="mob-sidebar__brand">Dimensione Dolce</span>
+      <button class="mob-sidebar__close" id="mobClose" aria-label="Chiudi menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
     </div>
-  </div>
+    <div class="mob-sidebar__nav">
+      <a href="menu.html" class="mob-sidebar__link">Menu'</a>
+      <a href="chi-siamo.html" class="mob-sidebar__link">Chi Siamo</a>
+      <a href="catering-eventi.html" class="mob-sidebar__link">Eventi</a>
+      <a href="contatti.html" class="mob-sidebar__link">Contatti</a>
+    </div>
+    <div class="mob-sidebar__footer">
+      <a href="tel:+390212345678" class="mob-sidebar__contact">+39 02 1234567</a>
+    </div>
+  </nav>
 
-  <!-- ========== HERO ========== -->
-  <section class="p-hero">
-    <div class="p-hero__bg">
-      <img src="assets/img/parallax-bakery.png" alt="Il laboratorio di Dimensione Dolce">
+  <!-- ========== GALLERY — drag-scroll ========== -->
+  <section class="cs-gal" style="padding-top:89px;">
+    <div class="cs-gal__track" id="galTrack">
+      <div class="cs-gal__item">
+        <img src="assets/img/vetrina-sfera-cioccolato.png" alt="Sfera al Cioccolato" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="assets/img/vetrina-pesca.png" alt="La Pesca" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="assets/img/vetrina-monoporzione.png" alt="Monoporzione" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="assets/img/vetrina-cornetti.png" alt="Cornetti" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="assets/img/vetrina-brioche.png" alt="Brioche" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="assets/img/vetrina-torta-funghetti.png" alt="Torta Incantata" loading="lazy">
+      </div>
     </div>
-    <div class="p-hero__overlay"></div>
-    <div class="p-hero__content">
-      <span class="p-hero__label">Dal 1962 a Milano</span>
-      <h1 class="p-hero__title">La <em>Pasticceria</em></h1>
-      <div class="p-hero__line"></div>
+    <div class="cs-gal__progress">
+      <div class="cs-gal__progress-fill" id="galFill"></div>
     </div>
   </section>
 
-  <!-- ========== QUOTE ========== -->
-  <section class="p-quote">
-    <p class="p-quote__text reveal">
-      &laquo;Il panettone non si fa con la fretta. Si fa con il tempo, con le mani, e con un lievito che ha piu memoria di noi.&raquo;
+  <!-- ========== LA NOSTRA STORIA ========== -->
+  <section class="cs-storia">
+    <h2 class="cs-storia__title reveal">La nostra Storia</h2>
+    <p class="cs-storia__text reveal">
+      Dimensione Dolce nasce dall'esperienza e dalla passione del nostro team, che
+      unisce tecnica, creativita e gusto in un'idea condivisa di dolcezza.
     </p>
-    <span class="p-quote__attr reveal reveal-delay-1">Mastro Giuseppe Conti, fondatore</span>
-  </section>
-
-  <!-- ========== STORIA ========== -->
-  <section class="p-storia">
-    <div class="p-storia__inner">
-      <div class="p-storia__header reveal">
-        <span class="p-storia__label">La nostra storia</span>
-        <h2 class="p-storia__title">Tre Generazioni <em>di Eccellenza</em></h2>
-      </div>
-
-      <!-- 1962 -->
-      <div class="p-epoch">
-        <div class="p-epoch__visual reveal">
-          <img src="assets/img/generated/storia-1962-bottega.png" alt="La bottega originale di Dimensione Dolce">
-        </div>
-        <div class="p-epoch__content reveal reveal-delay-1">
-          <div class="p-epoch__year">1962</div>
-          <h3 class="p-epoch__subtitle">La Bottega</h3>
-          <p class="p-epoch__text">
-            Mastro Giuseppe Conti apre una piccola bottega nel cuore di Milano, in Via Monte Napoleone.
-            Un bancone di marmo, un forno a legna e un sogno: creare il panettone perfetto. Con il suo
-            primo lievito madre, ancora oggi custodito e rinfrescato quotidianamente, nasce la tradizione
-            di Dimensione Dolce.
-          </p>
-          <div class="p-epoch__divider"></div>
-        </div>
-      </div>
-
-      <!-- 1985 -->
-      <div class="p-epoch p-epoch--reverse">
-        <div class="p-epoch__visual reveal">
-          <img src="assets/img/generated/storia-1985-generazione.png" alt="La seconda generazione">
-        </div>
-        <div class="p-epoch__content reveal reveal-delay-1">
-          <div class="p-epoch__year">1985</div>
-          <h3 class="p-epoch__subtitle">La Seconda Generazione</h3>
-          <p class="p-epoch__text">
-            Il figlio Marco Conti eredita il laboratorio e lo trasforma. Amplia la produzione mantenendo
-            il rigore artigianale del padre. Introduce le creme spalmabili e i lievitati speciali.
-            La fama del panettone Dimensione Dolce supera i confini di Milano e raggiunge le tavole
-            di tutta Italia.
-          </p>
-          <div class="p-epoch__divider"></div>
-        </div>
-      </div>
-
-      <!-- 2018 -->
-      <div class="p-epoch">
-        <div class="p-epoch__visual reveal">
-          <img src="assets/img/generated/storia-2018-contemporanea.png" alt="L'era contemporanea">
-        </div>
-        <div class="p-epoch__content reveal reveal-delay-1">
-          <div class="p-epoch__year">2018</div>
-          <h3 class="p-epoch__subtitle">L'Era Contemporanea</h3>
-          <p class="p-epoch__text">
-            La terza generazione, guidata da Elena e Luca Conti, porta Dimensione Dolce nel presente.
-            Nuovi gusti audaci come il Pistacchio di Bronte DOP e il Triplo Cioccolato Monorigine si
-            affiancano alla tradizione. Lo shop online nasce per portare l'eccellenza milanese in ogni
-            angolo del Paese.
-          </p>
-          <div class="p-epoch__divider"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== LABORATORIO ========== -->
-  <section class="p-lab">
-    <div class="p-lab__image reveal">
-      <img src="assets/img/parallax-bakery.png" alt="Il laboratorio artigianale">
-    </div>
-    <div class="p-lab__content">
-      <span class="p-lab__label reveal">Il cuore della produzione</span>
-      <h2 class="p-lab__title reveal reveal-delay-1">Il Nostro <em>Laboratorio</em></h2>
-      <p class="p-lab__text reveal reveal-delay-2">
-        Duecento metri quadri nel cuore di Milano dove il tempo scorre diversamente.
-        Qui ogni impasto nasce alle quattro del mattino, quando le mani dei nostri maestri
-        danno forma a quello che tra 72 ore diventerà un panettone.
-      </p>
-      <p class="p-lab__text reveal reveal-delay-2">
-        Il forno in pietra refrattaria, i tavoli in acciaio dove il lievito madre riposa,
-        le celle di lievitazione a temperatura controllata: ogni dettaglio è pensato per
-        rispettare i tempi della natura. Nessuna scorciatoia, nessun compromesso.
-      </p>
-      <div class="p-lab__line reveal reveal-delay-3"></div>
-    </div>
+    <div class="cs-storia__divider reveal"></div>
   </section>
 
   <!-- ========== MAESTRI PASTICCERI ========== -->
@@ -754,88 +955,101 @@
     </div>
   </section>
 
-  <!-- ========== CTA ========== -->
-  <section class="p-cta">
-    <h2 class="p-cta__title reveal">Scopri i nostri <em>panettoni</em></h2>
-    <a href="shop.html" class="p-cta__btn reveal reveal-delay-1">Vai allo Shop</a>
+  <!-- ========== CTA CONTATTO ========== -->
+  <section class="cs-cta">
+    <h2 class="cs-cta__title reveal">Vieni a <em>trovarci</em></h2>
+    <a href="contatti.html" class="cs-cta__btn reveal">Contattaci</a>
   </section>
 
-  <!-- ========== CART DRAWER ========== -->
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer">
-    <div class="cart-drawer__header">
-      <div>
-        <span class="cart-drawer__title">Carrello</span>
-        <span class="cart-drawer__count">0 articoli</span>
-      </div>
-      <button class="cart-drawer__close" aria-label="Chiudi carrello">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
+  <!-- ========== FOOTER v3 ========== -->
+  <footer class="ftr">
+    <div class="ftr__moon">
+      <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
     </div>
-    <div class="cart-drawer__items"></div>
-    <div class="cart-drawer__footer">
-      <div class="cart-drawer__subtotal">
-        <span class="cart-drawer__subtotal-label">Subtotale</span>
-        <span class="cart-drawer__subtotal-price">&euro;0,00</span>
-      </div>
-      <p class="cart-drawer__shipping-note">Spedizione gratuita sopra &euro;80</p>
-      <button class="cart-drawer__checkout" disabled>PROCEDI AL CHECKOUT</button>
-      <button class="cart-drawer__continue">Continua lo shopping</button>
-    </div>
-  </aside>
+    <nav class="ftr__nav">
+      <a href="menu.html">Menu'</a>
+      <span class="ftr__nav-sep">|</span>
+      <a href="chi-siamo.html">Chi Siamo</a>
+      <span class="ftr__nav-sep">|</span>
+      <a href="catering-eventi.html">Eventi</a>
+      <span class="ftr__nav-sep">|</span>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+    <p class="ftr__copy">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
+  </footer>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <div class="footer__logo">
-        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce" class="footer__logo-moon">
-      </div>
-      <div class="footer__social">
-        <a href="#" class="footer__social-link" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="#" class="footer__social-link" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <a href="mailto:ordini@dimensionedolce.it" class="footer__social-link" aria-label="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
-      </div>
-      <nav class="footer__links">
-        <a href="chi-siamo.html">La Pasticceria</a>
-        <a href="menu-v2.html">Il Menu</a>
-        <a href="torte-su-misura-v2.html">Torte su Misura</a>
-        <a href="catering-eventi-v2.html">Catering &amp; Eventi</a>
-        <a href="contatti-v2.html">Contatti</a>
-        <a href="spedizioni-faq.html">Spedizioni &amp; FAQ</a>
-        <a href="privacy.html">Privacy</a>
-      </nav>
-      <p class="footer__instagram">Seguici su Instagram <a href="#">@dimensionedolce</a></p>
-      <p class="footer__copy">&copy; 2026 Dimensione Dolce S.r.l. &mdash; Tutti i diritti riservati</p>
-    </div>
-  </footer>
 
   <!-- Main JS -->
   <script src="js/main.js" defer></script>
   <script src="https://sdks.shopifycdn.com/js-buy-sdk/v3/latest/index.umd.min.js" defer></script>
   <script src="js/shopify.js" defer></script>
 
-  <!-- Header JS — La Vetrina -->
+  <!-- Header JS v3 -->
   <script>
-    // Header scroll
     const hdr = document.getElementById('hdr');
     window.addEventListener('scroll', () => {
       hdr.classList.toggle('is-scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // Mobile menu
-    const burger = document.getElementById('hdrBurger');
-    const mobMenu = document.getElementById('mobMenu');
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('is-open');
-      mobMenu.classList.toggle('is-open');
-      document.body.style.overflow = mobMenu.classList.contains('is-open') ? 'hidden' : '';
+    const hdrBurger = document.getElementById('hdrBurger');
+    const mobSidebar = document.getElementById('mobSidebar');
+    const mobOverlay = document.getElementById('mobOverlay');
+    const mobClose = document.getElementById('mobClose');
+    function openMob() {
+      hdrBurger.classList.add('is-open');
+      mobSidebar.classList.add('is-open');
+      mobOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMob() {
+      hdrBurger.classList.remove('is-open');
+      mobSidebar.classList.remove('is-open');
+      mobOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    hdrBurger.addEventListener('click', () => {
+      mobSidebar.classList.contains('is-open') ? closeMob() : openMob();
     });
+    mobClose.addEventListener('click', closeMob);
+    mobOverlay.addEventListener('click', closeMob);
+    mobSidebar.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMob));
+  </script>
+
+  <!-- Gallery drag-scroll -->
+  <script>
+    const galTrack = document.getElementById('galTrack');
+    const galFill = document.getElementById('galFill');
+    if (galTrack) {
+      let isDragging = false, startX, scrollStart, hasDragged = false;
+      function updateProgress() {
+        const max = galTrack.scrollWidth - galTrack.clientWidth;
+        if (max <= 0) return;
+        const pct = galTrack.scrollLeft / max;
+        galFill.style.transform = `translateX(${pct * 200}%)`;
+      }
+      galTrack.addEventListener('scroll', () => updateProgress(), { passive: true });
+      galTrack.addEventListener('mousedown', (e) => {
+        isDragging = true; hasDragged = false;
+        startX = e.pageX - galTrack.offsetLeft;
+        scrollStart = galTrack.scrollLeft;
+        galTrack.classList.add('is-dragging');
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return; e.preventDefault();
+        const walk = (e.pageX - galTrack.offsetLeft - startX) * 1.5;
+        if (Math.abs(walk) > 5) hasDragged = true;
+        galTrack.scrollLeft = scrollStart - walk;
+      });
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return; isDragging = false;
+        galTrack.classList.remove('is-dragging');
+      });
+      galTrack.addEventListener('click', (e) => {
+        if (hasDragged) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+      updateProgress();
+    }
   </script>
 
   <!-- Scroll Reveal -->
