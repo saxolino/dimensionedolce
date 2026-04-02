@@ -256,7 +256,20 @@ body.is-leaving {
 .mob-sidebar__link:hover { color: var(--pistacchio); }
 
 .mob-sidebar__footer { padding: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
-.mob-sidebar__contact { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,0.4); }
+.mob-sidebar__contact { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,0.4); display: block; }
+
+.mob-sidebar__social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 16px;
+  transition: color 0.3s;
+}
+.mob-sidebar__social:hover { color: rgba(255,255,255,0.7); }
+.mob-sidebar__social svg { width: 18px; height: 18px; flex-shrink: 0; }
 
 /* ============================================================
    8. Footer — Pistacchio
@@ -291,6 +304,16 @@ body.is-leaving {
 
 .ftr__nav a:hover { opacity: 0.7; }
 .ftr__nav-sep { color: var(--cioccolato); opacity: 0.3; font-size: 13px; }
+
+.ftr__ig {
+  display: inline-block;
+  color: var(--cioccolato);
+  opacity: 0.4;
+  margin-bottom: 32px;
+  transition: opacity 0.3s;
+}
+.ftr__ig:hover { opacity: 0.7; }
+.ftr__ig svg { width: 22px; height: 22px; }
 
 .ftr__copy {
   font-family: var(--font-ui);
