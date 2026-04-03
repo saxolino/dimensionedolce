@@ -680,13 +680,9 @@
         grid-template-columns: 1fr;
       }
 
-      .process-block__photo {
-        aspect-ratio: 4/3;
-      }
-
-      .process-block__info {
-        aspect-ratio: auto;
-        padding: 48px 24px;
+      /* Always text first, photo second on mobile */
+      .process-block__photo { order: 2; aspect-ratio: 4/3; }
+      .process-block__info { order: 1; aspect-ratio: auto; padding: 48px 24px;
       }
 
       /* Creazioni: 2 columns on mobile */
@@ -866,7 +862,7 @@
     <!-- ========== FOOTER ========== -->
     <footer class="ftr">
       <div class="ftr__moon rv">
-        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
+        <img src="assets/img/logo-sbaffo-green.png" alt="Dimensione Dolce">
       </div>
       <nav class="ftr__nav rv rv-d1">
         <a href="menu.html">Menu'</a>
