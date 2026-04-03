@@ -162,15 +162,10 @@ body.is-leaving {
   to { opacity: 1; transform: scale(1); }
 }
 
-.hdr__logo-top {
-  font-family: var(--font-display); font-size: 10px; font-weight: 400;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(255,255,255,0.7); line-height: 1.2;
-}
-
-.hdr__logo-bottom {
-  font-family: var(--font-display); font-size: 28px; font-weight: 300;
-  color: var(--bianco); line-height: 1.1; letter-spacing: 0.02em;
+.hdr__logo-img {
+  height: 44px;
+  width: auto;
+  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Golden filament */
@@ -187,7 +182,7 @@ body.is-leaving {
   box-shadow: 0 4px 30px rgba(0,0,0,0.12);
 }
 .hdr.is-scrolled .hdr__inner { height: 64px; }
-.hdr.is-scrolled .hdr__logo-bottom { font-size: 22px; }
+.hdr.is-scrolled .hdr__logo-img { height: 34px; }
 .hdr.is-scrolled .hdr__filament {
   background: linear-gradient(90deg, transparent 0%, rgba(187,194,92,0.04) 10%, rgba(187,194,92,0.14) 50%, rgba(187,194,92,0.04) 90%, transparent 100%);
 }
@@ -236,6 +231,11 @@ body.is-leaving {
 .mob-sidebar__brand {
   font-family: var(--font-ui); font-size: 11px; font-weight: 500;
   letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+}
+
+.mob-sidebar__brand-img {
+  height: 28px;
+  width: auto;
 }
 
 .mob-sidebar__close {
@@ -457,7 +457,7 @@ body.is-leaving {
   .hdr__nav { display: none; }
   .hdr__burger { display: flex; }
   .hdr__inner { height: 56px; }
-  .hdr__logo-bottom { font-size: 22px; }
+  .hdr__logo-img { height: 34px; }
 
   .ftr { padding: 80px 24px 56px; }
   .ftr__nav { gap: 20px; }
