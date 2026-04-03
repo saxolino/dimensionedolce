@@ -282,7 +282,7 @@ body.is-leaving {
 }
 
 .ftr__moon { width: 80px; margin: 0 auto 56px; }
-.ftr__moon img { width: 100%; opacity: 0.7; filter: saturate(0) brightness(0.4); }
+.ftr__moon img { width: 100%; }
 
 .ftr__nav {
   display: flex;

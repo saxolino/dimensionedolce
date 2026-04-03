@@ -26,54 +26,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 180px 40px 80px;
+      padding: 200px 40px 100px;
       text-align: center;
     }
 
-    .hero__moon {
-      width: 200px;
-      height: 200px;
-      margin-bottom: 24px;
+    .hero__logo-full {
+      max-width: 200px;
       opacity: 0;
-      transform: scale(0.8);
-      animation: moonIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      transform: scale(0.9);
+      animation: logoIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
     }
 
-    .hero__moon img {
-      width: 100%; height: 100%;
-      object-fit: contain;
+    .hero__logo-full img {
+      width: 100%;
+      height: auto;
     }
 
-    @keyframes moonIn {
+    @keyframes logoIn {
       to { opacity: 1; transform: scale(1); }
-    }
-
-    .hero__wordmark {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero__dimensione {
-      font-family: var(--font-ui);
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--testo);
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
-    }
-
-    .hero__dolce {
-      font-family: var(--font-display);
-      font-size: 64px;
-      font-weight: 400;
-      color: var(--testo);
-      line-height: 1;
-      margin-top: 4px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.6s forwards;
     }
 
     @keyframes fadeUp {
@@ -500,8 +470,7 @@
     /* Tablet */
     @media (max-width: 1024px) {
       .hero { padding: 80px 40px 40px; }
-      .hero__moon { width: 160px; height: 160px; }
-      .hero__dolce { font-size: 52px; }
+      .hero__logo-full { max-width: 180px; }
 
       .gal__track { height: 500px; }
 
@@ -512,10 +481,8 @@
 
     /* Mobile */
     @media (max-width: 768px) {
-      .hero { padding: 80px 24px 32px; }
-      .hero__moon { width: 140px; height: 140px; }
-      .hero__dolce { font-size: 44px; }
-      .hero__dimensione { font-size: 12px; letter-spacing: 0.35em; }
+      .hero { padding: 120px 24px 60px; }
+      .hero__logo-full { max-width: 120px; }
 
       /* Gallery mobile */
       .gal__track {
@@ -532,6 +499,10 @@
       .team-block {
         grid-template-columns: 1fr;
       }
+
+      /* On mobile: always text first, photo second */
+      .svc-half--photo { order: 2; }
+      .svc-half:not(.svc-half--photo) { order: 1; }
 
       .svc-block--reverse,
       .team-block--reverse {
@@ -562,14 +533,13 @@
     }
 
     @media (max-width: 480px) {
-      .hero__moon { width: 120px; height: 120px; }
-      .hero__dolce { font-size: 38px; }
+      .hero__logo-full { max-width: 100px; }
 
       .svc-half--photo { min-height: 240px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero__moon, .hero__wordmark, .hero__tagline {
+      .hero__logo-full {
         opacity: 1; transform: none; animation: none;
       }
     }
@@ -629,12 +599,8 @@
 
     <!-- ========== HERO — Logo only ========== -->
     <section class="hero" id="hero">
-      <div class="hero__moon">
-        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
-      </div>
-      <div class="hero__wordmark">
-        <span class="hero__dimensione">Dimensione</span>
-        <span class="hero__dolce">Dolce</span>
+      <div class="hero__logo-full">
+        <img src="assets/img/logo-completo.png" alt="Dimensione Dolce">
       </div>
     </section>
 
@@ -798,7 +764,7 @@
     <!-- ========== FOOTER ========== -->
     <footer class="ftr" id="contatti">
       <div class="ftr__moon rv">
-        <img src="assets/img/logo-moon.png" alt="Dimensione Dolce">
+        <img src="assets/img/logo-sbaffo-green.png" alt="Dimensione Dolce">
       </div>
       <nav class="ftr__nav rv rv-d1">
         <a href="menu.html">Menu'</a>
