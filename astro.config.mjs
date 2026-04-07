@@ -15,6 +15,7 @@ export default defineConfig({
       dataset: 'production',
       useCdn: false,
       stega: {
+        enabled: false,
         studioUrl: 'https://dimensionedolce.sanity.studio',
       },
     }),
