@@ -1,4 +1,6 @@
 ---
+import { VisualEditing } from '@sanity/astro/visual-editing';
+
 interface Props {
   title: string;
   description: string;
@@ -107,12 +109,6 @@ const { title, description, preview = false } = Astro.props;
     <p class="cookie-banner__text">Questo sito utilizza solo cookie tecnici necessari al funzionamento. <a href="/cookie-policy.html">Maggiori informazioni</a></p>
     <button class="cookie-banner__btn">OK</button>
   </div>
-    <script is:inline>
-      if (window.self !== window.top || window.__sanityVisualEditing) {
-        import('https://esm.sh/@sanity/visual-editing@2').then(m => {
-          m.enableVisualEditing({ zIndex: 1000 });
-        }).catch(() => {});
-      }
-    </script>
+    <VisualEditing client:load />
 </body>
 </html>
