@@ -10,6 +10,7 @@ const page = await fetchSanity<any>(aboutPageQuery, preview);
 <BaseLayout
   title={page?.seoTitle || "La Pasticceria | Dimensione Dolce"}
   description={page?.seoDescription || "La storia di Dimensione Dolce: tre generazioni di panettone artigianale milanese dal 1962. Il laboratorio, i maestri pasticceri."}
+  preview={preview}
 >
 
 <style is:global>

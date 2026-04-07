@@ -4,10 +4,10 @@ import { VisualEditing } from '@sanity/astro/visual-editing';
 interface Props {
   title: string;
   description: string;
+  preview?: boolean;
 }
 
-const { title, description } = Astro.props;
-const preview = Astro.cookies.get('__sanity_preview')?.value === 'true';
+const { title, description, preview = false } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="it">

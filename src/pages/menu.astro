@@ -10,6 +10,7 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
 <BaseLayout
   title={page?.seoTitle || 'Il Menu | Dimensione Dolce'}
   description={page?.seoDescription || 'Il menu di Dimensione Dolce: gelateria artigianale, pasticceria e colazione. Creazioni preparate ogni giorno con ingredienti freschi e di stagione.'}
+  preview={preview}
 >
 
 <style is:global>

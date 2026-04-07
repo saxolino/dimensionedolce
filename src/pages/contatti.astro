@@ -8,7 +8,7 @@ const contactPage = await fetchSanity<any>(contactPageQuery, preview);
 const siteSettings = await fetchSanity<any>(siteSettingsQuery, preview);
 ---
 
-<BaseLayout title={contactPage?.seoTitle || "Contatti | Dimensione Dolce"} description={contactPage?.seoDescription || "Contattaci per informazioni, torte su misura, catering ed eventi. Vieni a trovarci nel nostro laboratorio a Macerata."}>
+<BaseLayout title={contactPage?.seoTitle || "Contatti | Dimensione Dolce"} description={contactPage?.seoDescription || "Contattaci per informazioni, torte su misura, catering ed eventi. Vieni a trovarci nel nostro laboratorio a Macerata."} preview={preview}>
 
   <style is:global>
     /* ============================================================

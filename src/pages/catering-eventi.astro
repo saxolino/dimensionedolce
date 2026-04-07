@@ -10,6 +10,7 @@ const page = await fetchSanity<any>(cateringPageQuery, preview);
 <BaseLayout
   title={page?.seoTitle || 'Catering & Eventi | Dimensione Dolce'}
   description={page?.seoDescription || 'Catering dolce per eventi privati e aziendali. Buffet, rinfreschi e allestimenti su misura dalla pasticceria Dimensione Dolce.'}
+  preview={preview}
 >
 
 <style is:global>
