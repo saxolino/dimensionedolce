@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { fetchSanity } from '../lib/sanity';
 import { menuPageQuery } from '../lib/queries';
 
-const preview = Astro.cookies.get('__sanity_preview')?.value === 'true';
+const preview = Astro.cookies.get('__sanity_preview')?.value === 'true' || Astro.url.searchParams.has('sanity-preview-perspective');
 const page = await fetchSanity<any>(menuPageQuery, preview);
 ---
 

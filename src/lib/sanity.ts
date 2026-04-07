@@ -24,7 +24,7 @@ export function getClient(preview = false): SanityClient | null {
       useCdn: false,
       stega: {
         enabled: true,
-        studioUrl: 'https://dimensionedolce.sanity.studio',
+        studioUrl: '/admin',
       },
     });
   }
