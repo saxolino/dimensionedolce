@@ -25,7 +25,7 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   cookies.set('__sanity_preview', 'true', {
     path: '/',
     httpOnly: true,
-    sameSite: 'lax',
+    sameSite: 'none',
     secure: true,
     maxAge: 60 * 60,
   });
