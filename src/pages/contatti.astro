@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchSanity } from '../lib/sanity';
+import { contactPageQuery, siteSettingsQuery } from '../lib/queries';
+
+const contactPage = await fetchSanity<any>(contactPageQuery);
+const siteSettings = await fetchSanity<any>(siteSettingsQuery);
+---
+
+<BaseLayout title={contactPage?.seoTitle || "Contatti | Dimensione Dolce"} description={contactPage?.seoDescription || "Contattaci per informazioni, torte su misura, catering ed eventi. Vieni a trovarci nel nostro laboratorio a Macerata."}>
+
+  <style is:global>
+    /* ============================================================
+       CONTATTI — Page-specific styles
+       ============================================================ */
+
+    .ct {
+      background: var(--bianco);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 160px clamp(24px, 5vw, 80px) 120px;
+      gap: 80px;
+    }
+    .ct__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3.5vw, 44px);
+      font-weight: 400;
+      color: var(--testo);
+      margin-bottom: 48px;
+    }
+    .ct__detail { margin-bottom: 28px; }
+    .ct__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--testo-muted);
+      margin-bottom: 6px;
+    }
+    .ct__detail p {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--testo);
+    }
+    .ct__detail a {
+      color: var(--testo);
+      border-bottom: 1px solid var(--beige);
+      transition: border-color 0.3s;
+    }
+    .ct__detail a:hover { border-color: var(--testo); }
+
+    /* Form */
+    .ct__form-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--testo);
+      margin-bottom: 36px;
+    }
+    .ct__form input,
+    .ct__form select,
+    .ct__form textarea {
+      display: block; width: 100%;
+      font-family: var(--font-ui); font-size: 14px; color: var(--testo);
+      background: transparent;
+      border: none; border-bottom: 1px solid var(--beige);
+      padding: 16px 0; margin-bottom: 4px;
+      outline: none; border-radius: 0;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+    .ct__form input::placeholder,
+    .ct__form textarea::placeholder { color: var(--testo-muted); }
+    .ct__form input:focus,
+    .ct__form select:focus,
+    .ct__form textarea:focus { border-color: var(--testo); }
+    .ct__form select { appearance: none; cursor: pointer; color: var(--testo-muted); }
+    .ct__form select:valid { color: var(--testo); }
+    .ct__form textarea { resize: vertical; min-height: 100px; margin-top: 12px; }
+    .ct__form button {
+      font-family: var(--font-ui); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--bianco); background: var(--cioccolato-deep);
+      border: none; padding: 18px 52px; margin-top: 36px;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .ct__form button:hover { background: var(--cioccolato); }
+
+    /* Map */
+    .ct-map { width: 100%; height: 400px; filter: grayscale(0.8) contrast(1.1); }
+    .ct-map iframe { width: 100%; height: 100%; }
+
+    /* ---- Responsive (page-specific) ---- */
+    @media (max-width: 768px) {
+      .ct { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px 64px; }
+      .ct-map { height: 280px; }
+    }
+  </style>
+
+  <!-- ========== CONTATTI ========== -->
+  <section class="ct" style="padding-top: 180px;">
+
+    <!-- Info -->
+    <div class="ct__info">
+      <h1 class="ct__title rv">Contatti</h1>
+
+      <div class="ct__detail rv rv-d1">
+        <span class="ct__label">Indirizzo</span>
+        <p>{siteSettings?.address ? `${siteSettings.address.street}` : 'Via Roma, 42'}<br>{siteSettings?.address ? `${siteSettings.address.zip} ${siteSettings.address.city} (${siteSettings.address.province})` : '62100 Macerata (MC)'}</p>
+      </div>
+
+      <div class="ct__detail rv rv-d2">
+        <span class="ct__label">Telefono</span>
+        <p><a href={`tel:${siteSettings?.phone?.replace(/\s/g, '') || '+390733123456'}`}>{siteSettings?.phone || '0733 123 456'}</a></p>
+      </div>
+
+      <div class="ct__detail rv rv-d3">
+        <span class="ct__label">Email</span>
+        <p><a href={`mailto:${siteSettings?.email || 'info@dimensionedolce.it'}`}>{siteSettings?.email || 'info@dimensionedolce.it'}</a></p>
+      </div>
+
+      <div class="ct__detail rv rv-d4">
+        <span class="ct__label">Orari</span>
+        {siteSettings?.hours && siteSettings.hours.length > 0 ? (
+          <p>{siteSettings.hours.map((h: any, i: number) => <Fragment key={i}>{i > 0 && <br />}{h.days}: {h.time}</Fragment>)}</p>
+        ) : (
+          <p>Lun &mdash; Sab: 7:00 &mdash; 20:00<br />Dom: 8:00 &mdash; 13:00</p>
+        )}
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form class="ct__form rv" onsubmit="return false;">
+      <h2 class="ct__form-title rv rv-d1">{contactPage?.formTitle || 'Scrivici'}</h2>
+      <input type="text" name="name" placeholder="Nome" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="phone" placeholder="Telefono">
+      <select name="subject" required>
+        <option value="" disabled selected>Motivo del contatto</option>
+        {contactPage?.contactSubjects && contactPage.contactSubjects.length > 0 ? (
+          contactPage.contactSubjects.map((s: any) => <option value={s.value}>{s.label}</option>)
+        ) : (
+          <Fragment>
+            <option value="info">Informazioni</option>
+            <option value="torte">Torte su misura</option>
+            <option value="catering">Catering &amp; eventi</option>
+            <option value="altro">Altro</option>
+          </Fragment>
+        )}
+      </select>
+      <textarea name="message" placeholder="Il tuo messaggio..." rows="5" required></textarea>
+      <div class="gdpr-consent">
+        <input type="checkbox" id="cf-privacy" required>
+        <label for="cf-privacy">Ho letto e accetto la <a href="privacy.html" target="_blank">Privacy Policy</a></label>
+      </div>
+      <button type="submit" class="rv rv-d2">Invia</button>
+    </form>
+
+  </section>
+
+  <!-- ========== MAP — Google Maps embed ========== -->
+  <div class="ct-map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.5!2d13.4531!3d43.2984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE3JzU0LjIiTiAxM8KwMjcnMTEuMiJF!5e0!3m2!1sit!2sit!4v1" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+</BaseLayout>

@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Cookie Policy | Dimensione Dolce"
+  description="Cookie Policy di Dimensione Dolce S.r.l. Informazioni sui cookie utilizzati dal sito."
+>
+
+<style is:global>
+    .legal {
+      background: var(--bianco);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 180px 40px 100px;
+    }
+
+    .legal__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 400;
+      color: var(--testo);
+      margin-bottom: 12px;
+    }
+
+    .legal__date {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--testo-muted);
+      margin-bottom: 56px;
+    }
+
+    .legal h2 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--testo);
+      margin: 48px 0 16px;
+    }
+
+    .legal p, .legal li {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--testo-light);
+      margin-bottom: 16px;
+    }
+
+    .legal ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .legal li::before {
+      content: '\2014';
+      margin-right: 8px;
+      color: var(--testo-muted);
+    }
+
+    .legal a {
+      color: var(--testo);
+      border-bottom: 1px solid var(--beige);
+      transition: border-color 0.3s;
+    }
+
+    .legal a:hover { border-color: var(--testo); }
+
+    .legal table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-family: var(--font-ui);
+      font-size: 13px;
+    }
+
+    .legal th, .legal td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--beige);
+      color: var(--testo-light);
+    }
+
+    .legal th {
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--testo-muted);
+    }
+
+    @media (max-width: 768px) {
+      .legal { padding: 120px 24px 64px; }
+    }
+</style>
+
+    <section class="legal">
+      <h1 class="legal__title rv">Cookie Policy</h1>
+      <p class="legal__date rv rv-d1">Ultimo aggiornamento: 3 aprile 2026</p>
+
+      <h2 class="rv rv-d1">1. Cosa sono i cookie</h2>
+      <p class="rv rv-d2">I cookie sono piccoli file di testo che i siti web salvano sul dispositivo dell'utente per migliorare l'esperienza di navigazione.</p>
+
+      <h2 class="rv rv-d1">2. Cookie utilizzati</h2>
+      <p class="rv rv-d2">Questo sito utilizza esclusivamente cookie tecnici necessari al corretto funzionamento del sito. Non utilizziamo cookie di profilazione o di terze parti per finalita di marketing.</p>
+
+      <table class="rv rv-d2">
+        <thead>
+          <tr>
+            <th>Cookie</th>
+            <th>Tipo</th>
+            <th>Finalita</th>
+            <th>Durata</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>dd_cookie_consent</td>
+            <td>Tecnico</td>
+            <td>Ricordare la scelta sul banner cookie</td>
+            <td>365 giorni</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="rv rv-d1">3. Cookie di terze parti</h2>
+      <p class="rv rv-d2">Al momento questo sito non utilizza cookie di terze parti. Qualora in futuro venissero introdotti servizi di analisi o marketing, questa pagina verra aggiornata e sara richiesto il consenso esplicito dell'utente.</p>
+
+      <h2 class="rv rv-d1">4. Come disabilitare i cookie</h2>
+      <p class="rv rv-d2">E possibile gestire le preferenze sui cookie direttamente dalle impostazioni del proprio browser. Di seguito i link alle guide dei principali browser:</p>
+      <ul class="rv rv-d2">
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/it/kb/protezione-antitracciamento-avanzata-firefox-desktop" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+        <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+      </ul>
+
+      <h2 class="rv rv-d1">5. Titolare del trattamento</h2>
+      <p class="rv rv-d2">
+        Dimensione Dolce S.r.l.<br>
+        Via Roma, 42 &mdash; 62100 Macerata (MC)<br>
+        Email: <a href="mailto:info@dimensionedolce.it">info@dimensionedolce.it</a>
+      </p>
+
+      <h2 class="rv rv-d1">6. Aggiornamenti</h2>
+      <p class="rv rv-d2">Questa Cookie Policy puo essere aggiornata periodicamente. La data dell'ultimo aggiornamento e indicata in alto.</p>
+    </section>
+
+</BaseLayout>

@@ -1,3 +1,6 @@
-generate-*.mjs
+node_modules/
+dist/
 .vercel
+.env
+.astro/
 assets/img/source-photos/

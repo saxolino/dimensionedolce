@@ -1,0 +1,764 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchSanity } from '../lib/sanity';
+import { menuPageQuery } from '../lib/queries';
+
+const page = await fetchSanity<any>(menuPageQuery);
+---
+
+<BaseLayout
+  title={page?.seoTitle || 'Il Menu | Dimensione Dolce'}
+  description={page?.seoDescription || 'Il menu di Dimensione Dolce: gelateria artigianale, pasticceria e colazione. Creazioni preparate ogni giorno con ingredienti freschi e di stagione.'}
+>
+
+<style is:global>
+    /* ============================================================
+       DIMENSIONE DOLCE — Menu Page (page-specific styles only)
+       Shared styles loaded from css/shared.css
+       ============================================================ */
+
+    /* Main content offset */
+    .main {
+      margin-left: 0;
+    }
+
+    /* ============================================================
+       HERO — Cinematic carousel (no moon)
+       ============================================================ */
+    .hero {
+      background: var(--nero);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 60px;
+    }
+
+    /* Carousel slides */
+    .hero__carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero__slide--active {
+      opacity: 1;
+    }
+
+    .hero__slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.32) saturate(0.7);
+      transform: scale(1.08);
+      animation: heroKenBurns 8s ease-out forwards;
+    }
+
+    .hero__slide--active img {
+      animation: heroKenBurns 8s ease-out forwards;
+    }
+
+    @keyframes heroKenBurns {
+      from { transform: scale(1.08); }
+      to { transform: scale(1); }
+    }
+
+    /* Dark overlay gradient */
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(30, 25, 24, 0.85) 0%,
+        rgba(30, 25, 24, 0.15) 50%,
+        rgba(30, 25, 24, 0.35) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero__brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      will-change: transform;
+    }
+
+    /* Wordmark — clip-path reveal */
+    .hero__wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Lines draw from center outward */
+    .hero__line-top,
+    .hero__line-bottom {
+      height: 1.5px;
+      background: rgba(255,255,255,0.6);
+      width: 0;
+      animation: lineDrawSlow 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    }
+
+    @keyframes lineDrawSlow {
+      to { width: 280px; }
+    }
+
+    /* IL — letter-spacing reveal */
+    .hero__il {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      padding: 14px 0;
+      opacity: 0;
+      animation: ilReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+    }
+
+    @keyframes ilReveal {
+      to { opacity: 1; letter-spacing: 0.45em; }
+    }
+
+    /* Menu — slide up from clip */
+    .hero__menu-title {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1;
+      margin-top: 8px;
+      clip-path: inset(100% 0 0 0);
+      animation: menuClipReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+    }
+
+    @keyframes menuClipReveal {
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    /* Tagline — fade + subtle slide */
+    .hero__tagline {
+      max-width: 480px;
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: taglineIn 1s cubic-bezier(0.22, 1, 0.36, 1) 1.3s forwards;
+      text-align: center;
+    }
+
+    @keyframes taglineIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero__tagline-text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: scrollIndicatorIn 0.8s ease 2s forwards;
+    }
+
+    .hero__scroll-label {
+      font-family: var(--font-ui);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--pistacchio), transparent);
+      animation: scrollPulse 2s ease-in-out 3s infinite;
+    }
+
+    @keyframes scrollIndicatorIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.3); transform-origin: top; }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       MENU SECTIONS — Category blocks
+       ============================================================ */
+    .menu-section {
+      padding: 120px 60px;
+      text-align: center;
+    }
+
+    .menu-section--white {
+      background: var(--bianco);
+    }
+
+    .menu-section--crema {
+      background: var(--crema-warm);
+    }
+
+    .menu-section__accent {
+      width: 40px;
+      height: 2px;
+      margin: 0 auto 28px;
+    }
+
+    .menu-section__accent--pistacchio {
+      background: var(--pistacchio);
+    }
+
+    .menu-section__accent--magenta {
+      background: var(--magenta);
+    }
+
+    .menu-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .menu-section__subtitle {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 560px;
+      margin: 0 auto 64px;
+    }
+
+    /* ============================================================
+       PRODUCT GRID
+       ============================================================ */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .menu-grid--2col {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 720px;
+    }
+
+    .menu-grid + .menu-grid {
+      margin-top: 40px;
+    }
+
+    /* ============================================================
+       PRODUCT CARD — Luxury editorial style
+       ============================================================ */
+    .menu-card {
+      text-align: left;
+    }
+
+    .menu-card__image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--crema);
+      border-radius: 2px;
+    }
+
+    .menu-section--crema .menu-card__image {
+      background: var(--beige);
+    }
+
+    .menu-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .menu-card:hover .menu-card__image img {
+      transform: scale(1.06);
+    }
+
+    .menu-card__body {
+      padding: 20px 4px 0;
+    }
+
+    .menu-card__name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .menu-card__desc {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--testo-light);
+      margin-bottom: 12px;
+    }
+
+    .menu-card__price {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pistacchio-scuro);
+    }
+
+    /* ---------- GALLERY drag-scroll ---------- */
+    .cs-gal { background: var(--bianco); }
+    .cs-gal__track { display: flex; gap: 6px; padding: 0 clamp(16px, 4vw, 60px); overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; cursor: grab; scrollbar-width: none; height: 620px; }
+    .cs-gal__track::-webkit-scrollbar { display: none; }
+    .cs-gal__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+    .cs-gal__item { flex-shrink: 0; width: calc(33.333% - 4px); height: 100%; scroll-snap-align: start; position: relative; overflow: hidden; border-radius: 3px; }
+    .cs-gal__item img { width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; transition: transform 1.2s cubic-bezier(0.16,1,0.3,1); }
+    .cs-gal__item:hover img { transform: scale(1.06); }
+    .cs-gal__progress { width: 120px; height: 2px; background: rgba(0,0,0,0.08); margin: 24px auto 0; border-radius: 1px; overflow: hidden; }
+    .cs-gal__progress-fill { height: 100%; background: var(--pistacchio); border-radius: 1px; width: 33.3%; transition: transform 0.15s ease-out; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .hero { padding: 60px 40px; }
+      .hero__menu-title { font-size: 56px; }
+      .hero__line-top, .hero__line-bottom { width: 220px; }
+
+      .menu-section { padding: 80px 36px; }
+      .menu-grid { gap: 28px; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .main { padding-top: 0; }
+      .cs-gal__track { height: 360px; }
+      .cs-gal__item { width: 75%; }
+
+      /* Hero mobile — stacked, centered */
+      .hero {
+        min-height: auto;
+        padding: 60px 24px 48px;
+      }
+
+      .hero__menu-title { font-size: 52px; clip-path: none; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+      .hero__line-top, .hero__line-bottom { width: 200px; }
+      .hero__il { font-size: 14px; letter-spacing: 0.35em; }
+      .hero__scroll { display: none; }
+
+      .hero__tagline {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      /* Menu sections */
+      .menu-section { padding: 64px 24px; }
+      .menu-section__subtitle { margin-bottom: 40px; }
+
+      /* Product grid — single column */
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        max-width: 400px;
+      }
+
+      .menu-grid--2col {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero__menu-title { font-size: 44px; }
+      .hero__line-top, .hero__line-bottom { width: 160px; }
+      .hero__il { font-size: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero__wordmark, .hero__tagline {
+        opacity: 1; transform: none; animation: none;
+      }
+      .hero__il { opacity: 1; letter-spacing: 0.45em; animation: none; }
+      .hero__menu-title { opacity: 1; clip-path: none; animation: none; }
+      .hero__line-top, .hero__line-bottom { width: 280px; animation: none; }
+    }
+</style>
+
+    <!-- ========== GALLERY — drag-scroll ========== -->
+    <section class="cs-gal" style="padding-top:89px;">
+      <div class="cs-gal__track" id="galTrack">
+        <div class="cs-gal__item"><img src="/assets/img/products/19_Sfera_di_cioccolato.webp" alt="Sfera di Cioccolato" loading="lazy"></div>
+        <div class="cs-gal__item"><img src="/assets/img/products/06_Torta_cuore_rossa_glossy.webp" alt="Torta Cuore Rosso" loading="lazy"></div>
+        <div class="cs-gal__item"><img src="/assets/img/products/01_Croissant_crema_e_frutti_rossi.webp" alt="Croissant" loading="lazy"></div>
+        <div class="cs-gal__item"><img src="/assets/img/products/15_Tarte_au_citron_meringuee.webp" alt="Tarte au Citron" loading="lazy"></div>
+        <div class="cs-gal__item"><img src="/assets/img/products/12_Tulipano_pesca.webp" alt="Tulipano alla Pesca" loading="lazy"></div>
+        <div class="cs-gal__item"><img src="/assets/img/products/05_Cruffin_ai_frutti_di_bosco.webp" alt="Cruffin" loading="lazy"></div>
+      </div>
+      <div class="cs-gal__progress"><div class="cs-gal__progress-fill" id="galFill"></div></div>
+    </section>
+
+    <!-- ========== COLAZIONE ========== -->
+    <section class="menu-section menu-section--white" id="colazione">
+      <div class="menu-section__accent menu-section__accent--pistacchio rv"></div>
+      <h2 class="menu-section__title rv rv-d1">{page?.sections?.[0]?.title || 'Colazione'}</h2>
+      <p class="menu-section__subtitle rv rv-d2">{page?.sections?.[0]?.subtitle || 'Il buongiorno si vede dal mattino. Viennoiserie sfogliate a mano, lievitazione lenta e farciture fresche ogni giorno.'}</p>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/01_Croissant_crema_e_frutti_rossi.webp" alt="Croissant Crema e Frutti Rossi" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[0]?.items?.[0]?.name || 'Croissant Crema e Frutti Rossi'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[0]?.items?.[0]?.description || 'Sfoglia dorata e croccante, farcita con crema pasticcera e frutti rossi freschi di stagione'}</p>
+            <span class="menu-card__price">{page?.sections?.[0]?.items?.[0]?.price || '€3.00'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/02_Brioche_scanalata_con_crema.webp" alt="Brioche Scanalata con Crema" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[0]?.items?.[1]?.name || 'Brioche Scanalata con Crema'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[0]?.items?.[1]?.description || 'Impasto soffice al burro con lievitazione lenta, ripiena di crema alla vaniglia del Madagascar'}</p>
+            <span class="menu-card__price">{page?.sections?.[0]?.items?.[1]?.price || '€2.80'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/03_Bomboloni_allo_zucchero.webp" alt="Bomboloni allo Zucchero" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[0]?.items?.[2]?.name || 'Bomboloni allo Zucchero'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[0]?.items?.[2]?.description || 'Fritti a mano e zuccherati al momento, soffici e leggerissimi. Farciture disponibili su richiesta'}</p>
+            <span class="menu-card__price">{page?.sections?.[0]?.items?.[2]?.price || '€2.50'}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-grid menu-grid--2col">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/04_Pain_au_chocolat_spirale.webp" alt="Pain au Chocolat Spirale" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[0]?.items?.[3]?.name || 'Pain au Chocolat Spirale'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[0]?.items?.[3]?.description || 'Sfogliatura a spirale con cuore di cioccolato fondente Valrhona, croccante fuori, morbido dentro'}</p>
+            <span class="menu-card__price">{page?.sections?.[0]?.items?.[3]?.price || '€3.20'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/05_Cruffin_ai_frutti_di_bosco.webp" alt="Cruffin ai Frutti di Bosco" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[0]?.items?.[4]?.name || 'Cruffin ai Frutti di Bosco'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[0]?.items?.[4]?.description || "L'incontro tra croissant e muffin, farcito con composta di frutti di bosco e crema leggera"}</p>
+            <span class="menu-card__price">{page?.sections?.[0]?.items?.[4]?.price || '€3.50'}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TORTE ========== -->
+    <section class="menu-section menu-section--crema" id="torte">
+      <div class="menu-section__accent menu-section__accent--magenta rv"></div>
+      <h2 class="menu-section__title rv rv-d1">{page?.sections?.[1]?.title || 'Le Torte'}</h2>
+      <p class="menu-section__subtitle rv rv-d2">{page?.sections?.[1]?.subtitle || 'Creazioni artigianali per le occasioni speciali. Ogni torta e preparata su ordinazione con ingredienti selezionati e decorata a mano.'}</p>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/06_Torta_cuore_rossa_glossy.webp" alt="Torta Cuore Rosso" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[1]?.items?.[0]?.name || 'Torta Cuore Rosso'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[1]?.items?.[0]?.description || 'Mousse al cioccolato fondente, cuore di lampone, glassa a specchio rossa. Disponibile da 4 a 10 porzioni'}</p>
+            <span class="menu-card__price">{page?.sections?.[1]?.items?.[0]?.price || 'da €32.00'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/07_Torta_limone_con_margherite.webp" alt="Torta al Limone e Margherite" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[1]?.items?.[1]?.name || 'Torta al Limone e Margherite'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[1]?.items?.[1]?.description || 'Crema al limone di Sorrento, meringa italiana soffice, decorata con margherite fresche'}</p>
+            <span class="menu-card__price">{page?.sections?.[1]?.items?.[1]?.price || 'da €28.00'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/08_Torta_mousse_bianca_funghetti.webp" alt="Torta Mousse Incantata" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[1]?.items?.[2]?.name || 'Torta Mousse Incantata'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[1]?.items?.[2]?.description || 'Mousse al cioccolato bianco e vaniglia, meringhe decorative, base croccante alle nocciole Piemonte'}</p>
+            <span class="menu-card__price">{page?.sections?.[1]?.items?.[2]?.price || 'da €35.00'}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MONOPORZIONI ========== -->
+    <section class="menu-section menu-section--white" id="monoporzioni">
+      <div class="menu-section__accent menu-section__accent--pistacchio rv"></div>
+      <h2 class="menu-section__title rv rv-d1">{page?.sections?.[2]?.title || 'Monoporzioni'}</h2>
+      <p class="menu-section__subtitle rv rv-d2">{page?.sections?.[2]?.subtitle || "Piccole opere d'arte da gustare. Ogni monoporzione e un equilibrio di sapori, texture e bellezza, preparata ogni giorno nel nostro laboratorio."}</p>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/09_Limone_trompe_loeil.webp" alt="Limone Trompe-l'oeil" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[0]?.name || "Limone Trompe-l'oeil"}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[0]?.description || 'Mousse al limone e basilico, cuore di gelee agli agrumi, glassa gialla a specchio che replica un vero limone'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[0]?.price || '€7.00'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/10_Pera_al_cioccolato.webp" alt="Pera al Cioccolato" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[1]?.name || 'Pera al Cioccolato'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[1]?.description || 'Mousse al cioccolato fondente, insert di pera williams caramellata, biscotto alle noci'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[1]?.price || '€6.50'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/11_Pera_trompe_loeil.webp" alt="Pera Trompe-l'oeil" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[2]?.name || "Pera Trompe-l'oeil"}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[2]?.description || 'Mousse alla pera e vaniglia, cuore di caramello al burro salato, glassa realistica verde e rossa'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[2]?.price || '€7.00'}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/12_Tulipano_pesca.webp" alt="Tulipano alla Pesca" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[3]?.name || 'Tulipano alla Pesca'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[3]?.description || "Mousse alla pesca e fiori d'arancio, biscotto alla mandorla, decorazione a petalo dipinta a mano"}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[3]?.price || '€7.50'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/13_Cupola_rossa_in_cioccolato.webp" alt="Cupola Rossa al Cioccolato" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[4]?.name || 'Cupola Rossa al Cioccolato'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[4]?.description || 'Cupola di mousse al cioccolato, glassa rossa lucida a specchio, base brownie fondente'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[4]?.price || '€7.00'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/14_Tiramisu_monoporzione.webp" alt="Tiramisu" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[5]?.name || 'Tiramisu'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[5]?.description || 'Savoiardi imbevuti nel nostro caffe, crema al mascarpone fresco, spolverata di cacao amaro Valrhona'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[5]?.price || '€6.00'}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/15_Tarte_au_citron_meringuee.webp" alt="Tarte au Citron Meringuee" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[6]?.name || 'Tarte au Citron Meringuee'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[6]?.description || 'Frolla croccante al burro, crema al limone vellutata, meringa italiana fiammeggiata al momento'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[6]?.price || '€6.50'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/16_Tartina_mango_foglia_doro.webp" alt="Tartina Mango e Foglia d'Oro" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[7]?.name || "Tartina Mango e Foglia d'Oro"}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[7]?.description || "Mousse esotica al mango e passion fruit, base croccante, finitura in foglia d'oro alimentare"}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[7]?.price || '€8.00'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/17_Trancio_tre_cioccolati.webp" alt="Trancio Tre Cioccolati" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[8]?.name || 'Trancio Tre Cioccolati'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[8]?.description || 'Tre strati di mousse: fondente, latte e bianco, su base di biscotto croccante al cacao'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[8]?.price || '€6.00'}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/18_Monoporzione_albicocca.webp" alt="Monoporzione all'Albicocca" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[9]?.name || "Monoporzione all'Albicocca"}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[9]?.description || "Mousse all'albicocca, insert alla vaniglia Bourbon, glassa arancione brillante"}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[9]?.price || '€6.50'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/19_Sfera_di_cioccolato.webp" alt="Sfera di Cioccolato" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[10]?.name || 'Sfera di Cioccolato'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[10]?.description || 'Sfera in cioccolato fondente a specchio, cuore cremoso al caramello salato, croccante alle nocciole'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[10]?.price || '€7.50'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="/assets/img/products/20_Choux_alla_crema.webp" alt="Choux alla Crema" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[11]?.name || 'Choux alla Crema'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[11]?.description || 'Pasta choux croccante, ripiena di crema leggera alla vaniglia, glassa fondente e finitura al cioccolato'}</p>
+            <span class="menu-card__price">{page?.sections?.[2]?.items?.[11]?.price || '€5.50'}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== GELATERIA ========== -->
+    <section class="menu-section menu-section--crema" id="gelateria">
+      <div class="menu-section__accent menu-section__accent--magenta rv"></div>
+      <h2 class="menu-section__title rv rv-d1">{page?.sections?.[3]?.title || 'Gelateria'}</h2>
+      <p class="menu-section__subtitle rv rv-d2">{page?.sections?.[3]?.subtitle || 'I nostri gusti artigianali, preparati ogni giorno con ingredienti freschi e di stagione.'}</p>
+
+      <div class="menu-grid">
+        <div class="menu-card rv rv-d1">
+          <div class="menu-card__image">
+            <img src="/assets/img/product-pistacchio.webp" alt="Pistacchio di Bronte" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[3]?.items?.[0]?.name || 'Pistacchio di Bronte'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[3]?.items?.[0]?.description || 'Crema di pistacchio DOP, tostato e macinato a pietra'}</p>
+            <span class="menu-card__price">{page?.sections?.[3]?.items?.[0]?.price || '€3.50'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d2">
+          <div class="menu-card__image">
+            <img src="/assets/img/product-cioccolato.webp" alt="Cioccolato Fondente" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[3]?.items?.[1]?.name || 'Cioccolato Fondente'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[3]?.items?.[1]?.description || 'Cioccolato Valrhona 70%, lavorato in mantecatura lenta'}</p>
+            <span class="menu-card__price">{page?.sections?.[3]?.items?.[1]?.price || '€3.50'}</span>
+          </div>
+        </div>
+        <div class="menu-card rv rv-d3">
+          <div class="menu-card__image">
+            <img src="/assets/img/product-classico.webp" alt="Crema Classica" loading="lazy">
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">{page?.sections?.[3]?.items?.[2]?.name || 'Crema Classica'}</h3>
+            <p class="menu-card__desc">{page?.sections?.[3]?.items?.[2]?.description || 'La nostra crema alla vaniglia del Madagascar, una tradizione rinnovata'}</p>
+            <span class="menu-card__price">{page?.sections?.[3]?.items?.[2]?.price || '€3.00'}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Page-specific: hero carousel + parallax -->
+  <script is:inline>
+    // Hero carousel
+    const slides = document.querySelectorAll('.hero__slide');
+    if (slides.length) {
+      let currentSlide = 0;
+      setInterval(() => {
+        slides[currentSlide].classList.remove('hero__slide--active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        const next = slides[currentSlide];
+        next.classList.add('hero__slide--active');
+        const img = next.querySelector('img');
+        img.style.animation = 'none';
+        img.offsetHeight;
+        img.style.animation = '';
+      }, 6000);
+    }
+
+    // Hero parallax on mouse
+    const heroEl = document.querySelector('.hero');
+    const brandEl = document.querySelector('.hero__brand');
+    if (heroEl && window.matchMedia('(min-width: 769px)').matches) {
+      heroEl.addEventListener('mousemove', (e) => {
+        const rect = heroEl.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        if (brandEl) brandEl.style.transform = `translate(${x * -6}px, ${y * -4}px)`;
+      });
+      heroEl.addEventListener('mouseleave', () => {
+        if (brandEl) brandEl.style.transform = '';
+      });
+    }
+  </script>
+
+</BaseLayout>

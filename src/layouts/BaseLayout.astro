@@ -1,0 +1,110 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- HEADER -->
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <nav class="hdr__nav hdr__nav--left">
+        <a href="/menu.html" class="hdr__link">Menu'</a>
+        <a href="/chi-siamo.html" class="hdr__link">Chi Siamo</a>
+      </nav>
+      <a href="/" class="hdr__logo">
+        <img src="/assets/img/logo-dimensione-dolce-light.png" alt="Dimensione Dolce" class="hdr__logo-img">
+      </a>
+      <nav class="hdr__nav hdr__nav--right">
+        <a href="/catering-eventi.html" class="hdr__link">Eventi</a>
+        <a href="/contatti.html" class="hdr__link">Contatti</a>
+      </nav>
+      <button class="hdr__burger" id="hdrBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="hdr__filament"></div>
+  </header>
+
+  <!-- MOBILE SIDEBAR -->
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <nav class="mob-sidebar" id="mobSidebar">
+    <div class="mob-sidebar__header">
+      <img src="/assets/img/logo-dimensione-dolce-light.png" alt="Dimensione Dolce" class="mob-sidebar__brand-img">
+      <button class="mob-sidebar__close" id="mobClose" aria-label="Chiudi menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="mob-sidebar__nav">
+      <a href="/menu.html" class="mob-sidebar__link">Menu'</a>
+      <a href="/chi-siamo.html" class="mob-sidebar__link">Chi Siamo</a>
+      <a href="/catering-eventi.html" class="mob-sidebar__link">Eventi</a>
+      <a href="/contatti.html" class="mob-sidebar__link">Contatti</a>
+    </div>
+    <div class="mob-sidebar__footer">
+      <a href="tel:+390212345678" class="mob-sidebar__contact">+39 02 1234567</a>
+      <a href="https://instagram.com/dimensionedolce" class="mob-sidebar__social" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @dimensionedolce
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <slot />
+
+    <!-- FOOTER -->
+    <footer class="ftr" id="contatti">
+      <div class="ftr__moon rv">
+        <img src="/assets/img/logo-sbaffo-green.png" alt="Dimensione Dolce">
+      </div>
+      <nav class="ftr__nav rv rv-d1">
+        <a href="/menu.html">Menu'</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="/chi-siamo.html">Chi Siamo</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="/catering-eventi.html">Eventi</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="/contatti.html">Contatti</a>
+      </nav>
+      <a href="https://instagram.com/dimensionedolce" class="ftr__ig" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <p class="ftr__copy rv rv-d2">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
+      <div class="ftr__legal">
+        <a href="/privacy.html">Privacy Policy</a>
+        <span class="ftr__nav-sep">|</span>
+        <a href="/cookie-policy.html">Cookie Policy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script is:inline src="/js/shared.js" defer></script>
+
+  <!-- Cookie Banner -->
+  <div class="cookie-banner">
+    <p class="cookie-banner__text">Questo sito utilizza solo cookie tecnici necessari al funzionamento. <a href="/cookie-policy.html">Maggiori informazioni</a></p>
+    <button class="cookie-banner__btn">OK</button>
+  </div>
+</body>
+</html>

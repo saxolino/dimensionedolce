@@ -1,0 +1,707 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchSanity } from '../lib/sanity';
+import { homePageQuery } from '../lib/queries';
+
+const page = await fetchSanity<any>(homePageQuery);
+---
+
+<BaseLayout title={page?.seoTitle || "Dimensione Dolce | Pasticceria Artigianale"} description={page?.seoDescription || "Un luogo dedicato al gusto e al piacere della dolcezza, tra pasticceria, gelateria e caffè."}>
+
+  <style is:global>
+    /* ============================================================
+       DIMENSIONE DOLCE — Homepage-specific styles
+       ============================================================ */
+
+    /* ============================================================
+       HERO — Minimal white with logo
+       ============================================================ */
+    .hero {
+      background: var(--bianco);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 200px 40px 100px;
+      text-align: center;
+    }
+
+    .hero__logo-full {
+      max-width: 200px;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: logoIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
+
+    .hero__logo-full img {
+      width: 100%;
+      height: auto;
+    }
+
+    @keyframes logoIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       GALLERY — Horizontal drag-scroll on white
+       ============================================================ */
+    .gal {
+      background: var(--bianco);
+      padding: 0 0 40px;
+      overflow: hidden;
+    }
+
+    .gal__track {
+      display: flex;
+      gap: 6px;
+      padding: 0 clamp(24px, 5vw, 80px);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      height: 780px;
+    }
+
+    .gal__track::-webkit-scrollbar { display: none; }
+    .gal__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+    .gal__track.is-dragging .gal__item img { pointer-events: none; }
+
+    .gal__item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      height: 100%;
+    }
+
+    .gal__item--wide { width: clamp(340px, 38vw, 520px); }
+    .gal__item--narrow { width: clamp(260px, 26vw, 360px); }
+
+    .gal__item--duo {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: clamp(260px, 26vw, 360px);
+    }
+
+    .gal__item--duo .gal__sub {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      flex: 1;
+    }
+
+    .gal__item img,
+    .gal__sub img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .gal__item:hover > img,
+    .gal__sub:hover img { transform: scale(1.06); }
+
+    .gal__item > .gal__name,
+    .gal__sub > .gal__name {
+      position: absolute;
+      bottom: 20px; left: 24px; right: 24px;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(16px, 1.4vw, 22px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover > .gal__name,
+    .gal__sub:hover > .gal__name {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gal__item::after,
+    .gal__sub::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(30,25,24,0.55), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .gal__item:hover::after,
+    .gal__sub:hover::after { opacity: 1; }
+    .gal__item--duo::after { display: none; }
+
+    .gal__progress {
+      width: 120px;
+      height: 2px;
+      background: rgba(0,0,0,0.08);
+      margin: 32px auto 0;
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .gal__progress-fill {
+      height: 100%;
+      background: var(--pistacchio);
+      border-radius: 1px;
+      width: 30%;
+      transition: width 0.1s ease-out, transform 0.1s ease-out;
+    }
+
+    /* ============================================================
+       BENVENUTI — Centered statement
+       ============================================================ */
+    .benvenuti {
+      background: var(--bianco);
+      padding: 150px 60px;
+      text-align: center;
+    }
+
+    .benvenuti__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .benvenuti__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .benvenuti__divider {
+      width: 60px;
+      height: 1px;
+      background: var(--pistacchio);
+      margin: 48px auto 0;
+    }
+
+    /* ============================================================
+       SERVICE BLOCKS — Square alternating halves
+       ============================================================ */
+    .svc-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .svc-half {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 56px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Text on dark bg */
+    .svc-half--dark {
+      background: var(--cioccolato-deep);
+    }
+
+    .svc-half--dark .svc-half__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .svc-half--dark .svc-half__text {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      max-width: 380px;
+    }
+
+    .svc-half--dark .svc-half__cta {
+      color: var(--magenta);
+      border-bottom: 1px solid var(--magenta);
+      margin-top: 28px;
+    }
+
+    /* Text on white bg */
+    .svc-half--bianco {
+      background: var(--bianco);
+    }
+
+    .svc-half--bianco .svc-half__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .svc-half--bianco .svc-half__text {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--testo-light);
+      max-width: 380px;
+    }
+
+    .svc-half--bianco .svc-half__cta {
+      color: var(--testo);
+      border-bottom: 1px solid rgba(56,46,44,0.25);
+      margin-top: 28px;
+    }
+
+    /* Text on pistachio bg */
+    .svc-half--pistacchio {
+      background: var(--pistacchio);
+    }
+
+    .svc-half--pistacchio .svc-half__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--cioccolato);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .svc-half--pistacchio .svc-half__text {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--cioccolato-deep);
+      max-width: 380px;
+      opacity: 0.75;
+    }
+
+    .svc-half--pistacchio .svc-half__cta {
+      color: var(--cioccolato);
+      border-bottom: 1px solid rgba(44,35,34,0.3);
+      margin-top: 28px;
+    }
+
+    /* Photo half */
+    .svc-half--photo {
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .svc-half--photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .svc-half--photo:hover img { transform: scale(1.06); }
+
+    .svc-half--photo::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(30,25,24,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .svc-half--photo:hover::after { opacity: 1; }
+
+    .svc-half--photo .svc-half__overlay {
+      position: absolute;
+      bottom: 28px; left: 0; right: 0;
+      z-index: 2;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bianco);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .svc-half--photo:hover .svc-half__overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CTA shared */
+    .svc-half__cta {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding-bottom: 4px;
+      transition: opacity 0.3s;
+    }
+
+    .svc-half__cta:hover { opacity: 0.7; }
+
+
+    /* ============================================================
+       LA NOSTRA STORIA — Team intro
+       ============================================================ */
+    .storia {
+      background: var(--bianco);
+      padding: 150px 60px;
+      text-align: center;
+    }
+
+    .storia__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+
+    .storia__text {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--testo-light);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .storia__divider {
+      width: 60px;
+      height: 1px;
+      background: var(--pistacchio);
+      margin: 48px auto 0;
+    }
+
+    /* ============================================================
+       TEAM BLOCKS — Alternating photo/text halves
+       ============================================================ */
+    .team-block {
+      display: flex;
+      min-height: 460px;
+    }
+
+    .team-half--info {
+      width: 50%;
+      flex-shrink: 0;
+      background: var(--cioccolato-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 56px 52px;
+    }
+
+    .team-half--photo {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .team-half__role {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pistacchio);
+      margin-bottom: 16px;
+    }
+
+    .team-half__name {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.5vw, 34px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .team-half__bio {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      max-width: 400px;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .hero { padding: 80px 40px 40px; }
+      .hero__logo-full { max-width: 180px; }
+
+      .gal__track { height: 500px; }
+
+      .svc-half, .team-half--info { padding: 48px 36px; }
+      .svc-half--text { padding: 48px 36px; }
+      .benvenuti, .storia { padding: 80px 36px; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .hero { padding: 120px 24px 60px; }
+      .hero__logo-full { max-width: 120px; }
+
+      /* Gallery mobile */
+      .gal__track {
+        height: 420px;
+        gap: 4px;
+        padding: 0 16px;
+      }
+      .gal__item--wide { width: 300px; }
+      .gal__item--narrow { width: 220px; }
+      .gal__item--duo { width: 220px; }
+
+      /* Service blocks stack */
+      .svc-block,
+      .team-block {
+        grid-template-columns: 1fr;
+      }
+
+      /* On mobile: always text first, photo second */
+      .svc-half--photo { order: 2; }
+      .svc-half:not(.svc-half--photo) { order: 1; }
+
+      .svc-block--reverse,
+      .team-block--reverse {
+        direction: ltr;
+      }
+
+      .team-half--info {
+        padding: 56px 24px;
+      }
+
+      .svc-half {
+        aspect-ratio: 1;
+        padding: 64px 32px;
+      }
+
+      .svc-half--photo {
+        padding: 0;
+        min-height: 280px;
+        aspect-ratio: 4 / 3;
+      }
+
+      .team-half--photo,
+      .team-half--placeholder {
+        min-height: 300px;
+      }
+
+      .benvenuti, .storia { padding: 72px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero__logo-full { max-width: 100px; }
+
+      .svc-half--photo { min-height: 240px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero__logo-full {
+        opacity: 1; transform: none; animation: none;
+      }
+    }
+  </style>
+
+  <!-- ========== HERO — Logo only ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__logo-full">
+      <img src="/assets/img/logo-completo.png" alt="Dimensione Dolce">
+    </div>
+  </section>
+
+  <!-- ========== GALLERY ========== -->
+  <section class="gal">
+    <div class="gal__track" id="galTrack">
+      <div class="gal__item gal__item--wide rv">
+        <img src="/assets/img/products/19_Sfera_di_cioccolato.webp" alt="Sfera di Cioccolato" loading="lazy">
+        <span class="gal__name">Sfera di Cioccolato</span>
+      </div>
+      <div class="gal__item gal__item--duo rv rv-d1">
+        <div class="gal__sub">
+          <img src="/assets/img/products/12_Tulipano_pesca.webp" alt="Tulipano alla Pesca" loading="lazy">
+          <span class="gal__name">Tulipano alla Pesca</span>
+        </div>
+        <div class="gal__sub">
+          <img src="/assets/img/products/01_Croissant_crema_e_frutti_rossi.webp" alt="Croissant" loading="lazy">
+          <span class="gal__name">Croissant Frutti Rossi</span>
+        </div>
+      </div>
+      <div class="gal__item gal__item--narrow rv rv-d2">
+        <img src="/assets/img/products/09_Limone_trompe_loeil.webp" alt="Limone Trompe-l'oeil" loading="lazy">
+        <span class="gal__name">Limone Trompe-l'oeil</span>
+      </div>
+      <div class="gal__item gal__item--duo rv rv-d3">
+        <div class="gal__sub">
+          <img src="/assets/img/products/15_Tarte_au_citron_meringuee.webp" alt="Tarte au Citron" loading="lazy">
+          <span class="gal__name">Tarte au Citron</span>
+        </div>
+        <div class="gal__sub">
+          <img src="/assets/img/products/06_Torta_cuore_rossa_glossy.webp" alt="Torta Cuore Rosso" loading="lazy">
+          <span class="gal__name">Torta Cuore Rosso</span>
+        </div>
+      </div>
+      <div class="gal__item gal__item--wide rv rv-d4">
+        <img src="/assets/img/products/02_Brioche_scanalata_con_crema.webp" alt="Brioche Scanalata" loading="lazy">
+        <span class="gal__name">Brioche Scanalata</span>
+      </div>
+      <div class="gal__item gal__item--narrow rv rv-d5">
+        <img src="/assets/img/products/08_Torta_mousse_bianca_funghetti.webp" alt="Torta Mousse Incantata" loading="lazy">
+        <span class="gal__name">Torta Mousse Incantata</span>
+      </div>
+    </div>
+    <div class="gal__progress">
+      <div class="gal__progress-fill" id="galProgressFill"></div>
+    </div>
+  </section>
+
+  <!-- ========== BENVENUTI ========== -->
+  <section class="benvenuti">
+    <h2 class="benvenuti__title rv">{page?.benvenuti?.title || 'Benvenuti nella nostra dimensione'}</h2>
+    <p class="benvenuti__text rv rv-d1">
+      {page?.benvenuti?.text || `Un luogo dove il piacere della dolcezza si incontra con il tempo di una pausa.
+      Nel nostro laboratorio, pasticceria e gelato nascono da ingredienti selezionati
+      e lavorazioni artigianali, insieme a caffe e specialita pensate per la colazione e per
+      i piccoli momenti della giornata. Dalla pausa quotidiana alle occasioni da
+      celebrare, con torte personalizzate e catering per eventi, accompagniamo ogni
+      momento con gusto e qualita.`}
+    </p>
+    <div class="benvenuti__divider rv rv-d2"></div>
+  </section>
+
+  <!-- ========== SERVIZI ========== -->
+  <div id="servizi">
+
+    <!-- GELATERIA: dark text + photo -->
+    <div class="svc-block">
+      <div class="svc-half svc-half--dark">
+        <h3 class="svc-half__title rv">{page?.serviceBlocks?.[0]?.title || 'Gelateria Artigianale'}</h3>
+        <p class="svc-half__text rv rv-d1">
+          {page?.serviceBlocks?.[0]?.text || `Il nostro gelato non conosce scorciatoie.
+          Ogni gusto nasce da ingredienti freschi e
+          selezionati, lavorati ogni giorno con
+          passione artigianale e nel rispetto dei
+          tempi. Un modo semplice e sincero di fare
+          gelato, dove la qualita si esprime nel
+          sapore autentico delle cose buone.`}
+        </p>
+        <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
+      </div>
+      <a href="menu.html" class="svc-half svc-half--photo">
+        <img src="/assets/img/products/gelato.webp" alt="Gelateria artigianale">
+        <span class="svc-half__overlay">Guarda tutto il menu</span>
+      </a>
+    </div>
+
+    <!-- PASTICCERIA: photo + white text -->
+    <div class="svc-block">
+      <a href="menu.html" class="svc-half svc-half--photo">
+        <img src="/assets/img/products/13_Cupola_rossa_in_cioccolato.webp" alt="Pasticceria artigianale">
+        <span class="svc-half__overlay">Guarda tutto il menu</span>
+      </a>
+      <div class="svc-half svc-half--bianco">
+        <h3 class="svc-half__title rv">{page?.serviceBlocks?.[1]?.title || 'La nostra Pasticceria'}</h3>
+        <p class="svc-half__text rv rv-d1">
+          {page?.serviceBlocks?.[1]?.text || `Un incontro tra gusto, tradizione e
+          creativita, in una selezione di dolci pensata
+          per ogni occasione. Preparati freschi e con
+          cura, accompagnano la colazione, le pause
+          della giornata e i momenti da condividere.`}
+        </p>
+        <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
+      </div>
+    </div>
+
+    <!-- CAFFE: pistachio text + photo -->
+    <div class="svc-block">
+      <div class="svc-half svc-half--pistacchio">
+        <h3 class="svc-half__title rv">{page?.serviceBlocks?.[2]?.title || 'Caffe & Torrefazione'}</h3>
+        <p class="svc-half__text rv rv-d1">
+          {page?.serviceBlocks?.[2]?.text || `Caffe selezionati e miscele curate, pensati
+          per chi ama il vero piacere del caffe.`}
+        </p>
+        <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
+      </div>
+      <a href="menu.html" class="svc-half svc-half--photo">
+        <img src="/assets/img/products/torrefazione.webp" alt="Caffe e torrefazione">
+        <span class="svc-half__overlay">Guarda tutto il menu</span>
+      </a>
+    </div>
+
+    <!-- APERITIVO: photo + white text -->
+    <div class="svc-block">
+      <a href="menu.html" class="svc-half svc-half--photo">
+        <img src="/assets/img/products/aperitivo.webp" alt="Aperitivo">
+        <span class="svc-half__overlay">Guarda tutto il menu</span>
+      </a>
+      <div class="svc-half svc-half--bianco">
+        <h3 class="svc-half__title rv">{page?.serviceBlocks?.[3]?.title || 'Aperitivo'}</h3>
+        <p class="svc-half__text rv rv-d1">
+          {page?.serviceBlocks?.[3]?.text || `Un momento che segna il passaggio dalla
+          giornata alla sera. Da Dimensione Dolce,
+          l'aperitivo e un invito a rallentare,
+          incontrarsi e godersi il tempo con
+          leggerezza.`}
+        </p>
+        <a href="menu.html" class="svc-half__cta rv rv-d2">Guarda tutto il menu</a>
+      </div>
+    </div>
+
+    <!-- EVENTI: dark text + photo -->
+    <div class="svc-block">
+      <div class="svc-half svc-half--dark">
+        <h3 class="svc-half__title rv">{page?.serviceBlocks?.[4]?.title || 'Eventi'}</h3>
+        <p class="svc-half__text rv rv-d1">
+          {page?.serviceBlocks?.[4]?.text || `Realizziamo creazioni su misura per
+          ogni occasione. Produzione artigianale,
+          ingredienti selezionati e massima cura.`}
+        </p>
+        <a href="catering-eventi.html" class="svc-half__cta rv rv-d2">Contattaci per prenotare</a>
+      </div>
+      <a href="catering-eventi.html" class="svc-half svc-half--photo">
+        <img src="/assets/img/products/07_Torta_limone_con_margherite.webp" alt="Eventi">
+        <span class="svc-half__overlay">Contattaci per prenotare</span>
+      </a>
+    </div>
+
+  </div>
+
+</BaseLayout>

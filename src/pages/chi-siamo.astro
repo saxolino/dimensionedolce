@@ -1,0 +1,754 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchSanity } from '../lib/sanity';
+import { aboutPageQuery } from '../lib/queries';
+
+const page = await fetchSanity<any>(aboutPageQuery);
+---
+
+<BaseLayout
+  title={page?.seoTitle || "La Pasticceria | Dimensione Dolce"}
+  description={page?.seoDescription || "La storia di Dimensione Dolce: tre generazioni di panettone artigianale milanese dal 1962. Il laboratorio, i maestri pasticceri."}
+>
+
+<style is:global>
+    /* ============================================================
+       LA PASTICCERIA — Editorial About Page
+       ============================================================ */
+
+    /* ---------- HERO ---------- */
+    .p-hero {
+      position: relative;
+      height: 85vh;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .p-hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .p-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.4) saturate(0.8);
+    }
+
+    .p-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(30, 25, 24, 0.95) 0%,
+        rgba(30, 25, 24, 0.3) 40%,
+        rgba(30, 25, 24, 0.1) 100%
+      );
+      z-index: 1;
+    }
+
+    .p-hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 40px 80px;
+      max-width: 800px;
+    }
+
+    .p-hero__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    .p-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+
+    .p-hero__title em {
+      font-style: italic;
+    }
+
+    .p-hero__line {
+      width: 60px;
+      height: 1px;
+      background: var(--oro);
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- INTRO QUOTE ---------- */
+    .p-quote {
+      background: var(--nero);
+      padding: 100px 40px;
+      text-align: center;
+    }
+
+    .p-quote__text {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+
+    .p-quote__attr {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--oro);
+    }
+
+    /* ---------- STORIA (Timeline) ---------- */
+    .p-storia {
+      background: var(--crema);
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .p-storia__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .p-storia__header {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .p-storia__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 20px;
+    }
+
+    .p-storia__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.15;
+    }
+
+    .p-storia__title em { font-style: italic; }
+
+    /* Timeline block — alternating layout */
+    .p-epoch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 80px;
+      align-items: center;
+      margin-bottom: 120px;
+    }
+
+    .p-epoch:last-child { margin-bottom: 0; }
+
+    .p-epoch--reverse .p-epoch__visual { order: 2; }
+    .p-epoch--reverse .p-epoch__content { order: 1; }
+
+    .p-epoch__visual {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 4 / 5;
+    }
+
+    .p-epoch__visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .p-epoch__visual:hover img {
+      transform: scale(1.04);
+    }
+
+    .p-epoch__year {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 8vw, 120px);
+      font-weight: 400;
+      color: var(--oro);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .p-epoch__subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+
+    .p-epoch__text {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--testo-light);
+    }
+
+    .p-epoch__divider {
+      width: 40px;
+      height: 1px;
+      background: var(--oro);
+      margin-top: 32px;
+    }
+
+    /* ---------- LABORATORIO (Full-bleed dark) ---------- */
+    .p-lab {
+      background: var(--nero);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .p-lab__image {
+      width: 100%;
+      height: 70vh;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .p-lab__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .p-lab__image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        var(--nero) 100%
+      );
+    }
+
+    .p-lab__content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 40px 120px;
+      text-align: center;
+      position: relative;
+      margin-top: -80px;
+      z-index: 1;
+    }
+
+    .p-lab__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 24px;
+    }
+
+    .p-lab__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+
+    .p-lab__title em { font-style: italic; }
+
+    .p-lab__text {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 24px;
+    }
+
+    .p-lab__line {
+      width: 60px;
+      height: 1px;
+      background: var(--oro);
+      margin: 48px auto 0;
+      opacity: 0.5;
+    }
+
+    /* ---------- MAESTRI (Chefs) ---------- */
+    .p-maestri {
+      background: var(--crema);
+      padding: 120px 0;
+    }
+
+    .p-maestri__header {
+      text-align: center;
+      margin-bottom: 80px;
+      padding: 0 40px;
+    }
+
+    .p-maestri__label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 20px;
+    }
+
+    .p-maestri__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 400;
+      color: var(--testo);
+      line-height: 1.15;
+    }
+
+    .p-maestri__title em { font-style: italic; }
+
+    .p-maestri__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .p-chef {
+      text-align: center;
+    }
+
+    .p-chef__portrait {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 3 / 4;
+      margin-bottom: 32px;
+      background: var(--cioccolato);
+    }
+
+    .p-chef__portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .p-chef:hover .p-chef__portrait img {
+      transform: scale(1.04);
+    }
+
+    .p-chef__name {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--testo);
+      margin-bottom: 8px;
+    }
+
+    .p-chef__role {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--oro-scuro);
+      margin-bottom: 20px;
+    }
+
+    .p-chef__bio {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--testo-light);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ---------- CTA BAND ---------- */
+    .p-cta {
+      background: var(--cioccolato);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .p-cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      margin-bottom: 32px;
+      line-height: 1.3;
+    }
+
+    .p-cta__btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--nero);
+      background: var(--oro);
+      padding: 16px 48px;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .p-cta__btn:hover {
+      background: var(--bianco);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .p-epoch {
+        gap: 32px 48px;
+        margin-bottom: 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .p-hero {
+        height: 70vh;
+        min-height: 400px;
+      }
+
+      .p-hero__content {
+        padding: 0 20px 60px;
+      }
+
+      .p-quote {
+        padding: 64px 24px;
+      }
+
+      .p-storia {
+        padding: 80px 0;
+      }
+
+      .p-storia__inner {
+        padding: 0 24px;
+      }
+
+      .p-storia__header {
+        margin-bottom: 64px;
+      }
+
+      .p-epoch {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 64px;
+      }
+
+      .p-epoch--reverse .p-epoch__visual { order: 0; }
+      .p-epoch--reverse .p-epoch__content { order: 0; }
+
+      .p-epoch__visual {
+        aspect-ratio: 16 / 10;
+      }
+
+      .p-epoch__year {
+        font-size: 64px;
+      }
+
+      .p-lab__image {
+        height: 50vh;
+      }
+
+      .p-lab__content {
+        padding: 0 24px 80px;
+      }
+
+      .p-maestri {
+        padding: 80px 0;
+      }
+
+      .p-maestri__header {
+        margin-bottom: 48px;
+        padding: 0 24px;
+      }
+
+      .p-maestri__grid {
+        grid-template-columns: 1fr;
+        gap: 64px;
+        padding: 0 24px;
+      }
+
+      .p-cta {
+        padding: 64px 24px;
+      }
+    }
+
+    /* ---------- CHI SIAMO GALLERY ---------- */
+    .cs-gal {
+      background: var(--bianco);
+    }
+    .cs-gal__track {
+      display: flex;
+      gap: 6px;
+      padding: 0 clamp(16px, 4vw, 60px);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      scrollbar-width: none;
+      height: 620px;
+    }
+    .cs-gal__track::-webkit-scrollbar { display: none; }
+    .cs-gal__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+    .cs-gal__item {
+      flex-shrink: 0;
+      width: calc(33.333% - 4px);
+      height: 100%;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+    }
+    .cs-gal__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cs-gal__item:hover img { transform: scale(1.06); }
+    .cs-gal__progress {
+      width: 120px; height: 2px;
+      background: rgba(0,0,0,0.08);
+      margin: 24px auto 0;
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    .cs-gal__progress-fill {
+      height: 100%;
+      background: var(--pistacchio);
+      border-radius: 1px;
+      width: 33.3%;
+      transition: transform 0.15s ease-out;
+    }
+
+    /* ---------- LA NOSTRA STORIA ---------- */
+    .cs-storia {
+      background: var(--bianco, #fff);
+      padding: 120px 60px;
+      text-align: center;
+    }
+    .cs-storia__title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--cioccolato, #382E2C);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .cs-storia__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: #6E6462;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .cs-storia__divider {
+      width: 60px; height: 1px;
+      background: var(--pistacchio);
+      margin: 48px auto 0;
+    }
+
+    /* ---------- CTA CONTATTO ---------- */
+    .cs-cta {
+      background: var(--cioccolato-deep);
+      padding: 100px 40px;
+      text-align: center;
+    }
+    .cs-cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--bianco);
+      line-height: 1.2;
+      margin-bottom: 36px;
+    }
+    .cs-cta__title em { font-style: italic; }
+    .cs-cta__btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cioccolato-deep);
+      background: var(--pistacchio);
+      padding: 16px 44px;
+      transition: opacity 0.3s;
+    }
+    .cs-cta__btn:hover { opacity: 0.85; }
+
+    @media (max-width: 768px) {
+      .cs-gal__track { height: 360px; }
+      .cs-gal__item { width: 75%; }
+      .cs-storia { padding: 80px 24px; }
+      .cs-cta { padding: 72px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .p-maestri__grid { grid-template-columns: 1fr; }
+      .cs-storia { padding: 64px 20px; }
+    }
+
+    /* ---------- REDUCED MOTION ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      .p-hero__label,
+      .p-hero__title,
+      .p-hero__line {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+</style>
+
+  <!-- ========== GALLERY — drag-scroll ========== -->
+  <section class="cs-gal" style="padding-top:89px;">
+    <div class="cs-gal__track" id="galTrack">
+      <div class="cs-gal__item">
+        <img src="/assets/img/products/17_Trancio_tre_cioccolati.webp" alt="Trancio Tre Cioccolati" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="/assets/img/products/11_Pera_trompe_loeil.webp" alt="Pera Trompe-l'oeil" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="/assets/img/products/03_Bomboloni_allo_zucchero.webp" alt="Bomboloni allo Zucchero" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="/assets/img/products/10_Pera_al_cioccolato.webp" alt="Pera al Cioccolato" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="/assets/img/products/04_Pain_au_chocolat_spirale.webp" alt="Pain au Chocolat" loading="lazy">
+      </div>
+      <div class="cs-gal__item">
+        <img src="/assets/img/products/18_Monoporzione_albicocca.webp" alt="Monoporzione all'Albicocca" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LA NOSTRA STORIA ========== -->
+  <section class="cs-storia">
+    <h2 class="cs-storia__title rv">{page?.storiaTitle || 'La nostra Storia'}</h2>
+    <p class="cs-storia__text rv rv-d1">
+      {page?.storiaText || `Dimensione Dolce nasce dall'esperienza e dalla passione del nostro team, che
+      unisce tecnica, creativita e gusto in un'idea condivisa di dolcezza.`}
+    </p>
+    <div class="cs-storia__divider rv rv-d2"></div>
+  </section>
+
+  <!-- ========== MAESTRI PASTICCERI ========== -->
+  <section class="p-maestri">
+    <div class="p-maestri__header rv">
+      <span class="p-maestri__label">Chi siamo</span>
+      <h2 class="p-maestri__title">I Nostri <em>Maestri</em></h2>
+    </div>
+
+    <div class="p-maestri__grid">
+      {page?.chefs && page.chefs.length > 0 ? (
+        page.chefs.map((chef: any, i: number) => (
+          <div class={`p-chef rv rv-d${i + 1}`}>
+            <div class="p-chef__portrait">
+              <img src={i === 0 ? '/assets/img/generated/chef-elena.webp' : '/assets/img/generated/chef-luca.webp'} alt={chef.name}>
+            </div>
+            <h3 class="p-chef__name">{chef.name}</h3>
+            <p class="p-chef__role">{chef.role}</p>
+            <p class="p-chef__bio">{chef.bio}</p>
+          </div>
+        ))
+      ) : (
+        <Fragment>
+          <div class="p-chef rv rv-d1">
+            <div class="p-chef__portrait">
+              <img src="/assets/img/generated/chef-elena.webp" alt="Elena Conti">
+            </div>
+            <h3 class="p-chef__name">Elena Conti</h3>
+            <p class="p-chef__role">Maestra Pasticcera</p>
+            <p class="p-chef__bio">
+              Formatasi tra le cucine di Parigi e Milano, Elena porta una visione contemporanea
+              alla tradizione di famiglia. Sua la mano dietro le creazioni piu audaci: il Panettone
+              al Pistacchio e le monoporzioni che reinterpretano i classici della pasticceria milanese.
+            </p>
+          </div>
+          <div class="p-chef rv rv-d2">
+            <div class="p-chef__portrait">
+              <img src="/assets/img/generated/chef-luca.webp" alt="Luca Conti">
+            </div>
+            <h3 class="p-chef__name">Luca Conti</h3>
+            <p class="p-chef__role">Maestro Cioccolatiere</p>
+            <p class="p-chef__bio">
+              Custode del lievito madre e dei segreti del nonno Giuseppe, Luca e il guardiano
+              della tradizione. Specializzato in cioccolato monorigine, seleziona personalmente
+              ogni fava di cacao per il Panettone Triplo Cioccolato e la Crema Spalmabile.
+            </p>
+          </div>
+        </Fragment>
+      )}
+    </div>
+  </section>
+
+  <!-- ========== CTA CONTATTO ========== -->
+  <section class="cs-cta">
+    <h2 class="cs-cta__title rv" set:html={page?.ctaTitle || 'Vieni a <em>trovarci</em>'}></h2>
+    <a href={page?.ctaButtonUrl || '/contatti.html'} class="cs-cta__btn rv rv-d1">{page?.ctaButtonText || 'Contattaci'}</a>
+  </section>
+
+</BaseLayout>
