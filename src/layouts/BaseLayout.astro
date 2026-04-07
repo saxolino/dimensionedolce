@@ -1,6 +1,4 @@
 ---
-import { VisualEditing } from '@sanity/astro/visual-editing';
-
 interface Props {
   title: string;
   description: string;
@@ -8,7 +6,6 @@ interface Props {
 }
 
 const { title, description, preview = false } = Astro.props;
-const visualEditingEnabled = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'true';
 ---
 <!DOCTYPE html>
 <html lang="it">
@@ -110,6 +107,12 @@ const visualEditingEnabled = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLE
     <p class="cookie-banner__text">Questo sito utilizza solo cookie tecnici necessari al funzionamento. <a href="/cookie-policy.html">Maggiori informazioni</a></p>
     <button class="cookie-banner__btn">OK</button>
   </div>
-    {visualEditingEnabled && <VisualEditing client:only="react" zIndex={1000} />}
+    <script is:inline>
+      if (window.self !== window.top || window.__sanityVisualEditing) {
+        import('https://esm.sh/@sanity/visual-editing@2').then(m => {
+          m.enableVisualEditing({ zIndex: 1000 });
+        }).catch(() => {});
+      }
+    </script>
 </body>
 </html>
