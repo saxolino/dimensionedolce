@@ -14,9 +14,10 @@ export default defineConfig({
       projectId: 'gk5zqp4d',
       dataset: 'production',
       useCdn: false,
+      studioBasePath: '/admin',
       stega: {
         enabled: false,
-        studioUrl: 'https://dimensionedolce.sanity.studio',
+        studioUrl: '/admin',
       },
     }),
     react(),

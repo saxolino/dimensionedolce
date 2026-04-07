@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [
     structureTool({ structure }),
     presentationTool({
-      previewUrl: 'https://dimensione-dolce.vercel.app',
+      previewUrl: '/',
     }),
   ],
   schema: {
