@@ -3,7 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { fetchSanity } from '../lib/sanity';
 import { aboutPageQuery } from '../lib/queries';
 
-const page = await fetchSanity<any>(aboutPageQuery);
+const preview = Astro.cookies.get('__sanity_preview')?.value === 'true';
+const page = await fetchSanity<any>(aboutPageQuery, preview);
 ---
 
 <BaseLayout

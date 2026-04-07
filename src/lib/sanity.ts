@@ -2,21 +2,40 @@ import { createClient, type SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-const projectId = import.meta.env.SANITY_PROJECT_ID;
+const projectId = import.meta.env.SANITY_PROJECT_ID || 'gk5zqp4d';
+const dataset = import.meta.env.SANITY_DATASET || 'production';
+const token = import.meta.env.SANITY_API_READ_TOKEN || '';
 
 export const sanityClient: SanityClient | null = projectId
   ? createClient({
       projectId,
-      dataset: import.meta.env.SANITY_DATASET || 'production',
+      dataset,
       apiVersion: '2024-01-01',
       useCdn: false,
     })
   : null;
 
-export async function fetchSanity<T>(query: string): Promise<T | null> {
+export function getClient(preview = false): SanityClient | null {
   if (!sanityClient) return null;
+  if (preview && token) {
+    return sanityClient.withConfig({
+      token,
+      perspective: 'previewDrafts',
+      useCdn: false,
+      stega: {
+        enabled: true,
+        studioUrl: 'https://dimensionedolce.sanity.studio',
+      },
+    });
+  }
+  return sanityClient;
+}
+
+export async function fetchSanity<T>(query: string, preview = false): Promise<T | null> {
+  const client = getClient(preview);
+  if (!client) return null;
   try {
-    return await sanityClient.fetch<T>(query);
+    return await client.fetch<T>(query);
   } catch {
     return null;
   }

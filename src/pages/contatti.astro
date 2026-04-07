@@ -3,8 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { fetchSanity } from '../lib/sanity';
 import { contactPageQuery, siteSettingsQuery } from '../lib/queries';
 
-const contactPage = await fetchSanity<any>(contactPageQuery);
-const siteSettings = await fetchSanity<any>(siteSettingsQuery);
+const preview = Astro.cookies.get('__sanity_preview')?.value === 'true';
+const contactPage = await fetchSanity<any>(contactPageQuery, preview);
+const siteSettings = await fetchSanity<any>(siteSettingsQuery, preview);
 ---
 
 <BaseLayout title={contactPage?.seoTitle || "Contatti | Dimensione Dolce"} description={contactPage?.seoDescription || "Contattaci per informazioni, torte su misura, catering ed eventi. Vieni a trovarci nel nostro laboratorio a Macerata."}>

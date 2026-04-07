@@ -3,7 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { fetchSanity } from '../lib/sanity';
 import { homePageQuery } from '../lib/queries';
 
-const page = await fetchSanity<any>(homePageQuery);
+const preview = Astro.cookies.get('__sanity_preview')?.value === 'true';
+const page = await fetchSanity<any>(homePageQuery, preview);
 ---
 
 <BaseLayout title={page?.seoTitle || "Dimensione Dolce | Pasticceria Artigianale"} description={page?.seoDescription || "Un luogo dedicato al gusto e al piacere della dolcezza, tra pasticceria, gelateria e caffè."}>
