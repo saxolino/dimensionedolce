@@ -4,3 +4,5 @@ dist/
 .env
 .astro/
 assets/img/source-photos/
+public/assets/img/source-photos/
+.sanity/
