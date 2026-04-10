@@ -750,7 +750,7 @@ const page = await fetchSanity<any>(aboutPageQuery, preview);
   <!-- ========== CTA CONTATTO ========== -->
   <section class="cs-cta">
     <h2 class="cs-cta__title rv" set:html={page?.ctaTitle || 'Vieni a <em>trovarci</em>'}></h2>
-    <a href={page?.ctaButtonUrl || '/contatti.html'} class="cs-cta__btn rv rv-d1">{page?.ctaButtonText || 'Contattaci'}</a>
+    <a href={page?.ctaButtonUrl || '/contatti'} class="cs-cta__btn rv rv-d1">{page?.ctaButtonText || 'Contattaci'}</a>
   </section>
 
 </BaseLayout>

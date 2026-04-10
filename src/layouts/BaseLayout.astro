@@ -31,15 +31,15 @@ const { title, description, preview = false } = Astro.props;
   <header class="hdr" id="hdr">
     <div class="hdr__inner">
       <nav class="hdr__nav hdr__nav--left">
-        <a href="/menu.html" class="hdr__link">Menu'</a>
-        <a href="/chi-siamo.html" class="hdr__link">Chi Siamo</a>
+        <a href="/menu" class="hdr__link">Menu'</a>
+        <a href="/chi-siamo" class="hdr__link">Chi Siamo</a>
       </nav>
       <a href="/" class="hdr__logo">
         <img src="/assets/img/logo-dimensione-dolce-light.png" alt="Dimensione Dolce" class="hdr__logo-img">
       </a>
       <nav class="hdr__nav hdr__nav--right">
-        <a href="/catering-eventi.html" class="hdr__link">Eventi</a>
-        <a href="/contatti.html" class="hdr__link">Contatti</a>
+        <a href="/catering-eventi" class="hdr__link">Eventi</a>
+        <a href="/contatti" class="hdr__link">Contatti</a>
       </nav>
       <button class="hdr__burger" id="hdrBurger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -58,10 +58,10 @@ const { title, description, preview = false } = Astro.props;
       </button>
     </div>
     <div class="mob-sidebar__nav">
-      <a href="/menu.html" class="mob-sidebar__link">Menu'</a>
-      <a href="/chi-siamo.html" class="mob-sidebar__link">Chi Siamo</a>
-      <a href="/catering-eventi.html" class="mob-sidebar__link">Eventi</a>
-      <a href="/contatti.html" class="mob-sidebar__link">Contatti</a>
+      <a href="/menu" class="mob-sidebar__link">Menu'</a>
+      <a href="/chi-siamo" class="mob-sidebar__link">Chi Siamo</a>
+      <a href="/catering-eventi" class="mob-sidebar__link">Eventi</a>
+      <a href="/contatti" class="mob-sidebar__link">Contatti</a>
     </div>
     <div class="mob-sidebar__footer">
       <a href="tel:+390212345678" class="mob-sidebar__contact">+39 02 1234567</a>
@@ -82,22 +82,22 @@ const { title, description, preview = false } = Astro.props;
         <img src="/assets/img/logo-sbaffo-green.png" alt="Dimensione Dolce">
       </div>
       <nav class="ftr__nav rv rv-d1">
-        <a href="/menu.html">Menu'</a>
+        <a href="/menu">Menu'</a>
         <span class="ftr__nav-sep">|</span>
-        <a href="/chi-siamo.html">Chi Siamo</a>
+        <a href="/chi-siamo">Chi Siamo</a>
         <span class="ftr__nav-sep">|</span>
-        <a href="/catering-eventi.html">Eventi</a>
+        <a href="/catering-eventi">Eventi</a>
         <span class="ftr__nav-sep">|</span>
-        <a href="/contatti.html">Contatti</a>
+        <a href="/contatti">Contatti</a>
       </nav>
       <a href="https://instagram.com/dimensionedolce" class="ftr__ig" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       </a>
       <p class="ftr__copy rv rv-d2">&copy; 2026 Dimensione Dolce &mdash; Tutti i diritti riservati</p>
       <div class="ftr__legal">
-        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/privacy">Privacy Policy</a>
         <span class="ftr__nav-sep">|</span>
-        <a href="/cookie-policy.html">Cookie Policy</a>
+        <a href="/cookie-policy">Cookie Policy</a>
       </div>
     </footer>
   </div>
@@ -106,7 +106,7 @@ const { title, description, preview = false } = Astro.props;
 
   <!-- Cookie Banner -->
   <div class="cookie-banner">
-    <p class="cookie-banner__text">Questo sito utilizza solo cookie tecnici necessari al funzionamento. <a href="/cookie-policy.html">Maggiori informazioni</a></p>
+    <p class="cookie-banner__text">Questo sito utilizza solo cookie tecnici necessari al funzionamento. <a href="/cookie-policy">Maggiori informazioni</a></p>
     <button class="cookie-banner__btn">OK</button>
   </div>
     <VisualEditing enabled={true} />
