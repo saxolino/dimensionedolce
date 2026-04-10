@@ -2,9 +2,10 @@ import { createClient, type SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-const projectId = import.meta.env.SANITY_PROJECT_ID || 'gk5zqp4d';
-const dataset = import.meta.env.SANITY_DATASET || 'production';
-const token = import.meta.env.SANITY_API_READ_TOKEN || '';
+// Trim to defuse env vars pasted with trailing newlines (Sanity client rejects projectId with \n)
+const projectId = (import.meta.env.SANITY_PROJECT_ID || 'gk5zqp4d').trim();
+const dataset = (import.meta.env.SANITY_DATASET || 'production').trim();
+const token = (import.meta.env.SANITY_API_READ_TOKEN || '').trim();
 
 export const sanityClient: SanityClient | null = projectId
   ? createClient({
