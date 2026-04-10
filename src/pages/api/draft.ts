@@ -3,7 +3,9 @@ import { validatePreviewUrl } from '@sanity/preview-url-secret';
 import { createClient } from '@sanity/client';
 
 export const GET: APIRoute = async ({ request, redirect, cookies }) => {
-  const token = import.meta.env.SANITY_API_READ_TOKEN;
+  // Trim for parity with src/lib/sanity.ts — env vars pasted from the Vercel
+  // dashboard sometimes carry a trailing newline and Sanity rejects the token.
+  const token = (import.meta.env.SANITY_API_READ_TOKEN || '').trim();
   if (!token) {
     return new Response('Missing SANITY_API_READ_TOKEN', { status: 500 });
   }
