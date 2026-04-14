@@ -18,7 +18,7 @@ export default defineConfig({
   plugins: [
     structureTool({ structure }),
     presentationTool({
-      previewUrl: { origin: 'same-origin', preview: '/' },
+      previewUrl: '/',
       resolve: {
         locations: {
           homePage: singletonLocation('Home', '/'),
