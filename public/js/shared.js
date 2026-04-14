@@ -131,7 +131,14 @@ document.querySelectorAll('a[href]').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     document.body.classList.add('is-leaving');
-    setTimeout(() => { window.location.href = href; }, 300);
+    const nextUrl = new URL(href, window.location.origin);
+    const currentParams = new URLSearchParams(window.location.search);
+    currentParams.forEach((value, key) => {
+      if (key.startsWith('sanity-') || key === 'preview') {
+        nextUrl.searchParams.set(key, value);
+      }
+    });
+    setTimeout(() => { window.location.href = nextUrl.toString(); }, 300);
   });
 });
 
