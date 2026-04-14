@@ -7,9 +7,18 @@
    ------------------------------------------------ */
 const hdr = document.getElementById('hdr');
 if (hdr) {
-  window.addEventListener('scroll', () => {
-    hdr.classList.toggle('is-scrolled', window.scrollY > 60);
-  }, { passive: true });
+  const isHomepage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+  const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+  const updateHeaderState = () => {
+    const scrolled = window.scrollY > 60;
+    hdr.classList.toggle('is-scrolled', scrolled);
+    hdr.classList.toggle('is-home-hidden', isHomepage && isMobile() && window.scrollY < 30);
+  };
+
+  updateHeaderState();
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+  window.addEventListener('resize', updateHeaderState, { passive: true });
 }
 
 /* 2. Mobile sidebar
