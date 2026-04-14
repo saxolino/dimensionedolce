@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Atelier | Dimensione Dolce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --magenta:#E91E8C; --magenta-dark:#C4177A;
+    --pistacchio:#BBC25C; --pistacchio-scuro:#A3AA42;
+    --cioccolato:#382E2C; --cioccolato-deep:#2C2322;
+    --crema:#F2F1F0; --crema-warm:#F7F6F4; --beige:#E8E5E1;
+    --bianco:#fff; --testo:#382E2C; --testo-light:#6E6462; --testo-muted:#9A9290;
+    --font-display:'Cormorant Garamond',Georgia,serif;
+    --font-ui:'Montserrat','Helvetica Neue',sans-serif;
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{font-family:var(--font-ui);font-size:16px;color:var(--testo);background:var(--crema);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+  /* ========== HEADER STICKY CATEGORIES ========== */
+  .hdr{
+    position:sticky;top:0;z-index:50;background:rgba(242,241,240,0.88);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(56,46,44,0.08);
+  }
+  .hdr__inner{max-width:1200px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;gap:32px}
+  .hdr__brand{font-family:var(--font-display);font-style:italic;font-size:20px;color:var(--testo)}
+  .hdr__tabs{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+  .hdr__tabs::-webkit-scrollbar{display:none}
+  .hdr__tab{
+    font-family:var(--font-ui);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--testo-muted);padding:10px 18px;border-radius:999px;white-space:nowrap;transition:all .3s;
+  }
+  .hdr__tab:hover{color:var(--testo)}
+  .hdr__tab.is-active{background:var(--cioccolato);color:var(--bianco)}
+  .hdr__cart{
+    display:flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--cioccolato);
+    border-radius:999px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;
+    transition:all .3s;
+  }
+  .hdr__cart:hover{background:var(--cioccolato);color:var(--bianco)}
+  .hdr__cart-count{background:var(--pistacchio);color:var(--cioccolato);border-radius:999px;min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;padding:0 6px}
+
+  /* ========== HERO ========== */
+  .hero{
+    padding:120px 40px 80px;text-align:center;position:relative;
+    background:linear-gradient(180deg,var(--crema-warm) 0%,var(--crema) 100%);
+  }
+  .hero__kicker{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--pistacchio-scuro);margin-bottom:24px}
+  .hero__title{font-family:var(--font-display);font-size:clamp(48px,8vw,104px);font-weight:400;line-height:.95;color:var(--testo);font-style:italic}
+  .hero__title em{color:var(--pistacchio-scuro);font-style:italic;font-weight:500}
+  .hero__lede{max-width:520px;margin:32px auto 0;font-size:15px;line-height:1.8;color:var(--testo-light)}
+
+  /* ========== SECTION ========== */
+  .sec{padding:80px 40px;position:relative}
+  .sec--white{background:var(--bianco)}
+  .sec__inner{max-width:1200px;margin:0 auto}
+  .sec__head{display:flex;align-items:baseline;gap:24px;margin-bottom:56px;padding-bottom:24px;border-bottom:1px solid rgba(56,46,44,0.08)}
+  .sec__num{font-family:var(--font-display);font-style:italic;font-size:28px;color:var(--pistacchio-scuro);font-weight:500;min-width:40px}
+  .sec__title{font-family:var(--font-display);font-size:clamp(32px,4vw,48px);font-weight:400;color:var(--testo);line-height:1}
+  .sec__count{margin-left:auto;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--testo-muted);font-weight:500}
+
+  /* ========== GRID ========== */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+
+  /* ========== PRODUCT CARD ========== */
+  .prod{position:relative;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+  .prod:hover{transform:translateY(-6px)}
+  .prod__img{
+    position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--beige);border-radius:4px;
+  }
+  .prod__img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .prod:hover .prod__img img{transform:scale(1.08)}
+  .prod__badge{
+    position:absolute;top:16px;left:16px;background:var(--bianco);color:var(--cioccolato);
+    font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+    padding:6px 12px;border-radius:999px;z-index:2;
+  }
+  .prod__add{
+    position:absolute;bottom:16px;right:16px;width:44px;height:44px;border-radius:999px;
+    background:var(--cioccolato);color:var(--bianco);font-size:20px;font-weight:300;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;transform:translateY(8px);transition:all .4s cubic-bezier(.16,1,.3,1);z-index:2;
+  }
+  .prod:hover .prod__add,.prod:focus-within .prod__add{opacity:1;transform:translateY(0)}
+  .prod__add:hover{background:var(--pistacchio);color:var(--cioccolato);transform:scale(1.08)!important}
+
+  .prod__body{padding:20px 2px 0}
+  .prod__name{
+    font-family:var(--font-display);font-style:italic;font-size:22px;font-weight:400;
+    color:var(--testo);line-height:1.2;margin-bottom:8px;
+  }
+  .prod__desc{font-size:13px;line-height:1.6;color:var(--testo-light);margin-bottom:16px}
+  .prod__variants{
+    display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;
+  }
+  .prod__variant{
+    font-family:var(--font-ui);font-size:11px;font-weight:500;letter-spacing:.06em;
+    padding:7px 14px;border:1px solid rgba(56,46,44,0.18);border-radius:999px;
+    color:var(--testo-light);transition:all .3s;line-height:1;
+  }
+  .prod__variant:hover{border-color:var(--testo);color:var(--testo)}
+  .prod__variant.is-active{background:var(--cioccolato);border-color:var(--cioccolato);color:var(--bianco)}
+  .prod__footer{display:flex;align-items:baseline;justify-content:space-between}
+  .prod__price{
+    font-family:var(--font-display);font-style:italic;font-size:22px;font-weight:500;color:var(--pistacchio-scuro);
+    transition:opacity .3s;
+  }
+  .prod__price-from{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--testo-muted);font-family:var(--font-ui);font-weight:500;font-style:normal}
+  .prod__ratings{display:flex;gap:3px;color:var(--pistacchio-scuro);font-size:11px}
+
+  /* ========== MOBILE ========== */
+  @media(max-width:768px){
+    .hdr__inner{padding:14px 20px;gap:16px}
+    .hdr__brand{font-size:16px}
+    .hdr__tab{font-size:10px;padding:8px 14px}
+    .hdr__cart{padding:8px 12px;font-size:10px}
+    .hero{padding:72px 24px 56px}
+    .sec{padding:56px 20px}
+    .sec__head{margin-bottom:40px;flex-wrap:wrap;gap:12px}
+    .sec__count{width:100%;margin-left:0;order:3}
+    .grid{grid-template-columns:1fr;gap:32px;max-width:420px;margin:0 auto}
+    .prod__img{aspect-ratio:1/1}
+    .prod__add{opacity:1;transform:none;width:48px;height:48px}
+  }
+
+  /* ========== BOTTOM TOAST ========== */
+  .toast{
+    position:fixed;bottom:-100px;left:50%;transform:translateX(-50%);
+    background:var(--cioccolato);color:var(--bianco);padding:14px 24px;border-radius:999px;
+    font-size:13px;font-weight:500;letter-spacing:.05em;display:flex;align-items:center;gap:12px;
+    box-shadow:0 12px 40px rgba(0,0,0,.2);transition:bottom .5s cubic-bezier(.16,1,.3,1);z-index:100;
+  }
+  .toast.is-visible{bottom:24px}
+  .toast__dot{width:6px;height:6px;border-radius:999px;background:var(--pistacchio)}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr__inner">
+    <a href="#" class="hdr__brand">Dimensione Dolce</a>
+    <nav class="hdr__tabs">
+      <a href="#colazione" class="hdr__tab is-active">Colazione</a>
+      <a href="#torte" class="hdr__tab">Le Torte</a>
+      <a href="#monoporzioni" class="hdr__tab">Monoporzioni</a>
+      <a href="#gelati" class="hdr__tab">Gelateria</a>
+    </nav>
+    <button class="hdr__cart">Ordine <span class="hdr__cart-count" id="count">0</span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__kicker">La carta</div>
+  <h1 class="hero__title">Il nostro <em>menu</em></h1>
+  <p class="hero__lede">Una selezione di creazioni nate in laboratorio ogni mattina. Scegli le tue preferite, personalizza con le varianti, porta a casa il gusto di Milano.</p>
+</section>
+
+<section class="sec sec--white" id="colazione">
+  <div class="sec__inner">
+    <header class="sec__head">
+      <span class="sec__num">I.</span>
+      <h2 class="sec__title">Colazione</h2>
+      <span class="sec__count">06 Prodotti</span>
+    </header>
+
+    <div class="grid">
+      <!-- Croissant con varianti -->
+      <article class="prod">
+        <div class="prod__img">
+          <span class="prod__badge">Iconico</span>
+          <img src="/assets/img/products/01_Croissant_crema_e_frutti_rossi.webp" alt="Croissant">
+          <button class="prod__add" aria-label="Aggiungi">+</button>
+        </div>
+        <div class="prod__body">
+          <h3 class="prod__name">Croissant</h3>
+          <p class="prod__desc">Sfoglia dorata, lievitazione lenta di 48 ore, burro francese AOP.</p>
+          <div class="prod__variants" data-prices='{"frutti":"€3.00","pistacchio":"€3.50","cioccolato":"€3.20","crema":"€2.80"}'>
+            <button class="prod__variant is-active" data-v="frutti">Crema e frutti rossi</button>
+            <button class="prod__variant" data-v="pistacchio">Pistacchio</button>
+            <button class="prod__variant" data-v="cioccolato">Cioccolato</button>
+            <button class="prod__variant" data-v="crema">Crema vaniglia</button>
+          </div>
+          <div class="prod__footer">
+            <span class="prod__price">€3.00</span>
+            <span class="prod__ratings">★★★★★</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Brioche -->
+      <article class="prod">
+        <div class="prod__img">
+          <img src="/assets/img/products/02_Brioche_scanalata_con_crema.webp" alt="Brioche">
+          <button class="prod__add" aria-label="Aggiungi">+</button>
+        </div>
+        <div class="prod__body">
+          <h3 class="prod__name">Brioche Scanalata</h3>
+          <p class="prod__desc">Impasto soffice al burro, lievitazione naturale, farcitura a scelta.</p>
+          <div class="prod__variants" data-prices='{"vaniglia":"€2.80","pistacchio":"€3.00","cioccolato":"€2.90"}'>
+            <button class="prod__variant is-active" data-v="vaniglia">Crema Vaniglia</button>
+            <button class="prod__variant" data-v="pistacchio">Pistacchio</button>
+            <button class="prod__variant" data-v="cioccolato">Cioccolato</button>
+          </div>
+          <div class="prod__footer"><span class="prod__price">€2.80</span></div>
+        </div>
+      </article>
+
+      <!-- Pain au chocolat -->
+      <article class="prod">
+        <div class="prod__img">
+          <img src="/assets/img/products/04_Pain_au_chocolat_spirale.webp" alt="Pain au Chocolat">
+          <button class="prod__add" aria-label="Aggiungi">+</button>
+        </div>
+        <div class="prod__body">
+          <h3 class="prod__name">Pain au Chocolat</h3>
+          <p class="prod__desc">Sfogliatura a spirale, cuore di cioccolato fondente Valrhona.</p>
+          <div class="prod__footer"><span class="prod__price">€3.20</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="torte">
+  <div class="sec__inner">
+    <header class="sec__head">
+      <span class="sec__num">II.</span>
+      <h2 class="sec__title">Le Torte</h2>
+      <span class="sec__count">08 Creazioni</span>
+    </header>
+
+    <div class="grid">
+      <article class="prod">
+        <div class="prod__img">
+          <span class="prod__badge">Su Misura</span>
+          <img src="/assets/img/products/06_Torta_cuore_rossa_glossy.webp" alt="Cuore Rosso">
+          <button class="prod__add" aria-label="Aggiungi">+</button>
+        </div>
+        <div class="prod__body">
+          <h3 class="prod__name">Cuore Rosso</h3>
+          <p class="prod__desc">Mousse ai lamponi, biscuit al cioccolato, glassa specchio.</p>
+          <div class="prod__variants" data-prices='{"s":"€28","m":"€42","l":"€58"}'>
+            <button class="prod__variant" data-v="s">6 persone</button>
+            <button class="prod__variant is-active" data-v="m">10 persone</button>
+            <button class="prod__variant" data-v="l">14 persone</button>
+          </div>
+          <div class="prod__footer"><span class="prod__price">€42</span></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod__img">
+          <img src="/assets/img/products/15_Tarte_au_citron_meringuee.webp" alt="Tarte au Citron">
+          <button class="prod__add" aria-label="Aggiungi">+</button>
+        </div>
+        <div class="prod__body">
+          <h3 class="prod__name">Tarte au Citron</h3>
+          <p class="prod__desc">Frolla bretonne, crema al limone di Sorrento, meringa italiana.</p>
+          <div class="prod__variants" data-prices='{"s":"€22","m":"€34"}'>
+            <button class="prod__variant is-active" data-v="s">6 persone</button>
+            <button class="prod__variant" data-v="m">10 persone</button>
+          </div>
+          <div class="prod__footer"><span class="prod__price">€22</span></div>
+        </div>
+      </article>
+
+      <article class="prod">
+        <div class="prod__img">
+          <img src="/assets/img/products/19_Sfera_di_cioccolato.webp" alt="Sfera">
+          <button class="prod__add" aria-label="Aggiungi">+</button>
+        </div>
+        <div class="prod__body">
+          <h3 class="prod__name">Sfera di Cioccolato</h3>
+          <p class="prod__desc">Involucro in cioccolato fondente, interno a sorpresa.</p>
+          <div class="prod__footer"><span class="prod__price">€38</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast"><span class="toast__dot"></span><span id="toastMsg">Aggiunto al carrello</span></div>
+
+<script>
+  // Variants price toggle
+  document.querySelectorAll('.prod__variants').forEach(group => {
+    const prices = JSON.parse(group.dataset.prices);
+    const priceEl = group.closest('.prod').querySelector('.prod__price');
+    group.querySelectorAll('.prod__variant').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.prod__variant').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        priceEl.style.opacity = '0';
+        setTimeout(() => {
+          priceEl.textContent = prices[btn.dataset.v];
+          priceEl.style.opacity = '1';
+        }, 180);
+      });
+    });
+  });
+
+  // Add to cart
+  let count = 0;
+  const countEl = document.getElementById('count');
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+  document.querySelectorAll('.prod__add').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const prod = btn.closest('.prod');
+      const name = prod.querySelector('.prod__name').textContent;
+      count++;
+      countEl.textContent = count;
+      toastMsg.textContent = `${name} aggiunto`;
+      toast.classList.add('is-visible');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2200);
+    });
+  });
+
+  // Sticky tabs active
+  const sections = ['colazione','torte','monoporzioni','gelati'];
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.hdr__tab').forEach(t => t.classList.remove('is-active'));
+        const tab = document.querySelector(`.hdr__tab[href="#${e.target.id}"]`);
+        if (tab) tab.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+</script>
+</body>
+</html>

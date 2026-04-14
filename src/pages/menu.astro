@@ -303,7 +303,7 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
     }
 
     .menu-card__image {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 1 / 1;
       overflow: hidden;
       background: var(--crema);
       border-radius: 2px;
@@ -323,6 +323,7 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
     .menu-card:hover .menu-card__image img {
       transform: scale(1.06);
     }
+
 
     .menu-card__body {
       padding: 20px 4px 0;
@@ -437,7 +438,7 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
     <!-- ========== GALLERY — drag-scroll ========== -->
     <section class="cs-gal" style="padding-top:89px;">
       <div class="cs-gal__track" id="galTrack">
-        <div class="cs-gal__item"><img src="/assets/img/products/19_Sfera_di_cioccolato.webp" alt="Sfera di Cioccolato" loading="lazy"></div>
+        <div class="cs-gal__item"><img src="/assets/img/products/10_Pera_al_cioccolato.webp" alt="Pera al Cioccolato" loading="lazy"></div>
         <div class="cs-gal__item"><img src="/assets/img/products/06_Torta_cuore_rossa_glossy.webp" alt="Torta Cuore Rosso" loading="lazy"></div>
         <div class="cs-gal__item"><img src="/assets/img/products/01_Croissant_crema_e_frutti_rossi.webp" alt="Croissant" loading="lazy"></div>
         <div class="cs-gal__item"><img src="/assets/img/products/15_Tarte_au_citron_meringuee.webp" alt="Tarte au Citron" loading="lazy"></div>
@@ -667,16 +668,6 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
           </div>
         </div>
         <div class="menu-card rv rv-d2">
-          <div class="menu-card__image">
-            <img src="/assets/img/products/19_Sfera_di_cioccolato.webp" alt="Sfera di Cioccolato" loading="lazy">
-          </div>
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">{page?.sections?.[2]?.items?.[10]?.name || 'Sfera di Cioccolato'}</h3>
-            <p class="menu-card__desc">{page?.sections?.[2]?.items?.[10]?.description || 'Sfera in cioccolato fondente a specchio, cuore cremoso al caramello salato, croccante alle nocciole'}</p>
-            <span class="menu-card__price">{page?.sections?.[2]?.items?.[10]?.price || '€7.50'}</span>
-          </div>
-        </div>
-        <div class="menu-card rv rv-d3">
           <div class="menu-card__image">
             <img src="/assets/img/products/20_Choux_alla_crema.webp" alt="Choux alla Crema" loading="lazy">
           </div>
