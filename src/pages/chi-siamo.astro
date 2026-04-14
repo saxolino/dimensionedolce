@@ -709,7 +709,7 @@ const page = await fetchSanity<any>(aboutPageQuery, preview);
         page.chefs.map((chef: any, i: number) => (
           <div class={`p-chef rv rv-d${i + 1}`}>
             <div class="p-chef__portrait">
-              <img src={i === 0 ? '/assets/img/generated/chef-elena.webp' : '/assets/img/generated/chef-luca.webp'} alt={chef.name}>
+              <img src={i === 0 ? '/assets/img/generated/chef-elena.jpg' : '/assets/img/generated/chef-luca.webp'} alt={chef.name}>
             </div>
             <h3 class="p-chef__name">{chef.name}</h3>
             <p class="p-chef__role">{chef.role}</p>
