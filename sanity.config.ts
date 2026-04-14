@@ -6,8 +6,10 @@ import { structure } from './src/sanity/structure';
 
 const singletonLocation = (title: string, href: string) =>
   defineLocations({
-    locations: [{ title, href }],
-    message: `Questa pagina è visibile su ${href}`,
+    select: { title: 'seoTitle' },
+    resolve: (doc) => ({
+      locations: [{ title: (doc?.title as string) || title, href }],
+    }),
   });
 
 export default defineConfig({
@@ -28,14 +30,16 @@ export default defineConfig({
           contactPage: singletonLocation('Contatti', '/contatti'),
           faqPage: singletonLocation('Spedizioni & FAQ', '/spedizioni-faq'),
           siteSettings: defineLocations({
-            locations: [
-              { title: 'Home', href: '/' },
-              { title: 'Menu', href: '/menu' },
-              { title: 'Chi Siamo', href: '/chi-siamo' },
-              { title: 'Catering & Eventi', href: '/catering-eventi' },
-              { title: 'Contatti', href: '/contatti' },
-            ],
-            message: 'Impostazioni globali del sito (header, footer, SEO)',
+            select: { title: '_id' },
+            resolve: () => ({
+              locations: [
+                { title: 'Home', href: '/' },
+                { title: 'Menu', href: '/menu' },
+                { title: 'Chi Siamo', href: '/chi-siamo' },
+                { title: 'Catering & Eventi', href: '/catering-eventi' },
+                { title: 'Contatti', href: '/contatti' },
+              ],
+            }),
           }),
         },
       },
