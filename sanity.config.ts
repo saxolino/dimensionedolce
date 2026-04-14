@@ -1,6 +1,6 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { presentationTool, defineLocations } from 'sanity/presentation';
+import { presentationTool, defineLocations, defineDocuments } from 'sanity/presentation';
 import { schemaTypes } from './src/sanity/schemas';
 import { structure } from './src/sanity/structure';
 
@@ -22,6 +22,14 @@ export default defineConfig({
     presentationTool({
       previewUrl: '/',
       resolve: {
+        mainDocuments: defineDocuments([
+          { route: '/', type: 'homePage' },
+          { route: '/menu', type: 'menuPage' },
+          { route: '/chi-siamo', type: 'aboutPage' },
+          { route: '/catering-eventi', type: 'cateringPage' },
+          { route: '/contatti', type: 'contactPage' },
+          { route: '/spedizioni-faq', type: 'faqPage' },
+        ]),
         locations: {
           homePage: singletonLocation('Home', '/'),
           aboutPage: singletonLocation('Chi Siamo', '/chi-siamo'),
