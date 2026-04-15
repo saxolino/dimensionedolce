@@ -445,6 +445,80 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
       text-align: center;
     }
 
+    /* ============================================================
+       CTA PRENOTA — Editorial footer section
+       ============================================================ */
+    .menu-cta {
+      background: var(--cioccolato-deep);
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 1px; height: 64px;
+      background: linear-gradient(to bottom, transparent, var(--pistacchio));
+    }
+    .menu-cta__inner {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .menu-cta__kicker {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--pistacchio);
+      margin-bottom: 28px;
+    }
+    .menu-cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bianco);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .menu-cta__text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 48px;
+    }
+    .menu-cta__btn {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--cioccolato-deep);
+      background: var(--pistacchio);
+      padding: 20px 48px;
+      border-radius: 2px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .menu-cta__btn:hover {
+      background: var(--bianco);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(187,194,92,0.25);
+    }
+
+    @media (max-width: 768px) {
+      .menu-cta { padding: 80px 24px; }
+      .menu-cta__text { margin-bottom: 36px; font-size: 14px; }
+      .menu-cta__btn { padding: 18px 36px; font-size: 10px; letter-spacing: 0.2em; }
+    }
+
     /* ---------- GALLERY drag-scroll ---------- */
     .cs-gal { background: var(--bianco); }
     .cs-gal__track { display: flex; gap: 6px; padding: 0 clamp(16px, 4vw, 60px); overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; cursor: grab; scrollbar-width: none; height: 620px; }
@@ -819,6 +893,16 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
       </div>
 
       <p class="gelato-footer rv rv-d5">La carta si rinnova con le stagioni. Chiedete al banco i gusti del giorno.</p>
+    </section>
+
+    <!-- ========== CTA PRENOTA ========== -->
+    <section class="menu-cta">
+      <div class="menu-cta__inner">
+        <p class="menu-cta__kicker rv">Ritira o prenota</p>
+        <h2 class="menu-cta__title rv rv-d1">Ordina online, ritira in pasticceria</h2>
+        <p class="menu-cta__text rv rv-d2">Componi la tua selezione, scegli il giorno e l'ora del ritiro. Ti prepariamo tutto fresco al mattino.</p>
+        <a href="/demos/menu-atelier.html" class="menu-cta__btn rv rv-d3">Prenota Online</a>
+      </div>
     </section>
 
   <!-- Page-specific: hero carousel + parallax -->
