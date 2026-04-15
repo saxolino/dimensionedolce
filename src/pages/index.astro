@@ -497,9 +497,12 @@ const page = await fetchSanity<any>(homePageQuery, preview);
         grid-template-columns: 1fr;
       }
 
-      /* On mobile: always text first, photo second */
-      .svc-half--photo { order: 2; }
-      .svc-half:not(.svc-half--photo) { order: 1; }
+      /* On mobile: photo first, text second */
+      .svc-half--photo,
+      .team-half--photo,
+      .team-half--placeholder { order: 1; }
+      .svc-half:not(.svc-half--photo),
+      .team-half--info { order: 2; }
 
       .svc-block--reverse,
       .team-block--reverse {
