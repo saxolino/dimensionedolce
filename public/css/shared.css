@@ -268,14 +268,14 @@ body.is-leaving {
 
 .mob-sidebar__link {
   font-family: var(--font-display); font-size: 22px; font-weight: 400;
-  color: rgba(255,255,255,0.7); padding: 16px 0; transition: color 0.3s;
+  color: var(--bianco); padding: 16px 0; transition: color 0.3s;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .mob-sidebar__link:last-child { border-bottom: none; }
 .mob-sidebar__link:hover { color: var(--pistacchio); }
 
 .mob-sidebar__footer { padding: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
-.mob-sidebar__contact { font-family: var(--font-ui); font-size: 13px; color: rgba(255,255,255,0.4); display: block; }
+.mob-sidebar__contact { font-family: var(--font-ui); font-size: 13px; color: var(--bianco); display: block; }
 
 .mob-sidebar__social {
   display: flex;
@@ -283,7 +283,7 @@ body.is-leaving {
   gap: 10px;
   font-family: var(--font-ui);
   font-size: 13px;
-  color: rgba(255,255,255,0.4);
+  color: var(--bianco);
   margin-top: 16px;
   transition: color 0.3s;
 }
