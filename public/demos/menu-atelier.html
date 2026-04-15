@@ -26,7 +26,8 @@
 
   .hdr{position:sticky;top:0;z-index:50;background:rgba(242,241,240,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(56,46,44,0.08)}
   .hdr__inner{max-width:1400px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;gap:32px}
-  .hdr__brand{font-family:var(--font-display);font-style:italic;font-size:20px;color:var(--testo)}
+  .hdr__brand{display:flex;align-items:center}
+  .hdr__brand img{height:38px;width:auto;display:block}
   .hdr__tabs{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
   .hdr__tabs::-webkit-scrollbar{display:none}
   .hdr__tab{font-family:var(--font-ui);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--testo-muted);padding:10px 18px;border-radius:999px;white-space:nowrap;transition:all .3s}
@@ -108,7 +109,7 @@
 
   @media(max-width:768px){
     .hdr__inner{padding:14px 20px;gap:16px}
-    .hdr__brand{font-size:16px}
+    .hdr__brand img{height:30px}
     .hdr__tab{font-size:10px;padding:8px 14px}
     .hdr__cart{padding:8px 12px;font-size:10px}
     .hero{padding:72px 24px 56px}
@@ -131,7 +132,7 @@
 <body>
 <header class="hdr">
   <div class="hdr__inner">
-    <a href="#" class="hdr__brand">Dimensione Dolce</a>
+    <a href="/" class="hdr__brand" aria-label="Dimensione Dolce"><img src="/assets/img/logo-dimensione-dolce-dark.png" alt="Dimensione Dolce"></a>
     <nav class="hdr__tabs">
       <a href="#colazione" class="hdr__tab is-active">Colazione</a>
       <a href="#monoporzioni" class="hdr__tab">Monoporzioni</a>
@@ -144,7 +145,7 @@
 <section class="hero">
   <div class="hero__kicker">La carta</div>
   <h1 class="hero__title">Il nostro <em>menu</em></h1>
-  <p class="hero__lede">Scegli le tue preferite, personalizza con le varianti, porta a casa il gusto di Milano.</p>
+  <p class="hero__lede">Scegli le tue preferite, personalizza con le varianti, porta a casa il gusto di Dimensione Dolce.</p>
 </section>
 
 <section class="sec sec--white" id="colazione">
