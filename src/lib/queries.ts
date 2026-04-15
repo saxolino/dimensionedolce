@@ -28,11 +28,13 @@ export const homePageQuery = `*[_type == "homePage"][0] {
 export const menuPageQuery = `*[_type == "menuPage"][0] {
   seoTitle, seoDescription,
   sections[] {
-    title, subtitle, bgVariant,
+    title, subtitle, bgVariant, layout,
     items[] {
-      name, description, price,
+      name, description, price, badge,
+      variants[] { name, price },
       image { asset-> { url, metadata { dimensions } } },
-      alt
+      alt,
+      gelatoColor, gelatoKicker
     }
   }
 }`;

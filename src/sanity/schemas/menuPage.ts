@@ -34,6 +34,19 @@ export default defineType({
               initialValue: 'white',
             },
             {
+              name: 'layout',
+              title: 'Tipo di layout',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Prodotti (card con foto)', value: 'products' },
+                  { title: 'Gelato (card colorate)', value: 'gelato' },
+                ],
+                layout: 'radio',
+              },
+              initialValue: 'products',
+            },
+            {
               name: 'items',
               title: 'Prodotti',
               type: 'array',
@@ -43,12 +56,40 @@ export default defineType({
                   fields: [
                     { name: 'name', title: 'Nome', type: 'string' },
                     { name: 'description', title: 'Descrizione', type: 'text', rows: 2 },
-                    { name: 'price', title: 'Prezzo', type: 'string' },
+                    { name: 'badge', title: 'Badge (es. "Iconico")', type: 'string' },
+                    {
+                      name: 'variants',
+                      title: 'Varianti',
+                      description: 'Lascia vuoto o una sola variante per un prezzo unico.',
+                      type: 'array',
+                      of: [
+                        {
+                          type: 'object',
+                          fields: [
+                            { name: 'name', title: 'Nome variante', type: 'string' },
+                            { name: 'price', title: 'Prezzo (solo numero, es. 3.50)', type: 'number' },
+                          ],
+                          preview: { select: { title: 'name', subtitle: 'price' } },
+                        },
+                      ],
+                    },
+                    { name: 'price', title: 'Prezzo (legacy — se non usi varianti)', type: 'string' },
                     { name: 'image', title: 'Foto', type: 'image', options: { hotspot: true } },
                     { name: 'alt', title: 'Alt immagine', type: 'string' },
+                    {
+                      name: 'gelatoColor',
+                      title: 'Colore card gelato',
+                      description: 'Solo per sezioni Gelato. Hex (es. #BBC25C)',
+                      type: 'string',
+                    },
+                    {
+                      name: 'gelatoKicker',
+                      title: 'Kicker gelato (es. "Sicilia", "IGP")',
+                      type: 'string',
+                    },
                   ],
                   preview: {
-                    select: { title: 'name', subtitle: 'price', media: 'image' },
+                    select: { title: 'name', subtitle: 'badge', media: 'image' },
                   },
                 },
               ],

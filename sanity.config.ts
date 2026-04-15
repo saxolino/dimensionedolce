@@ -25,6 +25,7 @@ export default defineConfig({
         mainDocuments: defineDocuments([
           { route: '/', type: 'homePage' },
           { route: '/menu', type: 'menuPage' },
+          { route: '/ordina', type: 'menuPage' },
           { route: '/chi-siamo', type: 'aboutPage' },
           { route: '/catering-eventi', type: 'cateringPage' },
           { route: '/contatti', type: 'contactPage' },
@@ -33,7 +34,15 @@ export default defineConfig({
         locations: {
           homePage: singletonLocation('Home', '/'),
           aboutPage: singletonLocation('Chi Siamo', '/chi-siamo'),
-          menuPage: singletonLocation('Menu', '/menu'),
+          menuPage: defineLocations({
+            select: { title: 'seoTitle' },
+            resolve: () => ({
+              locations: [
+                { title: 'Menu editoriale', href: '/menu' },
+                { title: 'Ordina online', href: '/ordina' },
+              ],
+            }),
+          }),
           cateringPage: singletonLocation('Catering & Eventi', '/catering-eventi'),
           contactPage: singletonLocation('Contatti', '/contatti'),
           faqPage: singletonLocation('Spedizioni & FAQ', '/spedizioni-faq'),
