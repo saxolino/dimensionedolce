@@ -355,6 +355,88 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
       color: var(--pistacchio-scuro);
     }
 
+    /* ============================================================
+       GELATO SECTION — Editorial feature
+       ============================================================ */
+    .gelato-hero {
+      max-width: 960px;
+      margin: 0 auto 56px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 3px;
+      background: var(--beige);
+    }
+    .gelato-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gelato-intro {
+      max-width: 640px;
+      margin: 0 auto 72px;
+      text-align: center;
+    }
+    .gelato-intro__text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--testo);
+    }
+
+    .gelato-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px 56px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .gelato-gusto {
+      position: relative;
+      padding-top: 20px;
+      border-top: 1px solid rgba(56,46,44,0.12);
+    }
+    .gelato-gusto::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0;
+      width: 32px; height: 1px;
+      background: var(--pistacchio-scuro);
+    }
+    .gelato-gusto__name {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--testo);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .gelato-gusto__desc {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--testo-light);
+    }
+
+    .gelato-footer {
+      max-width: 560px;
+      margin: 72px auto 0;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--testo-muted);
+      font-weight: 500;
+      text-align: center;
+    }
+
     /* ---------- GALLERY drag-scroll ---------- */
     .cs-gal { background: var(--bianco); }
     .cs-gal__track { display: flex; gap: 6px; padding: 0 clamp(16px, 4vw, 60px); overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; cursor: grab; scrollbar-width: none; height: 620px; }
@@ -417,6 +499,12 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
         grid-template-columns: 1fr;
         max-width: 400px;
       }
+
+      .gelato-hero { margin-bottom: 40px; border-radius: 2px; }
+      .gelato-intro { margin-bottom: 48px; }
+      .gelato-grid { grid-template-columns: 1fr; gap: 28px; max-width: 400px; }
+      .gelato-gusto__name { font-size: 20px; }
+      .gelato-footer { margin-top: 48px; font-size: 11px; }
     }
 
     @media (max-width: 480px) {
@@ -682,42 +770,46 @@ const page = await fetchSanity<any>(menuPageQuery, preview);
 
     <!-- ========== GELATERIA ========== -->
     <section class="menu-section menu-section--crema" id="gelateria">
-      <div class="menu-section__accent menu-section__accent--magenta rv"></div>
-      <h2 class="menu-section__title rv rv-d1">{page?.sections?.[3]?.title || 'Gelateria'}</h2>
-      <p class="menu-section__subtitle rv rv-d2">{page?.sections?.[3]?.subtitle || 'I nostri gusti artigianali, preparati ogni giorno con ingredienti freschi e di stagione.'}</p>
+      <div class="menu-section__accent menu-section__accent--pistacchio rv"></div>
+      <h2 class="menu-section__title rv rv-d1">Gelateria</h2>
+      <p class="menu-section__subtitle rv rv-d2">Mantecato ogni mattina con latte fresco e ingredienti di stagione. Una carta di gusti che cambia con le materie prime.</p>
 
-      <div class="menu-grid">
-        <div class="menu-card rv rv-d1">
-          <div class="menu-card__image">
-            <img src="/assets/img/product-pistacchio.webp" alt="Pistacchio di Bronte" loading="lazy">
-          </div>
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">{page?.sections?.[3]?.items?.[0]?.name || 'Pistacchio di Bronte'}</h3>
-            <p class="menu-card__desc">{page?.sections?.[3]?.items?.[0]?.description || 'Crema di pistacchio DOP, tostato e macinato a pietra'}</p>
-            <span class="menu-card__price">{page?.sections?.[3]?.items?.[0]?.price || '€3.50'}</span>
-          </div>
+      <div class="gelato-hero rv rv-d2">
+        <img src="/assets/img/generated/gelateria-vetrina.jpg" alt="La nostra vetrina di gelato artigianale" loading="lazy">
+      </div>
+
+      <div class="gelato-intro rv rv-d3">
+        <p class="gelato-intro__text">Il gelato è per noi un esercizio di precisione: poche ingredienti, rapporti perfetti, temperature studiate. Nessun aroma artificiale, nessun colorante. La panna arriva ogni giorno dal caseificio, la frutta viene selezionata al mercato all'alba.</p>
+      </div>
+
+      <div class="gelato-grid rv rv-d4">
+        <div class="gelato-gusto">
+          <h3 class="gelato-gusto__name">Pistacchio di Bronte DOP</h3>
+          <p class="gelato-gusto__desc">Pasta pura di pistacchio siciliano, tostato e macinato a pietra. Intensità verde, note terrose.</p>
         </div>
-        <div class="menu-card rv rv-d2">
-          <div class="menu-card__image">
-            <img src="/assets/img/product-cioccolato.webp" alt="Cioccolato Fondente" loading="lazy">
-          </div>
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">{page?.sections?.[3]?.items?.[1]?.name || 'Cioccolato Fondente'}</h3>
-            <p class="menu-card__desc">{page?.sections?.[3]?.items?.[1]?.description || 'Cioccolato Valrhona 70%, lavorato in mantecatura lenta'}</p>
-            <span class="menu-card__price">{page?.sections?.[3]?.items?.[1]?.price || '€3.50'}</span>
-          </div>
+        <div class="gelato-gusto">
+          <h3 class="gelato-gusto__name">Amarena e Fior di Latte</h3>
+          <p class="gelato-gusto__desc">Crema al latte fresco con variegatura di amarene sciroppate. L'equilibrio dell'acidulo.</p>
         </div>
-        <div class="menu-card rv rv-d3">
-          <div class="menu-card__image">
-            <img src="/assets/img/product-classico.webp" alt="Crema Classica" loading="lazy">
-          </div>
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">{page?.sections?.[3]?.items?.[2]?.name || 'Crema Classica'}</h3>
-            <p class="menu-card__desc">{page?.sections?.[3]?.items?.[2]?.description || 'La nostra crema alla vaniglia del Madagascar, una tradizione rinnovata'}</p>
-            <span class="menu-card__price">{page?.sections?.[3]?.items?.[2]?.price || '€3.00'}</span>
-          </div>
+        <div class="gelato-gusto">
+          <h3 class="gelato-gusto__name">Albicocca</h3>
+          <p class="gelato-gusto__desc">Sorbetto di albicocche del Vesuvio al punto di maturazione. Profumo pieno, dolcezza naturale.</p>
+        </div>
+        <div class="gelato-gusto">
+          <h3 class="gelato-gusto__name">Vaniglia del Madagascar</h3>
+          <p class="gelato-gusto__desc">Baccelli interi in infusione. La nostra crema classica, densa e profumata.</p>
+        </div>
+        <div class="gelato-gusto">
+          <h3 class="gelato-gusto__name">Lampone</h3>
+          <p class="gelato-gusto__desc">Sorbetto ai lamponi freschi, nessun aroma aggiunto. Colore e gusto vividi.</p>
+        </div>
+        <div class="gelato-gusto">
+          <h3 class="gelato-gusto__name">Limone di Sorrento</h3>
+          <p class="gelato-gusto__desc">Sorbetto al limone IGP, scorza e succo. Fresco, pulito, dissetante.</p>
         </div>
       </div>
+
+      <p class="gelato-footer rv rv-d5">La carta si rinnova con le stagioni. Chiedete al banco i gusti del giorno.</p>
     </section>
 
   <!-- Page-specific: hero carousel + parallax -->

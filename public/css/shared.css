@@ -213,9 +213,9 @@ body.is-leaving {
 .hdr.is-home-hidden .hdr__filament { opacity: 0; }
 .hdr.is-home-hidden .hdr__burger {
   pointer-events: auto;
-  background: var(--bianco);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-  width: 46px; height: 46px;
+  background: transparent;
+  box-shadow: none;
+  width: 44px; height: 44px;
 }
 .hdr.is-home-hidden .hdr__burger span { background: var(--cioccolato-deep); }
 
