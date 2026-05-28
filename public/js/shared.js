@@ -142,6 +142,13 @@ document.querySelectorAll('a[href]').forEach(link => {
   });
 });
 
+window.addEventListener('pageshow', (e) => {
+  document.body.classList.remove('is-leaving');
+  if (e.persisted) {
+    document.querySelectorAll('.rv').forEach(el => el.classList.add('is-v'));
+  }
+});
+
 // Cookie banner
 const cookieBanner = document.querySelector('.cookie-banner');
 const cookieBtn = document.querySelector('.cookie-banner__btn');
